@@ -1,0 +1,67 @@
+{
+  "id": "parametric",
+  "group": "object",
+  "title": "Parametric surface",
+  "about": "mobius band or klein bottle",
+  "prompt": "A mobius band in polished gold, turning.",
+  "source": "three.js examples/jsm ParametricGeometry",
+  "license": "MIT",
+  "order": 31,
+  "spec": {
+    "name": "parametric",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.4,
+        5.2
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -12,
+          "to": 12,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "band",
+        "type": "parametric",
+        "surface": "mobius",
+        "radius": 1.05,
+        "position": [
+          0,
+          1.25,
+          0
+        ],
+        "material": "gold",
+        "motion": [
+          {
+            "type": "turntable",
+            "speed": 26
+          },
+          {
+            "type": "sway",
+            "deg": 12,
+            "axis": "x",
+            "period": 5
+          }
+        ]
+      }
+    ]
+  }
+}

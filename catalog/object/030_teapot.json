@@ -1,0 +1,60 @@
+{
+  "id": "teapot",
+  "group": "object",
+  "title": "Teapot",
+  "about": "the Utah teapot, the hello-world of 3D",
+  "prompt": "The classic teapot in brushed gold on a black mirror.",
+  "source": "three.js examples/jsm TeapotGeometry",
+  "license": "MIT",
+  "order": 30,
+  "spec": {
+    "name": "teapot",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.4,
+        5.2
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -12,
+          "to": 12,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "pot",
+        "type": "teapot",
+        "size": 0.62,
+        "position": [
+          0,
+          0.62,
+          0
+        ],
+        "material": "gold-brushed",
+        "motion": [
+          {
+            "type": "turntable",
+            "speed": 24
+          }
+        ]
+      }
+    ]
+  }
+}

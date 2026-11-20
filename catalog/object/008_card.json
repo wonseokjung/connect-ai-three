@@ -1,0 +1,131 @@
+{
+  "id": "card",
+  "group": "object",
+  "title": "Glass card",
+  "about": "frosted panel with a kicker, a title and a gold rule",
+  "prompt": "Three frosted glass cards: 'Say it', 'One spec', 'Web + video', rising in turn.",
+  "source": "CONNECT AI LAB on RoundedBoxGeometry",
+  "license": "MIT",
+  "order": 8,
+  "spec": {
+    "name": "card",
+    "duration": 4,
+    "look": "midnight-glass",
+    "camera": {
+      "position": [
+        0,
+        1.5,
+        7.6
+      ],
+      "target": [
+        0,
+        1.25,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -14,
+          "to": 10,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror",
+        "dim": 0.72
+      },
+      {
+        "id": "card-1",
+        "type": "card",
+        "kicker": "01",
+        "title": "Say it",
+        "width": 2.15,
+        "height": 1.9,
+        "position": [
+          -2.4,
+          1.3,
+          -0.45
+        ],
+        "rotation": [
+          0,
+          14,
+          0
+        ],
+        "motion": [
+          {
+            "type": "rise",
+            "at": 0.2
+          },
+          {
+            "type": "float",
+            "amp": 0.035,
+            "phase": 0
+          }
+        ]
+      },
+      {
+        "id": "card-2",
+        "type": "card",
+        "kicker": "02",
+        "title": "One spec",
+        "width": 2.15,
+        "height": 1.9,
+        "position": [
+          0,
+          1.3,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "motion": [
+          {
+            "type": "rise",
+            "at": 0.5
+          },
+          {
+            "type": "float",
+            "amp": 0.035,
+            "phase": 1.3
+          }
+        ]
+      },
+      {
+        "id": "card-3",
+        "type": "card",
+        "kicker": "03",
+        "title": "Web + video",
+        "width": 2.15,
+        "height": 1.9,
+        "position": [
+          2.4,
+          1.3,
+          -0.45
+        ],
+        "rotation": [
+          0,
+          -14,
+          0
+        ],
+        "motion": [
+          {
+            "type": "rise",
+            "at": 0.8
+          },
+          {
+            "type": "float",
+            "amp": 0.035,
+            "phase": 2.6
+          }
+        ]
+      }
+    ]
+  }
+}

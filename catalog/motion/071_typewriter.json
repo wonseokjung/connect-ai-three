@@ -1,0 +1,56 @@
+{
+  "id": "typewriter",
+  "group": "motion",
+  "title": "typewriter",
+  "about": "a label types itself",
+  "prompt": "Type the sentence out, letter by letter.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 71,
+  "param": "{\"type\": \"typewriter\"}  at, dur",
+  "spec": {
+    "name": "typewriter",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.35,
+        4.7
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": []
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "subject",
+        "type": "label",
+        "text": "Say it, get a three.js scene.",
+        "size": 0.34,
+        "weight": 300,
+        "position": [
+          0,
+          1.2,
+          0
+        ],
+        "motion": [
+          {
+            "type": "typewriter",
+            "at": 0.3,
+            "dur": 2.4
+          }
+        ]
+      }
+    ]
+  }
+}

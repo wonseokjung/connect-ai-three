@@ -1,0 +1,61 @@
+{
+  "id": "gltf",
+  "group": "object",
+  "title": "glTF model",
+  "about": "your .glb or .gltf: fitted, grounded, animated by time",
+  "prompt": "Load my astronaut.glb, stand it on the mirror floor and turn it slowly under the gold rim light.",
+  "source": "three.js examples/jsm GLTFLoader",
+  "license": "MIT",
+  "order": 26,
+  "assets": "astronaut.glb: NASA 3D Resources (public domain)",
+  "spec": {
+    "name": "gltf",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.4,
+        5.2
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -12,
+          "to": 12,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "model",
+        "type": "gltf",
+        "src": "kit:astronaut.glb",
+        "fit": 2.3,
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "motion": [
+          {
+            "type": "turntable",
+            "speed": 22
+          }
+        ]
+      }
+    ]
+  }
+}

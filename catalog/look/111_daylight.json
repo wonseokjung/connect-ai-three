@@ -1,0 +1,91 @@
+{
+  "id": "daylight",
+  "group": "look",
+  "title": "daylight",
+  "about": "Outdoor daylight: physical sky, one sun with soft shadows",
+  "prompt": "Outdoors in daylight.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 111,
+  "param": "\"look\": \"daylight\"",
+  "spec": {
+    "name": "daylight",
+    "duration": 4,
+    "look": "daylight",
+    "camera": {
+      "position": [
+        0,
+        1.5,
+        7
+      ],
+      "target": [
+        0,
+        1.2,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -14,
+          "to": 14,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "matte",
+        "material": {
+          "preset": "clay",
+          "color": "#b9b4aa"
+        },
+        "size": 300
+      },
+      {
+        "id": "title",
+        "type": "text3d",
+        "text": "CONNECT AI LAB",
+        "size": 0.44,
+        "position": [
+          0,
+          0.72,
+          0
+        ],
+        "material": "gold"
+      },
+      {
+        "id": "rings",
+        "type": "rings",
+        "radius": 0.7,
+        "position": [
+          0,
+          2,
+          -0.2
+        ]
+      },
+      {
+        "id": "card",
+        "type": "card",
+        "kicker": "look",
+        "title": "daylight",
+        "width": 2.3,
+        "height": 1,
+        "position": [
+          2.9,
+          1.2,
+          -0.8
+        ],
+        "rotation": [
+          0,
+          -22,
+          0
+        ],
+        "material": "ivory",
+        "color": "#17181b"
+      }
+    ]
+  }
+}

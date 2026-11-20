@@ -1,0 +1,76 @@
+{
+  "id": "image",
+  "group": "object",
+  "title": "Image plane",
+  "about": "your own picture on a framed plane",
+  "prompt": "My screenshot on a tilted black-framed panel that slides in from the right.",
+  "source": "three.js core",
+  "license": "MIT",
+  "order": 9,
+  "spec": {
+    "name": "image",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.4,
+        5.2
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -12,
+          "to": 12,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "pic",
+        "type": "image",
+        "src": "kit:sample.jpg",
+        "height": 1.9,
+        "position": [
+          0,
+          1.25,
+          0
+        ],
+        "rotation": [
+          0,
+          -16,
+          0
+        ],
+        "motion": [
+          {
+            "type": "slide",
+            "at": 0.2,
+            "from": [
+              2.5,
+              0,
+              -1
+            ]
+          },
+          {
+            "type": "sway",
+            "deg": 3,
+            "axis": "y",
+            "period": 6
+          }
+        ]
+      }
+    ]
+  }
+}

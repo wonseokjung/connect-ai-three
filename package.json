@@ -1,0 +1,75 @@
+{
+  "name": "connect-ai-three",
+  "version": "0.1.0",
+  "description": "Say it, get a three.js scene. One scene spec (camera, lights, objects, motion, post) becomes an interactive web page AND a frame-locked video, with a self-check for blank frames, draw calls, texture sizes, mobile budgets and WebGL leaks. Open source by CONNECT AI LAB.",
+  "type": "module",
+  "license": "MIT",
+  "author": "CONNECT AI LAB",
+  "bin": {
+    "connect-ai-three": "bin/cli.mjs"
+  },
+  "scripts": {
+    "test": "node tests/run.mjs",
+    "demo": "node bin/cli.mjs demo",
+    "check": "node bin/cli.mjs check",
+    "catalog": "node bin/cli.mjs catalog",
+    "typecheck": "tsc -p ."
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@dimforge/rapier3d-compat": "0.21.0",
+    "@react-three/fiber": "9.3.0",
+    "@remotion/bundler": "4.0.529",
+    "@remotion/cli": "4.0.529",
+    "@remotion/renderer": "4.0.529",
+    "@remotion/three": "4.0.529",
+    "esbuild": "0.28.1",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "remotion": "4.0.529",
+    "three": "0.170.0",
+    "three-mesh-bvh": "0.9.18"
+  },
+  "devDependencies": {
+    "@types/react": "19.1.0",
+    "@types/three": "0.170.0",
+    "typescript": "5.6.3"
+  },
+  "files": [
+    "bin/",
+    "lib/",
+    "src/",
+    "catalog/",
+    "examples/",
+    "assets/",
+    "skill/",
+    "licenses/",
+    "tests/",
+    "remotion.config.ts",
+    "tsconfig.json",
+    "NOTICE.md",
+    "README.md",
+    "README.ko.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wonseokjung/connect-ai-three.git"
+  },
+  "homepage": "https://github.com/wonseokjung/connect-ai-three#readme",
+  "keywords": [
+    "three",
+    "threejs",
+    "webgl",
+    "3d",
+    "remotion",
+    "react-three-fiber",
+    "scene-spec",
+    "motion-graphics",
+    "visual-vibe-coding",
+    "claude-code",
+    "skill"
+  ]
+}

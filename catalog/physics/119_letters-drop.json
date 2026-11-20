@@ -1,0 +1,63 @@
+{
+  "id": "letters-drop",
+  "group": "physics",
+  "title": "Letters drop",
+  "about": "every letter is a rigid body falling onto the floor",
+  "prompt": "Drop the letters of 'CONNECT' from above and let them land and settle.",
+  "source": "Rapier (@dimforge/rapier3d-compat)",
+  "license": "Apache-2.0",
+  "order": 119,
+  "spec": {
+    "name": "letters-drop",
+    "duration": 5,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.6,
+        9
+      ],
+      "target": [
+        0,
+        0.75,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "dolly",
+          "from": 1.12,
+          "to": 0.95,
+          "dur": 5
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "word",
+        "type": "text3d",
+        "text": "CONNECT",
+        "size": 0.95,
+        "depth": 0.42,
+        "tracking": 0.1,
+        "split": true,
+        "position": [
+          0,
+          2.9,
+          0
+        ],
+        "material": "gold",
+        "bodyEach": true,
+        "each": 0.24,
+        "bounce": 0.12,
+        "friction": 1,
+        "angularDamping": 6
+      }
+    ]
+  }
+}

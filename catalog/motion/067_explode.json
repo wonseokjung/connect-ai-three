@@ -1,0 +1,174 @@
+{
+  "id": "explode",
+  "group": "motion",
+  "title": "explode",
+  "about": "children fly apart from the centre, then come back",
+  "prompt": "Open the object up into its parts, then close it.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 67,
+  "param": "{\"type\": \"explode\"}  at, dur, amount, hold, back",
+  "spec": {
+    "name": "explode",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.35,
+        4.7
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": []
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "subject",
+        "type": "group",
+        "position": [
+          0,
+          1.25,
+          0
+        ],
+        "rotation": [
+          0,
+          30,
+          0
+        ],
+        "motion": [
+          {
+            "type": "explode",
+            "at": 0.5,
+            "dur": 1,
+            "hold": 0.8,
+            "amount": 1.1
+          }
+        ],
+        "children": [
+          {
+            "type": "rounded-box",
+            "size": [
+              0.6,
+              0.6,
+              0.6
+            ],
+            "position": [
+              0.31,
+              0.31,
+              0.31
+            ],
+            "material": "gold"
+          },
+          {
+            "type": "rounded-box",
+            "size": [
+              0.6,
+              0.6,
+              0.6
+            ],
+            "position": [
+              -0.31,
+              0.31,
+              0.31
+            ],
+            "material": "black"
+          },
+          {
+            "type": "rounded-box",
+            "size": [
+              0.6,
+              0.6,
+              0.6
+            ],
+            "position": [
+              0.31,
+              -0.31,
+              0.31
+            ],
+            "material": "black"
+          },
+          {
+            "type": "rounded-box",
+            "size": [
+              0.6,
+              0.6,
+              0.6
+            ],
+            "position": [
+              -0.31,
+              -0.31,
+              0.31
+            ],
+            "material": "gold"
+          },
+          {
+            "type": "rounded-box",
+            "size": [
+              0.6,
+              0.6,
+              0.6
+            ],
+            "position": [
+              0.31,
+              0.31,
+              -0.31
+            ],
+            "material": "steel"
+          },
+          {
+            "type": "rounded-box",
+            "size": [
+              0.6,
+              0.6,
+              0.6
+            ],
+            "position": [
+              -0.31,
+              0.31,
+              -0.31
+            ],
+            "material": "gold"
+          },
+          {
+            "type": "rounded-box",
+            "size": [
+              0.6,
+              0.6,
+              0.6
+            ],
+            "position": [
+              0.31,
+              -0.31,
+              -0.31
+            ],
+            "material": "gold"
+          },
+          {
+            "type": "rounded-box",
+            "size": [
+              0.6,
+              0.6,
+              0.6
+            ],
+            "position": [
+              -0.31,
+              -0.31,
+              -0.31
+            ],
+            "material": "steel"
+          }
+        ]
+      }
+    ]
+  }
+}

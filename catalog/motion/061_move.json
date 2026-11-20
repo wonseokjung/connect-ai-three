@@ -1,0 +1,60 @@
+{
+  "id": "move",
+  "group": "motion",
+  "title": "move",
+  "about": "move by an offset between two moments",
+  "prompt": "Move the ball from the left side to the right side.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 61,
+  "param": "{\"type\": \"move\"}  at, dur, by [x,y,z], ease",
+  "spec": {
+    "name": "move",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.35,
+        4.7
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": []
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "subject",
+        "type": "sphere",
+        "radius": 0.55,
+        "position": [
+          -1.5,
+          0.55,
+          0
+        ],
+        "material": "chrome",
+        "motion": [
+          {
+            "type": "move",
+            "at": 0.5,
+            "dur": 2.4,
+            "by": [
+              3,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

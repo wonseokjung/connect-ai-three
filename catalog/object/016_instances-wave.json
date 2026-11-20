@@ -1,0 +1,59 @@
+{
+  "id": "instances-wave",
+  "group": "object",
+  "title": "Instances: wave grid",
+  "about": "hundreds of blocks in one draw call, moving as a wave",
+  "prompt": "A field of small brushed-gold blocks rippling like water.",
+  "source": "three.js core InstancedMesh",
+  "license": "MIT",
+  "order": 16,
+  "spec": {
+    "name": "instances-wave",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        3.2,
+        6.6
+      ],
+      "target": [
+        0,
+        0.2,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -18,
+          "to": 18,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "grid",
+        "type": "instances",
+        "layout": "wave",
+        "cols": 26,
+        "rows": 26,
+        "size": 0.2,
+        "spacing": 0.27,
+        "position": [
+          0,
+          0.3,
+          0
+        ],
+        "material": "gold-brushed",
+        "enter": {
+          "at": 0,
+          "each": 0,
+          "dur": 0.9,
+          "byDistance": true
+        }
+      }
+    ]
+  }
+}

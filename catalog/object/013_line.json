@@ -1,0 +1,117 @@
+{
+  "id": "line",
+  "group": "object",
+  "title": "Fat line",
+  "about": "lines that keep their width and can draw themselves",
+  "prompt": "Three thin gold and ivory curves drawing themselves in the air.",
+  "source": "three.js examples/jsm Line2",
+  "license": "MIT",
+  "order": 13,
+  "spec": {
+    "name": "line",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0.2,
+        1.4,
+        7
+      ],
+      "target": [
+        0.2,
+        1.1,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -12,
+          "to": 12,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "helix",
+        "type": "line",
+        "curve": "helix",
+        "radius": 0.9,
+        "height": 2,
+        "turns": 3,
+        "width": 4,
+        "position": [
+          -2.2,
+          1.2,
+          0
+        ],
+        "motion": [
+          {
+            "type": "draw",
+            "at": 0.1,
+            "dur": 1.8
+          },
+          {
+            "type": "turntable",
+            "speed": 30
+          }
+        ]
+      },
+      {
+        "id": "wave",
+        "type": "line",
+        "curve": "wave",
+        "length": 3.2,
+        "amp": 0.5,
+        "width": 4,
+        "color": "#EBE2D2",
+        "position": [
+          0.4,
+          1.2,
+          0
+        ],
+        "motion": [
+          {
+            "type": "draw",
+            "at": 0.6,
+            "dur": 1.6
+          }
+        ]
+      },
+      {
+        "id": "orbit",
+        "type": "line",
+        "curve": "orbit",
+        "radius": 0.9,
+        "width": 3,
+        "position": [
+          2.6,
+          1.2,
+          0
+        ],
+        "rotation": [
+          24,
+          0,
+          12
+        ],
+        "motion": [
+          {
+            "type": "draw",
+            "at": 1.1,
+            "dur": 1.6
+          },
+          {
+            "type": "turntable",
+            "speed": -24
+          }
+        ]
+      }
+    ]
+  }
+}

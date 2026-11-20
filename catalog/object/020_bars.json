@@ -1,0 +1,65 @@
+{
+  "id": "bars",
+  "group": "object",
+  "title": "3D bars",
+  "about": "a bar chart from your own numbers",
+  "prompt": "My four numbers as 3D bars growing one by one, the biggest in gold.",
+  "source": "CONNECT AI LAB on RoundedBoxGeometry",
+  "license": "MIT",
+  "order": 20,
+  "spec": {
+    "name": "bars",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.7,
+        7.2
+      ],
+      "target": [
+        0,
+        1.1,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -22,
+          "to": 8,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "bars",
+        "type": "bars",
+        "values": [
+          2,
+          3,
+          5,
+          8
+        ],
+        "labels": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "height": 1.8,
+        "position": [
+          0,
+          0.3,
+          0
+        ]
+      }
+    ]
+  }
+}

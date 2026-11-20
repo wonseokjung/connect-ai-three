@@ -1,0 +1,37 @@
+{
+  "name": "logo-night-city",
+  "duration": 8,
+  "look": "connect-night-city",
+  "exposure": 1.15,
+  "camera": {
+    "position": [0, 1.15, 7.2],
+    "target": [0, 1.0, 0],
+    "fov": 32,
+    "motion": [
+      {"type": "orbit", "from": -22, "to": 14, "dur": 8, "ease": "smooth"},
+      {"type": "dolly", "from": 1.3, "to": 1.0, "dur": 8, "ease": "out"},
+      {"type": "handheld", "amp": 0.015, "speed": 0.7}
+    ]
+  },
+  "addLights": [
+    {"type": "rim", "color": "#F2B45A", "intensity": 5, "position": [0, 2.4, -5], "motion": {"type": "sweep", "from": -70, "to": 70, "at": 0.4, "dur": 6.5}}
+  ],
+  "post": [
+    {"type": "dof", "aperture": 0.006, "maxblur": 0.011},
+    {"type": "bloom", "strength": 0.4, "radius": 0.7, "threshold": 0.8},
+    {"type": "vignette", "amount": 0.42},
+    {"type": "grain", "amount": 0.05}
+  ],
+  "objects": [
+    {"id": "floor", "type": "floor", "kind": "mirror", "size": 400, "dim": 0.58},
+    {"id": "logo", "type": "text3d", "text": "CONNECT AI LAB", "size": 0.56, "depth": 0.16, "split": true, "position": [0, 1.0, 0], "material": "gold",
+      "motion": [{"type": "stagger", "at": 0.5, "each": 0.085, "dur": 0.8}]},
+    {"id": "rule", "type": "plane", "width": 1.2, "height": 0.012, "position": [0, 0.45, 0.3], "material": {"preset": "flat", "color": "#D6892A"}, "shadow": false,
+      "motion": [{"type": "fade", "at": 2.4, "dur": 0.7}]},
+    {"id": "tag", "type": "label", "text": "VISUAL VIBE CODING", "size": 0.2, "tracking": 0.42, "weight": 400, "position": [0, 0.22, 0.3],
+      "motion": [{"type": "fade", "at": 2.7, "dur": 0.9}]},
+    {"id": "rings", "type": "rings", "radius": 0.5, "position": [0, 2.25, -0.6], "motion": [{"type": "pop", "at": 1.9, "dur": 0.9}]}
+  ],
+  "interact": ["parallax", "orbit"],
+  "page": {"kicker": "Open source by CONNECT AI LAB", "title": "Say it. Get a three.js scene.", "sub": "One spec becomes this page and a frame-locked video. Drag to look around."}
+}

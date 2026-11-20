@@ -1,0 +1,20 @@
+{
+  "name": "korean-title",
+  "duration": 7,
+  "look": "connect-gold-night",
+  "camera": {
+    "position": [0, 1.25, 7.4],
+    "target": [0, 1.05, 0],
+    "fov": 32,
+    "motion": [{"type": "orbit", "from": 16, "to": -12, "dur": 7, "ease": "smooth"}, {"type": "dolly", "from": 1.22, "to": 1.0, "dur": 7, "ease": "out"}]
+  },
+  "addLights": [{"type": "rim", "color": "#F2B45A", "intensity": 5, "position": [0, 2.4, -5], "motion": {"type": "sweep", "from": 60, "to": -60, "at": 0.4, "dur": 6}}],
+  "objects": [
+    {"id": "floor", "type": "floor", "kind": "mirror"},
+    {"id": "title", "type": "text3d", "text": "모두를 위한 AI 교육", "fontFile": "assets/YourFont.otf", "size": 0.62, "depth": 0.16, "split": true, "position": [0, 1.05, 0], "material": "gold",
+      "motion": [{"type": "stagger", "at": 0.4, "each": 0.1, "dur": 0.8}]},
+    {"id": "rule", "type": "plane", "width": 1.0, "height": 0.012, "position": [0, 0.47, 0.3], "material": {"preset": "flat", "color": "#D6892A"}, "shadow": false, "motion": [{"type": "fade", "at": 2.4, "dur": 0.7}]},
+    {"id": "sub", "type": "label", "text": "AI EDUCATION FOR EVERYONE", "size": 0.17, "tracking": 0.4, "weight": 400, "position": [0, 0.25, 0.3], "motion": [{"type": "fade", "at": 2.7, "dur": 0.9}]}
+  ],
+  "interact": ["parallax", "orbit"]
+}

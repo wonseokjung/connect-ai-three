@@ -1,0 +1,65 @@
+{
+  "id": "pop",
+  "group": "motion",
+  "title": "pop",
+  "about": "scale in with a small overshoot",
+  "prompt": "Make the block pop in with a small overshoot.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 56,
+  "param": "{\"type\": \"pop\"}  at, dur",
+  "spec": {
+    "name": "pop",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.35,
+        4.7
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": []
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "subject",
+        "type": "rounded-box",
+        "size": [
+          1,
+          1,
+          1
+        ],
+        "radius": 0.12,
+        "position": [
+          0,
+          0.9,
+          0
+        ],
+        "rotation": [
+          0,
+          28,
+          0
+        ],
+        "material": "gold",
+        "motion": [
+          {
+            "type": "pop",
+            "at": 0.6,
+            "dur": 0.8
+          }
+        ]
+      }
+    ]
+  }
+}

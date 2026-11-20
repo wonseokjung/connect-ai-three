@@ -1,0 +1,79 @@
+{
+  "id": "ribbon",
+  "group": "object",
+  "title": "Ribbon",
+  "about": "a solid tube along a curve that draws itself",
+  "prompt": "A gold ribbon sweeping around in one stroke, then turning slowly.",
+  "source": "three.js core TubeGeometry",
+  "license": "MIT",
+  "order": 14,
+  "spec": {
+    "name": "ribbon",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.4,
+        5.2
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -12,
+          "to": 12,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "ribbon",
+        "type": "ribbon",
+        "curve": "swoosh",
+        "radius": 1.7,
+        "thickness": 0.05,
+        "position": [
+          0,
+          1.25,
+          0
+        ],
+        "material": "gold",
+        "motion": [
+          {
+            "type": "draw",
+            "at": 0.15,
+            "dur": 1.9,
+            "ease": "out"
+          },
+          {
+            "type": "turntable",
+            "speed": 18
+          }
+        ]
+      },
+      {
+        "id": "core",
+        "type": "sphere",
+        "radius": 0.34,
+        "position": [
+          0,
+          1.2,
+          0
+        ],
+        "material": "chrome"
+      }
+    ]
+  }
+}

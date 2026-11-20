@@ -1,0 +1,78 @@
+{
+  "id": "on-video",
+  "group": "lane",
+  "title": "3D on your own video",
+  "about": "transparent 3D over your footage, a shadow, and a keep-out box so your face is never covered",
+  "prompt": "Put a gold gyroscope next to me in my talking video. Never cover my face.",
+  "source": "CONNECT AI LAB + Remotion OffthreadVideo",
+  "license": "MIT",
+  "order": 123,
+  "lane": "on-video",
+  "param": "connect-ai-three on-video talk.mp4 --faces face.json",
+  "spec": {
+    "name": "on-video",
+    "duration": 6,
+    "look": "on-video",
+    "keepOut": [
+      {
+        "x": 0.33,
+        "y": 0.13,
+        "w": 0.25,
+        "h": 0.48
+      }
+    ],
+    "camera": {
+      "position": [
+        0,
+        1.2,
+        6.5
+      ],
+      "target": [
+        0,
+        0.9,
+        0
+      ],
+      "fov": 34
+    },
+    "objects": [
+      {
+        "id": "object",
+        "type": "rings",
+        "radius": 0.6,
+        "position": [
+          2.25,
+          1.6,
+          0
+        ],
+        "motion": [
+          {
+            "type": "pop",
+            "at": 0.5
+          },
+          {
+            "type": "float",
+            "amp": 0.05
+          }
+        ]
+      },
+      {
+        "id": "name",
+        "type": "label",
+        "text": "AI MENTOR JAY",
+        "size": 0.15,
+        "tracking": 0.35,
+        "position": [
+          2.25,
+          0.68,
+          0
+        ],
+        "motion": [
+          {
+            "type": "fade",
+            "at": 1.2
+          }
+        ]
+      }
+    ]
+  }
+}

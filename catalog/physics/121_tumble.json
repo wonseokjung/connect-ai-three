@@ -1,0 +1,225 @@
+{
+  "id": "tumble",
+  "group": "physics",
+  "title": "Stack and ball",
+  "about": "a chrome ball knocks a stack of blocks over",
+  "prompt": "Stack nine blocks, then roll a chrome ball into them.",
+  "source": "Rapier (@dimforge/rapier3d-compat)",
+  "license": "Apache-2.0",
+  "order": 121,
+  "spec": {
+    "name": "tumble",
+    "duration": 5,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.7,
+        7
+      ],
+      "target": [
+        0,
+        0.8,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -10,
+          "to": 16,
+          "dur": 5
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "b0",
+        "type": "rounded-box",
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "radius": 0.05,
+        "position": [
+          0.07999999999999996,
+          0.25,
+          0
+        ],
+        "material": "gold",
+        "body": "dynamic",
+        "bounce": 0.15
+      },
+      {
+        "id": "b1",
+        "type": "rounded-box",
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "radius": 0.05,
+        "position": [
+          0.6,
+          0.25,
+          0
+        ],
+        "material": "black",
+        "body": "dynamic",
+        "bounce": 0.15
+      },
+      {
+        "id": "b2",
+        "type": "rounded-box",
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "radius": 0.05,
+        "position": [
+          1.12,
+          0.25,
+          0
+        ],
+        "material": "gold",
+        "body": "dynamic",
+        "bounce": 0.15
+      },
+      {
+        "id": "b3",
+        "type": "rounded-box",
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "radius": 0.05,
+        "position": [
+          0.07999999999999996,
+          0.75,
+          0
+        ],
+        "material": "black",
+        "body": "dynamic",
+        "bounce": 0.15
+      },
+      {
+        "id": "b4",
+        "type": "rounded-box",
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "radius": 0.05,
+        "position": [
+          0.6,
+          0.75,
+          0
+        ],
+        "material": "gold",
+        "body": "dynamic",
+        "bounce": 0.15
+      },
+      {
+        "id": "b5",
+        "type": "rounded-box",
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "radius": 0.05,
+        "position": [
+          1.12,
+          0.75,
+          0
+        ],
+        "material": "black",
+        "body": "dynamic",
+        "bounce": 0.15
+      },
+      {
+        "id": "b6",
+        "type": "rounded-box",
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "radius": 0.05,
+        "position": [
+          0.07999999999999996,
+          1.25,
+          0
+        ],
+        "material": "gold",
+        "body": "dynamic",
+        "bounce": 0.15
+      },
+      {
+        "id": "b7",
+        "type": "rounded-box",
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "radius": 0.05,
+        "position": [
+          0.6,
+          1.25,
+          0
+        ],
+        "material": "black",
+        "body": "dynamic",
+        "bounce": 0.15
+      },
+      {
+        "id": "b8",
+        "type": "rounded-box",
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "radius": 0.05,
+        "position": [
+          1.12,
+          1.25,
+          0
+        ],
+        "material": "gold",
+        "body": "dynamic",
+        "bounce": 0.15
+      },
+      {
+        "id": "ball",
+        "type": "sphere",
+        "radius": 0.36,
+        "position": [
+          -3.6,
+          0.5,
+          0
+        ],
+        "material": "chrome",
+        "body": "dynamic",
+        "collider": "ball",
+        "at": 0.7,
+        "push": [
+          9,
+          0.6,
+          0
+        ],
+        "density": 6
+      }
+    ]
+  }
+}

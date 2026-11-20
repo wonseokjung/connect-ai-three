@@ -1,0 +1,65 @@
+{
+  "id": "waves",
+  "group": "object",
+  "title": "Rolling surface",
+  "about": "a dark moving surface with gold crests",
+  "prompt": "A dark sea rolling slowly, gold light on the crests.",
+  "source": "CONNECT AI LAB shader",
+  "license": "MIT",
+  "order": 24,
+  "spec": {
+    "name": "waves",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.5,
+        7
+      ],
+      "target": [
+        0,
+        0.2,
+        0
+      ],
+      "fov": 38,
+      "motion": [
+        {
+          "type": "dolly",
+          "from": 1.1,
+          "to": 0.9,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "sea",
+        "type": "waves",
+        "amp": 0.4,
+        "position": [
+          0,
+          0,
+          -3
+        ]
+      },
+      {
+        "id": "moon",
+        "type": "sphere",
+        "radius": 0.5,
+        "position": [
+          0,
+          1.7,
+          -2
+        ],
+        "material": "chrome",
+        "motion": [
+          {
+            "type": "float",
+            "amp": 0.08
+          }
+        ]
+      }
+    ]
+  }
+}

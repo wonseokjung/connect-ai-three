@@ -1,0 +1,100 @@
+{
+  "id": "clay",
+  "group": "material",
+  "title": "clay",
+  "about": "matte clay, no gloss",
+  "prompt": "Make the knot matte clay with no gloss.",
+  "source": "three.js core",
+  "license": "MIT",
+  "order": 38,
+  "param": "\"material\": \"clay\"",
+  "spec": {
+    "name": "clay",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.4,
+        5.2
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -12,
+          "to": 12,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "knot",
+        "type": "knot",
+        "radius": 0.52,
+        "tube": 0.18,
+        "position": [
+          -0.95,
+          1.15,
+          0
+        ],
+        "material": "clay",
+        "motion": [
+          {
+            "type": "turntable",
+            "speed": 28
+          }
+        ]
+      },
+      {
+        "id": "ball",
+        "type": "sphere",
+        "radius": 0.5,
+        "position": [
+          0.95,
+          0.5,
+          0.6
+        ],
+        "material": "clay"
+      },
+      {
+        "id": "block",
+        "type": "rounded-box",
+        "size": [
+          0.7,
+          0.7,
+          0.7
+        ],
+        "radius": 0.1,
+        "position": [
+          1.75,
+          1.45,
+          -0.6
+        ],
+        "rotation": [
+          20,
+          30,
+          10
+        ],
+        "material": "clay",
+        "motion": [
+          {
+            "type": "turntable",
+            "speed": -20
+          }
+        ]
+      }
+    ]
+  }
+}

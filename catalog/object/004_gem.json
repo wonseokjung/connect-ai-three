@@ -1,0 +1,120 @@
+{
+  "id": "gem",
+  "group": "object",
+  "title": "Gem",
+  "about": "faceted gem: icosa, octa or dodeca cut",
+  "prompt": "A glass gem and two small gold gems, turning, light passing through.",
+  "source": "three.js core",
+  "license": "MIT",
+  "order": 4,
+  "spec": {
+    "name": "gem",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.4,
+        5.2
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -12,
+          "to": 12,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "big",
+        "type": "gem",
+        "radius": 0.8,
+        "position": [
+          0,
+          1.15,
+          0
+        ],
+        "material": "glass",
+        "motion": [
+          {
+            "type": "turntable",
+            "speed": 22
+          },
+          {
+            "type": "float",
+            "amp": 0.06
+          }
+        ]
+      },
+      {
+        "id": "left",
+        "type": "gem",
+        "cut": "octa",
+        "radius": 0.36,
+        "position": [
+          -1.7,
+          0.75,
+          0.3
+        ],
+        "material": "gold",
+        "motion": [
+          {
+            "type": "turntable",
+            "speed": -34
+          },
+          {
+            "type": "float",
+            "phase": 1.4
+          }
+        ]
+      },
+      {
+        "id": "right",
+        "type": "gem",
+        "cut": "dodeca",
+        "radius": 0.36,
+        "position": [
+          1.7,
+          0.85,
+          -0.2
+        ],
+        "material": "gold-brushed",
+        "motion": [
+          {
+            "type": "turntable",
+            "speed": 30
+          },
+          {
+            "type": "float",
+            "phase": 2.6
+          }
+        ]
+      },
+      {
+        "id": "behind",
+        "type": "rings",
+        "radius": 1.25,
+        "position": [
+          0,
+          1.15,
+          -1.4
+        ],
+        "core": false,
+        "count": 3
+      }
+    ]
+  }
+}

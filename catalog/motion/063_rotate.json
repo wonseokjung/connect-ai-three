@@ -1,0 +1,70 @@
+{
+  "id": "rotate",
+  "group": "motion",
+  "title": "rotate",
+  "about": "rotate by degrees between two moments",
+  "prompt": "Tip the block over by ninety degrees, once.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 63,
+  "param": "{\"type\": \"rotate\"}  at, dur, by [x,y,z]",
+  "spec": {
+    "name": "rotate",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.35,
+        4.7
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": []
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "subject",
+        "type": "rounded-box",
+        "size": [
+          1,
+          1,
+          1
+        ],
+        "radius": 0.12,
+        "position": [
+          0,
+          0.9,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "material": "gold",
+        "motion": [
+          {
+            "type": "rotate",
+            "at": 0.8,
+            "dur": 1.4,
+            "by": [
+              0,
+              0,
+              -90
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

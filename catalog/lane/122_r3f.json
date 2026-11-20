@@ -1,0 +1,82 @@
+{
+  "id": "r3f",
+  "group": "lane",
+  "title": "React Three Fiber lane",
+  "about": "the same spec inside <Canvas> / Remotion <ThreeCanvas> through our R3F adapter",
+  "prompt": "I already use React Three Fiber: mount this spec inside my own canvas next to my drei components.",
+  "source": "@react-three/fiber + @remotion/three",
+  "license": "MIT",
+  "order": 122,
+  "lane": "r3f",
+  "param": "<ConnectScene spec={spec} time={t} />",
+  "spec": {
+    "name": "r3f",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.4,
+        5.2
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -16,
+          "to": 16,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "knot",
+        "type": "knot",
+        "position": [
+          0,
+          1.15,
+          0
+        ],
+        "material": "gold",
+        "motion": [
+          {
+            "type": "turntable",
+            "speed": 26
+          }
+        ]
+      },
+      {
+        "id": "tag",
+        "type": "label",
+        "text": "REACT THREE FIBER LANE",
+        "size": 0.15,
+        "tracking": 0.35,
+        "weight": 400,
+        "color": "#F2B45A",
+        "position": [
+          0,
+          0.08,
+          0.9
+        ]
+      },
+      {
+        "id": "base",
+        "type": "cylinder",
+        "radius": 1.1,
+        "height": 0.06,
+        "position": [
+          0,
+          -0.38,
+          0
+        ],
+        "material": "black"
+      }
+    ]
+  }
+}

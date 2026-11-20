@@ -1,0 +1,139 @@
+{
+  "id": "shots",
+  "group": "camera",
+  "title": "shots",
+  "about": "fly between camera positions (a list of shots)",
+  "prompt": "Fly between three camera positions: wide, the rings, then the letters.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 78,
+  "param": "{\"type\": \"shots\"}  list: [{at, position, target, fov, dur, ease}]",
+  "spec": {
+    "name": "shots",
+    "duration": 4,
+    "look": "connect-night-city",
+    "camera": {
+      "position": [
+        0,
+        1.5,
+        7.4
+      ],
+      "target": [
+        0,
+        1.25,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "shots",
+          "list": [
+            {
+              "at": 0.2,
+              "dur": 1.2,
+              "position": [
+                -2.6,
+                2.6,
+                4.2
+              ],
+              "target": [
+                0,
+                2.05,
+                -0.4
+              ],
+              "arc": 0.3
+            },
+            {
+              "at": 1.7,
+              "dur": 1.2,
+              "position": [
+                2.4,
+                0.7,
+                3.6
+              ],
+              "target": [
+                0.6,
+                0.8,
+                0
+              ],
+              "arc": 0.2
+            },
+            {
+              "at": 3,
+              "dur": 0.9,
+              "position": [
+                0,
+                1.5,
+                7.4
+              ],
+              "target": [
+                0,
+                1.25,
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "title",
+        "type": "text3d",
+        "text": "CONNECT AI LAB",
+        "size": 0.44,
+        "position": [
+          0,
+          0.75,
+          0
+        ],
+        "material": "gold"
+      },
+      {
+        "id": "rings",
+        "type": "rings",
+        "radius": 0.72,
+        "position": [
+          0,
+          2.05,
+          -0.4
+        ]
+      },
+      {
+        "id": "left",
+        "type": "rounded-box",
+        "size": [
+          0.5,
+          1.4,
+          0.5
+        ],
+        "position": [
+          -3.2,
+          0.7,
+          -1.6
+        ],
+        "material": "black"
+      },
+      {
+        "id": "right",
+        "type": "rounded-box",
+        "size": [
+          0.5,
+          2,
+          0.5
+        ],
+        "position": [
+          3.3,
+          1,
+          -2.2
+        ],
+        "material": "steel"
+      }
+    ]
+  }
+}

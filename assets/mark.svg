@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- CONNECT mark (CONNECT AI LAB, own work): three nodes joined into one open ring -->
+  <path d="M100 14a86 86 0 1 0 74.5 129l-24.3-14A58 58 0 1 1 150.2 71l24.3-14A86 86 0 0 0 100 14z" fill="#D6892A"/>
+  <circle cx="100" cy="100" r="24" fill="#D6892A"/>
+  <circle cx="171" cy="100" r="15" fill="#D6892A"/>
+</svg>

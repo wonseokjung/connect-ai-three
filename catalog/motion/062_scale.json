@@ -1,0 +1,61 @@
+{
+  "id": "scale",
+  "group": "motion",
+  "title": "scale",
+  "about": "scale between two values",
+  "prompt": "Grow the gem from small to full size.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 62,
+  "param": "{\"type\": \"scale\"}  at, dur, from, to",
+  "spec": {
+    "name": "scale",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.35,
+        4.7
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": []
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "subject",
+        "type": "gem",
+        "radius": 0.9,
+        "position": [
+          0,
+          1.2,
+          0
+        ],
+        "material": "gold",
+        "motion": [
+          {
+            "type": "scale",
+            "at": 0.4,
+            "dur": 2.2,
+            "from": 0.3,
+            "to": 1
+          },
+          {
+            "type": "turntable",
+            "speed": 20
+          }
+        ]
+      }
+    ]
+  }
+}

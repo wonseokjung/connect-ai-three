@@ -1,0 +1,66 @@
+{
+  "id": "rise",
+  "group": "motion",
+  "title": "rise",
+  "about": "come up from below and settle",
+  "prompt": "Bring the block up from below and let it settle.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 58,
+  "param": "{\"type\": \"rise\"}  at, dur, from",
+  "spec": {
+    "name": "rise",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.35,
+        4.7
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": []
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "subject",
+        "type": "rounded-box",
+        "size": [
+          1,
+          1,
+          1
+        ],
+        "radius": 0.12,
+        "position": [
+          0,
+          0.9,
+          0
+        ],
+        "rotation": [
+          0,
+          28,
+          0
+        ],
+        "material": "gold",
+        "motion": [
+          {
+            "type": "rise",
+            "at": 0.5,
+            "dur": 1.1,
+            "from": -1.2
+          }
+        ]
+      }
+    ]
+  }
+}

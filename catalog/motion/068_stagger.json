@@ -1,0 +1,58 @@
+{
+  "id": "stagger",
+  "group": "motion",
+  "title": "stagger",
+  "about": "children pop or rise one after another",
+  "prompt": "Let the letters arrive one after another.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 68,
+  "param": "{\"type\": \"stagger\"}  at, each, dur, kind",
+  "spec": {
+    "name": "stagger",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.35,
+        6.5
+      ],
+      "target": [
+        0,
+        0.95,
+        0
+      ],
+      "fov": 34,
+      "motion": []
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "subject",
+        "type": "text3d",
+        "text": "ONE BY ONE",
+        "size": 0.6,
+        "split": true,
+        "position": [
+          0,
+          1.05,
+          0
+        ],
+        "material": "gold",
+        "motion": [
+          {
+            "type": "stagger",
+            "at": 0.3,
+            "each": 0.16,
+            "dur": 0.7
+          }
+        ]
+      }
+    ]
+  }
+}

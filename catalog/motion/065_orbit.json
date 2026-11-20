@@ -1,0 +1,72 @@
+{
+  "id": "orbit",
+  "group": "motion",
+  "title": "orbit",
+  "about": "circle around a point",
+  "prompt": "A small moon circling the big ball.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 65,
+  "param": "{\"type\": \"orbit\"}  radius, speed (deg/s), center, tilt",
+  "spec": {
+    "name": "orbit",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.35,
+        4.7
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": []
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "planet",
+        "type": "sphere",
+        "radius": 0.75,
+        "position": [
+          0,
+          1.2,
+          0
+        ],
+        "material": "black"
+      },
+      {
+        "id": "subject",
+        "type": "sphere",
+        "radius": 0.22,
+        "position": [
+          0,
+          1.2,
+          0
+        ],
+        "material": "gold",
+        "motion": [
+          {
+            "type": "orbit",
+            "radius": 1.6,
+            "speed": 90,
+            "center": [
+              0,
+              0,
+              0
+            ],
+            "tilt": 12
+          }
+        ]
+      }
+    ]
+  }
+}

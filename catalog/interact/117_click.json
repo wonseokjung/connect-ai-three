@@ -1,0 +1,134 @@
+{
+  "id": "click",
+  "group": "interact",
+  "title": "click",
+  "about": "click an object to give it a spin",
+  "prompt": "Give an object a spin when it is clicked.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 117,
+  "param": "\"interact\": [\"click\"]",
+  "spec": {
+    "name": "click",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.5,
+        7
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": []
+    },
+    "interact": [
+      "click"
+    ],
+    "pointerScript": [
+      {
+        "t": 0,
+        "x": -0.75,
+        "y": 0.5
+      },
+      {
+        "t": 0.7,
+        "x": -0.5,
+        "y": 0.02
+      },
+      {
+        "t": 0.8,
+        "x": -0.5,
+        "y": 0.02,
+        "click": "left",
+        "down": true
+      },
+      {
+        "t": 1,
+        "x": -0.5,
+        "y": 0.02
+      },
+      {
+        "t": 2,
+        "x": 0.5,
+        "y": 0.02
+      },
+      {
+        "t": 2.1,
+        "x": 0.5,
+        "y": 0.02,
+        "click": "right",
+        "down": true
+      },
+      {
+        "t": 2.3,
+        "x": 0.5,
+        "y": 0.02
+      },
+      {
+        "t": 4,
+        "x": 0.1,
+        "y": 0.4
+      }
+    ],
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror",
+        "motion": []
+      },
+      {
+        "id": "left",
+        "type": "gem",
+        "radius": 0.55,
+        "position": [
+          -2,
+          0.95,
+          0
+        ],
+        "material": "ivory",
+        "motion": []
+      },
+      {
+        "id": "mid",
+        "type": "knot",
+        "radius": 0.5,
+        "tube": 0.17,
+        "position": [
+          0,
+          1.1,
+          0
+        ],
+        "material": "gold",
+        "motion": []
+      },
+      {
+        "id": "right",
+        "type": "rounded-box",
+        "size": [
+          0.9,
+          0.9,
+          0.9
+        ],
+        "radius": 0.12,
+        "position": [
+          2,
+          0.95,
+          0
+        ],
+        "rotation": [
+          0,
+          30,
+          0
+        ],
+        "material": "black",
+        "motion": []
+      }
+    ]
+  }
+}

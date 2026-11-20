@@ -1,0 +1,95 @@
+{
+  "id": "handheld",
+  "group": "camera",
+  "title": "handheld",
+  "about": "small organic drift, like a hand-held camera",
+  "prompt": "Hold the camera by hand: a small organic drift.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 80,
+  "param": "{\"type\": \"handheld\"}  amp, speed",
+  "spec": {
+    "name": "handheld",
+    "duration": 4,
+    "look": "connect-night-city",
+    "camera": {
+      "position": [
+        0,
+        1.5,
+        6.2
+      ],
+      "target": [
+        0,
+        1.25,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "handheld",
+          "amp": 0.12,
+          "speed": 1.4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "title",
+        "type": "text3d",
+        "text": "CONNECT AI LAB",
+        "size": 0.44,
+        "position": [
+          0,
+          0.75,
+          0
+        ],
+        "material": "gold"
+      },
+      {
+        "id": "rings",
+        "type": "rings",
+        "radius": 0.72,
+        "position": [
+          0,
+          2.05,
+          -0.4
+        ]
+      },
+      {
+        "id": "left",
+        "type": "rounded-box",
+        "size": [
+          0.5,
+          1.4,
+          0.5
+        ],
+        "position": [
+          -3.2,
+          0.7,
+          -1.6
+        ],
+        "material": "black"
+      },
+      {
+        "id": "right",
+        "type": "rounded-box",
+        "size": [
+          0.5,
+          2,
+          0.5
+        ],
+        "position": [
+          3.3,
+          1,
+          -2.2
+        ],
+        "material": "steel"
+      }
+    ]
+  }
+}
