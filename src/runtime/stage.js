@@ -77,6 +77,7 @@ export async function createStage(specIn, opts = {}) {
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(spec.camera.fov ?? 35, size.width / size.height, 0.1, 600);
+  camera.layers.enable(1); // layer 1 = objects with "reflect": false
   const ctx = {
     THREE, spec, mode, size, renderer, scene, camera, transparent,
     palette: spec.palette,
@@ -118,6 +119,7 @@ export async function createStage(specIn, opts = {}) {
     } else scene.background = new THREE.Color(bg.color || '#000000');
   }
   if (spec.fog && !transparent) scene.fog = new THREE.FogExp2(spec.fog.color, spec.fog.density ?? 0.03);
+  const fogDensity = scene.fog ? scene.fog.density : null;
 
   await makeEnvironment(spec.env, ctx);
   const lights = makeLights(spec.lights, ctx);
@@ -174,12 +176,52 @@ export async function createStage(specIn, opts = {}) {
   }
 
   const post = makePost(spec.post, ctx);
+
+  // person matte (3D behind a person in your own video): after the frame is drawn, one full-screen quad erases the
+  // 3D wherever the matte says "person". Doubtful pixels count as person, so the footage always wins.
+  let occ = null;
+  function setOccluder(image, o = {}) {
+    if (!image) {
+      if (occ) occ.on = false;
+      return;
+    }
+    if (!occ) {
+      const tex = new THREE.Texture();
+      tex.minFilter = tex.magFilter = THREE.LinearFilter;
+      tex.generateMipmaps = false;
+      const mat = new THREE.ShaderMaterial({
+        depthTest: false, depthWrite: false, transparent: true, toneMapped: false,
+        blending: THREE.CustomBlending, blendEquation: THREE.AddEquation, blendSrc: THREE.ZeroFactor, blendDst: THREE.OneMinusSrcAlphaFactor, blendSrcAlpha: THREE.ZeroFactor, blendDstAlpha: THREE.OneMinusSrcAlphaFactor,
+        uniforms: {tMatte: {value: tex}, uLo: {value: 0.06}, uHi: {value: 0.42}, uPx: {value: new THREE.Vector2(1 / 1920, 1 / 1080)}},
+        vertexShader: /* glsl */ `varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0.0, 1.0); }`,
+        fragmentShader: /* glsl */ `uniform sampler2D tMatte; uniform float uLo; uniform float uHi; uniform vec2 uPx; varying vec2 vUv;
+          void main(){ float m = texture2D(tMatte, vUv).r;
+            m = max(m, max(max(texture2D(tMatte, vUv + vec2(uPx.x, 0.0)).r, texture2D(tMatte, vUv - vec2(uPx.x, 0.0)).r), max(texture2D(tMatte, vUv + vec2(0.0, uPx.y)).r, texture2D(tMatte, vUv - vec2(0.0, uPx.y)).r)));
+            gl_FragColor = vec4(0.0, 0.0, 0.0, smoothstep(uLo, uHi, m)); }`,
+      });
+      const geo = new THREE.PlaneGeometry(2, 2);
+      const quad = new THREE.Mesh(geo, mat);
+      quad.frustumCulled = false;
+      const sc = new THREE.Scene();
+      sc.add(quad);
+      ctx.disposables.push(tex, mat, geo);
+      occ = {tex, mat, sc, cam: new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1), on: true};
+    }
+    occ.tex.image = image;
+    occ.tex.needsUpdate = true;
+    occ.on = true;
+    occ.mat.uniforms.uLo.value = o.lo ?? 0.06;
+    occ.mat.uniforms.uHi.value = o.hi ?? 0.42;
+    const grow = o.grow ?? 1.5;
+    occ.mat.uniforms.uPx.value.set(grow / size.width, grow / size.height);
+  }
   const interact = new Set(spec.interact.map((i) => (typeof i === 'string' ? i : i.type)));
   const hoverables = tops.filter((o) => !o.userData.isFloor && !o.userData.isBackdrop && o.userData.def.hover !== false);
   // hover and click change scale / rotation: those objects must go back to their base pose every frame, or the
   // change piles up and the picture stops being a function of time
   if (interact.has('hover') || interact.has('click')) for (const o of hoverables) if (!movers.includes(o)) movers.push(o);
   const ray = new THREE.Raycaster();
+  ray.layers.enableAll();
   const ndc = new THREE.Vector2();
   let live = {pointer: null, orbit: [0, 0], zoom: 1, parallax: null, clicks: {}};
   let hovered = null, lastT = 0, frames = 0;
@@ -192,7 +234,9 @@ export async function createStage(specIn, opts = {}) {
       // narrow frame (phone): step back so the picture designed for 16:9 still fits
       const k = Math.pow(DESIGN_ASPECT / aspect, spec.camera.fitPower ?? 0.9);
       pose.position.sub(pose.target).multiplyScalar(k).add(pose.target);
-    }
+      // the camera is k times farther away: thin the haze by the same factor, or the scene sinks into the fog
+      if (scene.fog && fogDensity != null) scene.fog.density = fogDensity / k;
+    } else if (scene.fog && fogDensity != null) scene.fog.density = fogDensity;
     camera.fov = pose.fov;
     camera.aspect = aspect;
     camera.position.copy(pose.position);
@@ -251,6 +295,13 @@ export async function createStage(specIn, opts = {}) {
       post.frame(t, spec.fps, {focus: pose.position.distanceTo(pose.target)});
       post.composer.render();
     } else renderer.render(scene, camera);
+    if (occ && occ.on) {
+      const ac = renderer.autoClear;
+      renderer.autoClear = false;
+      renderer.setRenderTarget(null);
+      renderer.render(occ.sc, occ.cam);
+      renderer.autoClear = ac;
+    }
     frames++;
   }
 
@@ -282,7 +333,7 @@ export async function createStage(specIn, opts = {}) {
   }
 
   // where every top-level object sits on screen at the current time (0..1 from the top-left corner)
-  const box = new THREE.Box3(), corner = new THREE.Vector3();
+  const box = new THREE.Box3(), part = new THREE.Box3(), corner = new THREE.Vector3();
   function screenBoxes() {
     scene.updateMatrixWorld(true);
     const out = [];
@@ -292,7 +343,17 @@ export async function createStage(specIn, opts = {}) {
         out.push({id: o.userData.def.id, type: o.userData.type, visible: false});
         continue;
       }
-      box.setFromObject(o);
+      // only what is visible counts: letters that have not arrived yet, or a faded-out part, are not "on screen"
+      box.makeEmpty();
+      o.traverseVisible((m) => {
+        if (m.isInstancedMesh) {
+          m.computeBoundingBox();
+          box.union(part.copy(m.boundingBox).applyMatrix4(m.matrixWorld));
+        } else if (m.geometry) {
+          if (!m.geometry.boundingBox) m.geometry.computeBoundingBox();
+          if (m.geometry.boundingBox && !m.geometry.boundingBox.isEmpty()) box.union(part.copy(m.geometry.boundingBox).applyMatrix4(m.matrixWorld));
+        }
+      });
       if (box.isEmpty()) {
         out.push({id: o.userData.def.id, type: o.userData.type, visible: false});
         continue;
@@ -314,7 +375,7 @@ export async function createStage(specIn, opts = {}) {
     const out = [];
     const h = size.height;
     scene.traverse((o) => {
-      if (!o.userData.isLabel || !o.visible) return;
+      if (!o.userData.isLabel || !o.visible || o.userData.decor) return;
       const d = camera.position.distanceTo(o.getWorldPosition(corner));
       const s = o.getWorldScale(new THREE.Vector3()).y;
       const px = ((o.userData.labelWorldHeight * s) / (2 * Math.tan((camera.fov * Math.PI) / 360) * d)) * h;
@@ -352,7 +413,7 @@ export async function createStage(specIn, opts = {}) {
   return {
     spec, THREE, renderer, scene, camera, canvas, ctx, size,
     duration: spec.duration, fps: spec.fps,
-    render, resize, stats, screenBoxes, labelSizes, dispose,
+    render, resize, stats, screenBoxes, labelSizes, dispose, setOccluder,
     get hovered() {
       return hovered ? hovered.userData.def.id : null;
     },

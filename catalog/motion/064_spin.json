@@ -1,0 +1,61 @@
+{
+  "id": "spin",
+  "group": "motion",
+  "title": "spin",
+  "about": "a number of turns between two moments",
+  "prompt": "Give the clapperboard two quick spins, then let it rest.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 64,
+  "param": "{\"type\": \"spin\"}  turns, at, dur, axis, ease",
+  "peak": 3.2,
+  "spec": {
+    "name": "spin",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.3,
+        5.2
+      ],
+      "target": [
+        0,
+        1.25,
+        0
+      ],
+      "fov": 34,
+      "motion": []
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "clapper",
+        "type": "clapper",
+        "position": [
+          0,
+          1.15,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "clapAt": null,
+        "motion": [
+          {
+            "type": "spin",
+            "turns": 2,
+            "at": 0.5,
+            "dur": 1.6
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,169 @@
+{
+  "id": "crane",
+  "group": "camera",
+  "title": "crane",
+  "about": "rise or sink while looking at the target",
+  "prompt": "Start low at the desk edge and rise above my desk.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 86,
+  "param": "{\"type\": \"crane\"}  by, at, dur",
+  "spec": {
+    "name": "crane",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "backdrop": [
+      {
+        "type": "backglow",
+        "color": "#2F8F9D",
+        "intensity": 0.2
+      }
+    ],
+    "lights": [
+      {
+        "type": "key",
+        "color": "#fff2e2",
+        "intensity": 2.5,
+        "position": [
+          -3.2,
+          4.2,
+          4.5
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#2F8F9D",
+        "intensity": 8,
+        "position": [
+          3.6,
+          2.6,
+          -4.2
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#D6892A",
+        "intensity": 3,
+        "position": [
+          -4.2,
+          1.4,
+          -3.2
+        ]
+      },
+      {
+        "type": "ambient",
+        "color": "#8fa0b8",
+        "intensity": 0.13
+      }
+    ],
+    "env": {
+      "type": "softbox",
+      "intensity": 1.9,
+      "warm": "#7fd0d8"
+    },
+    "camera": {
+      "position": [
+        0,
+        0.55,
+        7.2
+      ],
+      "target": [
+        0,
+        1.15,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "crane",
+          "by": 3,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "desk",
+        "type": "rounded-box",
+        "size": [
+          5.2,
+          0.08,
+          1.9
+        ],
+        "radius": 0.03,
+        "position": [
+          0,
+          0.74,
+          0
+        ],
+        "material": {
+          "preset": "black",
+          "color": "#16171b",
+          "roughness": 0.5
+        }
+      },
+      {
+        "id": "display",
+        "type": "display",
+        "position": [
+          0,
+          0.78,
+          -0.4
+        ],
+        "width": 2.3
+      },
+      {
+        "id": "workstation",
+        "type": "workstation",
+        "position": [
+          1.85,
+          0.78,
+          0.1
+        ],
+        "rotation": [
+          0,
+          -20,
+          0
+        ],
+        "width": 0.7
+      },
+      {
+        "id": "mic",
+        "type": "microphone",
+        "position": [
+          -1.8,
+          0.78,
+          0.25
+        ],
+        "rotation": [
+          0,
+          20,
+          0
+        ],
+        "scale": 0.62
+      },
+      {
+        "id": "laptop",
+        "type": "laptop",
+        "position": [
+          -0.2,
+          0.78,
+          0.5
+        ],
+        "rotation": [
+          0,
+          8,
+          0
+        ],
+        "width": 1,
+        "title": "notes",
+        "kicker": ""
+      }
+    ]
+  }
+}

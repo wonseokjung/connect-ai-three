@@ -1,0 +1,104 @@
+{
+  "id": "smoked",
+  "group": "material",
+  "title": "smoked",
+  "about": "dark smoked glass panel",
+  "prompt": "Make the mark dark smoked glass.",
+  "source": "three.js core",
+  "license": "MIT",
+  "order": 54,
+  "param": "\"material\": \"smoked\"",
+  "spec": {
+    "name": "smoked",
+    "duration": 4,
+    "look": "studio-black",
+    "camera": {
+      "position": [
+        0,
+        1.45,
+        5
+      ],
+      "target": [
+        0,
+        1.25,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -10,
+          "to": 10,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror",
+        "dim": 0.66
+      },
+      {
+        "id": "monogram",
+        "type": "monogram",
+        "position": [
+          0,
+          1.5,
+          0
+        ],
+        "material": "smoked",
+        "pedestal": true,
+        "pedestalMaterial": {
+          "preset": "black",
+          "color": "#15171c"
+        },
+        "radius": 0.66,
+        "motion": [
+          {
+            "type": "turntable",
+            "speed": 30,
+            "phase": -30
+          }
+        ]
+      },
+      {
+        "id": "bar-0",
+        "type": "cylinder",
+        "radius": 0.05,
+        "height": 2.2,
+        "position": [
+          -0.55,
+          1.5,
+          -1.1
+        ],
+        "material": "gold"
+      },
+      {
+        "id": "bar-1",
+        "type": "cylinder",
+        "radius": 0.05,
+        "height": 2.2,
+        "position": [
+          0,
+          1.5,
+          -1.1
+        ],
+        "material": "ivory"
+      },
+      {
+        "id": "bar-2",
+        "type": "cylinder",
+        "radius": 0.05,
+        "height": 2.2,
+        "position": [
+          0.55,
+          1.5,
+          -1.1
+        ],
+        "material": "gold"
+      }
+    ]
+  }
+}

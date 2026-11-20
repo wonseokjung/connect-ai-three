@@ -15,7 +15,7 @@ export const registerPlugin = (p) => REG.plugins.set(p.name, p);
 
 // which optional adapter a spec needs (used by the web builder and by error messages)
 export const NEEDS = {
-  objects: {text3d: 'fonts', gltf: 'gltf', svg: 'svg', blob: 'jsm-objects', teapot: 'jsm-geometries', parametric: 'jsm-geometries'},
+  objects: {text3d: 'text3d', wordmark: 'brand', monogram: 'brand', building: 'brand', 'cinema-camera': 'brand', microphone: 'brand', workstation: 'brand', display: 'brand', laptop: 'brand', softbox: 'brand', clapper: 'brand', book: 'brand', gltf: 'gltf', svg: 'svg', blob: 'jsm-objects', teapot: 'jsm-geometries', parametric: 'jsm-geometries'},
   post: {ao: 'post-extra', outline: 'post-extra', pixel: 'post-extra', halftone: 'post-extra', dof: 'post-extra', smaa: 'post-extra'},
   env: {hdri: 'hdri'},
 };

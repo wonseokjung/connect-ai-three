@@ -1,0 +1,66 @@
+{
+  "id": "rotate",
+  "group": "motion",
+  "title": "rotate",
+  "about": "rotate by degrees between two moments",
+  "prompt": "Turn the laptop around to face us, once.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 74,
+  "param": "{\"type\": \"rotate\"}  at, dur, by [x,y,z]",
+  "peak": 1.6,
+  "spec": {
+    "name": "rotate",
+    "duration": 4,
+    "look": "blueprint",
+    "camera": {
+      "position": [
+        0,
+        1.9,
+        5
+      ],
+      "target": [
+        0,
+        0.55,
+        0
+      ],
+      "fov": 34,
+      "motion": []
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "grid",
+        "cell": 0.5,
+        "opacity": 0.45
+      },
+      {
+        "id": "laptop",
+        "type": "laptop",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          150,
+          0
+        ],
+        "motion": [
+          {
+            "type": "rotate",
+            "at": 0.7,
+            "dur": 1.6,
+            "by": [
+              0,
+              -150,
+              0
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

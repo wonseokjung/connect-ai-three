@@ -1,0 +1,237 @@
+{
+  "name": "on-my-video-2-modeling",
+  "duration": 11,
+  "look": "on-video",
+  "camera": {
+    "position": [
+      0,
+      1.2,
+      6.5
+    ],
+    "target": [
+      0,
+      0.9,
+      0
+    ],
+    "fov": 34
+  },
+  "post": [
+    {
+      "type": "grain",
+      "amount": 0.03
+    }
+  ],
+  "lights": [
+    {
+      "type": "key",
+      "color": "#ffe9d2",
+      "intensity": 2.3,
+      "position": [
+        -3,
+        4.5,
+        4.5
+      ]
+    },
+    {
+      "type": "rim",
+      "color": "#9fc4ff",
+      "intensity": 4,
+      "position": [
+        3.5,
+        2.5,
+        -4
+      ]
+    },
+    {
+      "type": "rim",
+      "color": "#D6892A",
+      "intensity": 2.5,
+      "position": [
+        -3.5,
+        2,
+        -3.5
+      ]
+    },
+    {
+      "type": "ambient",
+      "intensity": 0.2
+    }
+  ],
+  "env": {
+    "type": "softbox",
+    "intensity": 1.7,
+    "warm": "#e9c9a0"
+  },
+  "keepOut": [
+    {
+      "x": 0.336,
+      "y": 0.132,
+      "w": 0.232,
+      "h": 0.462
+    },
+    {
+      "x": 0,
+      "y": 0.5,
+      "w": 0.46,
+      "h": 0.5,
+      "front": true
+    }
+  ],
+  "objects": [
+    {
+      "id": "wire",
+      "type": "monogram",
+      "radius": 0.52,
+      "detail": 0.22,
+      "position": [
+        2.19,
+        1.695,
+        0
+      ],
+      "material": {
+        "preset": "wire",
+        "color": "#EBE2D2",
+        "opacity": 0.9
+      },
+      "motion": [
+        {
+          "type": "pop",
+          "at": 1.9,
+          "dur": 0.7
+        },
+        {
+          "type": "sway",
+          "deg": 32,
+          "axis": "y",
+          "period": 5,
+          "phase": 1
+        },
+        {
+          "type": "float",
+          "amp": 0.05
+        },
+        {
+          "type": "fade",
+          "at": 2.6,
+          "dur": 0.8,
+          "from": 1,
+          "to": 0
+        }
+      ]
+    },
+    {
+      "id": "solid",
+      "type": "monogram",
+      "radius": 0.515,
+      "position": [
+        2.19,
+        1.695,
+        0
+      ],
+      "material": "gold",
+      "motion": [
+        {
+          "type": "fade",
+          "at": 2.5,
+          "dur": 0.7
+        },
+        {
+          "type": "sway",
+          "deg": 32,
+          "axis": "y",
+          "period": 5,
+          "phase": 1
+        },
+        {
+          "type": "float",
+          "amp": 0.05
+        },
+        {
+          "type": "fade",
+          "at": 5.3,
+          "dur": 0.6,
+          "from": 1,
+          "to": 0
+        }
+      ]
+    },
+    {
+      "id": "caption",
+      "type": "label",
+      "text": "3D MODELING",
+      "size": 0.16,
+      "tracking": 0.4,
+      "weight": 400,
+      "position": [
+        2.19,
+        0.821,
+        0
+      ],
+      "motion": [
+        {
+          "type": "fade",
+          "at": 2.7,
+          "dur": 0.6
+        },
+        {
+          "type": "fade",
+          "at": 5.2,
+          "dur": 0.5,
+          "from": 1,
+          "to": 0
+        }
+      ]
+    },
+    {
+      "id": "computer",
+      "type": "workstation",
+      "width": 1.25,
+      "position": [
+        2.365,
+        1.302,
+        -0.3
+      ],
+      "rotation": [
+        14,
+        -28,
+        0
+      ],
+      "motion": [
+        {
+          "type": "fade",
+          "at": 7.15,
+          "dur": 0.25
+        },
+        {
+          "type": "slide",
+          "at": 7.2,
+          "dur": 1.1,
+          "from": [
+            -2.5,
+            0.25,
+            0
+          ],
+          "ease": "expoOut"
+        },
+        {
+          "type": "float",
+          "amp": 0.04,
+          "period": 4
+        },
+        {
+          "type": "sway",
+          "deg": 8,
+          "axis": "y",
+          "period": 6
+        },
+        {
+          "type": "fade",
+          "at": 10.3,
+          "dur": 0.6,
+          "from": 1,
+          "to": 0
+        }
+      ]
+    }
+  ]
+}

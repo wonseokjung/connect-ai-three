@@ -1,0 +1,68 @@
+{
+  "id": "wire",
+  "group": "material",
+  "title": "wire",
+  "about": "wireframe",
+  "prompt": "Make the mark ivory wireframe.",
+  "source": "three.js core",
+  "license": "MIT",
+  "order": 58,
+  "param": "\"material\": \"wire\"",
+  "spec": {
+    "name": "wire",
+    "duration": 4,
+    "look": "studio-black",
+    "camera": {
+      "position": [
+        0,
+        1.45,
+        5
+      ],
+      "target": [
+        0,
+        1.25,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -10,
+          "to": 10,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror",
+        "dim": 0.66
+      },
+      {
+        "id": "monogram",
+        "type": "monogram",
+        "position": [
+          0,
+          1.5,
+          0
+        ],
+        "material": "wire",
+        "pedestal": true,
+        "pedestalMaterial": {
+          "preset": "black",
+          "color": "#15171c"
+        },
+        "radius": 0.66,
+        "motion": [
+          {
+            "type": "turntable",
+            "speed": 30,
+            "phase": -30
+          }
+        ]
+      }
+    ]
+  }
+}

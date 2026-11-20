@@ -1,0 +1,120 @@
+{
+  "id": "truck",
+  "group": "camera",
+  "title": "truck",
+  "about": "slide sideways with the target",
+  "prompt": "Slide the camera sideways past my gear: camera, microphone, laptop, book, clapperboard.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 87,
+  "param": "{\"type\": \"truck\"}  by [x,y,z], at, dur",
+  "spec": {
+    "name": "truck",
+    "duration": 4,
+    "look": "midnight-glass",
+    "camera": {
+      "position": [
+        -3.4,
+        1.35,
+        6.2
+      ],
+      "target": [
+        -3.4,
+        0.95,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "truck",
+          "by": [
+            6.8,
+            0,
+            0
+          ],
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror",
+        "dim": 0.72
+      },
+      {
+        "id": "camera",
+        "type": "cinema-camera",
+        "position": [
+          -4.2,
+          0.6,
+          0
+        ],
+        "rotation": [
+          0,
+          30,
+          0
+        ],
+        "scale": 1
+      },
+      {
+        "id": "mic",
+        "type": "microphone",
+        "position": [
+          -2.1,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          20,
+          0
+        ]
+      },
+      {
+        "id": "laptop",
+        "type": "laptop",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          12,
+          0
+        ]
+      },
+      {
+        "id": "book",
+        "type": "book",
+        "position": [
+          2.1,
+          0.76,
+          0
+        ],
+        "rotation": [
+          0,
+          26,
+          0
+        ]
+      },
+      {
+        "id": "clapper",
+        "type": "clapper",
+        "position": [
+          4.3,
+          0.95,
+          0
+        ],
+        "rotation": [
+          0,
+          -18,
+          0
+        ],
+        "clapAt": null
+      }
+    ]
+  }
+}

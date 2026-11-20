@@ -1,0 +1,77 @@
+{
+  "id": "rings",
+  "group": "object",
+  "title": "Gyro rings",
+  "about": "metal rings turning around a core",
+  "prompt": "A gyroscope of gold and steel rings turning around our small ivory mark.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 26,
+  "spec": {
+    "name": "rings",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.4,
+        5.6
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -10,
+          "to": 10,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "rings",
+        "type": "rings",
+        "radius": 1.2,
+        "core": false,
+        "position": [
+          0,
+          1.35,
+          0
+        ],
+        "motion": [
+          {
+            "type": "pop",
+            "at": 0.1
+          }
+        ]
+      },
+      {
+        "id": "monogram",
+        "type": "monogram",
+        "position": [
+          -0.06,
+          1.35,
+          0
+        ],
+        "radius": 0.3,
+        "material": "ivory",
+        "motion": [
+          {
+            "type": "turntable",
+            "speed": -30
+          }
+        ]
+      }
+    ]
+  }
+}

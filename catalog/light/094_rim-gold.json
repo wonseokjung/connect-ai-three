@@ -1,0 +1,98 @@
+{
+  "id": "rim-gold",
+  "group": "light",
+  "title": "Gold rim light",
+  "about": "light from behind that draws the edge (gold by default)",
+  "prompt": "Light my microphone only from behind in gold, so just the edges show.",
+  "source": "three.js core",
+  "license": "MIT",
+  "order": 94,
+  "spec": {
+    "name": "rim-gold",
+    "duration": 4,
+    "backdrop": [],
+    "camera": {
+      "position": [
+        0,
+        1.3,
+        4.8
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -10,
+          "to": 10,
+          "dur": 4
+        }
+      ]
+    },
+    "post": [
+      "vignette",
+      "grain"
+    ],
+    "env": "none",
+    "background": {
+      "type": "color",
+      "color": "#040405"
+    },
+    "lights": [
+      {
+        "type": "rim",
+        "color": "#D6892A",
+        "intensity": 12,
+        "position": [
+          3.2,
+          2.6,
+          -4.5
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#F2B45A",
+        "intensity": 6,
+        "position": [
+          -3.6,
+          2.2,
+          -4
+        ]
+      },
+      {
+        "type": "ambient",
+        "intensity": 0.03
+      }
+    ],
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "matte",
+        "material": {
+          "preset": "black",
+          "color": "#050506",
+          "roughness": 0.78,
+          "clearcoat": 0
+        }
+      },
+      {
+        "id": "mic",
+        "type": "microphone",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          10,
+          0
+        ]
+      }
+    ]
+  }
+}

@@ -8,7 +8,7 @@ import {createStage, normalizeSpec} from '../runtime/all.js';
 import {probe} from '../runtime/probe.js';
 
 const FALLBACK = {name: 'empty', duration: 2, objects: [{type: 'gem'}]};
-type P = {spec: any; video?: {src: string; startFrom?: number; fit?: 'cover' | 'contain'} | null; times?: number[]; cols?: number; title?: string; bad?: string[]; keepOut?: boolean; samples?: number};
+type P = {spec: any; video?: {src?: string; startFrom?: number; fit?: 'cover' | 'contain'; matte?: any} | null; times?: number[]; cols?: number; title?: string; bad?: string[]; keepOut?: boolean; samples?: number};
 
 const meta = ({props}: {props: P}) => {
   const s = normalizeSpec(props.spec || FALLBACK);
@@ -19,9 +19,9 @@ const meta = ({props}: {props: P}) => {
 const Scene: React.FC<P> = ({spec, video}) => {
   const s = spec || FALLBACK;
   return (
-    <AbsoluteFill style={{backgroundColor: video ? '#000' : undefined}}>
-      {video ? <OffthreadVideo src={staticFile(video.src)} startFrom={video.startFrom ?? 0} style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: video.fit ?? 'cover'}} /> : null}
-      <SceneCanvas spec={video ? {...s, look: s.look ?? 'on-video', background: 'transparent'} : s} transparent={video ? true : undefined} />
+    <AbsoluteFill style={{backgroundColor: video && video.src ? '#000' : undefined}}>
+      {video && video.src ? <OffthreadVideo src={staticFile(video.src as string)} startFrom={video.startFrom ?? 0} style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: video.fit ?? 'cover'}} /> : null}
+      <SceneCanvas spec={video ? {...s, look: s.look ?? 'on-video', background: 'transparent'} : s} transparent={video ? true : undefined} matte={video && video.matte ? video.matte : null} />
     </AbsoluteFill>
   );
 };

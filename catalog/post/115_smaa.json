@@ -1,0 +1,84 @@
+{
+  "id": "smaa",
+  "group": "post",
+  "title": "smaa",
+  "about": "edge smoothing after the other passes",
+  "prompt": "Smooth the thin wire edges after the other passes.",
+  "source": "three.js examples/jsm SMAAPass",
+  "license": "MIT",
+  "order": 115,
+  "param": "\"post\": [\"vignette\", {\"type\":\"smaa\"}]",
+  "spec": {
+    "name": "smaa",
+    "post": [
+      "vignette",
+      {
+        "type": "smaa"
+      }
+    ],
+    "duration": 4,
+    "look": "blueprint",
+    "camera": {
+      "position": [
+        0,
+        1.6,
+        6.4
+      ],
+      "target": [
+        0,
+        1.2,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -10,
+          "to": 10,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "grid",
+        "cell": 0.5,
+        "opacity": 0.45
+      },
+      {
+        "id": "monogram",
+        "type": "monogram",
+        "position": [
+          -1.5,
+          1.4,
+          0
+        ],
+        "material": {
+          "preset": "wire",
+          "color": "#F2B45A",
+          "opacity": 0.9
+        },
+        "pedestal": true,
+        "radius": 0.6
+      },
+      {
+        "id": "wordmark",
+        "type": "wordmark",
+        "text": "CONNECT",
+        "size": 0.3,
+        "position": [
+          1.3,
+          1.3,
+          0
+        ],
+        "font": "light",
+        "material": {
+          "preset": "flat",
+          "color": "#dfeaf7"
+        }
+      }
+    ]
+  }
+}

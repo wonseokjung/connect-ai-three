@@ -1,0 +1,113 @@
+{
+  "id": "pulse",
+  "group": "motion",
+  "title": "pulse",
+  "about": "breathing scale",
+  "prompt": "Let the softbox breathe like a light warming up.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 75,
+  "param": "{\"type\": \"pulse\"}  amp, period",
+  "spec": {
+    "name": "pulse",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "backdrop": [
+      {
+        "type": "backglow",
+        "color": "#c9c2b4",
+        "intensity": 0.16
+      }
+    ],
+    "lights": [
+      {
+        "type": "key",
+        "color": "#ffffff",
+        "intensity": 2.8,
+        "position": [
+          -3.2,
+          4.2,
+          4.5
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#EBE2D2",
+        "intensity": 5,
+        "position": [
+          3.6,
+          2.6,
+          -4.2
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#4f7dd1",
+        "intensity": 2.2,
+        "position": [
+          -4.2,
+          1.4,
+          -3.2
+        ]
+      },
+      {
+        "type": "ambient",
+        "color": "#8fa0b8",
+        "intensity": 0.13
+      }
+    ],
+    "env": {
+      "type": "softbox",
+      "intensity": 1.9,
+      "warm": "#ffffff"
+    },
+    "camera": {
+      "position": [
+        0,
+        1.6,
+        6.4
+      ],
+      "target": [
+        0,
+        1.45,
+        0
+      ],
+      "fov": 34,
+      "motion": []
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "matte",
+        "material": {
+          "preset": "black",
+          "color": "#0c0d10",
+          "roughness": 0.78,
+          "clearcoat": 0
+        }
+      },
+      {
+        "id": "softbox",
+        "type": "softbox",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          -24,
+          0
+        ],
+        "motion": [
+          {
+            "type": "pulse",
+            "amp": 0.06,
+            "period": 1.3
+          }
+        ]
+      }
+    ]
+  }
+}

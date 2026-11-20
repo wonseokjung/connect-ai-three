@@ -1,0 +1,118 @@
+{
+  "id": "svg",
+  "group": "object",
+  "title": "SVG logo in 3D",
+  "about": "your .svg extruded into a solid object",
+  "prompt": "Extrude my logo.svg into thick ivory and let it turn like a medal, red light behind.",
+  "source": "three.js examples/jsm SVGLoader",
+  "license": "MIT",
+  "order": 38,
+  "spec": {
+    "name": "svg",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "backdrop": [
+      {
+        "type": "backglow",
+        "color": "#b0301f",
+        "intensity": 0.16
+      }
+    ],
+    "lights": [
+      {
+        "type": "key",
+        "color": "#fff2e2",
+        "intensity": 2.5,
+        "position": [
+          -3.2,
+          4.2,
+          4.5
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#C8372D",
+        "intensity": 7,
+        "position": [
+          3.6,
+          2.6,
+          -4.2
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#D6892A",
+        "intensity": 3,
+        "position": [
+          -4.2,
+          1.4,
+          -3.2
+        ]
+      },
+      {
+        "type": "ambient",
+        "color": "#8fa0b8",
+        "intensity": 0.13
+      }
+    ],
+    "env": {
+      "type": "softbox",
+      "intensity": 1.9,
+      "warm": "#ff9a7a"
+    },
+    "camera": {
+      "position": [
+        0,
+        1.4,
+        5.6
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -10,
+          "to": 10,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "mark",
+        "type": "svg",
+        "src": "kit:mark.svg",
+        "fit": 1.9,
+        "depth": 22,
+        "bevel": 2,
+        "position": [
+          0,
+          1.2,
+          0
+        ],
+        "material": "ivory",
+        "motion": [
+          {
+            "type": "pop",
+            "at": 0.15
+          },
+          {
+            "type": "sway",
+            "deg": 28,
+            "axis": "y",
+            "period": 5
+          }
+        ]
+      }
+    ]
+  }
+}

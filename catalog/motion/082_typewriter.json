@@ -1,0 +1,118 @@
+{
+  "id": "typewriter",
+  "group": "motion",
+  "title": "typewriter",
+  "about": "a label types itself",
+  "prompt": "Type the sentence onto my display, letter by letter.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 82,
+  "param": "{\"type\": \"typewriter\"}  at, dur",
+  "peak": 3.2,
+  "spec": {
+    "name": "typewriter",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "backdrop": [
+      {
+        "type": "backglow",
+        "color": "#2f5fc0",
+        "intensity": 0.22
+      }
+    ],
+    "lights": [
+      {
+        "type": "key",
+        "color": "#e6eeff",
+        "intensity": 2.3,
+        "position": [
+          -3.2,
+          4.2,
+          4.5
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#3f6fd0",
+        "intensity": 9,
+        "position": [
+          3.6,
+          2.6,
+          -4.2
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#D6892A",
+        "intensity": 3.5,
+        "position": [
+          -4.2,
+          1.4,
+          -3.2
+        ]
+      },
+      {
+        "type": "ambient",
+        "color": "#8fa0b8",
+        "intensity": 0.13
+      }
+    ],
+    "env": {
+      "type": "softbox",
+      "intensity": 1.9,
+      "warm": "#8fb0f0"
+    },
+    "camera": {
+      "position": [
+        0,
+        1.35,
+        5.6
+      ],
+      "target": [
+        0,
+        1.15,
+        0
+      ],
+      "fov": 34,
+      "motion": []
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "display",
+        "type": "display",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "title": " ",
+        "kicker": "connect-ai-three",
+        "width": 3.2
+      },
+      {
+        "id": "subject",
+        "type": "label",
+        "text": "Say it, get a three.js scene.",
+        "size": 0.2,
+        "weight": 300,
+        "position": [
+          0,
+          1.28,
+          0.04
+        ],
+        "motion": [
+          {
+            "type": "typewriter",
+            "at": 0.3,
+            "dur": 2.4
+          }
+        ]
+      }
+    ]
+  }
+}

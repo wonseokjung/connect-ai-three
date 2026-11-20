@@ -1,6 +1,6 @@
 // Scene spec: normalise (fill from the look) and validate. No three.js in here, so node and the browser share it.
 import {LOOKS, DEFAULT_LOOK} from './look.js';
-import {asDef, asList} from './util.js';
+import {asDef, asList, fontKey, BUILTIN_KO} from './util.js';
 
 export const SPEC_VERSION = 1;
 export const INTERACT = {
@@ -75,7 +75,11 @@ export function validateSpec(raw, names) {
   const walk = (o, where) => {
     if (!names.objects.includes(o.type)) err(`${where}: object type "${o.type}" does not exist. Did you mean "${near(String(o.type), names.objects)}"?`);
     if (ids.has(o.id)) err(`${where}: id "${o.id}" is used twice`);
-    if (o.type === 'text3d' && !o.fontFile && /[^\u0000-\u024f\u2010-\u2027]/.test(String(o.text ?? ''))) err(`${where}: 3D text "${String(o.text).slice(0, 20)}" has letters the built-in font does not have (it is Latin only). Add "fontFile": "assets/YourFont.ttf" (a .ttf / .otf you may use), or make it a "label".`);
+    if ((o.type === 'text3d' || o.type === 'wordmark') && !o.fontFile) {
+      const odd = [...String(o.text ?? '')].filter((ch) => /[^\u0000-\u024f\u2010-\u2027]/.test(ch));
+      const sans = !/^serif/.test(fontKey(o.font || (o.type === 'wordmark' ? 'light' : 'bold')));
+      if (odd.some((ch) => !sans || !BUILTIN_KO.includes(ch))) err(`${where}: 3D text "${String(o.text).slice(0, 20)}" has letters the built-in fonts do not have (they are Latin, plus a few Korean brand words in the sans faces). Add "fontFile": "assets/YourFont.ttf" (a .ttf / .otf you may use), or make it a "label".`);
+    }
     if (o.body != null && !['dynamic', 'fixed', true].includes(o.body)) err(`${where}: "body" is for physics and must be "dynamic" or "fixed" (for the small text on a card use "text")`);
     ids.add(o.id);
     const mats = [o.material, o.material2, o.coreMaterial].filter(Boolean);
@@ -101,15 +105,22 @@ export function validateSpec(raw, names) {
   return {errors, advice, spec: s};
 }
 
+// the CONNECT AI LAB prop set (src/plugins/brand.js) and the typeface each one uses for its 3D letters
+export const BRAND_OBJECTS = ['wordmark', 'monogram', 'building', 'cinema-camera', 'microphone', 'workstation', 'display', 'laptop', 'softbox', 'clapper', 'book'];
+const BRAND_FONT = {wordmark: 'light', building: 'sans'};
+
 // what optional adapters a spec uses (so a web page ships only those)
 export function specNeeds(raw) {
   const s = normalizeSpec(raw);
   const need = new Set();
-  const OBJ = {text3d: ['text3d', 'fonts'], gltf: ['gltf'], svg: ['svg'], blob: ['jsm-objects'], sky: ['jsm-objects'], teapot: ['jsm-geometries'], parametric: ['jsm-geometries']};
+  const OBJ = {text3d: ['text3d'], gltf: ['gltf'], svg: ['svg'], blob: ['jsm-objects'], sky: ['jsm-objects'], teapot: ['jsm-geometries'], parametric: ['jsm-geometries']};
+  for (const t of BRAND_OBJECTS) OBJ[t] = ['brand', 'text3d'];
   const POST = {ao: 'post-extra', outline: 'post-extra', pixel: 'post-extra', halftone: 'post-extra', dof: 'post-extra', smaa: 'post-extra'};
   const walk = (o) => {
     (OBJ[o.type] || []).forEach((n) => need.add(n));
     if (o.type === 'text3d' && o.fontFile) need.add('ttf');
+    else if (o.type === 'text3d') need.add('font:' + fontKey(o.font || 'bold'));
+    if (BRAND_FONT[o.type]) need.add('font:' + fontKey(o.font || BRAND_FONT[o.type]));
     if (['dynamic', 'fixed', true].includes(o.body) || ['dynamic', 'fixed', true].includes(o.bodyEach)) need.add('physics');
     if (o.type === 'gltf' && o.bvh !== false) need.add('bvh');
     (o.children || []).forEach(walk);

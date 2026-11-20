@@ -7,7 +7,7 @@ import {spawn} from 'node:child_process';
 import {KIT, KIT_NAME, VERSION, projectPaths, readJson, writeJson} from '../lib/paths.mjs';
 
 const argv = process.argv.slice(2);
-const VALUE = ['dir', 'agent', 'at', 'out', 'scale', 'target', 'faces', 'face', 'start', 'port', 'place', 'size', 'times'];
+const VALUE = ['dir', 'agent', 'at', 'out', 'scale', 'target', 'faces', 'face', 'matte', 'matte-fps', 'start', 'port', 'place', 'size', 'times'];
 const flag = (n) => argv.includes('--' + n);
 const opt = (n, d = null) => {
   const i = argv.indexOf('--' + n);
@@ -36,7 +36,8 @@ Say it, get a three.js scene: one spec becomes an interactive web page and a fra
   npx ${KIT_NAME} check [folder]        blank frames, draw calls, textures, phone framing, WebGL leaks, same-picture-twice
   npx ${KIT_NAME} sheet [folder]        out/sheet.jpg (stills across the scene)
   npx ${KIT_NAME} on-video talk.mp4 [folder]
-                                         3D object on top of your own video; --face x,y,w,h keeps your face clear
+                                         3D object on top of your own video; --face x,y,w,h keeps your face clear;
+                                         --matte <folder> draws the 3D BEHIND you (person matte, one picture per frame)
   npx ${KIT_NAME} catalog [group]       every object, material, motion, camera move, light, pass, look
   npx ${KIT_NAME} use <catalog-id> [folder]   start from a catalog example
   npx ${KIT_NAME} install               add the skill to Claude Code / Codex / Cursor / Antigravity
@@ -60,7 +61,13 @@ function printCheck(r, t) {
   const n = r.numbers || {};
   if (n.calls != null) log(`    ${n.calls} draw calls · ${n.triangles.toLocaleString('en-US')} triangles · largest texture ${n.maxTexture || 0}px · ${n.frameMs ? n.frameMs.median + ' ms/frame' : ''}${n.phoneMs != null ? ` · phone ${n.phoneMs} ms` : ''}`);
 }
-const shortSpec = (spec) => ({...spec, size: {width: 1080, height: 1920}});
+// the 9:16 version: the same scene at 1080x1920. A spec may carry "short": {...} with what should differ in the tall
+// frame: any top-level field, and "objects": {"<id>": {...}} to change single objects (a bigger caption, another place).
+const shortSpec = (spec) => {
+  const {objects: perId = {}, ...top} = spec.short || {};
+  const {short, ...base} = spec;
+  return {...base, ...top, camera: {...(base.camera || {}), ...(top.camera || {})}, size: {width: 1080, height: 1920}, objects: (base.objects || []).map((o) => (perId[o.id] ? {...o, ...perId[o.id]} : o))};
+};
 
 async function cmdMake(dirArg) {
   const L = await loadAll();
@@ -70,7 +77,9 @@ async function cmdMake(dirArg) {
   log(`${KIT_NAME} · ${dir}`);
   log('1/4 check');
   let t = Date.now();
-  const r = await L.check(dir, spec, {target: opt('target', 'both')});
+  const vj = readJson(path.join(dir, 'video.json'));
+  // with a person matte every object is drawn behind the person: the face keep-out cannot be broken
+  const r = await L.check(dir, vj && vj.matte ? {...spec, behindPerson: true} : spec, {target: opt('target', 'both')});
   printCheck(r, t);
   fs.mkdirSync(P.out, {recursive: true});
   fs.writeFileSync(path.join(P.out, 'report.md'), L.reportMd(spec.name || path.basename(dir), r));
@@ -96,7 +105,8 @@ async function cmdMake(dirArg) {
     log('  out/on_video_*.jpg');
   }
   if (flag('alpha')) {
-    await L.renderVideo(dir, {...spec, background: 'transparent'}, path.join(P.out, 'overlay.mov'), {alpha: true, log});
+    // with a person matte the overlay already has the person cut out of it: lay it over the footage in any editor
+    await L.renderVideo(dir, {...spec, background: 'transparent'}, path.join(P.out, 'overlay.mov'), {alpha: true, log, video: video && video.matte ? {matte: video.matte} : null});
     log('  out/overlay.mov');
   }
   if (flag('short')) {
@@ -226,7 +236,22 @@ async function main() {
       });
       log(`made ${P.spec} (edit the object, or ask your agent)`);
     }
-    writeJson(path.join(dir, 'video.json'), {src: rel, startFrom: Math.round(Number(opt('start', 0)) * 30)});
+    // person matte: --matte <folder of m_000000.png ...> (connect-ai-video-motion writes one in work/matte). With it
+    // every 3D object is drawn behind the person, so nothing can ever sit in front of a face or a hand.
+    let matte = null;
+    if (opt('matte') && fs.existsSync(opt('matte'))) {
+      const from = path.resolve(opt('matte'));
+      const names = fs.readdirSync(from).filter((f) => /\.(png|jpe?g)$/i.test(f)).sort();
+      if (names.length) {
+        const to = path.join(P.assets, 'matte');
+        fs.mkdirSync(to, {recursive: true});
+        for (const n of names) if (!fs.existsSync(path.join(to, n))) fs.copyFileSync(path.join(from, n), path.join(to, n));
+        const m = names[0].match(/^(.*?)(\d+)(\.\w+)$/);
+        matte = {dir: 'assets/matte', pattern: m ? `${m[1]}%0${m[2].length}d${m[3]}` : names[0], fps: Number(opt('matte-fps', 30)), start: m ? Number(m[2]) : 0, count: names.length};
+        log(`  person matte: ${names.length} frames, 3D goes behind the person`);
+      }
+    }
+    writeJson(path.join(dir, 'video.json'), {src: rel, startFrom: Math.round(Number(opt('start', 0)) * 30), ...(matte ? {matte} : {})});
     if (!keepOut.length) log('  no face box given: add --face x,y,w,h (fractions) or --faces <face.json from connect-ai-video-motion> so the check can keep your face clear');
     const r = await cmdMake(dir);
     if (!r.ok) process.exitCode = 1;
@@ -255,7 +280,7 @@ async function main() {
     const t = Date.now();
     const video = readJson(path.join(dir, 'video.json'));
     const out = path.resolve(opt('out') || path.join(P.out, flag('alpha') ? 'overlay.mov' : 'video.mp4'));
-    await L.renderVideo(dir, flag('alpha') ? {...spec, background: 'transparent'} : spec, out, {alpha: flag('alpha'), video: flag('alpha') ? null : video, scale: Number(opt('scale', 1)), r3f: flag('r3f'), log});
+    await L.renderVideo(dir, flag('alpha') ? {...spec, background: 'transparent'} : spec, out, {alpha: flag('alpha'), video: flag('alpha') ? (video && video.matte ? {matte: video.matte} : null) : video, scale: Number(opt('scale', 1)), r3f: flag('r3f'), log});
     log(`  ${path.relative(dir, out)}  (${secs(t)})`);
     if (flag('short')) {
       await L.renderVideo(dir, shortSpec(spec), path.join(P.out, 'short_9x16.mp4'), {log});

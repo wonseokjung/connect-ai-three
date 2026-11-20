@@ -1,0 +1,105 @@
+{
+  "id": "label",
+  "group": "object",
+  "title": "Text label",
+  "about": "thin sans text that is always crisp",
+  "prompt": "A small wide-spaced line 'CONNECT AI LAB' with a thin headline under it.",
+  "source": "CONNECT AI LAB canvas label",
+  "license": "MIT",
+  "order": 18,
+  "spec": {
+    "name": "label",
+    "duration": 4,
+    "look": "studio-black",
+    "camera": {
+      "position": [
+        0,
+        1.35,
+        6.5
+      ],
+      "target": [
+        0,
+        1.05,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "dolly",
+          "from": 1.1,
+          "to": 0.94,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror",
+        "dim": 0.74
+      },
+      {
+        "id": "kicker",
+        "type": "label",
+        "text": "CONNECT AI LAB",
+        "size": 0.2,
+        "tracking": 0.4,
+        "weight": 400,
+        "color": "#D6892A",
+        "position": [
+          0,
+          1.75,
+          0
+        ],
+        "motion": [
+          {
+            "type": "fade",
+            "at": 0.2
+          }
+        ]
+      },
+      {
+        "id": "head",
+        "type": "label",
+        "text": "The most beautiful way to learn AI",
+        "size": 0.52,
+        "weight": 200,
+        "position": [
+          0,
+          1.1,
+          0
+        ],
+        "motion": [
+          {
+            "type": "rise",
+            "at": 0.5,
+            "from": -0.25
+          }
+        ]
+      },
+      {
+        "id": "rule",
+        "type": "plane",
+        "width": 0.9,
+        "height": 0.012,
+        "position": [
+          0,
+          0.55,
+          0
+        ],
+        "material": {
+          "preset": "flat",
+          "color": "#D6892A"
+        },
+        "shadow": false,
+        "motion": [
+          {
+            "type": "fade",
+            "at": 1
+          }
+        ]
+      }
+    ]
+  }
+}

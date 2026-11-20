@@ -1,15 +1,7 @@
 {
   "name": "on-my-video",
-  "duration": 9,
+  "duration": 11,
   "look": "on-video",
-  "keepOut": [
-    {
-      "x": 0.33,
-      "y": 0.13,
-      "w": 0.25,
-      "h": 0.48
-    }
-  ],
   "camera": {
     "position": [
       0,
@@ -23,31 +15,96 @@
     ],
     "fov": 34
   },
+  "post": [
+    {
+      "type": "grain",
+      "amount": 0.03
+    }
+  ],
+  "lights": [
+    {
+      "type": "key",
+      "color": "#ffe9d2",
+      "intensity": 2.3,
+      "position": [
+        -3,
+        4.5,
+        4.5
+      ]
+    },
+    {
+      "type": "rim",
+      "color": "#9fc4ff",
+      "intensity": 4,
+      "position": [
+        3.5,
+        2.5,
+        -4
+      ]
+    },
+    {
+      "type": "rim",
+      "color": "#D6892A",
+      "intensity": 2.5,
+      "position": [
+        -3.5,
+        2,
+        -3.5
+      ]
+    },
+    {
+      "type": "ambient",
+      "intensity": 0.2
+    }
+  ],
+  "env": {
+    "type": "softbox",
+    "intensity": 1.7,
+    "warm": "#e9c9a0"
+  },
+  "keepOut": [
+    {
+      "x": 0.336,
+      "y": 0.132,
+      "w": 0.232,
+      "h": 0.462
+    },
+    {
+      "x": 0,
+      "y": 0.5,
+      "w": 0.46,
+      "h": 0.5,
+      "front": true
+    }
+  ],
   "objects": [
     {
       "id": "wire",
-      "type": "gem",
-      "radius": 0.62,
-      "detail": 1,
+      "type": "monogram",
+      "radius": 0.52,
+      "detail": 0.22,
       "position": [
-        2.3,
-        1.55,
+        2.19,
+        1.695,
         0
       ],
       "material": {
         "preset": "wire",
         "color": "#EBE2D2",
-        "opacity": 0.85
+        "opacity": 0.9
       },
       "motion": [
         {
           "type": "pop",
-          "at": 4.0,
+          "at": 1.9,
           "dur": 0.7
         },
         {
-          "type": "turntable",
-          "speed": 26
+          "type": "sway",
+          "deg": 32,
+          "axis": "y",
+          "period": 5,
+          "phase": 1
         },
         {
           "type": "float",
@@ -55,122 +112,124 @@
         },
         {
           "type": "fade",
-          "at": 6.6,
-          "dur": 0.9,
+          "at": 2.6,
+          "dur": 0.8,
           "from": 1,
-          "to": 0.25
+          "to": 0
         }
       ]
     },
     {
       "id": "solid",
-      "type": "gem",
-      "radius": 0.5,
-      "detail": 1,
+      "type": "monogram",
+      "radius": 0.515,
       "position": [
-        2.3,
-        1.55,
+        2.19,
+        1.695,
         0
       ],
       "material": "gold",
       "motion": [
         {
-          "type": "scale",
-          "at": 5.6,
-          "dur": 0.9,
-          "from": 0.02,
-          "to": 1,
-          "ease": "back"
+          "type": "fade",
+          "at": 2.5,
+          "dur": 0.7
+        },
+        {
+          "type": "sway",
+          "deg": 32,
+          "axis": "y",
+          "period": 5,
+          "phase": 1
+        },
+        {
+          "type": "float",
+          "amp": 0.05
         },
         {
           "type": "fade",
-          "at": 5.6,
-          "dur": 0.4
-        },
-        {
-          "type": "turntable",
-          "speed": 26
-        },
-        {
-          "type": "float",
-          "amp": 0.05
+          "at": 5.3,
+          "dur": 0.6,
+          "from": 1,
+          "to": 0
         }
       ]
     },
     {
-      "id": "orbit",
-      "type": "ribbon",
-      "curve": "orbit",
-      "radius": 0.86,
-      "thickness": 0.008,
-      "position": [
-        2.3,
-        1.55,
-        0
-      ],
-      "rotation": [
-        18,
-        0,
-        10
-      ],
-      "material": "gold",
-      "motion": [
-        {
-          "type": "draw",
-          "at": 6.0,
-          "dur": 1.1
-        },
-        {
-          "type": "turntable",
-          "speed": 40
-        },
-        {
-          "type": "float",
-          "amp": 0.05
-        }
-      ]
-    },
-    {
-      "id": "kicker",
+      "id": "caption",
       "type": "label",
       "text": "3D MODELING",
-      "size": 0.14,
+      "size": 0.16,
       "tracking": 0.4,
       "weight": 400,
-      "color": "#F2B45A",
       "position": [
-        2.3,
-        0.6,
+        2.19,
+        0.821,
         0
       ],
       "motion": [
         {
           "type": "fade",
-          "at": 5.6,
-          "dur": 0.5
+          "at": 2.7,
+          "dur": 0.6
+        },
+        {
+          "type": "fade",
+          "at": 5.2,
+          "dur": 0.5,
+          "from": 1,
+          "to": 0
         }
       ]
     },
     {
-      "id": "rule",
-      "type": "plane",
-      "width": 0.5,
-      "height": 0.01,
+      "id": "computer",
+      "type": "workstation",
+      "width": 1.25,
       "position": [
-        2.3,
-        0.44,
+        2.365,
+        1.302,
+        -0.3
+      ],
+      "rotation": [
+        14,
+        -28,
         0
       ],
-      "material": {
-        "preset": "flat",
-        "color": "#D6892A"
-      },
-      "shadow": false,
       "motion": [
         {
           "type": "fade",
-          "at": 5.8,
-          "dur": 0.5
+          "at": 7.15,
+          "dur": 0.25
+        },
+        {
+          "type": "slide",
+          "at": 7.2,
+          "dur": 1.1,
+          "from": [
+            -2.5,
+            0.25,
+            0
+          ],
+          "ease": "expoOut"
+        },
+        {
+          "type": "float",
+          "amp": 0.04,
+          "period": 4
+        },
+        {
+          "type": "sway",
+          "deg": 8,
+          "axis": "y",
+          "period": 6
+        },
+        {
+          "type": "fade",
+          "at": 10.3,
+          "dur": 0.6,
+          "from": 1,
+          "to": 0
         }
       ]
     }

@@ -1,0 +1,74 @@
+{
+  "id": "dolly",
+  "group": "camera",
+  "title": "dolly",
+  "about": "move toward or away from the target",
+  "prompt": "Push in slowly toward the microphone.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 85,
+  "param": "{\"type\": \"dolly\"}  from, to (x distance), at, dur",
+  "spec": {
+    "name": "dolly",
+    "duration": 4,
+    "look": "studio-black",
+    "camera": {
+      "position": [
+        0,
+        1.5,
+        7.6
+      ],
+      "target": [
+        0,
+        1.35,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "dolly",
+          "from": 1.25,
+          "to": 0.5,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror",
+        "dim": 0.7
+      },
+      {
+        "id": "mic",
+        "type": "microphone",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          14,
+          0
+        ]
+      },
+      {
+        "id": "softbox",
+        "type": "softbox",
+        "position": [
+          -2.6,
+          0,
+          -1.6
+        ],
+        "rotation": [
+          0,
+          50,
+          0
+        ],
+        "glow": 0.7
+      }
+    ]
+  }
+}

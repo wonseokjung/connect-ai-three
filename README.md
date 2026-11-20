@@ -6,9 +6,9 @@
 npx connect-ai-three
 ```
 
-[![A gold 3D logo over a night city, made from one scene.json](docs/media/hero.webp)](docs/index.html)
+[![Gold 3D letters on a dark mirror in front of a night city, made from one scene.json](docs/media/hero.webp)](docs/index.html)
 
-**[Open the catalog page](docs/index.html)**: all 124 items as living clips, the demos, and a prompt to copy for each one.
+**[Open the catalog page](docs/index.html)**: a live scene you can drag at the top, all 135 items as living clips, the demos, and a prompt to copy for each one.
 
 **One scene spec. Two outputs. A self-check.** You (or your coding agent) write one small `scene.json`: camera, lights, objects, motion, finish. The tool turns it into an interactive web page that runs in any browser **and** a video that is the same picture, frame for frame. Before it hands anything over it checks its own work: blank frames, objects out of view, a covered face, draw calls, texture sizes, phone framing, WebGL leaks.
 
@@ -27,7 +27,8 @@ flowchart LR
 It does not invent one more 3D library. Like mixed martial arts took the best moves of every style and made them work together, it puts the three.js ecosystem (three core, the `examples/jsm` loaders, geometries and post passes, Rapier physics, three-mesh-bvh, React Three Fiber, Remotion's renderer) behind one spec, so any of it is one line:
 
 ```json
-{"id": "title", "type": "text3d", "text": "MY NAME", "material": "gold", "split": true, "motion": [{"type": "stagger", "at": 0.5}]}
+{"id": "title", "type": "wordmark", "text": "MY NAME", "split": true, "motion": [{"type": "stagger", "at": 0.5}]}
+{"id": "camera", "type": "cinema-camera", "tripod": true}
 {"id": "model", "type": "gltf", "src": "assets/robot.glb", "motion": ["turntable"]}
 {"id": "word", "type": "text3d", "text": "DROP", "bodyEach": true}
 ```
@@ -87,7 +88,9 @@ What you get in `out/`:
 
 `look` is one word for background, lights, reflections and finish. Everything moves from time alone (`at`, `dur`), so you can scrub, loop, and render frames in any order.
 
-## Catalog: 124 items, every one a scene that runs
+Two small fields worth knowing: `"short": {...}` holds what should differ in the 9:16 version (`--short`): a top-level field such as `camera`, or single objects by id (`"objects": {"tag": {"size": 0.12}}`). And `"reflect": false` on an object keeps it out of the mirror floor.
+
+## Catalog: 135 items, every one a scene that runs
 
 ```bash
 npx connect-ai-three catalog            # the list
@@ -97,7 +100,7 @@ npx connect-ai-three use dof my-scene   # start from an item
 
 | Group | Items | Stands on |
 |---|---|---|
-| Objects (32) | 3D text (whole or letter by letter), labels, glass cards, your image, your `.glb` (Draco and Meshopt compression are read), your `.svg` logo extruded, floors (mirror, shadow catcher, grid), rounded boxes and primitives, gem, gyro rings, ribbon, fat lines, instanced grids / spheres / spirals, dot globe, 3D bars, night city, back glow, terrain, rolling surface, sky, liquid-metal blob, teapot, mobius | three core, examples/jsm (TextGeometry, GLTFLoader, SVGLoader, Reflector, Line2, RoundedBoxGeometry, Sky, MarchingCubes ...), our shaders |
+| Objects (43) | **the studio prop set** (wordmark, monogram, studio building with your sign, camera, microphone, workstation, display, laptop, softbox, clapperboard, course book: all built in code, no model files), 3D text in six typefaces (whole or letter by letter), labels, glass cards, your image, your `.glb` (Draco and Meshopt compression are read), your `.svg` logo extruded, floors (mirror, shadow catcher, grid), rounded boxes and primitives, gem, gyro rings, ribbon, fat lines, instanced grids / spheres / spirals, dot globe, 3D bars, night city, back glow, terrain, rolling surface, sky, liquid-metal blob, teapot, mobius | three core, examples/jsm (TextGeometry, GLTFLoader, SVGLoader, Reflector, Line2, RoundedBoxGeometry, Sky, MarchingCubes ...), our shaders |
 | Materials (20) | gold, brushed gold, chrome, steel, piano black, ivory, clay, plastic, car paint, glass, frosted, smoked, velvet, iridescent, glow, wire, flat, toon, rim, gradient | three's physical material, our shaders |
 | Motion (21) | turntable, spin, float, sway, pop, fade, rise, drop, slide, move, scale, rotate, pulse, orbit, path, explode, stagger, draw, count, typewriter, billboard | ours |
 | Camera (9) | orbit, dolly, crane, truck, zoom, shots (fly between positions), path, handheld, dolly-zoom | ours |
@@ -116,7 +119,7 @@ npx connect-ai-three use dof my-scene   # start from an item
 |---|---|
 | Blank or almost black frames | the most common three.js failure: camera looking the wrong way, no light |
 | Objects that are never inside the frame, NaN positions | a typo in a position; one NaN can blacken the whole frame once bloom is on |
-| The face keep-out box (`keepOut`) | on your own video nothing may cover your face |
+| The face keep-out box (`keepOut`), and boxes marked `front` | on your own video nothing may cover your face; with a person matte all 3D is behind you, and a mic arm in front of you stays in front |
 | The same picture twice | the frame at 2.0 s must be identical however you got there: this is what makes the page and the video match |
 | WebGL leaks | the scene is built and disposed several times: no context, geometry or texture may stay behind (browsers allow about 16 contexts) |
 | Draw calls, triangles, largest texture, texture memory | phones: 4096 px textures are the safe ceiling, instancing keeps draw calls down |
@@ -124,25 +127,58 @@ npx connect-ai-three use dof my-scene   # start from an item
 | Phone framing (390 x 844) | is anything cut off in portrait |
 | Text height in pixels | labels too small to read on a phone |
 
-## Text in Korean, Japanese, any script
+## Colour: black and gold, plus two or three colours of your own
 
-Flat text (`label`, `card`, the page headline) works in every language with no setup. Extruded 3D text uses a built-in Latin font; for other scripts add your own font file and it is extruded the same way:
+The eight looks set the room; the picture gets its colour from the things in it. Every catalog example stars a
+different object in a different scheme (gold, teal, deep blue, ivory, one red accent), so no two neighbours look
+alike. To change a scheme, change the pool of light behind the subject and one rim light:
 
 ```json
-{"type": "text3d", "text": "모두를 위한 AI 교육", "fontFile": "assets/MyFont.otf", "material": "gold", "split": true}
+"backdrop": [{"type": "backglow", "color": "#2F8F9D", "intensity": 0.2}],
+"lights": [{"type": "key", "intensity": 2.5, "position": [-3.2, 4.2, 4.5]}, {"type": "rim", "color": "#2F8F9D", "intensity": 8, "position": [3.6, 2.6, -4.2]}]
 ```
 
-The check tells you when a 3D text has letters the font does not have. See `examples/korean-title`.
+## 3D letters: six typefaces, and any font file
+
+`text3d`, `wordmark` and the sign on `building` take `"font"`: `thin`, `light`, `sans`, `bold` (one clean sans in four
+weights) or `serif`, `serif-bold` (a display serif). They are small glyph subsets, tens of KB each, and a web page
+carries only the ones its scene names. Kerning pairs are applied.
+
+Flat text (`label`, `card`, the page headline) works in every language with no setup. The sans faces also carry the
+Korean letters of a few lines such as "모두를 위한 AI 교육"; for any other Korean, Japanese, Chinese or Arabic text add
+your own font file and it is extruded the same way:
+
+```json
+{"type": "text3d", "text": "안녕하세요, 반갑습니다", "fontFile": "assets/MyFont.otf", "material": "gold", "split": true}
+```
+
+The check tells you when a 3D text has letters the font does not have. See `examples/korean-title`. The typeface data
+are derived from open fonts and stay under the SIL Open Font License ([licenses/fonts-OFL.txt](licenses/fonts-OFL.txt)).
 
 ## 3D on your own video
 
 Lesson 2's tool ([connect-ai-video-motion](https://github.com/wonseokjung/connect-ai-video-motion)) puts 2D graphics around you. This one adds a 3D object to the same video:
 
 ```bash
-npx connect-ai-three on-video talk.mp4 --faces talk-video-motion/work/face.json
+npx connect-ai-three on-video talk.mp4 --faces talk-video-motion/work/face.json --matte talk-video-motion/work/matte
 ```
 
-It makes a transparent 3D layer over your footage and never touches your pixels. `face.json` is what connect-ai-video-motion wrote when it analysed the clip; without it give the box yourself (`--face 0.33,0.13,0.25,0.48`). If an object crosses the face box, the check fails and tells you when and by how much.
+It makes a transparent 3D layer over your footage and never touches your pixels. `face.json` and the `matte` folder
+are what connect-ai-video-motion wrote when it analysed the clip (the matte is one grayscale picture per frame,
+white = person; on macOS it comes from Apple Vision, nothing to download).
+
+- **With the matte, every 3D object is drawn behind you.** A wordmark can rise from behind your shoulders, a camera
+  can fly behind your head, and nothing can ever sit in front of your face or your hands. Doubtful pixels at the
+  edge of the matte count as you, so the footage always wins.
+- **Without a matte** the 3D sits on top, and the face box does the guarding: give `--faces` or
+  `--face 0.33,0.13,0.25,0.48`. If an object crosses the box, the check fails and tells you when and by how much.
+- A thing in front of you that is not you (a mic arm, a lamp) is not in the matte. Mark its area
+  `{"x": 0, "y": 0.5, "w": 0.46, "h": 0.5, "front": true}` in `keepOut` and the check keeps the 3D off it.
+- `make --alpha` writes `overlay.mov` with the person already cut out of the 3D, ready to lay over the footage in
+  Premiere, CapCut or DaVinci.
+
+`examples/on-my-video` has five finished cuts (a greeting, "3D modeling", "I move the camera", "gravity",
+"AI-native company"), each timed to the words spoken in that take.
 
 ## Already using React Three Fiber?
 
@@ -167,7 +203,7 @@ The same component works inside Remotion's `<ThreeCanvas>` (`npx connect-ai-thre
 | `video [folder]` | only the video. `--alpha`, `--short`, `--scale 0.5`, `--r3f` |
 | `check [folder]` | only the self-check. `--json` |
 | `sheet [folder]` / `still [folder] --at 2.5` | stills |
-| `on-video <video> [folder]` | 3D over your own video. `--faces face.json` or `--face x,y,w,h` |
+| `on-video <video> [folder]` | 3D over your own video. `--faces face.json` or `--face x,y,w,h`; `--matte <folder>` draws the 3D behind you |
 | `catalog [group]` / `use <id> [folder]` | list the catalog / start from an item |
 | `install` / `uninstall` | the skill for Claude Code, Codex, Cursor, Antigravity. `--agent`, `--project`, `--dry-run` |
 | `doctor` | is this machine ready |
@@ -177,7 +213,7 @@ From a clone:
 ```bash
 git clone https://github.com/wonseokjung/connect-ai-three.git
 cd connect-ai-three && npm install
-npm test                 # 29 tests; --fast skips the ones that open the browser
+npm test                 # 30 tests; --fast skips the ones that open the browser
 node bin/cli.mjs demo
 ```
 
@@ -187,7 +223,7 @@ Gaussian splats · WebGPU / TSL materials · sound · a keyframe editor. Depth o
 
 ## Credits
 
-Built on three.js and the projects listed in [NOTICE.md](NOTICE.md), each with version and licence. Assets: one CC0 HDRI from Poly Haven and one public-domain NASA model ([licenses/assets.md](licenses/assets.md)); no credit-required assets. The clip on the catalog page that shows a person is the author, on his own footage.
+Built on three.js and the projects listed in [NOTICE.md](NOTICE.md), each with version and licence. Assets: one CC0 HDRI from Poly Haven, one public-domain NASA model, and typeface data derived from two open fonts under the SIL Open Font License ([licenses/assets.md](licenses/assets.md)); no credit-required assets. The props are built in code. The clips on the catalog page that show a person are the author, on his own footage.
 
 More open-source tools and free lessons: [CONNECT AI LAB on YouTube](https://www.youtube.com/@CONNECT-AI-LAB) · [aicitybuilders.com](https://www.aicitybuilders.com)
 

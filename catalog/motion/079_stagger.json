@@ -1,0 +1,67 @@
+{
+  "id": "stagger",
+  "group": "motion",
+  "title": "stagger",
+  "about": "children pop or rise one after another",
+  "prompt": "Let the letters arrive one after another.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 79,
+  "param": "{\"type\": \"stagger\"}  at, each, dur, kind",
+  "peak": 3.3,
+  "spec": {
+    "name": "stagger",
+    "duration": 4,
+    "look": "blueprint",
+    "camera": {
+      "position": [
+        0,
+        1.3,
+        7
+      ],
+      "target": [
+        0,
+        1.05,
+        0
+      ],
+      "fov": 34,
+      "motion": []
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "grid",
+        "cell": 0.5,
+        "opacity": 0.4
+      },
+      {
+        "id": "subject",
+        "type": "text3d",
+        "text": "VISUAL VIBE CODING",
+        "font": "light",
+        "size": 0.44,
+        "depth": 0.08,
+        "tracking": 0.14,
+        "split": true,
+        "position": [
+          0,
+          1.1,
+          0
+        ],
+        "material": {
+          "preset": "flat",
+          "color": "#dfeaf7"
+        },
+        "motion": [
+          {
+            "type": "stagger",
+            "at": 0.3,
+            "each": 0.1,
+            "dur": 0.6
+          }
+        ]
+      }
+    ]
+  }
+}

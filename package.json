@@ -1,7 +1,7 @@
 {
   "name": "connect-ai-three",
-  "version": "0.1.0",
-  "description": "Say it, get a three.js scene. One scene spec (camera, lights, objects, motion, post) becomes an interactive web page AND a frame-locked video, with a self-check for blank frames, draw calls, texture sizes, mobile budgets and WebGL leaks. Open source by CONNECT AI LAB.",
+  "version": "0.2.0",
+  "description": "Say it, get a three.js scene. One scene spec (camera, lights, objects, motion, post) becomes an interactive web page AND a frame-locked video, also behind you in your own footage, with a self-check for blank frames, draw calls, texture sizes, mobile budgets and WebGL leaks. Open source by CONNECT AI LAB.",
   "type": "module",
   "license": "MIT",
   "author": "CONNECT AI LAB",
@@ -49,6 +49,7 @@
     "tests/",
     "remotion.config.ts",
     "tsconfig.json",
+    "CHANGELOG.md",
     "NOTICE.md",
     "README.md",
     "README.ko.md",

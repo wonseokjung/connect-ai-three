@@ -1,0 +1,77 @@
+{
+  "id": "billboard",
+  "group": "motion",
+  "title": "billboard",
+  "about": "always face the camera",
+  "prompt": "Keep the name tag facing the camera while the camera circles my microphone.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 83,
+  "param": "{\"type\": \"billboard\"}  ",
+  "spec": {
+    "name": "billboard",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.5,
+        5.4
+      ],
+      "target": [
+        0,
+        1.15,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -70,
+          "to": 70,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "mic",
+        "type": "microphone",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "subject",
+        "type": "label",
+        "text": "AI MENTOR JAY",
+        "size": 0.2,
+        "tracking": 0.3,
+        "weight": 400,
+        "color": "#EBE2D2",
+        "position": [
+          0,
+          2.25,
+          0
+        ],
+        "motion": [
+          {
+            "type": "billboard"
+          }
+        ]
+      }
+    ]
+  }
+}

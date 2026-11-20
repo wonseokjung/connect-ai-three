@@ -1,0 +1,91 @@
+{
+  "id": "zoom",
+  "group": "interact",
+  "title": "zoom",
+  "about": "wheel or pinch to move closer",
+  "prompt": "Let visitors wheel or pinch to move closer to my microphone.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 127,
+  "param": "\"interact\": [\"zoom\"]",
+  "spec": {
+    "name": "zoom",
+    "interact": [
+      "zoom"
+    ],
+    "pointerScript": [
+      {
+        "t": 0,
+        "x": 0,
+        "y": 0,
+        "zoom": 1
+      },
+      {
+        "t": 1.6,
+        "x": 0,
+        "y": 0,
+        "zoom": 0.5
+      },
+      {
+        "t": 2.6,
+        "x": 0,
+        "y": 0,
+        "zoom": 0.5
+      },
+      {
+        "t": 4,
+        "x": 0,
+        "y": 0,
+        "zoom": 1.25
+      }
+    ],
+    "duration": 4,
+    "look": "pale-studio",
+    "camera": {
+      "position": [
+        0,
+        1.4,
+        6.6
+      ],
+      "target": [
+        0,
+        1.25,
+        0
+      ],
+      "fov": 34,
+      "motion": []
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "matte",
+        "material": {
+          "preset": "clay",
+          "color": "#dcd8d0"
+        },
+        "size": 300
+      },
+      {
+        "id": "shadow",
+        "type": "floor",
+        "kind": "shadow",
+        "opacity": 0.26
+      },
+      {
+        "id": "mic",
+        "type": "microphone",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          20,
+          0
+        ]
+      }
+    ]
+  }
+}

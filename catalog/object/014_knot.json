@@ -1,0 +1,172 @@
+{
+  "id": "knot",
+  "group": "object",
+  "title": "Torus knot",
+  "about": "one endless knot: a classic for trophies and material tests",
+  "prompt": "A trophy: a gold knot on a black base with my name on the plate.",
+  "source": "three.js core",
+  "license": "MIT",
+  "order": 14,
+  "spec": {
+    "name": "knot",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "backdrop": [
+      {
+        "type": "backglow",
+        "color": "#2f5fc0",
+        "intensity": 0.22
+      }
+    ],
+    "lights": [
+      {
+        "type": "key",
+        "color": "#e6eeff",
+        "intensity": 2.3,
+        "position": [
+          -3.2,
+          4.2,
+          4.5
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#3f6fd0",
+        "intensity": 9,
+        "position": [
+          3.6,
+          2.6,
+          -4.2
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#D6892A",
+        "intensity": 3.5,
+        "position": [
+          -4.2,
+          1.4,
+          -3.2
+        ]
+      },
+      {
+        "type": "ambient",
+        "color": "#8fa0b8",
+        "intensity": 0.13
+      }
+    ],
+    "env": {
+      "type": "softbox",
+      "intensity": 1.9,
+      "warm": "#8fb0f0"
+    },
+    "camera": {
+      "position": [
+        0,
+        1.4,
+        5.4
+      ],
+      "target": [
+        0,
+        1.15,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -10,
+          "to": 10,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "trophy",
+        "type": "group",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "motion": [
+          {
+            "type": "turntable",
+            "speed": 14
+          }
+        ],
+        "children": [
+          {
+            "id": "trophy-base",
+            "type": "rounded-box",
+            "size": [
+              1.5,
+              0.5,
+              0.9
+            ],
+            "radius": 0.04,
+            "position": [
+              0,
+              0.25,
+              0
+            ],
+            "material": {
+              "preset": "black",
+              "color": "#15171c"
+            }
+          },
+          {
+            "id": "trophy-plate",
+            "type": "label",
+            "text": "CONNECT AI LAB",
+            "size": 0.11,
+            "tracking": 0.3,
+            "weight": 400,
+            "color": "#F2B45A",
+            "position": [
+              0,
+              0.25,
+              0.455
+            ]
+          },
+          {
+            "id": "trophy-stem",
+            "type": "cylinder",
+            "radius": 0.05,
+            "height": 0.4,
+            "position": [
+              0,
+              0.7,
+              0
+            ],
+            "material": "gold"
+          },
+          {
+            "id": "trophy-knot",
+            "type": "knot",
+            "radius": 0.5,
+            "tube": 0.16,
+            "position": [
+              0,
+              1.55,
+              0
+            ],
+            "material": "gold",
+            "motion": [
+              {
+                "type": "turntable",
+                "speed": 30
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

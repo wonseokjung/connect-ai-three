@@ -1,0 +1,58 @@
+{
+  "id": "turntable",
+  "group": "motion",
+  "title": "turntable",
+  "about": "slow constant turn around Y",
+  "prompt": "Turn my workstation slowly, forever.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 63,
+  "param": "{\"type\": \"turntable\"}  speed (deg/s), axis",
+  "spec": {
+    "name": "turntable",
+    "duration": 4,
+    "look": "studio-black",
+    "camera": {
+      "position": [
+        0,
+        1.5,
+        4.4
+      ],
+      "target": [
+        0,
+        0.45,
+        0
+      ],
+      "fov": 34,
+      "motion": []
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror",
+        "dim": 0.66
+      },
+      {
+        "id": "workstation",
+        "type": "workstation",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          28,
+          0
+        ],
+        "motion": [
+          {
+            "type": "turntable",
+            "speed": 45
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "id": "bars",
+  "group": "object",
+  "title": "3D bars",
+  "about": "a bar chart from your own numbers",
+  "prompt": "My four numbers as 3D bars growing one by one, teal with the biggest in gold.",
+  "source": "CONNECT AI LAB on RoundedBoxGeometry",
+  "license": "MIT",
+  "order": 31,
+  "spec": {
+    "name": "bars",
+    "duration": 4,
+    "look": "pale-studio",
+    "camera": {
+      "position": [
+        0,
+        1.7,
+        7.2
+      ],
+      "target": [
+        0,
+        1.1,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -22,
+          "to": 8,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "matte",
+        "material": {
+          "preset": "clay",
+          "color": "#dcd8d0"
+        },
+        "size": 300
+      },
+      {
+        "id": "shadow",
+        "type": "floor",
+        "kind": "shadow",
+        "opacity": 0.25
+      },
+      {
+        "id": "bars",
+        "type": "bars",
+        "values": [
+          2,
+          3,
+          5,
+          8
+        ],
+        "labels": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "height": 1.8,
+        "position": [
+          0,
+          0.3,
+          0
+        ],
+        "material": "gold",
+        "material2": {
+          "preset": "paint",
+          "color": "#2F8F9D"
+        }
+      }
+    ]
+  }
+}

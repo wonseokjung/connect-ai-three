@@ -1,0 +1,257 @@
+{
+  "id": "tumble",
+  "group": "physics",
+  "title": "Stack and ball",
+  "about": "a chrome ball knocks a stack over",
+  "prompt": "Stack the letters 'JAY' as blocks three high, then roll a chrome ball into them.",
+  "source": "Rapier (@dimforge/rapier3d-compat)",
+  "license": "Apache-2.0",
+  "order": 132,
+  "peak": 0.5,
+  "spec": {
+    "name": "tumble",
+    "duration": 5,
+    "look": "connect-gold-night",
+    "backdrop": [
+      {
+        "type": "backglow",
+        "color": "#2f5fc0",
+        "intensity": 0.22
+      }
+    ],
+    "lights": [
+      {
+        "type": "key",
+        "color": "#e6eeff",
+        "intensity": 2.3,
+        "position": [
+          -3.2,
+          4.2,
+          4.5
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#3f6fd0",
+        "intensity": 9,
+        "position": [
+          3.6,
+          2.6,
+          -4.2
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#D6892A",
+        "intensity": 3.5,
+        "position": [
+          -4.2,
+          1.4,
+          -3.2
+        ]
+      },
+      {
+        "type": "ambient",
+        "color": "#8fa0b8",
+        "intensity": 0.13
+      }
+    ],
+    "env": {
+      "type": "softbox",
+      "intensity": 1.9,
+      "warm": "#8fb0f0"
+    },
+    "camera": {
+      "position": [
+        0,
+        1.7,
+        7.4
+      ],
+      "target": [
+        0,
+        0.9,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -10,
+          "to": 16,
+          "dur": 5
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "b00",
+        "type": "text3d",
+        "text": "J",
+        "font": "bold",
+        "size": 0.62,
+        "depth": 0.5,
+        "position": [
+          -0.06000000000000005,
+          0.31,
+          0
+        ],
+        "material": "gold",
+        "body": "dynamic",
+        "bounce": 0.15
+      },
+      {
+        "id": "b01",
+        "type": "text3d",
+        "text": "A",
+        "font": "bold",
+        "size": 0.62,
+        "depth": 0.5,
+        "position": [
+          0.6,
+          0.31,
+          0
+        ],
+        "material": "ivory",
+        "body": "dynamic",
+        "bounce": 0.15
+      },
+      {
+        "id": "b02",
+        "type": "text3d",
+        "text": "Y",
+        "font": "bold",
+        "size": 0.62,
+        "depth": 0.5,
+        "position": [
+          1.26,
+          0.31,
+          0
+        ],
+        "material": "gold",
+        "body": "dynamic",
+        "bounce": 0.15
+      },
+      {
+        "id": "b10",
+        "type": "text3d",
+        "text": "J",
+        "font": "bold",
+        "size": 0.62,
+        "depth": 0.5,
+        "position": [
+          -0.06000000000000005,
+          0.765,
+          0
+        ],
+        "material": "ivory",
+        "body": "dynamic",
+        "bounce": 0.15
+      },
+      {
+        "id": "b11",
+        "type": "text3d",
+        "text": "A",
+        "font": "bold",
+        "size": 0.62,
+        "depth": 0.5,
+        "position": [
+          0.6,
+          0.765,
+          0
+        ],
+        "material": "gold",
+        "body": "dynamic",
+        "bounce": 0.15
+      },
+      {
+        "id": "b12",
+        "type": "text3d",
+        "text": "Y",
+        "font": "bold",
+        "size": 0.62,
+        "depth": 0.5,
+        "position": [
+          1.26,
+          0.765,
+          0
+        ],
+        "material": "ivory",
+        "body": "dynamic",
+        "bounce": 0.15
+      },
+      {
+        "id": "b20",
+        "type": "text3d",
+        "text": "J",
+        "font": "bold",
+        "size": 0.62,
+        "depth": 0.5,
+        "position": [
+          -0.06000000000000005,
+          1.22,
+          0
+        ],
+        "material": "gold",
+        "body": "dynamic",
+        "bounce": 0.15
+      },
+      {
+        "id": "b21",
+        "type": "text3d",
+        "text": "A",
+        "font": "bold",
+        "size": 0.62,
+        "depth": 0.5,
+        "position": [
+          0.6,
+          1.22,
+          0
+        ],
+        "material": "ivory",
+        "body": "dynamic",
+        "bounce": 0.15
+      },
+      {
+        "id": "b22",
+        "type": "text3d",
+        "text": "Y",
+        "font": "bold",
+        "size": 0.62,
+        "depth": 0.5,
+        "position": [
+          1.26,
+          1.22,
+          0
+        ],
+        "material": "gold",
+        "body": "dynamic",
+        "bounce": 0.15
+      },
+      {
+        "id": "ball",
+        "type": "sphere",
+        "radius": 0.36,
+        "position": [
+          -3.6,
+          0.5,
+          0
+        ],
+        "material": "chrome",
+        "body": "dynamic",
+        "collider": "ball",
+        "at": 0.7,
+        "push": [
+          9,
+          0.6,
+          0
+        ],
+        "density": 6
+      }
+    ]
+  }
+}

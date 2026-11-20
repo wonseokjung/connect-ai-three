@@ -1,0 +1,82 @@
+{
+  "id": "env-room",
+  "group": "light",
+  "title": "Environment: lit room",
+  "about": "three's RoomEnvironment: a neutral lit room",
+  "prompt": "Reflections from a plain neutral room on my aluminium workstation.",
+  "source": "three.js examples/jsm RoomEnvironment",
+  "license": "MIT",
+  "order": 103,
+  "spec": {
+    "name": "env-room",
+    "duration": 4,
+    "backdrop": [],
+    "camera": {
+      "position": [
+        0,
+        1.4,
+        4.4
+      ],
+      "target": [
+        0,
+        0.42,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -8,
+          "to": 8,
+          "dur": 4
+        }
+      ]
+    },
+    "post": [
+      "vignette",
+      "grain"
+    ],
+    "env": {
+      "type": "room",
+      "intensity": 0.7
+    },
+    "background": {
+      "type": "gradient",
+      "top": "#1a1c20",
+      "bottom": "#08090a"
+    },
+    "lights": [
+      {
+        "type": "ambient",
+        "intensity": 0.05
+      }
+    ],
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "workstation",
+        "type": "workstation",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          28,
+          0
+        ],
+        "motion": [
+          {
+            "type": "turntable",
+            "speed": 24
+          }
+        ]
+      }
+    ]
+  }
+}

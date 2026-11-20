@@ -48,14 +48,21 @@ test('spec: duplicate ids, odd sizes, no objects, card text in "body"', () => {
   ok(V({...good, objects: []}).errors.some((e) => e.msg.includes('no objects')));
   ok(V({...good, objects: [{id: 'c', type: 'card', title: 'x', body: 'small text'}]}).errors.some((e) => e.msg.includes('"body" is for physics')));
   ok(V({...good, objects: [{id: 'a', type: 'gem', motion: [{type: 'pop', at: 9}]}]}).advice.some((e) => e.msg.includes('after the scene ends')));
-  ok(V({...good, objects: [{id: 't', type: 'text3d', text: '안녕'}]}).errors.some((e) => e.msg.includes('Latin only')), 'Korean 3D text needs a font file');
-  eq(V({...good, objects: [{id: 't', type: 'text3d', text: '안녕', fontFile: 'assets/f.ttf'}]}).errors, [], 'with a font file it is fine');
+  ok(V({...good, objects: [{id: 't', type: 'text3d', text: '훈민정음'}]}).errors.some((e) => e.msg.includes('built-in fonts do not have')), 'Korean 3D text needs a font file');
+  eq(V({...good, objects: [{id: 't', type: 'text3d', text: '모두를 위한 AI 교육', font: 'sans'}]}).errors, [], 'the Korean brand words are built into the sans faces');
+  ok(V({...good, objects: [{id: 't', type: 'text3d', text: '모두를 위한 AI 교육', font: 'serif'}]}).errors.length === 1, 'but not into the serif faces');
+  eq(V({...good, objects: [{id: 't', type: 'text3d', text: '훈민정음', fontFile: 'assets/f.ttf'}]}).errors, [], 'with a font file it is fine');
   ok(specNeeds({...good, objects: [{type: 'text3d', text: '안녕', fontFile: 'assets/f.ttf'}]}).includes('ttf'));
 });
 test('spec: only the adapters a spec uses are named', () => {
   eq(specNeeds(good), []);
   const n = specNeeds({...good, env: 'hdri', post: ['dof'], objects: [{type: 'text3d', text: 'A', bodyEach: true}, {type: 'gltf', src: 'm.glb'}]});
-  for (const k of ['text3d', 'fonts', 'physics', 'gltf', 'bvh', 'hdri', 'post-extra']) ok(n.includes(k), `needs ${k}: ${n}`);
+  for (const k of ['text3d', 'font:bold', 'physics', 'gltf', 'bvh', 'hdri', 'post-extra']) ok(n.includes(k), `needs ${k}: ${n}`);
+  // the brand prop set: its own adapter, the text adapter, and only the typeface each object uses
+  const w = specNeeds({...good, objects: [{type: 'wordmark'}, {type: 'building'}, {type: 'text3d', text: 'A', font: 'display'}]});
+  for (const k of ['brand', 'text3d', 'font:light', 'font:sans', 'font:serif-bold']) ok(w.includes(k), `needs ${k}: ${w}`);
+  ok(!w.includes('font:bold') && !w.includes('font:thin'), `no unused typeface: ${w}`);
+  eq(specNeeds({...good, objects: [{type: 'monogram'}]}).filter((k) => k.startsWith('font:')), [], 'a prop without letters ships no typeface');
   ok(!specNeeds({...good, objects: [{type: 'card', title: 'x', text: 'y'}]}).includes('physics'));
 });
 test('camera: a pure function of time', () => {
@@ -101,7 +108,9 @@ test('pointer script: smooth between keys, clicks remembered', () => {
 });
 test('draft: words become a spec that validates', () => {
   const cases = [
-    ["gold logo 'AI MENTOR JAY' over a night city, slow orbit, 5s", (s) => s.look === 'connect-night-city' && s.objects.some((o) => o.type === 'text3d' && o.text === 'AI MENTOR JAY') && s.duration === 5],
+    ["gold logo 'AI MENTOR JAY' over a night city, slow orbit, 5s", (s) => s.look === 'connect-night-city' && s.objects.some((o) => o.type === 'wordmark' && o.text === 'AI MENTOR JAY') && s.duration === 5],
+    ["my studio building with the sign 'JANE STUDIO' at night in the city", (s) => s.objects.some((o) => o.type === 'building' && o.sign === 'JANE STUDIO') && s.look === 'connect-night-city'],
+    ['내 마이크를 밝은 스튜디오에', (s) => s.objects.some((o) => o.type === 'microphone') && s.look === 'pale-studio'],
     ['a chrome liquid blob, vertical short', (s) => s.objects.some((o) => o.type === 'blob' && o.material === 'chrome') && s.size.height === 1920],
     ['interactive hero for my website with a gem', (s) => s.interact.includes('hover') && s.objects.some((o) => o.type === 'gem')],
     ['내 영상 위에 3D 로고', (s) => s.look === 'on-video' && s.objects[0].kind === 'shadow'],
@@ -126,6 +135,21 @@ test('catalog: every item validates, ids are unique, the index matches the files
     eq(r.errors, [], `${it.group}/${it.id}`);
     ok(it.prompt && it.about && it.source && it.license, `${it.id}: prompt, about, source, license`);
   }
+  // 0.2: no example stars a bare tutorial shape. Every item shows a studio prop, letters, the user's own file or one of
+  // our composed objects; cubes, spheres and knots only appear as parts of something.
+  const PLAIN = new Set(['box', 'sphere', 'torus', 'knot', 'cylinder', 'cone', 'capsule', 'plane', 'disc', 'ring', 'gem', 'rounded-box', 'teapot', 'parametric', 'blob', 'floor', 'backglow', 'group']);
+  const types = (o, out = []) => {
+    out.push(o.type);
+    (o.children || []).forEach((c) => types(c, out));
+    return out;
+  };
+  // (the one exception is the "primitives" item itself: its six shapes are put together as our mark)
+  const bare = items.filter((it) => it.spec.objects.flatMap((o) => types(o)).every((t) => PLAIN.has(t)) && !['primitives'].includes(it.id));
+  eq(bare.map((i) => `${i.group}/${i.id}`), [], 'examples whose only subject is a plain shape');
+  // and the examples are spread over the looks: none of them carries more than 40 % of the catalog
+  const looks = {};
+  for (const it of items) looks[it.spec.look || 'own light'] = (looks[it.spec.look || 'own light'] || 0) + 1;
+  ok(Object.keys(looks).length >= 8 && Math.max(...Object.values(looks)) / items.length < 0.4, `looks: ${JSON.stringify(looks)}`);
   // every registered object, material, motion, camera move, post pass and look has its own item
   const have = (g) => new Set(items.filter((i) => i.group === g).map((i) => i.id));
   for (const m of N.materials) ok(have('material').has(m) || m === 'shadow', `material ${m} has no catalog item`);
@@ -181,6 +205,13 @@ test('check: covering the face keep-out box is an error', () => {
   ok(has(J(probeOf({}, {boxes: [box('a', 0.45, 0.2, 0.2, 0.2)]}), spec).errors, 'a'), 'overlap');
   ok(J(probeOf({}, {boxes: [box('a', 0.7, 0.2, 0.2, 0.2)]}), spec).ok, 'beside the face is fine');
   ok(J(probeOf({}, {boxes: [box('a', 0.45, 0.2, 0.2, 0.2, {shield: true})]}), spec).ok, 'allowOverFace is the only way through');
+});
+test('check: with a person matte objects may pass behind the face, but never over a "front" box', () => {
+  const spec = {...good, behindPerson: true, keepOut: [{x: 0.4, y: 0.1, w: 0.2, h: 0.4}, {x: 0, y: 0.5, w: 0.46, h: 0.5, front: true}]};
+  const behind = J(probeOf({}, {boxes: [box('a', 0.45, 0.2, 0.2, 0.2)]}), spec);
+  ok(behind.ok && behind.advice.some((x) => x.msg.includes('person matte')), 'behind the person is allowed and said so');
+  ok(has(J(probeOf({}, {boxes: [box('a', 0.1, 0.6, 0.2, 0.2)]}), spec).errors, 'a'), 'a mic arm in front of the person is not in the matte');
+  ok(has(J(probeOf({}, {boxes: [box('a', 0.1, 0.6, 0.2, 0.2)]}), {...spec, behindPerson: false}).errors, 'a'), 'front boxes also count without a matte');
 });
 test('check: a different picture the second time is an error', () => ok(has(J(probeOf({determinism: [{t: 1, same: false}]})).errors, 'determinism')));
 test('check: leaks: growing memory or a live context', () => {
@@ -266,10 +297,10 @@ test('web: one html file, only the adapters the spec uses', async () => {
   const html = fs.readFileSync(a.file, 'utf8');
   ok(html.includes('Hello') && html.includes('&lt;there&gt;') && html.includes('"web-test"') && html.includes('id="stage"'), 'page content');
   ok(a.bytes < 1.4 * 1024 * 1024, `core page is ${(a.bytes / 1048576).toFixed(2)} MB`);
-  ok(!html.includes('droid') && !/rapier/i.test(html), 'no fonts, no physics in a page that needs neither');
+  ok(!html.includes('CAL Sans') && !html.includes('CAL Serif') && !/rapier/i.test(html), 'no fonts, no physics in a page that needs neither');
   const b = await buildWeb(dir, {...good, objects: [{type: 'text3d', text: 'HI', bodyEach: true}, {type: 'gltf', src: 'kit:astronaut.glb'}], env: 'hdri'});
   const html2 = fs.readFileSync(b.file, 'utf8');
-  ok(/rapier/i.test(html2) && b.inlined && html2.includes('data:model/gltf-binary;base64,') && b.needs.includes('fonts'), 'adapters and assets inlined when used');
+  ok(/rapier/i.test(html2) && b.inlined && html2.includes('data:model/gltf-binary;base64,') && b.needs.includes('font:bold') && html2.includes('CAL Sans Bold') && !html2.includes('CAL Serif'), 'adapters and assets inlined when used');
   fs.rmSync(dir, {recursive: true, force: true});
 });
 test('package: no private paths, mail addresses or keys in the files we ship', () => {

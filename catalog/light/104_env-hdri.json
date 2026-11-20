@@ -1,0 +1,85 @@
+{
+  "id": "env-hdri",
+  "group": "light",
+  "title": "Environment: HDRI photo",
+  "about": "an .hdr studio photo lights the scene (CC0 file ships with the kit)",
+  "prompt": "Light the chrome letters of my name with a real studio HDRI.",
+  "source": "three.js examples/jsm RGBELoader",
+  "license": "MIT",
+  "order": 104,
+  "spec": {
+    "name": "env-hdri",
+    "duration": 4,
+    "backdrop": [],
+    "camera": {
+      "position": [
+        0,
+        1.4,
+        5.8
+      ],
+      "target": [
+        0,
+        0.85,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -8,
+          "to": 8,
+          "dur": 4
+        }
+      ]
+    },
+    "post": [
+      "vignette",
+      "grain"
+    ],
+    "env": {
+      "type": "hdri",
+      "src": "kit:studio_small_08_1k.hdr",
+      "intensity": 1
+    },
+    "background": {
+      "type": "gradient",
+      "top": "#16181c",
+      "bottom": "#070708"
+    },
+    "lights": [
+      {
+        "type": "ambient",
+        "intensity": 0.03
+      }
+    ],
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "letters",
+        "type": "text3d",
+        "text": "JAY",
+        "font": "bold",
+        "size": 1.1,
+        "depth": 0.34,
+        "position": [
+          0,
+          0.75,
+          0
+        ],
+        "material": "chrome",
+        "motion": [
+          {
+            "type": "sway",
+            "deg": 14,
+            "axis": "y",
+            "period": 6
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "id": "orbit",
+  "group": "interact",
+  "title": "orbit",
+  "about": "drag to look around",
+  "prompt": "Let visitors drag to look around the studio building.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 124,
+  "param": "\"interact\": [\"orbit\"]",
+  "spec": {
+    "name": "orbit",
+    "interact": [
+      "orbit"
+    ],
+    "pointerScript": [
+      {
+        "t": 0,
+        "x": -0.2,
+        "y": 0.1,
+        "orbit": [
+          0,
+          0
+        ]
+      },
+      {
+        "t": 0.6,
+        "x": -0.2,
+        "y": 0.1,
+        "orbit": [
+          0,
+          0
+        ],
+        "down": true
+      },
+      {
+        "t": 2,
+        "x": 0.5,
+        "y": 0.25,
+        "orbit": [
+          1.1,
+          0.2
+        ],
+        "down": true
+      },
+      {
+        "t": 3.4,
+        "x": -0.4,
+        "y": 0,
+        "orbit": [
+          -0.5,
+          0.05
+        ],
+        "down": true
+      },
+      {
+        "t": 4,
+        "x": -0.4,
+        "y": 0,
+        "orbit": [
+          -0.5,
+          0.05
+        ]
+      }
+    ],
+    "duration": 4,
+    "look": "connect-night-city",
+    "camera": {
+      "position": [
+        0,
+        1.7,
+        7.6
+      ],
+      "target": [
+        0,
+        1.25,
+        0
+      ],
+      "fov": 34,
+      "motion": []
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror",
+        "size": 400,
+        "dim": 0.62
+      },
+      {
+        "id": "building",
+        "type": "building",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          -20,
+          0
+        ],
+        "scale": 0.82
+      }
+    ]
+  }
+}

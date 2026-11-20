@@ -1,0 +1,118 @@
+{
+  "id": "fill",
+  "group": "light",
+  "title": "Key + fill",
+  "about": "weak light from the other side, no shadow",
+  "prompt": "Key light from the left on my course book and camera, a weak blue fill from the right.",
+  "source": "three.js core",
+  "license": "MIT",
+  "order": 95,
+  "spec": {
+    "name": "fill",
+    "duration": 4,
+    "backdrop": [],
+    "camera": {
+      "position": [
+        0,
+        1.4,
+        5.6
+      ],
+      "target": [
+        0,
+        0.8,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -8,
+          "to": 8,
+          "dur": 4
+        }
+      ]
+    },
+    "post": [
+      "vignette",
+      "grain"
+    ],
+    "env": "none",
+    "background": {
+      "type": "gradient",
+      "top": "#0c1322",
+      "bottom": "#040508"
+    },
+    "lights": [
+      {
+        "type": "key",
+        "intensity": 3,
+        "position": [
+          -3.5,
+          4.5,
+          3.5
+        ]
+      },
+      {
+        "type": "fill",
+        "color": "#5f8fe0",
+        "intensity": 1.6,
+        "position": [
+          4,
+          1.5,
+          3
+        ]
+      },
+      {
+        "type": "ambient",
+        "intensity": 0.05
+      }
+    ],
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "matte",
+        "material": {
+          "preset": "black",
+          "color": "#14161b",
+          "roughness": 0.78,
+          "clearcoat": 0
+        }
+      },
+      {
+        "id": "book",
+        "type": "book",
+        "position": [
+          -1,
+          0.76,
+          0
+        ],
+        "rotation": [
+          0,
+          30,
+          0
+        ],
+        "material": {
+          "preset": "ivory"
+        },
+        "color": "#15171c",
+        "accent": "#9a5f14"
+      },
+      {
+        "id": "camera",
+        "type": "cinema-camera",
+        "position": [
+          1.15,
+          0.62,
+          0.2
+        ],
+        "rotation": [
+          0,
+          -30,
+          0
+        ],
+        "scale": 1.05
+      }
+    ]
+  }
+}

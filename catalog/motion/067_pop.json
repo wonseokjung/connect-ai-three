@@ -1,0 +1,70 @@
+{
+  "id": "pop",
+  "group": "motion",
+  "title": "pop",
+  "about": "scale in with a small overshoot",
+  "prompt": "Make the microphone pop in with a small overshoot.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 67,
+  "param": "{\"type\": \"pop\"}  at, dur",
+  "peak": 1.05,
+  "spec": {
+    "name": "pop",
+    "duration": 4,
+    "look": "pale-studio",
+    "camera": {
+      "position": [
+        0,
+        1.3,
+        5
+      ],
+      "target": [
+        0,
+        0.95,
+        0
+      ],
+      "fov": 34,
+      "motion": []
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "matte",
+        "material": {
+          "preset": "clay",
+          "color": "#dcd8d0"
+        },
+        "size": 300
+      },
+      {
+        "id": "shadow",
+        "type": "floor",
+        "kind": "shadow",
+        "opacity": 0.26
+      },
+      {
+        "id": "mic",
+        "type": "microphone",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          20,
+          0
+        ],
+        "motion": [
+          {
+            "type": "pop",
+            "at": 0.6,
+            "dur": 0.8
+          }
+        ]
+      }
+    ]
+  }
+}

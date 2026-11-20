@@ -1,0 +1,81 @@
+{
+  "id": "orbit",
+  "group": "motion",
+  "title": "orbit",
+  "about": "circle around a point",
+  "prompt": "The astronaut circling the letters 'AI'.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 76,
+  "param": "{\"type\": \"orbit\"}  radius, speed (deg/s), center, tilt",
+  "assets": "astronaut.glb: NASA 3D Resources (public domain)",
+  "spec": {
+    "name": "orbit",
+    "duration": 4,
+    "look": "midnight-glass",
+    "camera": {
+      "position": [
+        0,
+        1.9,
+        7.2
+      ],
+      "target": [
+        0,
+        1.25,
+        0
+      ],
+      "fov": 34,
+      "motion": []
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror",
+        "dim": 0.72
+      },
+      {
+        "id": "letters",
+        "type": "text3d",
+        "text": "AI",
+        "font": "serif-bold",
+        "size": 1.3,
+        "depth": 0.34,
+        "position": [
+          0,
+          0.95,
+          0
+        ],
+        "material": "gold"
+      },
+      {
+        "id": "subject",
+        "type": "gltf",
+        "src": "kit:astronaut.glb",
+        "fit": 0.9,
+        "position": [
+          0,
+          1,
+          0
+        ],
+        "motion": [
+          {
+            "type": "orbit",
+            "radius": 2.3,
+            "speed": 80,
+            "center": [
+              0,
+              0,
+              0
+            ],
+            "tilt": 10
+          },
+          {
+            "type": "turntable",
+            "speed": -80
+          }
+        ]
+      }
+    ]
+  }
+}

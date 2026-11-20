@@ -1,0 +1,58 @@
+{
+  "id": "dolly-zoom",
+  "group": "camera",
+  "title": "dolly-zoom",
+  "about": "move in while widening the lens (vertigo)",
+  "prompt": "The vertigo move on our wordmark: push in while the lens widens, the city grows behind.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 92,
+  "param": "{\"type\": \"dolly-zoom\"}  to (x distance), at, dur",
+  "spec": {
+    "name": "dolly-zoom",
+    "duration": 4,
+    "look": "connect-night-city",
+    "camera": {
+      "position": [
+        0,
+        1.35,
+        13
+      ],
+      "target": [
+        0,
+        1.15,
+        0
+      ],
+      "fov": 20,
+      "motion": [
+        {
+          "type": "dolly-zoom",
+          "to": 0.42,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror",
+        "size": 400,
+        "dim": 0.62
+      },
+      {
+        "id": "wordmark",
+        "type": "wordmark",
+        "text": "CONNECT AI LAB",
+        "size": 0.4,
+        "position": [
+          0,
+          1.15,
+          0
+        ],
+        "font": "serif-bold",
+        "tracking": 0.08
+      }
+    ]
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "id": "shots",
+  "group": "camera",
+  "title": "shots",
+  "about": "fly between camera positions (a list of shots)",
+  "prompt": "Fly between three camera positions: the whole set, our mark, then the clapperboard.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 89,
+  "param": "{\"type\": \"shots\"}  list: [{at, position, target, fov, dur, ease}]",
+  "spec": {
+    "name": "shots",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.6,
+        8.4
+      ],
+      "target": [
+        0,
+        1.2,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "shots",
+          "list": [
+            {
+              "at": 0.3,
+              "dur": 1.2,
+              "position": [
+                -3.4,
+                1.9,
+                3.4
+              ],
+              "target": [
+                -2.2,
+                1.35,
+                0
+              ],
+              "arc": 0.3
+            },
+            {
+              "at": 1.8,
+              "dur": 1.2,
+              "position": [
+                3.6,
+                1.2,
+                3.2
+              ],
+              "target": [
+                2.3,
+                1.15,
+                0
+              ],
+              "arc": 0.2
+            },
+            {
+              "at": 3.1,
+              "dur": 0.9,
+              "position": [
+                0,
+                1.6,
+                8.4
+              ],
+              "target": [
+                0,
+                1.2,
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "monogram",
+        "type": "monogram",
+        "position": [
+          -2.2,
+          1.4,
+          0
+        ],
+        "pedestal": true,
+        "radius": 0.5
+      },
+      {
+        "id": "wordmark",
+        "type": "wordmark",
+        "text": "CONNECT AI LAB",
+        "size": 0.3,
+        "position": [
+          0,
+          1.2,
+          -0.6
+        ],
+        "font": "serif-bold",
+        "tracking": 0.08
+      },
+      {
+        "id": "clapper",
+        "type": "clapper",
+        "position": [
+          2.3,
+          1,
+          0
+        ],
+        "rotation": [
+          0,
+          -18,
+          0
+        ],
+        "scale": 0.8,
+        "clapAt": 2.6
+      }
+    ]
+  }
+}

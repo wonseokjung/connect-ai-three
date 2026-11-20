@@ -1,0 +1,117 @@
+{
+  "id": "text3d-letters",
+  "group": "object",
+  "title": "3D text, letter by letter",
+  "about": "split:true makes each letter its own object",
+  "prompt": "The name 'AI MENTOR JAY' arriving one ivory letter at a time, teal light behind.",
+  "source": "three.js examples/jsm TextGeometry",
+  "license": "MIT",
+  "order": 17,
+  "peak": 3.3,
+  "spec": {
+    "name": "text3d-letters",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "backdrop": [
+      {
+        "type": "backglow",
+        "color": "#2F8F9D",
+        "intensity": 0.2
+      }
+    ],
+    "lights": [
+      {
+        "type": "key",
+        "color": "#fff2e2",
+        "intensity": 2.5,
+        "position": [
+          -3.2,
+          4.2,
+          4.5
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#2F8F9D",
+        "intensity": 8,
+        "position": [
+          3.6,
+          2.6,
+          -4.2
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#D6892A",
+        "intensity": 3,
+        "position": [
+          -4.2,
+          1.4,
+          -3.2
+        ]
+      },
+      {
+        "type": "ambient",
+        "color": "#8fa0b8",
+        "intensity": 0.13
+      }
+    ],
+    "env": {
+      "type": "softbox",
+      "intensity": 1.9,
+      "warm": "#7fd0d8"
+    },
+    "camera": {
+      "position": [
+        0,
+        1.3,
+        7
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -8,
+          "to": 8,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "title",
+        "type": "text3d",
+        "text": "AI MENTOR JAY",
+        "font": "sans",
+        "size": 0.56,
+        "depth": 0.14,
+        "tracking": 0.12,
+        "split": true,
+        "position": [
+          0,
+          1.05,
+          0
+        ],
+        "material": "ivory",
+        "motion": [
+          {
+            "type": "stagger",
+            "at": 0.25,
+            "each": 0.1,
+            "dur": 0.7
+          }
+        ]
+      }
+    ]
+  }
+}

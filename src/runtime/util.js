@@ -85,3 +85,10 @@ float c3noise(vec2 p){ vec2 i=floor(p), f=fract(p); vec2 u=f*f*(3.0-2.0*f);
   return mix(mix(c3hash(i), c3hash(i+vec2(1,0)), u.x), mix(c3hash(i+vec2(0,1)), c3hash(i+vec2(1,1)), u.x), u.y); }
 float c3fbm(vec2 p){ float a=0.5, s=0.0; for(int i=0;i<4;i++){ s+=a*c3noise(p); p*=2.03; a*=0.5; } return s; }
 `;
+
+// built-in 3D typefaces (data in src/fonts/, one small adapter each)
+export const FONT_KEYS = ['thin', 'light', 'sans', 'bold', 'serif', 'serif-bold'];
+export const FONT_ALIAS = {'sans-bold': 'bold', 'sans-light': 'light', 'sans-thin': 'thin', display: 'serif-bold', regular: 'sans', medium: 'sans'};
+export const fontKey = (name) => FONT_ALIAS[name] || (FONT_KEYS.includes(name) ? name : 'bold');
+// Korean letters the built-in sans faces carry (a few brand phrases); any other Korean text needs "fontFile"
+export const BUILTIN_KO = [...new Set('모두를 위한 AI 교육 비주얼 바이브코딩 커넥트 에이아이 랩 멘토 제이 야학당 인공지능 가장 멋진 방법 배우는 를 말하면 장면이 됩니다 영상 위에 삼차원 강의 안녕하세요 오픈소스'.replace(/[ A-Za-z]/g, ''))].join('');

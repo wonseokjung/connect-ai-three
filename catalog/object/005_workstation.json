@@ -1,0 +1,112 @@
+{
+  "id": "workstation",
+  "group": "object",
+  "title": "Workstation",
+  "about": "a compact aluminium desktop computer with a soft status light",
+  "prompt": "A compact aluminium desktop computer on a black mirror, a soft blue light behind.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 5,
+  "spec": {
+    "name": "workstation",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "backdrop": [
+      {
+        "type": "backglow",
+        "color": "#2f5fc0",
+        "intensity": 0.22
+      }
+    ],
+    "lights": [
+      {
+        "type": "key",
+        "color": "#e6eeff",
+        "intensity": 2.3,
+        "position": [
+          -3.2,
+          4.2,
+          4.5
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#3f6fd0",
+        "intensity": 9,
+        "position": [
+          3.6,
+          2.6,
+          -4.2
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#D6892A",
+        "intensity": 3.5,
+        "position": [
+          -4.2,
+          1.4,
+          -3.2
+        ]
+      },
+      {
+        "type": "ambient",
+        "color": "#8fa0b8",
+        "intensity": 0.13
+      }
+    ],
+    "env": {
+      "type": "softbox",
+      "intensity": 1.9,
+      "warm": "#8fb0f0"
+    },
+    "camera": {
+      "position": [
+        0,
+        1.35,
+        4.6
+      ],
+      "target": [
+        0,
+        0.42,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -18,
+          "to": 14,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "workstation",
+        "type": "workstation",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          28,
+          0
+        ],
+        "motion": [
+          {
+            "type": "turntable",
+            "speed": 16
+          }
+        ]
+      }
+    ]
+  }
+}

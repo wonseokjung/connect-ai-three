@@ -1,0 +1,116 @@
+{
+  "name": "on-my-video-1-hello",
+  "duration": 4.1,
+  "look": "on-video",
+  "camera": {
+    "position": [
+      0,
+      1.2,
+      6.5
+    ],
+    "target": [
+      0,
+      0.9,
+      0
+    ],
+    "fov": 34
+  },
+  "post": [
+    {
+      "type": "grain",
+      "amount": 0.03
+    }
+  ],
+  "keepOut": [
+    {
+      "x": 0.34,
+      "y": 0.207,
+      "w": 0.22,
+      "h": 0.441
+    },
+    {
+      "x": 0,
+      "y": 0.58,
+      "w": 0.45,
+      "h": 0.42,
+      "front": true
+    }
+  ],
+  "objects": [
+    {
+      "id": "wordmark",
+      "type": "wordmark",
+      "text": "CONNECT AI LAB",
+      "font": "sans",
+      "size": 0.34,
+      "depth": 0.06,
+      "tracking": 0.15,
+      "split": true,
+      "position": [
+        0,
+        2.544,
+        -0.6
+      ],
+      "material": "gold",
+      "motion": [
+        {
+          "type": "stagger",
+          "at": 0.85,
+          "each": 0.075,
+          "dur": 0.9,
+          "kind": "rise",
+          "from": -1.9
+        }
+      ]
+    },
+    {
+      "id": "name",
+      "type": "text3d",
+      "text": "AI MENTOR JAY",
+      "font": "light",
+      "size": 0.17,
+      "depth": 0.03,
+      "tracking": 0.2,
+      "split": true,
+      "position": [
+        2.12,
+        1.218,
+        0
+      ],
+      "material": "ivory",
+      "motion": [
+        {
+          "type": "stagger",
+          "at": 2.6,
+          "each": 0.05,
+          "dur": 0.6,
+          "kind": "rise",
+          "from": -0.2
+        }
+      ]
+    },
+    {
+      "id": "rule",
+      "type": "plane",
+      "width": 0.7,
+      "height": 0.008,
+      "position": [
+        2.12,
+        0.999,
+        0
+      ],
+      "material": {
+        "preset": "flat",
+        "color": "#D6892A"
+      },
+      "shadow": false,
+      "motion": [
+        {
+          "type": "fade",
+          "at": 3.1,
+          "dur": 0.5
+        }
+      ]
+    }
+  ]
+}

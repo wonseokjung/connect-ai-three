@@ -1,0 +1,60 @@
+{
+  "id": "handheld",
+  "group": "camera",
+  "title": "handheld",
+  "about": "small organic drift, like a hand-held camera",
+  "prompt": "Hold the camera by hand outside the studio at night: a small organic drift.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 91,
+  "param": "{\"type\": \"handheld\"}  amp, speed",
+  "spec": {
+    "name": "handheld",
+    "duration": 4,
+    "look": "connect-night-city",
+    "camera": {
+      "position": [
+        0.6,
+        1.3,
+        7.4
+      ],
+      "target": [
+        0,
+        1.4,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "handheld",
+          "amp": 0.14,
+          "speed": 1.4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror",
+        "size": 400,
+        "dim": 0.6
+      },
+      {
+        "id": "building",
+        "type": "building",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          -20,
+          0
+        ],
+        "scale": 0.82
+      }
+    ]
+  }
+}

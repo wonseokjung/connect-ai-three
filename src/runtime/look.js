@@ -6,7 +6,9 @@ export const BRAND = {
   ivory: '#EBE2D2',
   black: '#060709',
   night: '#0B1220',
-  teal: '#2A6F86',
+  teal: '#2F8F9D',
+  blue: '#1F3F7A',
+  red: '#C8372D',
   ember: '#B8502A',
 };
 
@@ -38,7 +40,7 @@ export const LOOKS = {
   // the same light with a procedural night city behind glass: window bokeh, haze
   'connect-night-city': {
     about: 'Night city tone: procedural skyline with warm windows behind the subject, haze, gold rim',
-    background: {type: 'gradient', top: '#03050a', mid: '#1f2c44', horizon: 0.5, bottom: '#020203'},
+    background: {type: 'gradient', top: '#02040a', mid: '#2b3d5e', horizon: 0.47, bottom: '#020203'},
     env: {type: 'softbox', intensity: 2.1, warm: BRAND.gold},
     lights: [
       {type: 'key', color: '#ffe9cf', intensity: 1.7, position: [-3, 4, 4.5]},
@@ -47,7 +49,7 @@ export const LOOKS = {
       {type: 'ambient', color: '#6f86a8', intensity: 0.14},
     ],
     backdrop: {type: 'city'},
-    post: [{type: 'bloom', strength: 0.36, radius: 0.7, threshold: 0.84}, {type: 'vignette', amount: 0.42}, {type: 'grain', amount: 0.05}],
+    post: [{type: 'bloom', strength: 0.26, radius: 0.6, threshold: 0.88}, {type: 'vignette', amount: 0.42}, {type: 'grain', amount: 0.05}],
     tone: 'aces',
     exposure: 1.0,
     fog: {color: '#060a12', density: 0.022},

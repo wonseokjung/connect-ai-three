@@ -1,6 +1,6 @@
 // Adapter: three examples/jsm TTFLoader (MIT, with opentype.js, MIT). 3D text in your own font file:
 // {"type": "text3d", "text": "안녕하세요", "fontFile": "assets/MyFont.ttf"}. This is how Korean, Japanese and other
-// scripts get extruded: the built-in Droid Sans data only has Latin letters.
+// scripts get extruded: the built-in typefaces are Latin (plus a few Korean brand words).
 import {TTFLoader} from 'three/examples/jsm/loaders/TTFLoader.js';
 import {registerPlugin} from '../runtime/registry.js';
 

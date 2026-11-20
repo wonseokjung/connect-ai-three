@@ -1,0 +1,81 @@
+{
+  "id": "env-softbox",
+  "group": "light",
+  "title": "Environment: softbox room",
+  "about": "our own reflection map: black room with warm and white strip lights",
+  "prompt": "Reflections from a black studio with long warm strip lights on our chrome mark.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 102,
+  "spec": {
+    "name": "env-softbox",
+    "duration": 4,
+    "backdrop": [],
+    "camera": {
+      "position": [
+        0,
+        1.45,
+        5
+      ],
+      "target": [
+        0,
+        1.25,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -8,
+          "to": 8,
+          "dur": 4
+        }
+      ]
+    },
+    "post": [
+      "bloom",
+      "vignette",
+      "grain"
+    ],
+    "env": {
+      "type": "softbox",
+      "intensity": 1.6
+    },
+    "background": {
+      "type": "gradient",
+      "top": "#0d1017",
+      "bottom": "#030304"
+    },
+    "lights": [
+      {
+        "type": "ambient",
+        "intensity": 0.05
+      }
+    ],
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "monogram",
+        "type": "monogram",
+        "position": [
+          0,
+          1.45,
+          0
+        ],
+        "material": "chrome",
+        "pedestal": true,
+        "radius": 0.66,
+        "motion": [
+          {
+            "type": "turntable",
+            "speed": 24
+          }
+        ]
+      }
+    ]
+  }
+}

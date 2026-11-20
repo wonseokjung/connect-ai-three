@@ -1,15 +1,12 @@
-# 3D text in Korean (or any script)
+# 3D text in Korean
 
-The built-in 3D font (Droid Sans) only has Latin letters. For Korean, Japanese, Chinese, Arabic and so on, give the
-text your own font file and the tool extrudes it the same way:
+The four sans typefaces (`thin`, `light`, `sans`, `bold`) carry the Korean letters of a few lines, so this scene needs
+no font file: "모두를 위한 AI 교육" (AI education for everyone).
 
-    {"type": "text3d", "text": "모두를 위한 AI 교육", "fontFile": "assets/YourFont.otf"}
+For any other Korean text, or Japanese, Chinese, Arabic and so on, give the 3D text your own font file. Put a `.ttf`
+or `.otf` you are allowed to use in `assets/` and name it:
 
-1. Put a `.ttf` or `.otf` you are allowed to use in `assets/` (the kit does not ship one).
-2. Change `fontFile` in `scene.json` to its name.
-3. `npx connect-ai-three make examples/korean-title`
+    {"type": "text3d", "text": "안녕하세요, 반갑습니다", "fontFile": "assets/MyFont.otf"}
 
-If the letters come out inside-out (only the holes are filled), add `"fontReversed": true` (or `false`): font files
-wind their outlines in two different directions and the tool can only guess from the file type.
-
-Flat text (`label`, `card`) needs no font file: it uses the system fonts and works in every language.
+Then `npx connect-ai-three make examples/korean-title`. The check tells you which letters a font does not have.
+Letters inside-out? Add `"fontReversed": true` (or `false`): `.otf` and `.ttf` files wind their outlines opposite ways.

@@ -1,6 +1,7 @@
 // Node side: the same registry, without the font data (JSON imports) and without touching the DOM.
 import './index.js';
 import '../plugins/text3d.js';
+import '../plugins/brand.js';
 import '../plugins/gltf.js';
 import '../plugins/svg.js';
 import '../plugins/jsm-objects.js';

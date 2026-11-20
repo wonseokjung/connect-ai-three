@@ -1,0 +1,68 @@
+{
+  "id": "building",
+  "group": "object",
+  "title": "Studio building",
+  "about": "a small studio building: lit windows, a lobby, and your sign on the roof",
+  "prompt": "A small studio building at night with lit windows and the sign 'CONNECT AI LAB' on the roof.",
+  "source": "CONNECT AI LAB on InstancedMesh",
+  "license": "MIT",
+  "order": 2,
+  "spec": {
+    "name": "building",
+    "duration": 4,
+    "look": "connect-night-city",
+    "camera": {
+      "position": [
+        0,
+        1.7,
+        7.6
+      ],
+      "target": [
+        0,
+        1.25,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -20,
+          "to": 12,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror",
+        "size": 400,
+        "dim": 0.62
+      },
+      {
+        "id": "building",
+        "type": "building",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          -26,
+          0
+        ],
+        "scale": 0.82,
+        "motion": [
+          {
+            "type": "rise",
+            "at": 0.1,
+            "from": -0.5,
+            "dur": 1.2
+          }
+        ]
+      }
+    ]
+  }
+}

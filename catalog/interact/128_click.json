@@ -1,0 +1,179 @@
+{
+  "id": "click",
+  "group": "interact",
+  "title": "click",
+  "about": "click an object to give it a spin",
+  "prompt": "Give an object a spin when it is clicked.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 128,
+  "param": "\"interact\": [\"click\"]",
+  "spec": {
+    "name": "click",
+    "interact": [
+      "click"
+    ],
+    "pointerScript": [
+      {
+        "t": 0,
+        "x": -0.75,
+        "y": 0.5
+      },
+      {
+        "t": 0.7,
+        "x": -0.5,
+        "y": 0.02
+      },
+      {
+        "t": 0.8,
+        "x": -0.5,
+        "y": 0.02,
+        "click": "left",
+        "down": true
+      },
+      {
+        "t": 1,
+        "x": -0.5,
+        "y": 0.02
+      },
+      {
+        "t": 2,
+        "x": 0.5,
+        "y": 0.02
+      },
+      {
+        "t": 2.1,
+        "x": 0.5,
+        "y": 0.02,
+        "click": "right",
+        "down": true
+      },
+      {
+        "t": 2.3,
+        "x": 0.5,
+        "y": 0.02
+      },
+      {
+        "t": 4,
+        "x": 0.1,
+        "y": 0.4
+      }
+    ],
+    "duration": 4,
+    "look": "connect-gold-night",
+    "backdrop": [
+      {
+        "type": "backglow",
+        "color": "#2F8F9D",
+        "intensity": 0.2
+      }
+    ],
+    "lights": [
+      {
+        "type": "key",
+        "color": "#fff2e2",
+        "intensity": 2.5,
+        "position": [
+          -3.2,
+          4.2,
+          4.5
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#2F8F9D",
+        "intensity": 8,
+        "position": [
+          3.6,
+          2.6,
+          -4.2
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#D6892A",
+        "intensity": 3,
+        "position": [
+          -4.2,
+          1.4,
+          -3.2
+        ]
+      },
+      {
+        "type": "ambient",
+        "color": "#8fa0b8",
+        "intensity": 0.13
+      }
+    ],
+    "env": {
+      "type": "softbox",
+      "intensity": 1.9,
+      "warm": "#7fd0d8"
+    },
+    "camera": {
+      "position": [
+        0,
+        1.5,
+        7
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": []
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "left",
+        "type": "clapper",
+        "position": [
+          -2.1,
+          1.05,
+          0
+        ],
+        "rotation": [
+          0,
+          16,
+          0
+        ],
+        "scale": 0.72,
+        "clapAt": null,
+        "motion": []
+      },
+      {
+        "id": "mid",
+        "type": "monogram",
+        "position": [
+          0,
+          1.2,
+          0
+        ],
+        "radius": 0.5,
+        "motion": []
+      },
+      {
+        "id": "right",
+        "type": "cinema-camera",
+        "position": [
+          2.1,
+          1.05,
+          0
+        ],
+        "rotation": [
+          0,
+          -28,
+          0
+        ],
+        "scale": 0.85,
+        "motion": []
+      }
+    ]
+  }
+}

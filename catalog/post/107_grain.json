@@ -1,0 +1,70 @@
+{
+  "id": "grain",
+  "group": "post",
+  "title": "grain",
+  "about": "light film grain, the same on every render",
+  "prompt": "Add visible film grain.",
+  "source": "CONNECT AI LAB shader",
+  "license": "MIT",
+  "order": 107,
+  "param": "\"post\": [{\"type\":\"grain\",\"amount\":0.17}]",
+  "spec": {
+    "name": "grain",
+    "post": [
+      {
+        "type": "grain",
+        "amount": 0.17
+      }
+    ],
+    "duration": 4,
+    "look": "midnight-glass",
+    "camera": {
+      "position": [
+        0,
+        1.2,
+        4.8
+      ],
+      "target": [
+        0,
+        0.95,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -10,
+          "to": 10,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror",
+        "dim": 0.72
+      },
+      {
+        "id": "book",
+        "type": "book",
+        "position": [
+          0,
+          0.95,
+          0
+        ],
+        "rotation": [
+          0,
+          26,
+          0
+        ],
+        "material": {
+          "preset": "ivory"
+        },
+        "color": "#15171c",
+        "accent": "#9a5f14"
+      }
+    ]
+  }
+}

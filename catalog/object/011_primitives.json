@@ -1,0 +1,170 @@
+{
+  "id": "primitives",
+  "group": "object",
+  "title": "Primitives",
+  "about": "box, sphere, cylinder, cone, capsule, torus",
+  "prompt": "Build our mark from six basic shapes: an open ring, a ball, a rod, on a stem and a block, with a small lamp pointed at it.",
+  "source": "three.js core",
+  "license": "MIT",
+  "order": 11,
+  "peak": 3.4,
+  "spec": {
+    "name": "primitives",
+    "duration": 4,
+    "look": "studio-black",
+    "camera": {
+      "position": [
+        0,
+        1.5,
+        5.4
+      ],
+      "target": [
+        0,
+        1.2,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -16,
+          "to": 14,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror",
+        "dim": 0.72
+      },
+      {
+        "id": "mark-in-six-shapes",
+        "type": "group",
+        "position": [
+          0,
+          1.62,
+          0
+        ],
+        "motion": [
+          {
+            "type": "stagger",
+            "at": 0.15,
+            "each": 0.2
+          }
+        ],
+        "children": [
+          {
+            "id": "base",
+            "type": "box",
+            "size": [
+              1.5,
+              0.14,
+              0.8
+            ],
+            "position": [
+              0,
+              -1.5,
+              0
+            ],
+            "material": {
+              "preset": "black",
+              "color": "#15171c"
+            }
+          },
+          {
+            "id": "stem",
+            "type": "cylinder",
+            "radius": 0.035,
+            "height": 0.64,
+            "position": [
+              0,
+              -1.12,
+              0
+            ],
+            "material": "steel"
+          },
+          {
+            "id": "open-ring",
+            "type": "torus",
+            "radius": 0.62,
+            "tube": 0.124,
+            "arc": 296,
+            "rotation": [
+              0,
+              0,
+              32
+            ],
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "material": "gold"
+          },
+          {
+            "id": "node",
+            "type": "sphere",
+            "radius": 0.22,
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "material": "gold"
+          },
+          {
+            "id": "link",
+            "type": "capsule",
+            "radius": 0.045,
+            "height": 0.42,
+            "position": [
+              0.42,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              90
+            ],
+            "material": "ivory"
+          },
+          {
+            "id": "end-node",
+            "type": "sphere",
+            "radius": 0.1,
+            "position": [
+              0.72,
+              0,
+              0
+            ],
+            "material": "gold"
+          },
+          {
+            "id": "lamp",
+            "type": "cone",
+            "radius": 0.17,
+            "height": 0.3,
+            "position": [
+              -1.35,
+              0.55,
+              0.3
+            ],
+            "rotation": [
+              0,
+              0,
+              58
+            ],
+            "material": {
+              "preset": "paint",
+              "color": "#2F8F9D"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

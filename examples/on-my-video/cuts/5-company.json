@@ -1,0 +1,168 @@
+{
+  "name": "on-my-video-5-company",
+  "duration": 9.7,
+  "look": "on-video",
+  "camera": {
+    "position": [
+      0,
+      1.2,
+      6.5
+    ],
+    "target": [
+      0,
+      0.9,
+      0
+    ],
+    "fov": 34
+  },
+  "post": [
+    {
+      "type": "grain",
+      "amount": 0.03
+    }
+  ],
+  "keepOut": [
+    {
+      "x": 0.338,
+      "y": 0.159,
+      "w": 0.226,
+      "h": 0.492
+    },
+    {
+      "x": 0,
+      "y": 0.55,
+      "w": 0.42,
+      "h": 0.45,
+      "front": true
+    }
+  ],
+  "exposure": 1.15,
+  "lights": [
+    {
+      "type": "key",
+      "color": "#ffffff",
+      "intensity": 3,
+      "position": [
+        -2,
+        4.5,
+        5
+      ]
+    },
+    {
+      "type": "rim",
+      "color": "#bcd8ff",
+      "intensity": 4,
+      "position": [
+        3.5,
+        3,
+        -4
+      ]
+    },
+    {
+      "type": "ambient",
+      "color": "#dfeaff",
+      "intensity": 0.6
+    }
+  ],
+  "env": {
+    "type": "softbox",
+    "intensity": 2.2,
+    "warm": "#ffffff"
+  },
+  "objects": [
+    {
+      "id": "building",
+      "type": "building",
+      "scale": 0.66,
+      "position": [
+        2.397,
+        -1.178,
+        -0.5
+      ],
+      "rotation": [
+        0,
+        -30,
+        0
+      ],
+      "lit": 0.3,
+      "glow": 0.8,
+      "material": {
+        "preset": "plastic",
+        "color": "#eae5db",
+        "roughness": 0.6
+      },
+      "groundMaterial": {
+        "preset": "clay",
+        "color": "#9a958b"
+      },
+      "dark": "#27313d",
+      "signMaterial": {
+        "preset": "black",
+        "color": "#15171c"
+      },
+      "motion": [
+        {
+          "type": "rise",
+          "at": 2.5,
+          "dur": 1.3,
+          "from": -2.2
+        }
+      ]
+    },
+    {
+      "id": "engineering",
+      "type": "workstation",
+      "width": 0.72,
+      "position": [
+        -2.614,
+        1.854,
+        0
+      ],
+      "rotation": [
+        16,
+        30,
+        0
+      ],
+      "motion": [
+        {
+          "type": "pop",
+          "at": 6.05,
+          "dur": 0.6
+        },
+        {
+          "type": "float",
+          "amp": 0.04
+        }
+      ]
+    },
+    {
+      "id": "business",
+      "type": "book",
+      "scale": 0.5,
+      "title": "BUSINESS",
+      "author": "CONNECT AI LAB",
+      "position": [
+        -1.59,
+        1.973,
+        0
+      ],
+      "rotation": [
+        0,
+        -22,
+        0
+      ],
+      "motion": [
+        {
+          "type": "pop",
+          "at": 7.25,
+          "dur": 0.6
+        },
+        {
+          "type": "float",
+          "amp": 0.04,
+          "phase": 2
+        }
+      ]
+    }
+  ]
+}

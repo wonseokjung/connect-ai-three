@@ -10,7 +10,7 @@ You write ONE file, `scene.json` (the scene spec). The tool turns it into:
 - `out/video.mp4`: the same picture as video, frame for frame (`--alpha` for a transparent `.mov`, `--short` for 9:16)
 - `out/sheet.jpg` + `out/report.md`: stills and the self-check
 
-Never write raw three.js for this. Everything you may name is in `catalog.json` next to this file (124 items, each a
+Never write raw three.js for this. Everything you may name is in `catalog.json` next to this file (135 items, each a
 complete working spec with a one-line prompt). Read the items you need before writing.
 
 ## Steps
@@ -23,8 +23,9 @@ complete working spec with a one-line prompt). Read the items you need before wr
 5. Tell the user the two paths (page + video) in one line. Offer one next change.
 
 Only the page: `npx connect-ai-three web <folder>`. Only the check: `npx connect-ai-three check <folder>`.
-On their own video: `npx connect-ai-three on-video talk.mp4 <folder> --faces <face.json>` (face.json comes from
-`connect-ai-video-motion`; or `--face x,y,w,h` as fractions of the frame).
+On their own video: `npx connect-ai-three on-video talk.mp4 <folder> --faces <face.json> --matte <matte folder>`
+(both come from `connect-ai-video-motion`'s `work/` folder; or `--face x,y,w,h` as fractions of the frame). With the
+matte every 3D object is drawn BEHIND the person: use it whenever it exists.
 
 ## The spec
 
@@ -57,6 +58,10 @@ On their own video: `npx connect-ai-three on-video talk.mp4 <folder> --faces <fa
 Names (details and examples for each are in `catalog.json`):
 - looks: connect-gold-night (default), connect-night-city, studio-black, midnight-glass, pale-studio, blueprint,
   daylight, on-video
+- studio props (built in code, no files): wordmark, monogram, building, cinema-camera, microphone, workstation,
+  display, laptop, softbox, clapper, book. Prefer these (and the user's own logo, name, model) over bare cubes,
+  spheres and knots: a scene should star a thing the user owns.
+- 3D typefaces (`"font"`): thin, light, sans, bold, serif, serif-bold
 - objects: text3d, label, card, image, gltf, svg, floor, rounded-box, box, sphere, torus, knot, cylinder, cone,
   capsule, plane, disc, ring, gem, rings, ribbon, line, instances, globe, bars, city, backglow, terrain, waves, sky,
   blob, teapot, parametric, group
@@ -72,24 +77,33 @@ Names (details and examples for each are in `catalog.json`):
 ## Rules that keep it good
 
 - One hero. One idea per scene. Empty space is fine; clutter is not.
+- Colour: a black room and gold are the base; give the picture two or three colours of its own (a teal or deep-blue
+  pool of light behind the subject with `backdrop: [{"type": "backglow", "color": ...}]`, an ivory object, one red
+  accent). Never one amber tone over everything. No neon glow, no particles.
+- Letters must read first: thin wide-tracked letters (`wordmark`, font `light` or `sans`) or the display serif; keep
+  reflections dim (`floor` `dim` 0.8 or more) and depth of field gentle (`dof` `aperture` about 0.0003 to 0.0006).
 - Motion is slow and has weight: 4 to 8 seconds, ease in and out, never constant shaking.
 - Text in 3D stays short (a name, a title). Sentences go in the page (`page.title`, `page.sub`) or in labels.
 - Show the user's real things: their name, their logo file, their numbers, their model. Never invent numbers,
   results or claims. If a `bars` chart has no numbers from the user, ask for them.
 - On video: nothing may cover the face. Put the face box in `keepOut`; place the object beside the head, about one
-  head-width away. The check fails if any object crosses the box.
+  head-width away. The check fails if any object crosses the box. With a person matte the objects go behind the
+  person, so they may pass behind the head and shoulders; still keep them off anything in front of the person (a mic
+  arm): add that area to `keepOut` with `"front": true`. Time every object to the words spoken in that take, and
+  only show what was said.
 - Phone: the page must work at 390 px wide. If the report says something is cut off on a phone, pull the camera
   back (`camera.fitPower`) or stack things vertically.
 - Assets: only files the user gave, or CC0 / public-domain ones. `kit:astronaut.glb` and
   `kit:studio_small_08_1k.hdr` ship with the tool.
 - Models: `.glb` / `.gltf`, also Draco- or Meshopt-compressed. Put them in `assets/`.
-- 3D text (`text3d`) is Latin only unless you add `"fontFile": "assets/<their font>.ttf|.otf"`. For Korean, Japanese
-  and other scripts: ask the user for a font file they may use, or use a `label` (flat text works in every language).
+- 3D text (`text3d`, `wordmark`) is Latin (plus a few Korean brand words in the sans faces) unless you add
+  `"fontFile": "assets/<their font>.ttf|.otf"`. For Korean, Japanese and other scripts: ask the user for a font file
+  they may use, or use a `label` (flat text works in every language). The check says which letters are missing.
   Inside-out letters: set `"fontReversed": true` or `false`.
 
 ## What the check looks at
 
-Blank frames · objects never in view · NaN positions · the face keep-out box · the same picture twice (video and
+Blank frames · objects never in view · NaN positions · the face keep-out box and `front` boxes · the same picture twice (video and
 page must match) · WebGL leaks after dispose · draw calls · triangles · texture size · frame time · phone framing ·
 text too small to read. "FIX" lines must be fixed. "look" lines are advice: read them, decide, say what you decided.
 

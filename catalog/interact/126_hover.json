@@ -1,0 +1,139 @@
+{
+  "id": "hover",
+  "group": "interact",
+  "title": "hover",
+  "about": "the object under the pointer lifts a little",
+  "prompt": "Lift the object under the pointer a little.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 126,
+  "param": "\"interact\": [\"hover\"]",
+  "spec": {
+    "name": "hover",
+    "interact": [
+      "hover"
+    ],
+    "pointerScript": [
+      {
+        "t": 0,
+        "x": -0.75,
+        "y": 0.5
+      },
+      {
+        "t": 0.8,
+        "x": -0.5,
+        "y": 0.02
+      },
+      {
+        "t": 1.5,
+        "x": -0.5,
+        "y": 0.02
+      },
+      {
+        "t": 2.1,
+        "x": 0,
+        "y": -0.04
+      },
+      {
+        "t": 2.8,
+        "x": 0,
+        "y": -0.04
+      },
+      {
+        "t": 3.4,
+        "x": 0.5,
+        "y": 0.02
+      },
+      {
+        "t": 4,
+        "x": 0.5,
+        "y": 0.02
+      }
+    ],
+    "duration": 4,
+    "look": "studio-black",
+    "camera": {
+      "position": [
+        0,
+        1.5,
+        7
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": []
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror",
+        "dim": 0.7
+      },
+      {
+        "id": "left",
+        "type": "clapper",
+        "position": [
+          -2.1,
+          1.05,
+          0
+        ],
+        "rotation": [
+          0,
+          16,
+          0
+        ],
+        "scale": 0.72,
+        "clapAt": null,
+        "motion": [
+          {
+            "type": "float",
+            "amp": 0.04
+          }
+        ]
+      },
+      {
+        "id": "mid",
+        "type": "monogram",
+        "position": [
+          0,
+          1.2,
+          0
+        ],
+        "radius": 0.5,
+        "motion": [
+          {
+            "type": "turntable",
+            "speed": 14
+          }
+        ]
+      },
+      {
+        "id": "right",
+        "type": "cinema-camera",
+        "position": [
+          2.1,
+          1.05,
+          0
+        ],
+        "rotation": [
+          0,
+          -28,
+          0
+        ],
+        "scale": 0.85,
+        "motion": [
+          {
+            "type": "float",
+            "amp": 0.04,
+            "phase": 2
+          }
+        ]
+      }
+    ],
+    "hoverScale": 1.16
+  }
+}

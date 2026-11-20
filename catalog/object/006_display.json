@@ -1,0 +1,67 @@
+{
+  "id": "display",
+  "group": "object",
+  "title": "Display",
+  "about": "a studio display on a stand; shows your image (\"src\") or a title card",
+  "prompt": "A studio display on its stand showing a title card: 'CONNECT AI LAB'.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 6,
+  "spec": {
+    "name": "display",
+    "duration": 4,
+    "look": "midnight-glass",
+    "camera": {
+      "position": [
+        0,
+        1.35,
+        6
+      ],
+      "target": [
+        0,
+        1.05,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -22,
+          "to": 16,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror",
+        "dim": 0.72
+      },
+      {
+        "id": "display",
+        "type": "display",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "kicker": "Open source",
+        "title": "connect-ai-three",
+        "rotation": [
+          0,
+          -8,
+          0
+        ],
+        "motion": [
+          {
+            "type": "rise",
+            "at": 0.1,
+            "from": -0.3
+          }
+        ]
+      }
+    ]
+  }
+}

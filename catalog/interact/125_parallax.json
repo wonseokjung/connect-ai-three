@@ -1,0 +1,98 @@
+{
+  "id": "parallax",
+  "group": "interact",
+  "title": "parallax",
+  "about": "the camera leans toward the pointer",
+  "prompt": "Make the camera lean gently toward the pointer.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 125,
+  "param": "\"interact\": [\"parallax\"]",
+  "assets": "astronaut.glb: NASA 3D Resources (public domain)",
+  "spec": {
+    "name": "parallax",
+    "interact": [
+      "parallax"
+    ],
+    "pointerScript": [
+      {
+        "t": 0,
+        "x": -0.8,
+        "y": -0.5
+      },
+      {
+        "t": 1.3,
+        "x": 0.8,
+        "y": -0.3
+      },
+      {
+        "t": 2.6,
+        "x": 0.6,
+        "y": 0.6
+      },
+      {
+        "t": 4,
+        "x": -0.7,
+        "y": 0.4
+      }
+    ],
+    "duration": 4,
+    "look": "midnight-glass",
+    "camera": {
+      "position": [
+        0,
+        1.4,
+        6.8
+      ],
+      "target": [
+        0,
+        1.15,
+        0
+      ],
+      "fov": 34,
+      "motion": []
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror",
+        "dim": 0.72
+      },
+      {
+        "id": "wordmark",
+        "type": "wordmark",
+        "text": "CONNECT AI LAB",
+        "size": 0.27,
+        "position": [
+          -0.9,
+          1.6,
+          1
+        ],
+        "font": "light"
+      },
+      {
+        "id": "monogram",
+        "type": "monogram",
+        "position": [
+          -2.3,
+          0.75,
+          -1.2
+        ],
+        "radius": 0.5
+      },
+      {
+        "id": "astronaut",
+        "type": "gltf",
+        "src": "kit:astronaut.glb",
+        "fit": 2.2,
+        "position": [
+          3.1,
+          0,
+          -2.6
+        ]
+      }
+    ],
+    "parallaxAmount": 0.32
+  }
+}

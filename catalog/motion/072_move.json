@@ -1,0 +1,71 @@
+{
+  "id": "move",
+  "group": "motion",
+  "title": "move",
+  "about": "move by an offset between two moments",
+  "prompt": "Move my camera on its tripod from the left side to the right side.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 72,
+  "param": "{\"type\": \"move\"}  at, dur, by [x,y,z], ease",
+  "peak": 1.9,
+  "spec": {
+    "name": "move",
+    "duration": 4,
+    "look": "daylight",
+    "camera": {
+      "position": [
+        0,
+        1.7,
+        8
+      ],
+      "target": [
+        0,
+        1.45,
+        0
+      ],
+      "fov": 34,
+      "motion": []
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "matte",
+        "material": {
+          "preset": "clay",
+          "color": "#b9b4aa"
+        },
+        "size": 300
+      },
+      {
+        "id": "camera",
+        "type": "cinema-camera",
+        "position": [
+          -1.9,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          38,
+          0
+        ],
+        "scale": 1,
+        "tripod": true,
+        "motion": [
+          {
+            "type": "move",
+            "at": 0.5,
+            "dur": 2.4,
+            "by": [
+              3.8,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

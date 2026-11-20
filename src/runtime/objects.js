@@ -24,7 +24,7 @@ const mesh = (geo, def, ctx, fallback = 'gold') => {
 const prim = (type, geo, about) => registerObject(type, (d, ctx) => mesh(geo(d), d, ctx), {source: CORE, about});
 prim('box', (d) => new THREE.BoxGeometry(...v3(d.size, [1, 1, 1])), 'box');
 prim('sphere', (d) => new THREE.SphereGeometry(d.radius ?? 0.6, 64, 40), 'sphere');
-prim('torus', (d) => new THREE.TorusGeometry(d.radius ?? 0.6, d.tube ?? 0.16, 32, 128), 'torus (ring)');
+prim('torus', (d) => new THREE.TorusGeometry(d.radius ?? 0.6, d.tube ?? 0.16, 32, 128, (d.arc ?? 360) * DEG), 'torus (ring); "arc" in degrees opens it');
 prim('knot', (d) => new THREE.TorusKnotGeometry(d.radius ?? 0.55, d.tube ?? 0.17, 220, 32, d.p ?? 2, d.q ?? 3), 'torus knot');
 prim('cylinder', (d) => new THREE.CylinderGeometry(d.radius ?? 0.4, d.radiusBottom ?? d.radius ?? 0.4, d.height ?? 1, 64), 'cylinder');
 prim('cone', (d) => new THREE.ConeGeometry(d.radius ?? 0.5, d.height ?? 1, 64), 'cone');
@@ -417,16 +417,16 @@ registerObject('bars', (d, ctx) => {
   return g;
 }, {source: OURS + ' on RoundedBoxGeometry', about: '3D bar chart from your own numbers; bars grow in turn'});
 
-// --- procedural night city: our backdrop for the night-city look ------------------------------------------
+// --- procedural night city: dark building silhouettes in layers of haze, a few lit windows, roof beacons ------------
 registerObject('city', (d, ctx) => {
   const rnd = rng(d.seed ?? 'city');
-  const count = d.count ?? 360;
+  const count = d.count ?? 230;
   const geo = new THREE.BoxGeometry(1, 1, 1);
   geo.translate(0, 0.5, 0);
   ctx.disposables.push(geo);
-  const fogColor = new THREE.Color(ctx.fogColor || '#060a12');
+  const haze = new THREE.Color(d.haze || '#1b2a45');
   const mat = new THREE.ShaderMaterial({
-    uniforms: {uWarm: {value: new THREE.Color(d.warm || '#ffb45e')}, uCool: {value: new THREE.Color(d.cool || '#8fb8e8')}, uBody: {value: new THREE.Color(d.body || '#070a11')}, uFog: {value: fogColor}, uFogNear: {value: d.fogNear ?? 90}, uFogFar: {value: d.fogFar ?? 420}, uLit: {value: d.lit ?? 0.3}, uGain: {value: d.intensity ?? 1.0}, uTime: {value: 0}},
+    uniforms: {uWarm: {value: new THREE.Color(d.warm || '#ffbe7a')}, uCool: {value: new THREE.Color(d.cool || '#9dbfe6')}, uBody: {value: new THREE.Color(d.body || '#04060a')}, uFog: {value: haze}, uFogNear: {value: d.fogNear ?? 110}, uFogFar: {value: d.fogFar ?? 330}, uLit: {value: d.lit ?? 0.1}, uGain: {value: d.intensity ?? 1.0}, uTime: {value: 0}},
     vertexShader: /* glsl */ `varying vec3 vL; varying vec3 vN; varying vec3 vS; varying float vSeed; varying float vDepth;
       void main(){ mat4 im = mat4(1.0);
         #ifdef USE_INSTANCING
@@ -436,37 +436,72 @@ registerObject('city', (d, ctx) => {
         vec4 mv = modelViewMatrix * im * vec4(position, 1.0); vDepth = -mv.z; gl_Position = projectionMatrix * mv; }`,
     fragmentShader: /* glsl */ `uniform vec3 uWarm; uniform vec3 uCool; uniform vec3 uBody; uniform vec3 uFog; uniform float uFogNear; uniform float uFogFar; uniform float uLit; uniform float uGain; uniform float uTime;
       varying vec3 vL; varying vec3 vN; varying vec3 vS; varying float vSeed; varying float vDepth; ${GLSL_NOISE}
-      void main(){ vec3 col = uBody; vec3 an = abs(vN);
-        if (an.y < 0.5) { vec2 uv = an.x > 0.5 ? vec2(vL.z, vL.y) : vec2(vL.x, vL.y); vec2 cell = vec2(0.95, 1.35); vec2 id = floor(uv / cell); vec2 f = fract(uv / cell);
-          float h = c3hash(id + vSeed); float row = c3hash(vec2(id.y, vSeed));
-          float on = step(1.0 - uLit * (0.5 + row), h) * step(0.18, f.x) * step(f.x, 0.82) * step(0.25, f.y) * step(f.y, 0.78);
-          float tw = 0.85 + 0.15 * sin(uTime * 0.7 + h * 40.0);
-          vec3 w = mix(uWarm, uCool, step(0.78, c3hash(id * 1.7 + vSeed)));
-          col += w * on * tw * (0.5 + h) * uGain; }
-        float fog = smoothstep(uFogNear, uFogFar, vDepth); gl_FragColor = vec4(mix(col, uFog, fog * 0.85), 1.0); }`,
+      void main(){ vec3 an = abs(vN); float fog = smoothstep(uFogNear, uFogFar, vDepth);
+        // the silhouette: a near-black body that takes the colour of the haze with distance, a touch lighter on the roof
+        vec3 col = mix(uBody, uFog, fog * 0.78) * (an.y > 0.5 ? 1.5 : 1.0);
+        if (an.y < 0.5) {
+          vec2 uv = an.x > 0.5 ? vec2(vL.z, vL.y) : vec2(vL.x, vL.y); vec2 cell = vec2(2.6, 3.4); vec2 q = uv / cell; vec2 id = floor(q); vec2 f = fract(q);
+          float b = c3hash(vec2(vSeed, 3.7));                       // how awake this building is
+          float row = c3hash(vec2(id.y * 1.3, vSeed));              // some floors work late
+          float h = c3hash(id + vSeed);
+          float p = uLit * (0.25 + 1.5 * b) * (row > 0.9 ? 2.6 : 1.0);
+          vec2 w = fwidth(q) * 1.2;
+          float box = smoothstep(0.2 - w.x, 0.2 + w.x, f.x) * smoothstep(0.8 + w.x, 0.8 - w.x, f.x) * smoothstep(0.26 - w.y, 0.26 + w.y, f.y) * smoothstep(0.74 + w.y, 0.74 - w.y, f.y);
+          float on = step(1.0 - p, h) * box * step(vL.y, vS.y - 1.5);
+          float tw = 0.9 + 0.1 * sin(uTime * 0.6 + h * 40.0);
+          vec3 wc = mix(uWarm, uCool, step(0.8, c3hash(id * 1.7 + vSeed)));
+          col += wc * on * tw * (0.35 + 0.65 * h) * uGain * (1.0 - fog * 0.55);
+          col += uFog * 0.5 * smoothstep(9.0, 0.0, vL.y) * (1.0 - fog);   // street glow at the foot
+        }
+        gl_FragColor = vec4(col, 1.0); }`,
   });
   ctx.disposables.push(mat);
   ctx.timeUniforms.push(mat.uniforms.uTime);
-  const im = new THREE.InstancedMesh(geo, mat, count);
-  const dummy = new THREE.Object3D();
-  const width = d.width ?? 560, depth = d.depth ?? 150;
+  const width = d.width ?? 620, depth = d.depth ?? 170, maxH = d.maxHeight ?? 58;
+  const list = [], beacons = [];
   for (let i = 0; i < count; i++) {
-    const z = -rnd() * depth;
-    const near = 1 - -z / depth;
-    const h = 5 + Math.pow(rnd(), 2.6) * (d.maxHeight ?? 44) * (0.45 + (1 - near) * 0.75);
-    dummy.position.set((rnd() - 0.5) * width, 0, z);
-    dummy.scale.set(7 + rnd() * 11, h, 7 + rnd() * 11);
+    const z = -rnd() * depth, far = -z / depth;
+    const tall = Math.pow(rnd(), 2.4);
+    const h = 6 + tall * maxH * (0.4 + far * 0.8);
+    const x = (rnd() - 0.5) * width, sx = 8 + rnd() * 13, sz = 8 + rnd() * 13;
+    list.push([x, 0, z, sx, h, sz]);
+    if (h > maxH * 0.42 && rnd() < 0.6) {
+      const k = 0.5 + rnd() * 0.25, h2 = h * (0.12 + rnd() * 0.2);
+      list.push([x, h, z, sx * k, h2, sz * k]);
+      if (rnd() < 0.6) {
+        list.push([x, h + h2, z, 0.5, 6 + rnd() * 8, 0.5]);
+        beacons.push([x, h + h2 + 0.4, z, rnd() * 6.28]);
+      }
+    }
+  }
+  const im = new THREE.InstancedMesh(geo, mat, list.length);
+  const dummy = new THREE.Object3D();
+  list.forEach((b, i) => {
+    dummy.position.set(b[0], b[1], b[2]);
+    dummy.scale.set(b[3], b[4], b[5]);
     dummy.updateMatrix();
     im.setMatrixAt(i, dummy.matrix);
-  }
+  });
   im.frustumCulled = false;
   im.userData.noShadow = true;
   const g = new THREE.Group();
   g.add(im);
-  g.position.set(0, d.y ?? -2, d.z ?? -130);
+  if (beacons.length && d.beacons !== false) {
+    const bg = new THREE.SphereGeometry(0.55, 8, 6), bm = new THREE.MeshBasicMaterial({color: d.beacon || '#ff4a3a', toneMapped: false, fog: false});
+    ctx.disposables.push(bg, bm);
+    const lamps = beacons.slice(0, 14).map((b) => {
+      const m = new THREE.Mesh(bg, bm);
+      m.position.set(b[0], b[1], b[2]);
+      m.userData.noShadow = true;
+      g.add(m);
+      return [m, b[3]];
+    });
+    ctx.updaters.push((t) => lamps.forEach(([m, ph]) => m.scale.setScalar(Math.max(0.001, Math.sin(t * 1.8 + ph)))));
+  }
+  g.position.set(0, d.y ?? -2, d.z ?? -120);
   g.userData.isBackdrop = true;
   return g;
-}, {source: OURS + ' shader on InstancedMesh', about: 'procedural night skyline with lit windows, one draw call'});
+}, {source: OURS + ' shader on InstancedMesh', about: 'procedural night skyline: building silhouettes in haze, a few lit windows, roof beacons; one draw call for the buildings'});
 
 // --- back glow: a soft pool of light on the wall behind the subject (the night-set look) ---------------------
 registerObject('backglow', (d, ctx) => {
@@ -474,7 +509,7 @@ registerObject('backglow', (d, ctx) => {
   ctx.disposables.push(geo);
   const mat = new THREE.ShaderMaterial({
     transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, fog: false,
-    uniforms: {uColor: {value: new THREE.Color(d.color || ctx.palette.accent)}, uGain: {value: d.intensity ?? 0.15}, uAlpha: {value: 1}},
+    uniforms: {uColor: {value: new THREE.Color(d.color || ctx.palette.accent)}, uGain: {value: d.intensity ?? 0.11}, uAlpha: {value: 1}},
     vertexShader: /* glsl */ `varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
     fragmentShader: /* glsl */ `uniform vec3 uColor; uniform float uGain; uniform float uAlpha; varying vec2 vUv;
       void main(){ vec2 c = (vUv - 0.5) * vec2(1.0, 1.25); float r = length(c) * 2.0; float a = pow(max(0.0, 1.0 - r), 2.2);
@@ -558,6 +593,8 @@ export async function makeObject(def, ctx) {
   o.name = def.id || o.name || def.type;
   o.userData.def = def;
   o.userData.type = def.type;
+  // "reflect": false keeps an object out of the mirror floor (it lives on layer 1, which only the main camera sees)
+  if (def.reflect === false) o.traverse((m) => m.layers.set(1));
   o.traverse((m) => {
     if (!m.isMesh && !m.isPoints && !m.isLine2) return;
     if (m.userData.noShadow || def.shadow === false) return;

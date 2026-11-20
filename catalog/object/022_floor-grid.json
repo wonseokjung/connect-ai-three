@@ -1,0 +1,74 @@
+{
+  "id": "floor-grid",
+  "group": "object",
+  "title": "Grid floor",
+  "about": "thin lines fading into the distance",
+  "prompt": "A drawing-board view: the studio building as a gold wireframe over an endless thin grid.",
+  "source": "CONNECT AI LAB shader",
+  "license": "MIT",
+  "order": 22,
+  "spec": {
+    "name": "floor-grid",
+    "duration": 4,
+    "look": "blueprint",
+    "camera": {
+      "position": [
+        0,
+        2.1,
+        7.6
+      ],
+      "target": [
+        0,
+        1.15,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -24,
+          "to": 16,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "grid",
+        "cell": 0.5,
+        "opacity": 0.5
+      },
+      {
+        "id": "building",
+        "type": "building",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          -26,
+          0
+        ],
+        "scale": 0.82,
+        "material": {
+          "preset": "wire",
+          "color": "#dfeaf7",
+          "opacity": 0.5
+        },
+        "groundMaterial": {
+          "preset": "wire",
+          "color": "#dfeaf7",
+          "opacity": 0.25
+        },
+        "lit": 0.25,
+        "glow": 0.9,
+        "warm": "#F2B45A",
+        "dark": "#0f2540"
+      }
+    ]
+  }
+}

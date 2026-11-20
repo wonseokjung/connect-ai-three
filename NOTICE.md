@@ -12,8 +12,10 @@ spec in front of the existing three.js ecosystem and adds a self-check on top. L
 | `rounded-box`, `card`, `bars` | three examples/jsm `RoundedBoxGeometry` | MIT | Used as it is |
 | `floor` kind mirror | three examples/jsm `Reflector` | MIT | Used as it is, plus our dimming veil |
 | `line`, globe arcs | three examples/jsm `Line2`, `LineGeometry`, `LineMaterial` | MIT | Used as they are |
-| `text3d` | three examples/jsm `TextGeometry`, `FontLoader`; Droid Sans / Serif typeface data from `three/examples/fonts/droid` | MIT; fonts Apache-2.0 (`licenses/droid-fonts-NOTICE.txt`) | Used as they are; letter layout (tracking, split letters) is ours |
-| `text3d` with `fontFile` (Korean and other scripts) | three examples/jsm `TTFLoader` with opentype.js 1.3.4 | MIT | Used as they are; no font file is shipped |
+| `text3d` | three examples/jsm `TextGeometry`, `FontLoader`, `BufferGeometryUtils` | MIT | Used as they are; letter layout (tracking, kerning, split letters) is ours |
+| The six built-in typefaces (`thin`, `light`, `sans`, `bold`, `serif`, `serif-bold`) | glyph subsets derived from Pretendard (Kil Hyung-jin) and Cormorant Garamond (The Cormorant Project Authors), stored as typeface data under other names ("CAL Sans", "CAL Serif") | SIL Open Font License 1.1, `licenses/fonts-OFL.txt` | Modified Versions (subset + format change), kept under the OFL and bundled with the kit as the OFL allows |
+| `text3d` with `fontFile` (any other script or face) | three examples/jsm `TTFLoader` with opentype.js 1.3.4 | MIT | Used as they are; no font file is shipped |
+| The studio props: `wordmark`, `monogram`, `building`, `cinema-camera`, `microphone`, `workstation`, `display`, `laptop`, `softbox`, `clapper`, `book` | three core shapes, `RoundedBoxGeometry`, `InstancedMesh`, `TextGeometry` | MIT | The objects are ours, built in code from those shapes; no model files |
 | `gltf` | three examples/jsm `GLTFLoader`, `meshopt_decoder`, `DRACOLoader` | MIT | Used as they are |
 | Draco decoder files (`draco_wasm_wrapper.js`, `draco_decoder.wasm`), only when a model is Draco-compressed | Google Draco, as shipped inside the three npm package (`examples/jsm/libs/draco/gltf`) | Apache-2.0 | Copied from your installed three package into the project (or inlined into the one-file page) at build time; not stored in this repository |
 | `svg` | three examples/jsm `SVGLoader` | MIT | Used as it is |
@@ -31,7 +33,7 @@ spec in front of the existing three.js ecosystem and adds a self-check on top. L
 ## Ours (MIT)
 
 The scene spec and its validator, the look presets (`connect-gold-night`, `connect-night-city` and the others), the
-softbox reflection map, the night-city, grid-floor, waves, rim, gradient, back-glow and finishing shaders (vignette,
+softbox reflection map, the eleven studio props, the person-matte layer that draws 3D behind a speaker, the night-city, grid-floor, waves, rim, gradient, back-glow and finishing shaders (vignette,
 grain, chroma, grade), the canvas text labels and glass cards, globe, rings, bars, instancing layouts, every motion
 and camera move, the pointer script, the web player, the self-check (probe + judge), the physics bake, the words-to-spec
 draft, the CLI, the skill and all catalog specs. The GLSL noise in `src/runtime/util.js` is our own value noise; no
@@ -56,7 +58,8 @@ theatre-js/theatre, shader-effects-inc/shaders (all permissive; planned as later
 
 ## Assets
 
-See `licenses/assets.md`: one CC0 HDRI (Poly Haven), one NASA public-domain model, our own mark and sample frame.
+See `licenses/assets.md`: one CC0 HDRI (Poly Haven), one NASA public-domain model, our own mark and sample frame,
+and six small typefaces under the SIL Open Font License.
 No credit-required (CC BY) asset is used.
 
 ## Remotion

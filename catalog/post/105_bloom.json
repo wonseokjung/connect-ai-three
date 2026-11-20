@@ -1,0 +1,70 @@
+{
+  "id": "bloom",
+  "group": "post",
+  "title": "bloom",
+  "about": "glow around bright parts",
+  "prompt": "Add a soft glow around the lit windows of the building.",
+  "source": "three.js examples/jsm UnrealBloomPass",
+  "license": "MIT",
+  "order": 105,
+  "param": "\"post\": [{\"type\":\"bloom\",\"strength\":0.5,\"radius\":0.7,\"threshold\":0.7}]",
+  "spec": {
+    "name": "bloom",
+    "post": [
+      {
+        "type": "bloom",
+        "strength": 0.5,
+        "radius": 0.7,
+        "threshold": 0.7
+      }
+    ],
+    "duration": 4,
+    "look": "connect-night-city",
+    "camera": {
+      "position": [
+        0,
+        1.7,
+        7.6
+      ],
+      "target": [
+        0,
+        1.25,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -10,
+          "to": 10,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror",
+        "size": 400,
+        "dim": 0.6
+      },
+      {
+        "id": "building",
+        "type": "building",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          -26,
+          0
+        ],
+        "scale": 0.82,
+        "glow": 1.25
+      }
+    ]
+  }
+}

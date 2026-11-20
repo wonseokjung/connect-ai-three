@@ -1,0 +1,145 @@
+{
+  "id": "softbox",
+  "group": "object",
+  "title": "Softbox",
+  "about": "a studio softbox on a light stand: shows where your key light is",
+  "prompt": "A studio softbox on its stand lighting ivory letters from the side.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 8,
+  "spec": {
+    "name": "softbox",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "backdrop": [
+      {
+        "type": "backglow",
+        "color": "#c9c2b4",
+        "intensity": 0.16
+      }
+    ],
+    "lights": [
+      {
+        "type": "key",
+        "color": "#ffffff",
+        "intensity": 2.8,
+        "position": [
+          -3.2,
+          4.2,
+          4.5
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#EBE2D2",
+        "intensity": 5,
+        "position": [
+          3.6,
+          2.6,
+          -4.2
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#4f7dd1",
+        "intensity": 2.2,
+        "position": [
+          -4.2,
+          1.4,
+          -3.2
+        ]
+      },
+      {
+        "type": "ambient",
+        "color": "#8fa0b8",
+        "intensity": 0.13
+      }
+    ],
+    "env": {
+      "type": "softbox",
+      "intensity": 1.9,
+      "warm": "#ffffff"
+    },
+    "camera": {
+      "position": [
+        0.3,
+        1.5,
+        7.2
+      ],
+      "target": [
+        0.3,
+        1.15,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -8,
+          "to": 12,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "matte",
+        "material": {
+          "preset": "black",
+          "color": "#0c0d10",
+          "roughness": 0.78,
+          "clearcoat": 0
+        }
+      },
+      {
+        "id": "softbox",
+        "type": "softbox",
+        "position": [
+          -2.3,
+          0,
+          0.4
+        ],
+        "rotation": [
+          0,
+          62,
+          0
+        ]
+      },
+      {
+        "id": "letters",
+        "type": "text3d",
+        "text": "AI",
+        "font": "serif-bold",
+        "size": 1.5,
+        "depth": 0.42,
+        "position": [
+          0.9,
+          0.75,
+          0
+        ],
+        "material": "ivory"
+      }
+    ],
+    "addLights": [
+      {
+        "type": "spot",
+        "color": "#fff0dc",
+        "intensity": 55,
+        "position": [
+          -2.3,
+          2.1,
+          0.9
+        ],
+        "target": [
+          0.9,
+          0.9,
+          0
+        ],
+        "angle": 40,
+        "penumbra": 0.9
+      }
+    ]
+  }
+}

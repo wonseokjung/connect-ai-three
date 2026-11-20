@@ -1,0 +1,71 @@
+{
+  "id": "text3d",
+  "group": "object",
+  "title": "3D text",
+  "about": "extruded letters in six built-in typefaces (thin, light, sans, bold, serif, serif-bold)",
+  "prompt": "The words 'Visual Vibe Coding' as gold serif 3D letters, a slow sway, reflected on the floor.",
+  "source": "three.js examples/jsm TextGeometry",
+  "license": "MIT",
+  "order": 16,
+  "spec": {
+    "name": "text3d",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.3,
+        7
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -8,
+          "to": 8,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "title",
+        "type": "text3d",
+        "text": "Visual Vibe Coding",
+        "font": "serif-bold",
+        "size": 0.62,
+        "depth": 0.12,
+        "tracking": 0.02,
+        "position": [
+          0,
+          1.05,
+          0
+        ],
+        "material": "gold",
+        "motion": [
+          {
+            "type": "sway",
+            "deg": 7,
+            "axis": "y",
+            "period": 8
+          },
+          {
+            "type": "rise",
+            "at": 0.1,
+            "from": -0.4
+          }
+        ]
+      }
+    ]
+  }
+}

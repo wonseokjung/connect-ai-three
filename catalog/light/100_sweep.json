@@ -1,0 +1,102 @@
+{
+  "id": "sweep",
+  "group": "light",
+  "title": "Light sweep",
+  "about": "the light circles the subject",
+  "prompt": "Let a teal rim light travel around the black letters 'AI'.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 100,
+  "spec": {
+    "name": "sweep",
+    "duration": 4,
+    "backdrop": [],
+    "camera": {
+      "position": [
+        0,
+        1.4,
+        5.6
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -6,
+          "to": 6,
+          "dur": 4
+        }
+      ]
+    },
+    "post": [
+      {
+        "type": "bloom",
+        "strength": 0.25
+      },
+      "vignette",
+      "grain"
+    ],
+    "env": "none",
+    "background": {
+      "type": "color",
+      "color": "#030506"
+    },
+    "lights": [
+      {
+        "type": "rim",
+        "color": "#3fb6c6",
+        "intensity": 12,
+        "position": [
+          0,
+          2.6,
+          -5
+        ],
+        "motion": {
+          "type": "sweep",
+          "from": -120,
+          "to": 120,
+          "dur": 4
+        }
+      },
+      {
+        "type": "ambient",
+        "intensity": 0.04
+      }
+    ],
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "matte",
+        "material": {
+          "preset": "black",
+          "color": "#050607",
+          "roughness": 0.78,
+          "clearcoat": 0
+        }
+      },
+      {
+        "id": "letters",
+        "type": "text3d",
+        "text": "AI",
+        "font": "serif-bold",
+        "size": 1.6,
+        "depth": 0.42,
+        "position": [
+          0,
+          0.86,
+          0
+        ],
+        "material": {
+          "preset": "black",
+          "color": "#1c1e23",
+          "roughness": 0.3
+        }
+      }
+    ]
+  }
+}

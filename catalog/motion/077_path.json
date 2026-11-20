@@ -1,0 +1,160 @@
+{
+  "id": "path",
+  "group": "motion",
+  "title": "path",
+  "about": "travel along points",
+  "prompt": "Send my camera flying along the drawn path.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 77,
+  "param": "{\"type\": \"path\"}  points, at, dur, ease",
+  "peak": 2.2,
+  "spec": {
+    "name": "path",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "backdrop": [
+      {
+        "type": "backglow",
+        "color": "#2F8F9D",
+        "intensity": 0.2
+      }
+    ],
+    "lights": [
+      {
+        "type": "key",
+        "color": "#fff2e2",
+        "intensity": 2.5,
+        "position": [
+          -3.2,
+          4.2,
+          4.5
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#2F8F9D",
+        "intensity": 8,
+        "position": [
+          3.6,
+          2.6,
+          -4.2
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#D6892A",
+        "intensity": 3,
+        "position": [
+          -4.2,
+          1.4,
+          -3.2
+        ]
+      },
+      {
+        "type": "ambient",
+        "color": "#8fa0b8",
+        "intensity": 0.13
+      }
+    ],
+    "env": {
+      "type": "softbox",
+      "intensity": 1.9,
+      "warm": "#7fd0d8"
+    },
+    "camera": {
+      "position": [
+        0,
+        1.4,
+        6.2
+      ],
+      "target": [
+        0,
+        1.15,
+        0
+      ],
+      "fov": 34,
+      "motion": []
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "track",
+        "type": "line",
+        "points": [
+          [
+            -2.5,
+            0.6,
+            0.5
+          ],
+          [
+            -1,
+            1.9,
+            -0.8
+          ],
+          [
+            0.7,
+            0.8,
+            0.8
+          ],
+          [
+            2.5,
+            1.7,
+            -0.2
+          ]
+        ],
+        "width": 2,
+        "color": "#EBE2D2",
+        "opacity": 0.5
+      },
+      {
+        "id": "subject",
+        "type": "cinema-camera",
+        "position": [
+          0,
+          1.15,
+          0
+        ],
+        "rotation": [
+          0,
+          60,
+          0
+        ],
+        "scale": 0.6,
+        "motion": [
+          {
+            "type": "path",
+            "points": [
+              [
+                -2.5,
+                0.6,
+                0.5
+              ],
+              [
+                -1,
+                1.9,
+                -0.8
+              ],
+              [
+                0.7,
+                0.8,
+                0.8
+              ],
+              [
+                2.5,
+                1.7,
+                -0.2
+              ]
+            ],
+            "at": 0.3,
+            "dur": 3.2
+          }
+        ]
+      }
+    ]
+  }
+}

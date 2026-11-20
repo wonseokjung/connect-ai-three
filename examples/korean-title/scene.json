@@ -1,20 +1,193 @@
 {
   "name": "korean-title",
-  "duration": 7,
+  "duration": 8,
   "look": "connect-gold-night",
-  "camera": {
-    "position": [0, 1.25, 7.4],
-    "target": [0, 1.05, 0],
-    "fov": 32,
-    "motion": [{"type": "orbit", "from": 16, "to": -12, "dur": 7, "ease": "smooth"}, {"type": "dolly", "from": 1.22, "to": 1.0, "dur": 7, "ease": "out"}]
-  },
-  "addLights": [{"type": "rim", "color": "#F2B45A", "intensity": 5, "position": [0, 2.4, -5], "motion": {"type": "sweep", "from": 60, "to": -60, "at": 0.4, "dur": 6}}],
-  "objects": [
-    {"id": "floor", "type": "floor", "kind": "mirror"},
-    {"id": "title", "type": "text3d", "text": "모두를 위한 AI 교육", "fontFile": "assets/YourFont.otf", "size": 0.62, "depth": 0.16, "split": true, "position": [0, 1.05, 0], "material": "gold",
-      "motion": [{"type": "stagger", "at": 0.4, "each": 0.1, "dur": 0.8}]},
-    {"id": "rule", "type": "plane", "width": 1.0, "height": 0.012, "position": [0, 0.47, 0.3], "material": {"preset": "flat", "color": "#D6892A"}, "shadow": false, "motion": [{"type": "fade", "at": 2.4, "dur": 0.7}]},
-    {"id": "sub", "type": "label", "text": "AI EDUCATION FOR EVERYONE", "size": 0.17, "tracking": 0.4, "weight": 400, "position": [0, 0.25, 0.3], "motion": [{"type": "fade", "at": 2.7, "dur": 0.9}]}
+  "backdrop": [
+    {
+      "type": "backglow",
+      "color": "#2f5fc0",
+      "intensity": 0.2
+    }
   ],
-  "interact": ["parallax", "orbit"]
+  "lights": [
+    {
+      "type": "key",
+      "color": "#e6eeff",
+      "intensity": 2.3,
+      "position": [
+        -3.2,
+        4.2,
+        4.5
+      ]
+    },
+    {
+      "type": "rim",
+      "color": "#3f6fd0",
+      "intensity": 8,
+      "position": [
+        3.6,
+        2.6,
+        -4.2
+      ]
+    },
+    {
+      "type": "rim",
+      "color": "#D6892A",
+      "intensity": 3.5,
+      "position": [
+        -4.2,
+        1.4,
+        -3.2
+      ]
+    },
+    {
+      "type": "rim",
+      "color": "#F2B45A",
+      "intensity": 5,
+      "position": [
+        0,
+        2.4,
+        -5
+      ],
+      "motion": {
+        "type": "sweep",
+        "from": 60,
+        "to": -60,
+        "at": 0.4,
+        "dur": 6.5
+      }
+    },
+    {
+      "type": "ambient",
+      "color": "#8fa0b8",
+      "intensity": 0.13
+    }
+  ],
+  "camera": {
+    "position": [
+      0,
+      1.2,
+      8.2
+    ],
+    "target": [
+      0,
+      1.1,
+      0
+    ],
+    "fov": 32,
+    "motion": [
+      {
+        "type": "orbit",
+        "from": 12,
+        "to": -9,
+        "dur": 8,
+        "ease": "smooth"
+      },
+      {
+        "type": "dolly",
+        "from": 1.16,
+        "to": 0.96,
+        "dur": 8,
+        "ease": "out"
+      }
+    ]
+  },
+  "objects": [
+    {
+      "id": "floor",
+      "type": "floor",
+      "kind": "mirror",
+      "dim": 0.72
+    },
+    {
+      "id": "title",
+      "type": "text3d",
+      "text": "모두를 위한 AI 교육",
+      "font": "sans",
+      "size": 0.52,
+      "depth": 0.1,
+      "tracking": 0.05,
+      "split": true,
+      "position": [
+        0,
+        1.24,
+        0
+      ],
+      "material": "ivory",
+      "motion": [
+        {
+          "type": "stagger",
+          "at": 0.3,
+          "each": 0.12,
+          "dur": 0.8,
+          "kind": "rise",
+          "from": -0.3
+        }
+      ]
+    },
+    {
+      "id": "rule",
+      "type": "plane",
+      "width": 1,
+      "height": 0.01,
+      "position": [
+        0,
+        0.72,
+        0.2
+      ],
+      "material": {
+        "preset": "flat",
+        "color": "#D6892A"
+      },
+      "shadow": false,
+      "motion": [
+        {
+          "type": "fade",
+          "at": 2.6,
+          "dur": 0.7
+        }
+      ]
+    },
+    {
+      "id": "sub",
+      "type": "label",
+      "text": "AI FOR EVERYONE  ·  CONNECT AI LAB",
+      "size": 0.18,
+      "tracking": 0.42,
+      "weight": 300,
+      "position": [
+        0,
+        0.48,
+        0.2
+      ],
+      "motion": [
+        {
+          "type": "fade",
+          "at": 3,
+          "dur": 0.9
+        }
+      ]
+    },
+    {
+      "id": "mark",
+      "type": "monogram",
+      "radius": 0.26,
+      "position": [
+        0,
+        2.35,
+        -0.3
+      ],
+      "motion": [
+        {
+          "type": "pop",
+          "at": 2.2,
+          "dur": 0.8
+        },
+        {
+          "type": "turntable",
+          "speed": 22
+        }
+      ]
+    }
+  ]
 }

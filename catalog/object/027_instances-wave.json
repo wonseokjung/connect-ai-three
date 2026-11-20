@@ -1,0 +1,126 @@
+{
+  "id": "instances-wave",
+  "group": "object",
+  "title": "Instances: wave grid",
+  "about": "hundreds of copies in one draw call, moving as a wave",
+  "prompt": "A sea of small teal discs rippling under the gold wordmark.",
+  "source": "three.js core InstancedMesh",
+  "license": "MIT",
+  "order": 27,
+  "spec": {
+    "name": "instances-wave",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "backdrop": [
+      {
+        "type": "backglow",
+        "color": "#2F8F9D",
+        "intensity": 0.2
+      }
+    ],
+    "lights": [
+      {
+        "type": "key",
+        "color": "#fff2e2",
+        "intensity": 2.5,
+        "position": [
+          -3.2,
+          4.2,
+          4.5
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#2F8F9D",
+        "intensity": 8,
+        "position": [
+          3.6,
+          2.6,
+          -4.2
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#D6892A",
+        "intensity": 3,
+        "position": [
+          -4.2,
+          1.4,
+          -3.2
+        ]
+      },
+      {
+        "type": "ambient",
+        "color": "#8fa0b8",
+        "intensity": 0.13
+      }
+    ],
+    "env": {
+      "type": "softbox",
+      "intensity": 1.9,
+      "warm": "#7fd0d8"
+    },
+    "camera": {
+      "position": [
+        0,
+        2.7,
+        7.4
+      ],
+      "target": [
+        0,
+        0.9,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -14,
+          "to": 14,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "grid",
+        "type": "instances",
+        "layout": "wave",
+        "shape": "coin",
+        "cols": 30,
+        "rows": 24,
+        "size": 0.2,
+        "spacing": 0.26,
+        "position": [
+          0,
+          0.2,
+          0
+        ],
+        "material": {
+          "preset": "paint",
+          "color": "#2F8F9D",
+          "roughness": 0.3
+        },
+        "enter": {
+          "at": 0,
+          "each": 0,
+          "dur": 0.9,
+          "byDistance": true
+        }
+      },
+      {
+        "id": "wordmark",
+        "type": "wordmark",
+        "text": "CONNECT AI LAB",
+        "size": 0.42,
+        "position": [
+          0,
+          1.75,
+          0
+        ],
+        "font": "sans",
+        "tracking": 0.16
+      }
+    ]
+  }
+}

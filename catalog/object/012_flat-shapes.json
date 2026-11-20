@@ -1,0 +1,133 @@
+{
+  "id": "flat-shapes",
+  "group": "object",
+  "title": "Flat shapes",
+  "about": "plane, disc and ring: plates, floor marks, thin rules",
+  "prompt": "A round stage mark on the floor, a tall teal plate behind, our gold mark standing on it.",
+  "source": "three.js core",
+  "license": "MIT",
+  "order": 12,
+  "spec": {
+    "name": "flat-shapes",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "camera": {
+      "position": [
+        0,
+        1.4,
+        5.6
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -10,
+          "to": 10,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "plate",
+        "type": "plane",
+        "width": 2.3,
+        "height": 2.7,
+        "position": [
+          0,
+          1.35,
+          -1.3
+        ],
+        "material": {
+          "preset": "paint",
+          "color": "#2F8F9D",
+          "side": 2
+        }
+      },
+      {
+        "id": "stage-disc",
+        "type": "disc",
+        "radius": 1.05,
+        "position": [
+          0,
+          0.012,
+          0.3
+        ],
+        "rotation": [
+          -90,
+          0,
+          0
+        ],
+        "material": {
+          "preset": "ivory",
+          "side": 2
+        },
+        "shadow": false,
+        "motion": [
+          {
+            "type": "pop",
+            "at": 0.15
+          }
+        ]
+      },
+      {
+        "id": "stage-ring",
+        "type": "ring",
+        "inner": 1.28,
+        "radius": 1.36,
+        "position": [
+          0,
+          0.014,
+          0.3
+        ],
+        "rotation": [
+          -90,
+          0,
+          0
+        ],
+        "material": {
+          "preset": "flat",
+          "color": "#D6892A",
+          "side": 2
+        },
+        "shadow": false,
+        "motion": [
+          {
+            "type": "pop",
+            "at": 0.45
+          }
+        ]
+      },
+      {
+        "id": "monogram",
+        "type": "monogram",
+        "position": [
+          0,
+          1.15,
+          0.3
+        ],
+        "radius": 0.5,
+        "motion": [
+          {
+            "type": "turntable",
+            "speed": 26
+          },
+          {
+            "type": "float",
+            "amp": 0.05
+          }
+        ]
+      }
+    ]
+  }
+}

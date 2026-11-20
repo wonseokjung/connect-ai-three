@@ -1,0 +1,53 @@
+{
+  "id": "city",
+  "group": "object",
+  "title": "Night city",
+  "about": "procedural night skyline: building silhouettes in haze, a few lit windows, roof beacons; one draw call for the buildings",
+  "prompt": "A night skyline: dark towers in haze, a few lit windows, red lights on the roofs; the camera slides sideways.",
+  "source": "CONNECT AI LAB shader on InstancedMesh",
+  "license": "MIT",
+  "order": 32,
+  "spec": {
+    "name": "city",
+    "duration": 4,
+    "look": "connect-night-city",
+    "backdrop": [],
+    "camera": {
+      "position": [
+        -8,
+        7,
+        30
+      ],
+      "target": [
+        0,
+        12,
+        -120
+      ],
+      "fov": 30,
+      "motion": [
+        {
+          "type": "truck",
+          "by": [
+            16,
+            0,
+            0
+          ],
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror",
+        "size": 600,
+        "dim": 0.55
+      },
+      {
+        "id": "city",
+        "type": "city"
+      }
+    ]
+  }
+}

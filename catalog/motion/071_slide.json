@@ -1,0 +1,67 @@
+{
+  "id": "slide",
+  "group": "motion",
+  "title": "slide",
+  "about": "slide in from an offset",
+  "prompt": "Slide the display in from the left.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 71,
+  "param": "{\"type\": \"slide\"}  at, dur, from [x,y,z]",
+  "peak": 0.95,
+  "spec": {
+    "name": "slide",
+    "duration": 4,
+    "look": "studio-black",
+    "camera": {
+      "position": [
+        0,
+        1.35,
+        6.2
+      ],
+      "target": [
+        0,
+        1.05,
+        0
+      ],
+      "fov": 34,
+      "motion": []
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror",
+        "dim": 0.7
+      },
+      {
+        "id": "display",
+        "type": "display",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "kicker": "Slide",
+        "title": "From the left",
+        "rotation": [
+          0,
+          10,
+          0
+        ],
+        "motion": [
+          {
+            "type": "slide",
+            "at": 0.4,
+            "dur": 1.2,
+            "from": [
+              -6,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

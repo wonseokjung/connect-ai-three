@@ -1,0 +1,79 @@
+{
+  "id": "sky",
+  "group": "object",
+  "title": "Sky",
+  "about": "physical sky with a sun",
+  "prompt": "The studio building outdoors under a real sky, low sun, long shadows.",
+  "source": "three.js examples/jsm Sky",
+  "license": "MIT",
+  "order": 39,
+  "spec": {
+    "name": "sky",
+    "duration": 4,
+    "look": "daylight",
+    "camera": {
+      "position": [
+        0,
+        1.6,
+        8.2
+      ],
+      "target": [
+        0,
+        1.25,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -16,
+          "to": 12,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "matte",
+        "material": {
+          "preset": "clay",
+          "color": "#b9b4aa"
+        },
+        "size": 300
+      },
+      {
+        "id": "building",
+        "type": "building",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          -26,
+          0
+        ],
+        "scale": 0.82,
+        "lit": 0.2,
+        "glow": 0.7,
+        "material": {
+          "preset": "plastic",
+          "color": "#e8e2d6",
+          "roughness": 0.6
+        },
+        "groundMaterial": {
+          "preset": "clay",
+          "color": "#8f8a80"
+        },
+        "dark": "#2a3440",
+        "signMaterial": {
+          "preset": "black",
+          "color": "#15171c"
+        }
+      }
+    ]
+  }
+}

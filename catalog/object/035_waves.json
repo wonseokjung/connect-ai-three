@@ -1,0 +1,118 @@
+{
+  "id": "waves",
+  "group": "object",
+  "title": "Rolling surface",
+  "about": "a dark moving surface with coloured crests",
+  "prompt": "A dark sea rolling slowly under our gold mark, teal light on the crests.",
+  "source": "CONNECT AI LAB shader",
+  "license": "MIT",
+  "order": 35,
+  "spec": {
+    "name": "waves",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "backdrop": [
+      {
+        "type": "backglow",
+        "color": "#2F8F9D",
+        "intensity": 0.2
+      }
+    ],
+    "lights": [
+      {
+        "type": "key",
+        "color": "#fff2e2",
+        "intensity": 2.5,
+        "position": [
+          -3.2,
+          4.2,
+          4.5
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#2F8F9D",
+        "intensity": 8,
+        "position": [
+          3.6,
+          2.6,
+          -4.2
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#D6892A",
+        "intensity": 3,
+        "position": [
+          -4.2,
+          1.4,
+          -3.2
+        ]
+      },
+      {
+        "type": "ambient",
+        "color": "#8fa0b8",
+        "intensity": 0.13
+      }
+    ],
+    "env": {
+      "type": "softbox",
+      "intensity": 1.9,
+      "warm": "#7fd0d8"
+    },
+    "camera": {
+      "position": [
+        0,
+        1.5,
+        7
+      ],
+      "target": [
+        0,
+        0.6,
+        0
+      ],
+      "fov": 38,
+      "motion": [
+        {
+          "type": "dolly",
+          "from": 1.1,
+          "to": 0.9,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "sea",
+        "type": "waves",
+        "amp": 0.4,
+        "color2": "#4fc3cf",
+        "position": [
+          0,
+          0,
+          -3
+        ]
+      },
+      {
+        "id": "monogram",
+        "type": "monogram",
+        "position": [
+          0,
+          1.75,
+          -1.5
+        ],
+        "radius": 0.55,
+        "motion": [
+          {
+            "type": "float",
+            "amp": 0.08
+          },
+          {
+            "type": "turntable",
+            "speed": 14
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "id": "floor-shadow",
+  "group": "object",
+  "title": "Shadow catcher",
+  "about": "an invisible floor that only shows the shadow",
+  "prompt": "Big black letters 'JAY' standing in a bright studio with a soft shadow under them.",
+  "source": "three.js core ShadowMaterial",
+  "license": "MIT",
+  "order": 23,
+  "spec": {
+    "name": "floor-shadow",
+    "duration": 4,
+    "look": "pale-studio",
+    "camera": {
+      "position": [
+        0,
+        1.5,
+        6.4
+      ],
+      "target": [
+        0,
+        0.85,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -18,
+          "to": 14,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "shadow",
+        "opacity": 0.34
+      },
+      {
+        "id": "letters",
+        "type": "text3d",
+        "text": "JAY",
+        "font": "bold",
+        "size": 1.35,
+        "depth": 0.5,
+        "position": [
+          0,
+          0.68,
+          0
+        ],
+        "material": {
+          "preset": "black",
+          "color": "#15171c"
+        },
+        "motion": [
+          {
+            "type": "sway",
+            "deg": 6,
+            "axis": "y",
+            "period": 6
+          }
+        ]
+      }
+    ]
+  }
+}

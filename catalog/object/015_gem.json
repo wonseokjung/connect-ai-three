@@ -1,0 +1,126 @@
+{
+  "id": "gem",
+  "group": "object",
+  "title": "Gem",
+  "about": "faceted gem: icosa, octa or dodeca cut",
+  "prompt": "The letters 'AI' in ivory with three glass gems floating around them like crystals.",
+  "source": "three.js core",
+  "license": "MIT",
+  "order": 15,
+  "spec": {
+    "name": "gem",
+    "duration": 4,
+    "look": "midnight-glass",
+    "camera": {
+      "position": [
+        0,
+        1.4,
+        6.2
+      ],
+      "target": [
+        0,
+        1.1,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -14,
+          "to": 14,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror",
+        "dim": 0.7
+      },
+      {
+        "id": "letters",
+        "type": "text3d",
+        "text": "AI",
+        "font": "serif-bold",
+        "size": 1.5,
+        "depth": 0.36,
+        "position": [
+          0,
+          0.92,
+          -0.2
+        ],
+        "material": "ivory"
+      },
+      {
+        "id": "gem-a",
+        "type": "gem",
+        "radius": 0.42,
+        "position": [
+          -1.15,
+          1.55,
+          0.9
+        ],
+        "material": "glass",
+        "motion": [
+          {
+            "type": "turntable",
+            "speed": 26
+          },
+          {
+            "type": "float",
+            "amp": 0.07
+          }
+        ]
+      },
+      {
+        "id": "gem-b",
+        "type": "gem",
+        "cut": "octa",
+        "radius": 0.3,
+        "position": [
+          1.85,
+          0.75,
+          0.6
+        ],
+        "material": "gold",
+        "motion": [
+          {
+            "type": "turntable",
+            "speed": -34
+          },
+          {
+            "type": "float",
+            "phase": 1.4
+          }
+        ]
+      },
+      {
+        "id": "gem-c",
+        "type": "gem",
+        "cut": "dodeca",
+        "radius": 0.24,
+        "position": [
+          1.5,
+          2.15,
+          -0.3
+        ],
+        "material": {
+          "preset": "glass",
+          "tint": "#2F8F9D"
+        },
+        "motion": [
+          {
+            "type": "turntable",
+            "speed": 30
+          },
+          {
+            "type": "float",
+            "phase": 2.6
+          }
+        ]
+      }
+    ]
+  }
+}

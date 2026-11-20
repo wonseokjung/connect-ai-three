@@ -1,0 +1,125 @@
+{
+  "id": "image",
+  "group": "object",
+  "title": "Image plane",
+  "about": "your own picture on a framed plane",
+  "prompt": "My screenshot on a tilted black-framed panel that slides in from the right.",
+  "source": "three.js core",
+  "license": "MIT",
+  "order": 20,
+  "spec": {
+    "name": "image",
+    "duration": 4,
+    "look": "connect-gold-night",
+    "backdrop": [
+      {
+        "type": "backglow",
+        "color": "#2f5fc0",
+        "intensity": 0.22
+      }
+    ],
+    "lights": [
+      {
+        "type": "key",
+        "color": "#e6eeff",
+        "intensity": 2.3,
+        "position": [
+          -3.2,
+          4.2,
+          4.5
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#3f6fd0",
+        "intensity": 9,
+        "position": [
+          3.6,
+          2.6,
+          -4.2
+        ]
+      },
+      {
+        "type": "rim",
+        "color": "#D6892A",
+        "intensity": 3.5,
+        "position": [
+          -4.2,
+          1.4,
+          -3.2
+        ]
+      },
+      {
+        "type": "ambient",
+        "color": "#8fa0b8",
+        "intensity": 0.13
+      }
+    ],
+    "env": {
+      "type": "softbox",
+      "intensity": 1.9,
+      "warm": "#8fb0f0"
+    },
+    "camera": {
+      "position": [
+        0,
+        1.4,
+        5.6
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -8,
+          "to": 8,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "pic",
+        "type": "image",
+        "src": "kit:sample.jpg",
+        "height": 1.9,
+        "position": [
+          0,
+          1.25,
+          0
+        ],
+        "rotation": [
+          0,
+          -16,
+          0
+        ],
+        "motion": [
+          {
+            "type": "slide",
+            "at": 0.2,
+            "from": [
+              2.5,
+              0,
+              -1
+            ]
+          },
+          {
+            "type": "sway",
+            "deg": 3,
+            "axis": "y",
+            "period": 6
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "id": "zoom",
+  "group": "camera",
+  "title": "zoom",
+  "about": "change the lens (fov)",
+  "prompt": "Zoom the lens from wide to tight on the sign of the building.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 88,
+  "param": "{\"type\": \"zoom\"}  from, to (fov deg), at, dur",
+  "spec": {
+    "name": "zoom",
+    "duration": 4,
+    "look": "daylight",
+    "camera": {
+      "position": [
+        0,
+        2.2,
+        12
+      ],
+      "target": [
+        0,
+        2.35,
+        0
+      ],
+      "fov": 50,
+      "motion": [
+        {
+          "type": "zoom",
+          "from": 46,
+          "to": 17,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "matte",
+        "material": {
+          "preset": "clay",
+          "color": "#b9b4aa"
+        },
+        "size": 300
+      },
+      {
+        "id": "building",
+        "type": "building",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          -14,
+          0
+        ],
+        "scale": 1,
+        "lit": 0.2,
+        "glow": 0.7,
+        "material": {
+          "preset": "plastic",
+          "color": "#e8e2d6",
+          "roughness": 0.6
+        },
+        "groundMaterial": {
+          "preset": "clay",
+          "color": "#8f8a80"
+        },
+        "dark": "#2a3440",
+        "signMaterial": {
+          "preset": "black",
+          "color": "#15171c"
+        }
+      }
+    ]
+  }
+}

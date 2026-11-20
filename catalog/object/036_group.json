@@ -1,0 +1,142 @@
+{
+  "id": "group",
+  "group": "object",
+  "title": "Group",
+  "about": "several objects that move, stagger and explode together",
+  "prompt": "My desk as one group: display, computer, microphone and book move apart and come back together.",
+  "source": "three.js core",
+  "license": "MIT",
+  "order": 36,
+  "peak": 0.4,
+  "spec": {
+    "name": "group",
+    "duration": 4,
+    "look": "studio-black",
+    "camera": {
+      "position": [
+        0,
+        1.75,
+        6.2
+      ],
+      "target": [
+        0,
+        1.25,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -14,
+          "to": 14,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror",
+        "dim": 0.72
+      },
+      {
+        "id": "desk-set",
+        "type": "group",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "motion": [
+          {
+            "type": "explode",
+            "at": 0.6,
+            "dur": 1,
+            "hold": 0.8,
+            "amount": 0.9
+          }
+        ],
+        "children": [
+          {
+            "id": "set-display",
+            "type": "display",
+            "position": [
+              0,
+              0.78,
+              -0.45
+            ],
+            "width": 2.2,
+            "kicker": "Group",
+            "title": "One desk"
+          },
+          {
+            "id": "set-work",
+            "type": "workstation",
+            "position": [
+              1.75,
+              0.78,
+              0.1
+            ],
+            "rotation": [
+              0,
+              -20,
+              0
+            ],
+            "width": 0.7
+          },
+          {
+            "id": "set-mic",
+            "type": "microphone",
+            "position": [
+              -1.75,
+              0.78,
+              0.25
+            ],
+            "rotation": [
+              0,
+              20,
+              0
+            ],
+            "scale": 0.62
+          },
+          {
+            "id": "set-book",
+            "type": "book",
+            "position": [
+              0.75,
+              0.86,
+              0.55
+            ],
+            "rotation": [
+              -90,
+              0,
+              24
+            ],
+            "scale": 0.42
+          },
+          {
+            "id": "set-desk",
+            "type": "rounded-box",
+            "size": [
+              4.6,
+              0.08,
+              1.7
+            ],
+            "radius": 0.03,
+            "position": [
+              0,
+              0.74,
+              0.001
+            ],
+            "material": {
+              "preset": "black",
+              "color": "#16171b",
+              "roughness": 0.5
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

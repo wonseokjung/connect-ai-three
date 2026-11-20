@@ -1,0 +1,75 @@
+{
+  "id": "sun",
+  "group": "light",
+  "title": "Sun + sky light",
+  "about": "sun set by elevation and azimuth",
+  "prompt": "Outdoor sun, low in the sky, on the deep-blue letters 'CONNECT', with blue sky light in the shadows.",
+  "source": "three.js examples/jsm Sky",
+  "license": "MIT",
+  "order": 99,
+  "spec": {
+    "name": "sun",
+    "duration": 4,
+    "backdrop": [],
+    "camera": {
+      "position": [
+        0,
+        1.5,
+        7.2
+      ],
+      "target": [
+        0,
+        0.7,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -10,
+          "to": 10,
+          "dur": 4
+        }
+      ]
+    },
+    "post": [
+      "vignette"
+    ],
+    "look": "daylight",
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "matte",
+        "material": {
+          "preset": "clay",
+          "color": "#b9b4aa"
+        },
+        "size": 300
+      },
+      {
+        "id": "word",
+        "type": "text3d",
+        "text": "CONNECT",
+        "font": "bold",
+        "size": 0.9,
+        "depth": 0.5,
+        "position": [
+          0,
+          0.47,
+          0
+        ],
+        "rotation": [
+          0,
+          16,
+          0
+        ],
+        "material": {
+          "preset": "paint",
+          "color": "#1F3F7A",
+          "roughness": 0.5
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "id": "key",
+  "group": "light",
+  "title": "Key light",
+  "about": "main directional light with soft shadows",
+  "prompt": "One soft key light from the upper left on the ivory letters 'JAY', soft shadows on the floor.",
+  "source": "three.js core",
+  "license": "MIT",
+  "order": 93,
+  "spec": {
+    "name": "key",
+    "duration": 4,
+    "backdrop": [],
+    "camera": {
+      "position": [
+        0,
+        1.5,
+        6
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -8,
+          "to": 8,
+          "dur": 4
+        }
+      ]
+    },
+    "post": [
+      "vignette",
+      "grain"
+    ],
+    "env": "none",
+    "background": {
+      "type": "gradient",
+      "top": "#10131a",
+      "bottom": "#040506"
+    },
+    "lights": [
+      {
+        "type": "key",
+        "intensity": 3.4,
+        "position": [
+          -3.5,
+          5,
+          3.5
+        ]
+      },
+      {
+        "type": "ambient",
+        "intensity": 0.08
+      }
+    ],
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "matte",
+        "material": {
+          "preset": "black",
+          "color": "#191b20",
+          "roughness": 0.78,
+          "clearcoat": 0
+        }
+      },
+      {
+        "id": "letters",
+        "type": "text3d",
+        "text": "JAY",
+        "font": "bold",
+        "size": 1.1,
+        "depth": 0.34,
+        "position": [
+          0,
+          0.7,
+          0
+        ],
+        "material": "ivory",
+        "rotation": [
+          0,
+          14,
+          0
+        ]
+      }
+    ]
+  }
+}

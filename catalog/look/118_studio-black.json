@@ -1,0 +1,105 @@
+{
+  "id": "studio-black",
+  "group": "look",
+  "title": "studio-black",
+  "about": "Black studio: soft top light, mirror floor, clean reflections",
+  "prompt": "Black product studio with one big softbox.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 118,
+  "param": "\"look\": \"studio-black\"",
+  "spec": {
+    "name": "studio-black",
+    "duration": 4,
+    "look": "studio-black",
+    "camera": {
+      "position": [
+        0,
+        1.5,
+        7.2
+      ],
+      "target": [
+        0,
+        1.2,
+        0
+      ],
+      "fov": 34,
+      "motion": [
+        {
+          "type": "orbit",
+          "from": -14,
+          "to": 14,
+          "dur": 4
+        }
+      ]
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror"
+      },
+      {
+        "id": "wordmark",
+        "type": "wordmark",
+        "text": "CONNECT AI LAB",
+        "size": 0.34,
+        "position": [
+          0,
+          0.62,
+          0.4
+        ],
+        "font": "serif-bold",
+        "tracking": 0.08,
+        "material": "gold"
+      },
+      {
+        "id": "monogram",
+        "type": "monogram",
+        "position": [
+          -1.9,
+          1.95,
+          -0.3
+        ],
+        "radius": 0.44,
+        "pedestal": false,
+        "material": "gold",
+        "motion": [
+          {
+            "type": "turntable",
+            "speed": 24
+          }
+        ]
+      },
+      {
+        "id": "camera",
+        "type": "cinema-camera",
+        "position": [
+          1.9,
+          1.9,
+          -0.3
+        ],
+        "rotation": [
+          0,
+          -30,
+          0
+        ],
+        "scale": 0.8
+      },
+      {
+        "id": "card",
+        "type": "card",
+        "kicker": "look",
+        "title": "studio-black",
+        "width": 2.5,
+        "height": 0.9,
+        "position": [
+          0,
+          1.95,
+          -0.6
+        ],
+        "material": "frosted"
+      }
+    ]
+  }
+}

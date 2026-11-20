@@ -1,0 +1,59 @@
+{
+  "id": "float",
+  "group": "motion",
+  "title": "float",
+  "about": "gentle up-down hover",
+  "prompt": "Let our mark hover up and down gently.",
+  "source": "CONNECT AI LAB",
+  "license": "MIT",
+  "order": 65,
+  "param": "{\"type\": \"float\"}  amp, period, phase",
+  "spec": {
+    "name": "float",
+    "duration": 4,
+    "look": "midnight-glass",
+    "camera": {
+      "position": [
+        0,
+        1.4,
+        5
+      ],
+      "target": [
+        0,
+        1.25,
+        0
+      ],
+      "fov": 34,
+      "motion": []
+    },
+    "objects": [
+      {
+        "id": "floor",
+        "type": "floor",
+        "kind": "mirror",
+        "dim": 0.7
+      },
+      {
+        "id": "monogram",
+        "type": "monogram",
+        "position": [
+          0,
+          1.3,
+          0
+        ],
+        "rotation": [
+          0,
+          -24,
+          0
+        ],
+        "motion": [
+          {
+            "type": "float",
+            "amp": 0.2,
+            "period": 2.4
+          }
+        ]
+      }
+    ]
+  }
+}

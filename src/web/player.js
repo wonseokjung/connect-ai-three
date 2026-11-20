@@ -7,7 +7,10 @@ export function makePlayer(createStage) {
     el.appendChild(canvas);
     const coarse = matchMedia('(pointer: coarse)').matches;
     const dprCap = opts.maxPixelRatio ?? (coarse ? 1.5 : 2);
-    const dpr = () => Math.min(window.devicePixelRatio || 1, dprCap);
+    // quality steps down by itself when the device cannot keep up (see the frame-time watch in tick)
+    let quality = 1;
+    const dpr = () => Math.max(0.6, Math.min(window.devicePixelRatio || 1, dprCap) * quality);
+    const watch = {n: 0, sum: 0, last: 0, steps: 0};
     const rect = () => ({w: Math.max(2, el.clientWidth), h: Math.max(2, el.clientHeight)});
     const interact = new Set((spec.interact || []).map((i) => (typeof i === 'string' ? i : i.type)));
     const q = new URLSearchParams(location.search);
@@ -54,6 +57,21 @@ export function makePlayer(createStage) {
       live.pointer = target.on ? [target.px, target.py] : null;
       const t = timeNow();
       stage.render(t, live);
+      // frame-time watch: 45 frames in a row slower than ~30 fps -> render 25 % fewer pixels (at most three times)
+      const now = performance.now();
+      if (watch.last && now - watch.last < 250) {
+        watch.sum += now - watch.last;
+        if (++watch.n >= 45) {
+          if (watch.sum / watch.n > 30 && watch.steps < 3 && opts.adaptive !== false) {
+            quality *= 0.75;
+            watch.steps++;
+            const {w, h} = rect();
+            stage.resize(w, h, dpr());
+          }
+          watch.n = watch.sum = 0;
+        }
+      } else watch.n = watch.sum = 0;
+      watch.last = now;
       canvas.style.cursor = drag ? 'grabbing' : stage.hovered ? 'pointer' : interact.has('orbit') ? 'grab' : '';
       if (opts.onFrame) opts.onFrame(t, stage);
       if (playing && visible && frozen == null) raf = requestAnimationFrame(tick);
@@ -129,6 +147,9 @@ export function makePlayer(createStage) {
     return {
       get stage() {
         return stage;
+      },
+      get quality() {
+        return {pixelRatio: dpr(), steps: watch.steps};
       },
       play() {
         held = null;

@@ -31,15 +31,17 @@ for (const it of items) {
   const r = {id: it.id, group: it.group};
   try {
     materialize(work, spec);
-    const video = it.lane === 'on-video' && fs.existsSync(path.join(work, 'assets', 'talk.mp4')) ? {src: 'assets/talk.mp4'} : null;
+    // the on-video lane: assets/talk.mp4 (+ assets/talk.json = {matte: {...}} to draw the 3D behind the person)
+    const video = it.lane === 'on-video' && fs.existsSync(path.join(work, 'assets', 'talk.mp4')) ? {src: 'assets/talk.mp4', ...(readJson(path.join(work, 'assets', 'talk.json')) || {})} : null;
     if (argv.includes('--check')) {
-      const c = await check(work, spec, {samples: 6});
+      // with a person matte the 3D is drawn behind the person: the face box cannot be broken (same rule as `make`)
+      const c = await check(work, video && video.matte ? {...spec, behindPerson: true} : spec, {samples: 6});
       r.check = {ok: c.ok, errors: c.errors.map((e) => e.msg), advice: c.advice.map((e) => e.msg), numbers: c.numbers};
     }
     if (!argv.includes('--stills') && !argv.includes('--check-only') && (argv.includes('--force') || !fs.existsSync(clip))) await renderVideo(work, spec, clip, {r3f: it.lane === 'r3f', video, crf: 20});
     if (!argv.includes('--check-only') && (argv.includes('--force') || !fs.existsSync(still))) {
       if (it.lane === 'r3f') r.note = 'still skipped (r3f lane)';
-      else await renderStillAt(work, spec, still, (spec.duration || 4) * 0.62, {video});
+      else await renderStillAt(work, spec, still, it.peak ?? (spec.duration || 4) * 0.62, {video});
     }
     r.ok = true;
     r.sec = +((Date.now() - t0) / 1000).toFixed(1);

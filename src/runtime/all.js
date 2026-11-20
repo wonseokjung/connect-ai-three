@@ -2,7 +2,7 @@
 export * from './index.js';
 import '../plugins/text3d.js';
 import '../plugins/fonts.js';
-import '../plugins/fonts-serif.js';
+import '../plugins/brand.js';
 import '../plugins/ttf.js';
 import '../plugins/gltf.js';
 import '../plugins/svg.js';
