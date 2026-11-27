@@ -147,7 +147,7 @@ registerObject('wordmark', async (d, ctx) => {
     g.add(r);
   }
   if (d.sub) {
-    const l = makeLabel({text: String(d.sub).toUpperCase(), size: d.subSize ?? size * 0.42, weight: 300, tracking: d.subTracking ?? 0.42, color: d.subColor || ctx.palette.text}, ctx);
+    const l = makeLabel({text: String(d.sub).toUpperCase(), size: d.subSize ?? size * 0.42, weight: d.subWeight ?? 300, tracking: d.subTracking ?? 0.42, color: d.subColor || ctx.palette.text}, ctx);
     l.position.set(0, -size * (d.rule ? 1.42 : 1.12), 0);
     g.add(l);
   }

@@ -115,7 +115,11 @@ test('draft: words become a spec that validates', () => {
     ['interactive hero for my website with a gem', (s) => s.interact.includes('hover') && s.objects.some((o) => o.type === 'gem')],
     ['내 영상 위에 3D 로고', (s) => s.look === 'on-video' && s.objects[0].kind === 'shadow'],
     ['밤 도시 위에 금색 글자 "CONNECT" 떨어지는 물리', (s) => s.look === 'connect-night-city' && s.objects.some((o) => o.bodyEach)],
-    ['밤 도시 위에 금색 글자 "커넥트"', (s) => s.objects.some((o) => o.type === 'label' && o.text === '커넥트') && !s.objects.some((o) => o.type === 'text3d')],
+    // 0.3: Korean words the built-in font covers become a real 3D wordmark; other Korean stays a flat label (never broken text3d)
+    ['밤 도시 위에 금색 글자 "커넥트"', (s) => s.objects.some((o) => o.type === 'wordmark' && o.text === '커넥트') && !s.objects.some((o) => o.type === 'text3d')],
+    ['밤 도시 위에 금색 글자 "햇살김밥"', (s) => s.objects.some((o) => o.type === 'label' && o.text === '햇살김밥') && !s.objects.some((o) => o.type === 'text3d' || o.type === 'wordmark')],
+    ['삼각대 위 시네마 카메라, 천천히 도는 카메라', (s) => s.objects.some((o) => o.type === 'cinema-camera')],
+    ['slow orbit around a gold logo "CONNECT AI LAB"', (s) => !s.objects.some((o) => o.type === 'cinema-camera')],
     ['bar chart 3 5 8 12 in a bright studio', (s) => s.look === 'pale-studio' && s.objects.some((o) => o.type === 'bars' && o.values.length === 4)],
     ['', (s) => s.objects.length >= 1],
   ];

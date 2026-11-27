@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.3.0
+
+Premium product and sculpture shots; the spec stays compatible.
+
+- **`contact`**: a soft dark pool under an object, so it sits on its pedestal or the floor instead of floating.
+- **Floor and wall without a seam.** `floor` mirror takes `dimFar` (with `fadeFrom` / `fadeTo`, metres) so the far
+  floor fades out; `backglow` takes `floorFade` (metres) so the wall glow stops above the floor line.
+- **`fade` with `until` / `back`**: fade in, then out again at `until`. Fades on one object multiply.
+- **Korean 3D letters from a sentence.** `new` turns a quoted Korean line into a 3D `wordmark` when the built-in
+  faces carry all its letters (more brand and business words were added to them); any other Korean stays a flat label.
+- `new` no longer adds a cinema camera when "camera" only means the camera move ("천천히 도는 카메라", "slow orbit
+  camera"); "my camera", "tripod", "삼각대" still bring the prop.
+- `wordmark` takes `subWeight`. `demo --no-open` (or `CI=1`) says "Open <path>" instead of "Opening it".
+- 136 catalog items (was 135): a contact-shadow example.
+
 ## 0.2.0
 
 The picture got better; the spec stays compatible.

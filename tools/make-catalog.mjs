@@ -390,6 +390,14 @@ add('lane', 'r3f', 'React Three Fiber lane', 'the same spec inside <Canvas> / Re
 const hello = JSON.parse(fs.readFileSync(path.join(KIT, 'examples', 'on-my-video', 'cuts', '1-hello.json'), 'utf8'));
 add('lane', 'on-video', '3D on your own video', 'transparent 3D over your footage; with a person matte the 3D goes BEHIND you, and keep-out boxes guard your face and your mic arm', "On my talking video: when I say our name, let 'CONNECT AI LAB' rise from behind my shoulders and settle above my head, then my name beside me. Never cover my face.", OURS + ' + Remotion OffthreadVideo', {duration: hello.duration, look: 'on-video', keepOut: hello.keepOut, camera: hello.camera, post: hello.post, objects: hello.objects}, {lane: 'on-video', peak: 3.3, param: 'connect-ai-three on-video talk.mp4 --faces face.json --matte work/matte'});
 
+// 0.3: a soft contact shadow under a prop on a dark mirror floor (added last so the older item numbers stay)
+add(O, 'contact', 'Contact shadow', 'a soft dark pool under an object so it sits on the floor instead of floating', 'My cinema camera on a dark pedestal, with a soft shadow where it touches the floor, slow turn.', OURS, S('studio-black', null, cam(slow(-16, 14), {position: [0, 1.5, 6.2], target: [0, 0.95, 0]}), [floor('mirror', {dim: 0.85, dimFar: 0.3}),
+  {id: 'stage', type: 'cylinder', radius: 1.0, height: 0.5, position: [0, 0.25, 0], material: {preset: 'black', color: '#0A0A0A', roughness: 0.65}},
+  {id: 'stage-shadow', type: 'contact', radius: 1.35, opacity: 0.8, position: [0, 0.005, 0]},
+  {id: 'prop-shadow', type: 'contact', radius: 0.55, opacity: 0.7, position: [0, 0.505, 0]},
+  camera3d({position: [0, 0.5, 0], scale: 1.0}),
+]));
+
 // write
 const dir = path.join(KIT, 'catalog');
 for (const g of fs.readdirSync(dir, {withFileTypes: true})) if (g.isDirectory()) fs.rmSync(path.join(dir, g.name), {recursive: true, force: true});

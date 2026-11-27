@@ -8,7 +8,7 @@ export const MOTIONS = {
   float: {about: 'gentle up-down hover', params: 'amp, period, phase'},
   sway: {about: 'slow tilt left-right', params: 'deg, period, axis'},
   pop: {about: 'scale in with a small overshoot', params: 'at, dur'},
-  fade: {about: 'opacity in or out', params: 'at, dur, from, to'},
+  fade: {about: 'opacity in or out; with "until" it goes back again', params: 'at, dur, from, to, until, back'},
   rise: {about: 'come up from below and settle', params: 'at, dur, from'},
   drop: {about: 'fall in from above with a bounce', params: 'at, dur, from'},
   slide: {about: 'slide in from an offset', params: 'at, dur, from [x,y,z]'},
@@ -81,7 +81,8 @@ export function applyMotions(o, motions, t, camera) {
         o.scale.multiplyScalar(Math.max(0.0001, prog(t, at, m.dur ?? 0.7, 'back')));
         break;
       case 'fade':
-        opacity *= lerp(m.from ?? 0, m.to ?? 1, prog(t, at, m.dur ?? 0.6, m.ease || 'smooth'));
+        // "until": hold, then go back to "from" (a neighbour steps aside while the camera visits, then returns)
+        opacity *= lerp(m.from ?? 0, m.to ?? 1, prog(t, at, m.dur ?? 0.6, m.ease || 'smooth') * (m.until != null ? 1 - prog(t, m.until, m.back ?? m.dur ?? 0.6, m.ease || 'smooth') : 1));
         touchedOpacity = true;
         break;
       case 'rise': {

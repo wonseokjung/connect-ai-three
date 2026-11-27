@@ -171,6 +171,28 @@ registerObject('floor', (d, ctx) => {
     // a dark veil just above the mirror: keeps the reflection soft and the floor black
     const veil = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({color: d.tint || ctx.palette.base, transparent: true, opacity: d.dim ?? 0.62, depthWrite: false}));
     veil.material.userData.baseOpacity = veil.material.opacity;
+    // "dimFar": the veil thins out with distance (from "fadeFrom" to "fadeTo" units), so the far floor reflects the
+    // back wall and the line where floor meets wall melts into one soft horizon glow
+    if (d.dimFar != null) {
+      const dim = Math.max(1e-3, d.dim ?? 0.62), N = 256;
+      const cv = document.createElement('canvas');
+      cv.width = cv.height = N;
+      const c2 = cv.getContext('2d');
+      const r0 = ((d.fadeFrom ?? 3) / size) * N, r1 = Math.min(N / 2, ((d.fadeTo ?? 10) / size) * N);
+      const grad = c2.createRadialGradient(N / 2, N / 2, r0, N / 2, N / 2, Math.max(r0 + 1, r1));
+      const far = Math.round(255 * Math.min(1, Math.max(0, d.dimFar / dim)));
+      grad.addColorStop(0, 'rgb(255,255,255)');
+      grad.addColorStop(1, `rgb(${far},${far},${far})`);
+      c2.fillStyle = `rgb(${far},${far},${far})`;
+      c2.fillRect(0, 0, N, N);
+      c2.fillStyle = grad;
+      c2.beginPath();
+      c2.arc(N / 2, N / 2, Math.max(r0 + 1, r1), 0, Math.PI * 2);
+      c2.fill();
+      const tex = new THREE.CanvasTexture(cv);
+      ctx.disposables.push(tex);
+      veil.material.alphaMap = tex;
+    }
     ctx.disposables.push(veil.material);
     veil.rotation.x = -Math.PI / 2;
     veil.position.y = 0.002;
@@ -506,25 +528,57 @@ registerObject('city', (d, ctx) => {
 // --- back glow: a soft pool of light on the wall behind the subject (the night-set look) ---------------------
 registerObject('backglow', (d, ctx) => {
   const geo = new THREE.PlaneGeometry(1, 1);
+  // "floorFade" (metres): the glow fades out this far above the floor line, so the wall never meets the floor in a hard seam
+  const bgH = d.height ?? 12, bgY = d.y ?? 2.2;
+  const floorV = (0 - (bgY - bgH / 2)) / bgH, fadeV = (d.floorFade ?? 0) / bgH;
   ctx.disposables.push(geo);
   const mat = new THREE.ShaderMaterial({
     transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, fog: false,
-    uniforms: {uColor: {value: new THREE.Color(d.color || ctx.palette.accent)}, uGain: {value: d.intensity ?? 0.11}, uAlpha: {value: 1}},
+    uniforms: {uColor: {value: new THREE.Color(d.color || ctx.palette.accent)}, uGain: {value: d.intensity ?? 0.11}, uAlpha: {value: 1}, uFloor: {value: floorV}, uFade: {value: fadeV}},
     vertexShader: /* glsl */ `varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
-    fragmentShader: /* glsl */ `uniform vec3 uColor; uniform float uGain; uniform float uAlpha; varying vec2 vUv;
+    fragmentShader: /* glsl */ `uniform vec3 uColor; uniform float uGain; uniform float uAlpha; uniform float uFloor; uniform float uFade; varying vec2 vUv;
       void main(){ vec2 c = (vUv - 0.5) * vec2(1.0, 1.25); float r = length(c) * 2.0; float a = pow(max(0.0, 1.0 - r), 2.2);
+        if (uFade > 0.0) a *= smoothstep(uFloor, uFloor + uFade, vUv.y);
         gl_FragColor = vec4(uColor * a * uGain * uAlpha, 1.0); }`,
   });
   mat.userData.baseOpacity = 1;
   ctx.disposables.push(mat);
   const m = new THREE.Mesh(geo, mat);
-  m.scale.set(d.width ?? 22, d.height ?? 12, 1);
-  m.position.set(0, d.y ?? 2.2, d.z ?? -9);
+  m.scale.set(d.width ?? 22, bgH, 1);
+  m.position.set(0, bgY, d.z ?? -9);
   m.userData.noShadow = true;
   m.userData.isBackdrop = true;
   m.renderOrder = -5;
   return m;
 }, {source: OURS + ' shader', about: 'soft pool of warm light on the wall behind the subject'});
+
+// --- contact shadow: a soft dark pool under an object, so it sits on its pedestal or floor instead of floating ---
+registerObject('contact', (d, ctx) => {
+  const N = 128;
+  const cv = document.createElement('canvas');
+  cv.width = cv.height = N;
+  const c2 = cv.getContext('2d');
+  const g = c2.createRadialGradient(N / 2, N / 2, 0, N / 2, N / 2, N / 2);
+  const soft = d.softness ?? 0.55;
+  g.addColorStop(0, 'rgba(255,255,255,1)');
+  g.addColorStop(Math.max(0.05, 1 - soft), 'rgba(255,255,255,0.7)');
+  g.addColorStop(1, 'rgba(255,255,255,0)');
+  c2.fillStyle = g;
+  c2.fillRect(0, 0, N, N);
+  const tex = new THREE.CanvasTexture(cv);
+  const r = d.radius ?? 0.6;
+  const geo = new THREE.PlaneGeometry(r * 2 * (d.stretch ?? 1), r * 2);
+  const mat = new THREE.MeshBasicMaterial({color: d.color || '#000000', alphaMap: tex, transparent: true, opacity: d.opacity ?? 0.75, depthWrite: false});
+  mat.userData.baseOpacity = mat.opacity;
+  ctx.disposables.push(tex, geo, mat);
+  const m = new THREE.Mesh(geo, mat);
+  m.rotation.x = -Math.PI / 2;
+  m.userData.noShadow = true;
+  m.renderOrder = 1;
+  const wrap = new THREE.Group();
+  wrap.add(m);
+  return wrap;
+}, {source: OURS, about: 'soft contact shadow under an object (put it at the height of the surface it stands on)'});
 
 // --- terrain and water-like surface ------------------------------------------------------------------------
 registerObject('terrain', (d, ctx) => {

@@ -135,7 +135,7 @@ async function main() {
     log(`demo scene: ${P.spec}`);
     const t = Date.now();
     const w = await L.buildWeb(dir, spec, {log});
-    log(`web page ready in ${secs(t)}. Opening it: drag to look around.`);
+    log(`web page ready in ${secs(t)}. ${flag('no-open') || process.env.CI ? `Open ${path.relative(process.cwd(), w.file)}` : 'Opening it'}: drag to look around.`);
     open(w.file);
     log(`\nnext:\n  npx ${KIT_NAME} make ${path.relative(process.cwd(), dir) || '.'}      (self-check + video + sheet)\n  npx ${KIT_NAME} install             (teach your AI agent the spec and the catalog)\n  edit scene.json, or tell your agent: "change the text to my name and make it a 9:16 short"`);
     return;

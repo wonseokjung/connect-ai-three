@@ -1,12 +1,12 @@
 {
   "name": "connect-ai-three catalog",
-  "count": 135,
+  "count": 136,
   "groups": [
     {
       "id": "object",
       "title": "Objects",
       "about": "things you can put in the scene",
-      "count": 43
+      "count": 44
     },
     {
       "id": "material",
@@ -4707,6 +4707,105 @@
       }
     },
     {
+      "id": "contact",
+      "group": "object",
+      "title": "Contact shadow",
+      "about": "a soft dark pool under an object so it sits on the floor instead of floating",
+      "prompt": "My cinema camera on a dark pedestal, with a soft shadow where it touches the floor, slow turn.",
+      "source": "CONNECT AI LAB",
+      "license": "MIT",
+      "order": 135,
+      "file": "object/135_contact.json",
+      "spec": {
+        "name": "contact",
+        "duration": 4,
+        "look": "studio-black",
+        "camera": {
+          "position": [
+            0,
+            1.5,
+            6.2
+          ],
+          "target": [
+            0,
+            0.95,
+            0
+          ],
+          "fov": 34,
+          "motion": [
+            {
+              "type": "orbit",
+              "from": -16,
+              "to": 14,
+              "dur": 4
+            }
+          ]
+        },
+        "objects": [
+          {
+            "id": "floor",
+            "type": "floor",
+            "kind": "mirror",
+            "dim": 0.85,
+            "dimFar": 0.3
+          },
+          {
+            "id": "stage",
+            "type": "cylinder",
+            "radius": 1,
+            "height": 0.5,
+            "position": [
+              0,
+              0.25,
+              0
+            ],
+            "material": {
+              "preset": "black",
+              "color": "#0A0A0A",
+              "roughness": 0.65
+            }
+          },
+          {
+            "id": "stage-shadow",
+            "type": "contact",
+            "radius": 1.35,
+            "opacity": 0.8,
+            "position": [
+              0,
+              0.005,
+              0
+            ]
+          },
+          {
+            "id": "prop-shadow",
+            "type": "contact",
+            "radius": 0.55,
+            "opacity": 0.7,
+            "position": [
+              0,
+              0.505,
+              0
+            ]
+          },
+          {
+            "id": "camera",
+            "type": "cinema-camera",
+            "position": [
+              0,
+              0.5,
+              0
+            ],
+            "rotation": [
+              0,
+              32,
+              0
+            ],
+            "scale": 1
+          }
+        ]
+      }
+    },
+    {
       "id": "gold",
       "group": "material",
       "title": "gold",
@@ -6560,12 +6659,12 @@
       "id": "fade",
       "group": "motion",
       "title": "fade",
-      "about": "opacity in or out",
+      "about": "opacity in or out; with \"until\" it goes back again",
       "prompt": "Fade the line in, hold, and fade it out.",
       "source": "CONNECT AI LAB",
       "license": "MIT",
       "order": 68,
-      "param": "{\"type\": \"fade\"}  at, dur, from, to",
+      "param": "{\"type\": \"fade\"}  at, dur, from, to, until, back",
       "peak": 1.8,
       "file": "motion/068_fade.json",
       "spec": {

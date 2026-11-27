@@ -10,7 +10,7 @@ You write ONE file, `scene.json` (the scene spec). The tool turns it into:
 - `out/video.mp4`: the same picture as video, frame for frame (`--alpha` for a transparent `.mov`, `--short` for 9:16)
 - `out/sheet.jpg` + `out/report.md`: stills and the self-check
 
-Never write raw three.js for this. Everything you may name is in `catalog.json` next to this file (135 items, each a
+Never write raw three.js for this. Everything you may name is in `catalog.json` next to this file (136 items, each a
 complete working spec with a one-line prompt). Read the items you need before writing.
 
 <!-- connect-ai-lab:brand -->
@@ -93,6 +93,9 @@ Names (details and examples for each are in `catalog.json`):
   accent). Never one amber tone over everything. No neon glow, no particles.
 - Letters must read first: thin wide-tracked letters (`wordmark`, font `light` or `sans`) or the display serif; keep
   reflections dim (`floor` `dim` 0.8 or more) and depth of field gentle (`dof` `aperture` about 0.0003 to 0.0006).
+- A product or a sculpture: light it with an HDRI (`env` `{"type": "hdri", "src": ..., "rotation": deg}`), set it on
+  a dark pedestal with a `contact` shadow under it, fade the far mirror floor (`floor` `dimFar`) and let the wall glow
+  stop above the floor (`backglow` `floorFade` 2 to 3) so wall and floor never meet in a hard line.
 - Motion is slow and has weight: 4 to 8 seconds, ease in and out, never constant shaking.
 - Text in 3D stays short (a name, a title). Sentences go in the page (`page.title`, `page.sub`) or in labels.
 - Show the user's real things: their name, their logo file, their numbers, their model. Never invent numbers,
