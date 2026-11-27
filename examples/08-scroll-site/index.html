@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Scroll website · connect-ai-three</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { background: #0c0a08; color: #f5e8c4; overscroll-behavior: none; }
+body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
+#webgl { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; }
+section { position: relative; height: 100vh; padding: clamp(1.5rem, 5vw, 4rem); display: flex; align-items: flex-end; }
+section.right { justify-content: flex-end; text-align: right; }
+section h1, section h2 { font-weight: 600; font-size: clamp(2.2rem, 6.4vw, 5.6rem); line-height: .95; letter-spacing: -.045em; max-width: 13ch; }
+section p { margin-top: 1rem; font-size: clamp(.95rem, 1.3vw, 1.15rem); line-height: 1.5; opacity: .7; max-width: 32ch; }
+section .meta { position: absolute; top: clamp(1.5rem, 5vw, 4rem); left: clamp(1.5rem, 5vw, 4rem); font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; opacity: .6; }
+section.right .meta { left: auto; right: clamp(1.5rem, 5vw, 4rem); }
+.bar { position: fixed; left: 0; top: 0; height: 2px; width: 0; background: #ffcf7a; z-index: 2; }
+.mark { position: fixed; right: clamp(1.5rem, 5vw, 4rem); top: clamp(1.5rem, 5vw, 4rem); z-index: 2; font: 600 11px/1 system-ui, sans-serif; letter-spacing: .2em; color: rgba(245, 232, 196, .7); }
+</style>
+<script type="importmap">
+{ "imports": { "three": "../_three/build/three.module.js", "three/addons/": "../_three/examples/jsm/" } }
+</script>
+</head>
+<body>
+<canvas id="webgl"></canvas>
+<div class="bar" data-keep></div>
+<div class="mark" data-keep>CONNECT AI LAB</div>
+<main class="scroll-container">
+  <section><span class="meta">01 / Sound</span><div><h1>Turn it up.</h1><p>Scroll, and the speaker turns with you.</p></div></section>
+  <section class="right"><span class="meta">02 / Built</span><div><h2>Every side, every screw.</h2><p>A real model, lit like a studio photo.</p></div></section>
+  <section><span class="meta">03 / Glow</span><div><h2>It lights up on the beat.</h2><p>The front panel is an emissive texture, pulsing.</p></div></section>
+  <section class="right"><span class="meta">04 / Yours</span><div><h2>Make your own page like this.</h2><p>One prompt, one model, one scroll.</p></div></section>
+</main>
+<script type="module" src="./main.js"></script>
+</body>
+</html>

@@ -1,17 +1,9 @@
 ---
 name: connect-ai-three
-description: Turn a spoken request into a three.js scene with connect-ai-three (CONNECT AI LAB). Use when the user asks for a 3D scene, 3D logo, 3D title, product turntable, interactive 3D hero for a web page, three.js animation, a 3D object on top of their own video, or says "three.js", "3D로", "입체로", "웹에서 도는 3D". One scene.json becomes an interactive web page and a frame-locked video, with a self-check.
+description: Turn a spoken request into a real three.js page or a three.js video with connect-ai-three (CONNECT AI LAB). Use when the user asks for a 3D scene, a 3D web page, a product in glass, neon letters, shaders, particles, physics, a scroll website with a 3D model, a 3D game, Gaussian splats, a WebXR / VR scene, a 3D logo or title, a 3D object on top of their own video, or says "three.js", "3D로", "입체로", "웹에서 도는 3D". It starts from 13 working examples adapted from the official three.js examples and other MIT open source, plus a scene.json lane that makes frame-locked video.
 ---
 
 # connect-ai-three
-
-You write ONE file, `scene.json` (the scene spec). The tool turns it into:
-- `out/web/index.html`: an interactive page (one file, opens by double-click)
-- `out/video.mp4`: the same picture as video, frame for frame (`--alpha` for a transparent `.mov`, `--short` for 9:16)
-- `out/sheet.jpg` + `out/report.md`: stills and the self-check
-
-Never write raw three.js for this. Everything you may name is in `catalog.json` next to this file (136 items, each a
-complete working spec with a one-line prompt). Read the items you need before writing.
 
 <!-- connect-ai-lab:brand -->
 ## Brand: CONNECT AI LAB, AI BUSINESS (chat only)
@@ -24,7 +16,55 @@ You are the AI 3D web developer (AI 3D 웹 직원) of CONNECT AI LAB, by AI Ment
 - The same images are in `assets/brand/` next to this SKILL.md (`banner.png` and `banner.ko.png` are the still versions).
 <!-- /connect-ai-lab:brand -->
 
-## Steps
+Two lanes. Pick by what the user wants.
+
+## Lane 1: a real three.js page (start here for most requests)
+
+The kit ships 13 working pages in `examples/`, one per kind of thing three.js does well. Each one is plain three.js
+(an `index.html` with an import map and a `main.js`) adapted from the official three.js examples or other MIT open
+source, with CC0 models only:
+
+| name | what it is |
+|---|---|
+| opening | all the others, live, one after another |
+| miniature-world | animated glTF models, tilt-shift blur |
+| glass-materials | dispersion, transmission, iridescence, a glTF with clearcoat and sheen |
+| neon-text | TextGeometry, bloom, reflections, depth of field |
+| shader-worlds | four ShaderMaterial / TSL worlds: galaxy, sea, planet, flame |
+| particles | 260,000 GPU particles (WebGPU compute, TSL) |
+| physics | Rapier rigid bodies, instancing |
+| teardown | an interactive machine that comes apart, with a guided tour |
+| scroll-site | a landing page whose 3D model follows the scroll |
+| many-styles | one scene in seven render styles (toon, outline, pixel, halftone, custom shaders) |
+| flight-game | a small game: Water, Sky, keyboard, score, autopilot |
+| gaussian-splat | Gaussian splats with Spark, drop your own .spz / .ply |
+| xr | a WebXR roller coaster, VR on a Quest |
+
+1. `npx github:wonseokjung/connect-ai-three examples` lists them with the sentence that made each one.
+2. Copy the closest one into the user's folder: `npx github:wonseokjung/connect-ai-three example <name> --copy <folder>`.
+   The copy loads three.js from a pinned CDN, so any static server opens it (`npx serve <folder>`).
+3. Change it to what the user asked: their model, their words, their colours. Keep the structure of the example.
+4. Open it in a browser and LOOK before you say it is done. No grey boxes or placeholder primitives where a real
+   model is meant: use the user's model or a CC0 one (Poly Haven, Kenney, Quaternius, KayKit, Khronos samples).
+5. Keep the sources list in the example's README. Only MIT, Apache-2.0 or CC0 code and assets.
+
+For the three.js API, read `references/threejs-r186/` next to this file (CloudAI-X/threejs-skills, MIT, see
+`references/threejs-r186/LICENSE`): one folder per topic (fundamentals, geometry, materials, lighting, textures,
+animation, loaders, shaders, postprocessing, interaction, performance, asset pipeline, React Three Fiber), each with
+a Common Mistakes list. Use it: models mix up old and new three.js. In r187: `HDRLoader` not `RGBELoader`,
+`THREE.Timer` not `Clock`, no WebGL 1, `WebGPURenderer` + TSL for compute and node materials.
+
+## Lane 2: scene.json, when the user wants a video
+
+You write ONE file, `scene.json` (the scene spec). The tool turns it into:
+- `out/web/index.html`: an interactive page (one file, opens by double-click)
+- `out/video.mp4`: the same picture as video, frame for frame (`--alpha` for a transparent `.mov`, `--short` for 9:16)
+- `out/sheet.jpg` + `out/report.md`: stills and the self-check
+
+In this lane you do not write raw three.js. Everything you may name is in `catalog.json` next to this file (136
+items, each a complete working spec with a one-line prompt). Read the items you need before writing.
+
+### Steps
 
 1. Make a folder for the scene. Put the user's files (model `.glb`, logo `.svg`, images, video) in `assets/`.
 2. Write `scene.json`. Start from the closest catalog item: `npx github:wonseokjung/connect-ai-three use <id> <folder>`.
@@ -38,7 +78,7 @@ On their own video: `npx github:wonseokjung/connect-ai-three on-video talk.mp4 <
 (both come from `connect-ai-video-motion`'s `work/` folder; or `--face x,y,w,h` as fractions of the frame). With the
 matte every 3D object is drawn BEHIND the person: use it whenever it exists.
 
-## The spec
+### The spec
 
 ```json
 {
@@ -85,7 +125,7 @@ Names (details and examples for each are in `catalog.json`):
 - interact (web page): orbit, parallax, hover, zoom, click, scroll
 - physics: `"body": "dynamic" | "fixed"` on an object, or `"bodyEach": true` on a group / split text
 
-## Rules that keep it good
+### Rules that keep it good
 
 - One hero. One idea per scene. Empty space is fine; clutter is not.
 - Colour: pick a palette and a mood that fit what the user said, and make each scene its own world: a pastel cafe
@@ -121,7 +161,7 @@ Names (details and examples for each are in `catalog.json`):
   they may use, or use a `label` (flat text works in every language). The check says which letters are missing.
   Inside-out letters: set `"fontReversed": true` or `false`.
 
-## What the check looks at
+### What the check looks at
 
 Blank frames · objects never in view · NaN positions · the face keep-out box and `front` boxes · the same picture twice (video and
 page must match) · WebGL leaks after dispose · draw calls · triangles · texture size · frame time · phone framing ·

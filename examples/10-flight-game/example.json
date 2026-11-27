@@ -1,0 +1,18 @@
+{
+  "name": "flight-game",
+  "section": 10,
+  "title": "Flight game",
+  "titleKo": "비행 게임",
+  "about": "Fly a jet over a sunset sea and through golden rings. Arrow keys or WASD steer, Shift boosts; leave the keys alone and the autopilot flies for you.",
+  "aboutKo": "노을 지는 바다 위를 날면서 금색 링을 통과하는 게임이에요. 방향키나 WASD로 조종하고 Shift로 가속해요. 키에서 손을 떼면 자동 조종으로 알아서 날아가요.",
+  "prompt": "Make a flight game over a sunset sea: fly a jet through golden rings, count the score, and let an autopilot fly when I don't touch the keys.",
+  "promptKo": "노을 지는 바다 위 링을 통과하는 비행 게임 만들어 줘. 링을 지나가면 점수가 오르고, 키를 안 누르면 자동 조종으로 날게 해 줘.",
+  "renderer": "webgl",
+  "sources": [
+    {"name": "three.js example webgl_shaders_ocean", "url": "https://threejs.org/examples/#webgl_shaders_ocean", "license": "MIT", "what": "Water and Sky objects, the shared sun, sky lighting with PMREMGenerator"},
+    {"name": "Spaceship by Quaternius (via Poly Pizza)", "url": "https://poly.pizza/m/DbGajMHrvp", "license": "CC0-1.0", "what": "the jet (assets/jet.glb)"},
+    {"name": "Kenney Nature Kit", "url": "https://kenney.nl/assets/nature-kit", "license": "CC0-1.0", "what": "rocks used as sea stacks (assets/rock_*.glb)"}
+  ],
+  "replaces": "The official example's waternormals.jpg is not used; the normal map is drawn in code.",
+  "capture": {"wait": 6, "warm": 2, "clip": 10, "still": 6.6}
+}

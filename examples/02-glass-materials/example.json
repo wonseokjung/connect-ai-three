@@ -1,0 +1,20 @@
+{
+  "name": "glass-materials",
+  "section": 2,
+  "title": "Glass, rainbow and soap film",
+  "titleKo": "유리, 무지개, 비눗방울",
+  "about": "A cut crystal splits light into a rainbow, thick glass orbs bend the stripes behind them, soap bubbles shimmer, and a real glTF toy car shows clearcoat, sheen and a glass dome.",
+  "aboutKo": "보석이 빛을 무지갯빛으로 가르고, 두꺼운 유리구슬 너머로 뒤쪽 줄무늬가 휘어 보이고, 비눗방울이 반짝여요. glTF 장난감 자동차 모델에는 코팅 페인트, 천 질감, 유리 돔이 다 들어 있어요.",
+  "prompt": "Show my product like glass: a crystal that splits light into a rainbow, glass marbles that bend what is behind them, and soap bubbles floating around. Make it slowly turn.",
+  "promptKo": "내 제품을 유리처럼 보여 줘. 빛이 무지개로 갈라지는 보석, 뒤가 휘어 보이는 유리구슬, 주변에 둥둥 떠다니는 비눗방울까지. 천천히 돌아가게.",
+  "renderer": "webgl",
+  "sources": [
+    {"name": "three.js example webgl_loader_gltf_dispersion", "url": "https://threejs.org/examples/#webgl_loader_gltf_dispersion", "license": "MIT", "what": "dispersion on MeshPhysicalMaterial, NeutralToneMapping"},
+    {"name": "three.js example webgl_materials_physical_transmission", "url": "https://threejs.org/examples/#webgl_materials_physical_transmission", "license": "MIT", "what": "transmission, thickness, ior"},
+    {"name": "three.js example webgl_loader_gltf_iridescence", "url": "https://threejs.org/examples/#webgl_loader_gltf_iridescence", "license": "MIT", "what": "iridescence on a clear shell"},
+    {"name": "Khronos glTF Sample Assets: ToyCar (Guido Odendahl, Eric Chadwick)", "url": "https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/ToyCar", "license": "CC0-1.0", "what": "assets/toy-car.glb"},
+    {"name": "Poly Haven: Colorful Studio HDRI (Sergej Majboroda)", "url": "https://polyhaven.com/a/colorful_studio", "license": "CC0-1.0", "what": "assets/colorful_studio_1k.hdr"}
+  ],
+  "replaces": "The official examples use DispersionTest and IridescenceLamp (CC BY 4.0). They are not used here.",
+  "capture": {"wait": 7, "warm": 1, "clip": 6, "still": 3}
+}

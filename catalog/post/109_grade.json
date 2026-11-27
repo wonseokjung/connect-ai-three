@@ -2,7 +2,7 @@
   "id": "grade",
   "group": "post",
   "title": "grade",
-  "about": "contrast, saturation, tint",
+  "about": "contrast, saturation, tint, a soft roll-off for the brightest whites (whites)",
   "prompt": "Grade it teal and warm with more contrast.",
   "source": "CONNECT AI LAB shader",
   "license": "MIT",

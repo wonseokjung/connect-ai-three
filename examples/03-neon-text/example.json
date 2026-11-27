@@ -1,0 +1,56 @@
+{
+  "name": "neon-text",
+  "section": 3,
+  "title": "Neon text and post effects",
+  "titleKo": "빛나는 네온 글자와 후처리",
+  "about": "3D letters switch on one by one like real neon tubes, the wet street reflects them, and the city behind melts into bokeh. Bloom and depth of field are post effects on top of the render.",
+  "aboutKo": "3D 글자가 진짜 네온관처럼 하나씩 켜지고, 젖은 바닥에 비치고, 뒤쪽 도시 불빛은 동그랗게 흐려져요. 빛 번짐이랑 초점 흐림은 렌더링한 화면 위에 얹는 후처리 효과예요.",
+  "prompt": "Make my shop name in 3D neon letters that switch on one by one, glowing on a dark wall, reflected on a wet street, with the city lights behind out of focus.",
+  "promptKo": "우리 가게 이름을 3D 네온 글자로 만들어 줘. 글자가 하나씩 켜지면서 빛나고, 젖은 바닥에 비치고, 뒤쪽 도시 불빛은 초점이 흐려지게 해 줘.",
+  "renderer": "webgl",
+  "sources": [
+    {
+      "name": "three.js example webgl_postprocessing_unreal_bloom",
+      "url": "https://threejs.org/examples/#webgl_postprocessing_unreal_bloom",
+      "license": "MIT",
+      "what": "EffectComposer, UnrealBloomPass, OutputPass"
+    },
+    {
+      "name": "three.js example webgl_geometry_text",
+      "url": "https://threejs.org/examples/#webgl_geometry_text",
+      "license": "MIT",
+      "what": "FontLoader, TextGeometry with bevel"
+    },
+    {
+      "name": "three.js example webgl_postprocessing_dof",
+      "url": "https://threejs.org/examples/#webgl_postprocessing_dof",
+      "license": "MIT",
+      "what": "BokehPass depth of field"
+    },
+    {
+      "name": "three.js addons Reflector",
+      "url": "https://threejs.org/examples/#webgl_mirror",
+      "license": "MIT",
+      "what": "the wet street"
+    },
+    {
+      "name": "typeface subsets of Pretendard and Cormorant Garamond (in this kit)",
+      "url": "https://github.com/wonseokjung/connect-ai-three/blob/main/licenses/fonts-OFL.txt",
+      "license": "OFL-1.1",
+      "what": "assets/*.typeface.json, licence text in assets/LICENSE-fonts-OFL.txt"
+    },
+    {
+      "name": "Poly Haven: Brick Wall 006 (Jan Burghardt)",
+      "url": "https://polyhaven.com/a/brick_wall_006",
+      "license": "CC0-1.0",
+      "what": "assets/brick_*_1k.jpg, made smaller"
+    }
+  ],
+  "replaces": "The bloom example's ion drive model is not used.",
+  "capture": {
+    "wait": 5,
+    "warm": 0,
+    "clip": 7,
+    "still": 4
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "shader-worlds",
+  "section": 4,
+  "title": "Shader worlds: galaxy, sea, planet, flame",
+  "titleKo": "셰이더로 그린 세상: 은하, 바다, 행성, 불꽃",
+  "about": "Four things drawn only by shaders, side by side: a spiral galaxy of 40,000 sprites, a stormy sea, a planet with day, night, clouds and city lights, and two candle flames. No image files. Click a panel to open it full screen.",
+  "aboutKo": "셰이더로만 그린 네 장면을 한 화면에 모았어요. 스프라이트 4만 개짜리 은하, 거친 바다, 낮과 밤에 구름이랑 도시 불빛까지 있는 행성, 그리고 촛불 두 개예요. 이미지 파일은 하나도 없어요. 칸을 누르면 크게 보여요.",
+  "prompt": "Make a spiral galaxy, a stormy sea, a planet with city lights on the night side and a candle flame, all with shaders and no image files. Put them in four panels.",
+  "promptKo": "소용돌이 은하, 거친 바다, 밤이 된 쪽에 도시 불빛이 켜지는 행성, 흔들리는 촛불을 셰이더로만 만들어 줘. 이미지 파일 없이, 네 칸으로 나눠서.",
+  "renderer": "webgpu",
+  "sources": [
+    {"name": "three.js example webgpu_tsl_galaxy", "url": "https://threejs.org/examples/#webgpu_tsl_galaxy", "license": "MIT", "what": "the galaxy, as it is, with more arms and stars"},
+    {"name": "three.js example webgpu_tsl_raging_sea", "url": "https://threejs.org/examples/#webgpu_tsl_raging_sea", "license": "MIT", "what": "the sea, as it is"},
+    {"name": "three.js example webgpu_tsl_earth", "url": "https://threejs.org/examples/#webgpu_tsl_earth", "license": "MIT", "what": "day and night mix, fresnel atmosphere; the photo maps are replaced by noise"},
+    {"name": "three.js example webgpu_tsl_vfx_flames", "url": "https://threejs.org/examples/#webgpu_tsl_vfx_flames", "license": "MIT", "what": "both flame shaders; the noise images are replaced by MaterialX noise nodes"}
+  ],
+  "replaces": "The Earth example's day, night and cloud photos are CC BY 4.0 and are not used. The flame example's noise images are not used.",
+  "capture": {"wait": 9, "warm": 1, "clip": 6, "still": 3}
+}

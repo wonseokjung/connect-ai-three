@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>260,000 particles · connect-ai-three</title>
+<style>
+html, body { margin: 0; height: 100%; overflow: hidden; background: #000; }
+canvas { display: block; }
+.mark { position: fixed; right: 16px; bottom: 14px; font: 600 11px/1 system-ui, sans-serif; letter-spacing: .2em; color: rgba(255, 255, 255, .7); pointer-events: none; }
+.nogpu { position: fixed; inset: 0; display: grid; place-items: center; color: #fff; font: 16px system-ui; }
+</style>
+<script type="importmap">
+{ "imports": { "three": "../_three/build/three.webgpu.js", "three/webgpu": "../_three/build/three.webgpu.js", "three/tsl": "../_three/build/three.tsl.js", "three/addons/": "../_three/examples/jsm/" } }
+</script>
+</head>
+<body>
+<div class="mark" data-keep>CONNECT AI LAB</div>
+<script type="module" src="./main.js"></script>
+</body>
+</html>

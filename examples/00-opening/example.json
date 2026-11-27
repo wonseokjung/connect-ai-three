@@ -1,0 +1,15 @@
+{
+  "name": "opening",
+  "section": 0,
+  "title": "This is all code",
+  "titleKo": "이게 다 코드예요",
+  "about": "The opening: the twelve other examples play one after another with hard cuts, live in the browser. Nothing is a video.",
+  "aboutKo": "오프닝이에요. 나머지 예제 12개가 브라우저에서 실시간으로 하나씩 바로바로 바뀌면서 지나가요. 영상은 하나도 없어요.",
+  "prompt": "Make an opening page that plays all my three.js examples one after another with hard cuts, live, with a big title 'This is all code.' at the start.",
+  "promptKo": "내 three.js 예제들을 하나씩 바로바로 바꿔 가며 실시간으로 보여 주는 오프닝 페이지 만들어 줘. 처음엔 크게 '이게 다 코드예요'라고 써 줘.",
+  "renderer": "html",
+  "sources": [
+    {"name": "the other examples in this folder", "url": "", "license": "own", "what": "everything on screen"}
+  ],
+  "capture": {"montage": true}
+}

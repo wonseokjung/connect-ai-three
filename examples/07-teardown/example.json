@@ -1,0 +1,17 @@
+{
+  "name": "teardown",
+  "section": 7,
+  "title": "Machine teardown",
+  "titleKo": "기계 분해 시뮬레이터",
+  "about": "A V8 engine built from code that you can take apart: cut it open, follow one cylinder through its four strokes, slow it down, switch camera views. Left alone, it gives itself a guided tour.",
+  "aboutKo": "코드로 만든 V8 엔진을 분해해 보는 시뮬레이터예요. 단면으로 잘라 보고, 실린더 하나가 네 박자로 움직이는 걸 따라가고, 속도를 늦추거나 카메라도 바꿀 수 있어요. 가만히 두면 자동으로 투어가 돌아가요.",
+  "prompt": "Make an interactive V8 engine I can take apart. Cut it open, show the four strokes of one cylinder, let me change the speed and the camera, and play a guided tour when I leave it alone.",
+  "promptKo": "분해해 볼 수 있는 V8 엔진 시뮬레이터 만들어 줘. 단면으로 잘라서 실린더 하나가 네 박자로 움직이는 걸 보여 주고, 속도랑 카메라도 바꿀 수 있게 해 줘. 가만히 두면 자동 투어가 돌아가게 해 줘.",
+  "renderer": "webgl",
+  "sources": [
+    {"name": "elvarofficial/teardown, V8 four-stroke live page (sims/kit, sims/v8-shared, sims/v8-live)", "url": "https://github.com/elvarofficial/teardown", "license": "MIT", "what": "the whole simulator: engine geometry, kinematics, cutaway, HUD, auto tour (kit/, v8/)"},
+    {"name": "Inter by The Inter Project Authors", "url": "https://github.com/rsms/inter", "license": "OFL-1.1", "what": "HUD typeface (assets/fonts)"},
+    {"name": "JetBrains Mono by The JetBrains Mono Project Authors", "url": "https://github.com/JetBrains/JetBrainsMono", "license": "OFL-1.1", "what": "HUD numbers typeface (assets/fonts)"}
+  ],
+  "capture": {"wait": 8, "warm": 2, "clip": 8, "still": 6, "keepui": true}
+}

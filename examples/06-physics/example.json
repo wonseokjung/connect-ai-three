@@ -1,0 +1,18 @@
+{
+  "name": "physics",
+  "section": 6,
+  "title": "Real physics",
+  "titleKo": "진짜 물리",
+  "about": "Big 3D letters drop and bounce, then 600 candy balls and blocks pour down on them and keep pouring. Every piece is a Rapier rigid body. Double-click to shake it all up.",
+  "aboutKo": "큰 3D 글자가 떨어져서 튕기고, 그 위로 사탕 같은 공과 블록 600개가 계속 쏟아져요. 하나하나가 다 Rapier 물리 엔진으로 움직여요. 더블클릭하면 전부 튀어 올라요.",
+  "prompt": "Make my logo letters fall from above and bounce on the floor, then pour hundreds of colourful balls and blocks on them with real physics. Double-click shakes everything.",
+  "promptKo": "내 로고 글자들이 위에서 떨어져서 바닥에 부딪혀 튕기게 해 줘. 그 위로 알록달록한 공이랑 블록 수백 개가 진짜 물리 법칙대로 쏟아지고, 더블클릭하면 다 튀어 오르게.",
+  "renderer": "webgl",
+  "sources": [
+    {"name": "three.js example physics_rapier_instancing", "url": "https://threejs.org/examples/#physics_rapier_instancing", "license": "MIT", "what": "instanced bodies, recycling from the top, the shake impulse; the collider shapes follow three's RapierPhysics addon"},
+    {"name": "Rapier (@dimforge/rapier3d-compat 0.21.0)", "url": "https://github.com/dimforge/rapier", "license": "Apache-2.0", "what": "the physics engine, loaded from the kit's node_modules"},
+    {"name": "three.js addons TextGeometry, RoundedBoxGeometry, RoomEnvironment", "url": "https://github.com/mrdoob/three.js/tree/dev/examples/jsm", "license": "MIT", "what": "letters, blocks, reflections"},
+    {"name": "typeface subset of Pretendard Bold (in this kit)", "url": "https://github.com/wonseokjung/connect-ai-three/blob/main/licenses/fonts-OFL.txt", "license": "OFL-1.1", "what": "assets/bold.typeface.json, licence text in assets/LICENSE-fonts-OFL.txt"}
+  ],
+  "capture": {"wait": 5, "warm": 0, "clip": 8, "still": 5.5}
+}

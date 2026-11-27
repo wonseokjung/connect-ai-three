@@ -1,0 +1,20 @@
+{
+  "name": "many-styles",
+  "section": 9,
+  "title": "One scene, many styles",
+  "titleKo": "한 장면, 스타일만 바꾸기",
+  "about": "The same dancing robot on the same stage, drawn seven ways: studio, toon, stained glass, LiDAR scan, pixel art, comic dots and hologram. First all side by side, then one at a time.",
+  "aboutKo": "같은 무대에서 춤추는 로봇 하나를 일곱 가지 스타일로 그려요. 스튜디오, 툰, 스테인드글라스, 라이다 스캔, 픽셀 아트, 만화 망점, 홀로그램이에요. 처음엔 나란히, 그다음엔 하나씩 보여 줘요.",
+  "prompt": "Show my dancing robot in seven styles: studio, toon, stained glass, LiDAR scan, pixel art, comic dots and hologram. First all side by side in slanted strips, then one at a time, with buttons to pick a style.",
+  "promptKo": "춤추는 로봇을 일곱 가지 스타일로 보여 줘. 스튜디오, 툰, 스테인드글라스, 라이다 스캔, 픽셀 아트, 만화 망점, 홀로그램. 처음엔 화면을 비스듬하게 나눠서 나란히 보여 주고, 그다음엔 하나씩 버튼으로 고를 수 있게 해 줘.",
+  "renderer": "webgl",
+  "sources": [
+    {"name": "three.js example webgl_animation_skinning_morph", "url": "https://threejs.org/examples/#webgl_animation_skinning_morph", "license": "MIT", "what": "the robot, its Dance clip, AnimationMixer"},
+    {"name": "three.js example webgl_materials_toon + OutlineEffect", "url": "https://threejs.org/examples/#webgl_materials_toon", "license": "MIT", "what": "toon shading with a 3-step gradient map and outlines"},
+    {"name": "three.js example webgl_postprocessing_pixel (RenderPixelatedPass)", "url": "https://threejs.org/examples/#webgl_postprocessing_pixel", "license": "MIT", "what": "pixel art look"},
+    {"name": "three.js addons HalftonePass, UnrealBloomPass", "url": "https://github.com/mrdoob/three.js/tree/dev/examples/jsm/postprocessing", "license": "MIT", "what": "comic dots, glow"},
+    {"name": "RobotExpressive by Tomas Laulhe (Quaternius), morphs by Don McCurdy", "url": "https://github.com/mrdoob/three.js/tree/dev/examples/models/gltf/RobotExpressive", "license": "CC0-1.0", "what": "the robot (assets/robot.glb)"},
+    {"name": "stained glass, LiDAR and hologram shader patches", "url": "", "license": "own", "what": "written for this kit"}
+  ],
+  "capture": {"wait": 6, "warm": 0, "clip": 12, "still": 2.0, "pre": "window.RESTART()"}
+}

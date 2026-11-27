@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gaussian splats · connect-ai-three</title>
+<style>
+html, body { margin: 0; height: 100%; overflow: hidden; background: #07080b; }
+canvas { display: block; touch-action: none; }
+.note { position: fixed; left: 24px; bottom: 22px; color: rgba(255, 255, 255, .82); font: 500 13px/1.5 system-ui, sans-serif; letter-spacing: .02em; pointer-events: none; }
+.note b { display: block; font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #fff; }
+.mark { position: fixed; right: 20px; top: 18px; font: 600 11px/1 system-ui, sans-serif; letter-spacing: .2em; color: rgba(255, 255, 255, .7); }
+.drop { position: fixed; inset: 0; display: none; place-items: center; background: rgba(10, 12, 20, .7); color: #fff; font: 600 18px system-ui, sans-serif; }
+.drop.on { display: grid; }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "../_three/build/three.module.js",
+  "three/addons/": "../_three/examples/jsm/",
+  "@sparkjsdev/spark": "./lib/spark/spark.module.min.js"
+} }
+</script>
+</head>
+<body>
+<div class="note" data-keep><b id="count">Gaussian splats</b>Drop your own .spz, .ply or .splat file to look around it.</div>
+<div class="mark" data-keep>CONNECT AI LAB</div>
+<div class="drop">Drop the splat file</div>
+<script type="module" src="./main.js"></script>
+</body>
+</html>

@@ -1,10 +1,48 @@
 # NOTICE
 
-connect-ai-three is CONNECT AI LAB's code (MIT, see LICENSE). It does not re-implement three.js: it puts one scene
-spec in front of the existing three.js ecosystem and adds a self-check on top. Licence texts are in `licenses/`.
-"Used as it is" = imported from the installed npm package, not copied into this repository. "Idea" = no code copied.
+connect-ai-three is CONNECT AI LAB's code (MIT, see LICENSE). It has two parts:
 
-## What each part stands on
+- `examples/`: 13 three.js pages adapted from MIT open source, above all the official three.js examples
+  (mrdoob/three.js). Each folder says where every piece came from in its `example.json` and `README.md`, and keeps
+  the licence texts it needs next to the code, so a copy made with `example <name> --copy` carries them too.
+- the scene.json lane (`src/`, `lib/`, `catalog/`): one scene spec in front of the existing three.js ecosystem, made
+  into a web page and a frame-locked video, with a self-check on top.
+
+Licence texts are in `licenses/`. "Used as it is" = imported from the installed npm package, not copied into this
+repository. "Adapted" = code copied and changed. "Idea" = no code copied.
+
+## The examples
+
+| Example | Code it is adapted from | Licence | Models, textures, fonts (all CC0 or OFL) |
+|---|---|---|---|
+| 00 opening | our own page that plays the other examples | MIT (ours) | none of its own |
+| 01 miniature-world | three.js `webgl_animation_keyframes`, `HorizontalTiltShiftShader`, `VerticalTiltShiftShader` | MIT | KayKit Medieval Hexagon Pack 1.0 by Kay Lousberg, CC0 (`licenses/kaykit-CC0.txt`) |
+| 02 glass-materials | three.js `webgl_loader_gltf_dispersion`, `webgl_materials_physical_transmission`, `webgl_loader_gltf_iridescence` | MIT | Khronos ToyCar, CC0; Poly Haven Colorful Studio HDRI, CC0 |
+| 03 neon-text | three.js `webgl_postprocessing_unreal_bloom`, `webgl_geometry_text`, `webgl_postprocessing_dof`, `Reflector` | MIT | Poly Haven Brick Wall 006, CC0; our Pretendard / Cormorant Garamond subsets, OFL |
+| 04 shader-worlds | three.js `webgpu_tsl_galaxy`, `webgpu_tsl_raging_sea`, `webgpu_tsl_earth`, `webgpu_tsl_vfx_flames` | MIT | none: the Earth photos (CC BY) and the flame noise images are replaced by noise in code |
+| 05 particles | three.js `webgpu_tsl_compute_attractors_particles`, `webgpu_postprocessing_bloom` | MIT | none |
+| 06 physics | three.js `physics_rapier_instancing`, `TextGeometry`, `RoundedBoxGeometry`, `RoomEnvironment`; Rapier 0.21.0 | MIT; Rapier Apache-2.0 (`licenses/rapier-Apache-2.0.txt`) | our Pretendard Bold subset, OFL |
+| 07 teardown | elvarofficial/teardown, the V8 four-stroke live page (`sims/kit`, `sims/v8-shared`, `sims/v8-live`) | MIT (`licenses/teardown-MIT.txt`) | Inter and JetBrains Mono, OFL (`licenses/fonts-Inter-OFL.txt`, `licenses/fonts-JetBrainsMono-OFL.txt`) |
+| 08 scroll-site | tsogjavklann/awwwards-3d, coin-scroll template (GSAP and Lenis left out) | MIT (`licenses/awwwards-3d-MIT.txt`) | Khronos BoomBox by Microsoft, CC0 |
+| 09 many-styles | three.js `webgl_animation_skinning_morph`, `webgl_materials_toon` + `OutlineEffect`, `webgl_postprocessing_pixel`, `HalftonePass`, `UnrealBloomPass`; the stained glass, LiDAR and hologram shaders are ours | MIT | RobotExpressive by Tomás Laulhé (Quaternius), morphs by Don McCurdy, CC0 |
+| 10 flight-game | three.js `webgl_shaders_ocean` (`Water`, `Sky`) | MIT | Spaceship by Quaternius, CC0; Kenney Nature Kit rocks, CC0 (`licenses/kenney-CC0.txt`) |
+| 11 gaussian-splat | Spark 2.4.0 by World Labs (`spark.module.min.js` shipped in the folder), its procedural-splats and splat-reveal-effects examples | MIT (`licenses/spark-MIT.txt`) | Poly Haven Gothic Statue and Mossy Rock, CC0 |
+| 12 xr | three.js `webxr_vr_rollercoaster` (`RollerCoaster` geometries, `VRButton`), `webgl_shaders_sky` | MIT | Kenney Coaster Kit, CC0 (`licenses/kenney-CC0.txt`) |
+
+The pages load three.js 0.187.0 (npm alias `three-latest`, MIT, `licenses/three-MIT.txt`) from the kit's own
+`node_modules`; a copy loads the same version from jsDelivr.
+
+Left out on purpose, because they need credit or are not open: Littlest Tokyo (CC BY 4.0, used by the official
+keyframes example), DispersionTest and IridescenceLamp (CC BY 4.0), the Earth texture photos of the TSL Earth example
+(CC BY 4.0), GSAP (its own licence). Spark's own demo captures are not used.
+
+## The skill's three.js reference
+
+`skill/references/threejs-r186/` is CloudAI-X/threejs-skills (r186), copied as it is: MIT, Copyright (c) 2026
+CloudAI-X, `skill/references/threejs-r186/LICENSE` and `licenses/threejs-skills-MIT.txt`.
+
+## The scene.json lane: what each part stands on
+
 
 | Part in this kit | Source | Licence | How |
 |---|---|---|---|
@@ -53,15 +91,14 @@ pmndrs/postprocessing (Zlib: fine to use, we stay on three's own MIT passes to k
 pmndrs/drei (MIT: works next to our R3F adapter, not a dependency) · pmndrs/react-three-rapier (MIT: we call Rapier
 directly so physics can be baked) · protectwise/troika-three-text (MIT: needs a font file to ship; our labels use a
 canvas and system fonts) · pmndrs/lamina (MIT, no release since 2022) · patriciogonzalezvivo/lygia (Prosperity /
-Patron dual licence, not MIT: no code taken) · sparkjsdev/spark splats, google/model-viewer, donmccurdy/glTF-Transform,
-theatre-js/theatre, shader-effects-inc/shaders (all permissive; planned as later adapters).
+Patron dual licence, not MIT: no code taken) · google/model-viewer, donmccurdy/glTF-Transform, theatre-js/theatre,
+shader-effects-inc/shaders (all permissive; planned as later adapters). sparkjsdev/spark is now used by example 11.
 
 ## Assets
 
-See `licenses/assets.md`: one CC0 HDRI (Poly Haven), one NASA public-domain model, our own mark and sample frame,
-six small typefaces under the SIL Open Font License, and for the `bust`, `showroom` and `flythrough` examples five
-CC0 models and three CC0 HDRIs from Poly Haven.
-No credit-required (CC BY) asset is used.
+See `licenses/assets.md`: every model, texture, HDRI and font in the kit and in each example, with its source and
+licence. They are CC0, public domain (one NASA model), SIL OFL (fonts) or our own. No credit-required (CC BY) asset is
+used anywhere.
 
 ## Remotion
 

@@ -14,7 +14,13 @@ const clipsDir = opt('clips'), demosDir = opt('demos');
 const skip = argv.includes('--skip-media');
 const DOCS = path.join(KIT, 'docs');
 for (const d of ['clips', 'posters', 'media', 'live']) fs.mkdirSync(path.join(DOCS, d), {recursive: true});
-const ff = (args) => execFileSync('ffmpeg', ['-v', 'error', '-y', ...args], {stdio: ['ignore', 'ignore', 'inherit']});
+// every video we write is yuv420p, limited (tv) range, BT.709, and says so in its tags (tests/run.mjs checks it)
+const BT709 = ['-colorspace', 'bt709', '-color_primaries', 'bt709', '-color_trc', 'bt709', '-color_range', 'tv'];
+const ff = (args) => {
+  const a = args.map((x) => (typeof x === 'string' ? x.replace(/flags=lanczos,format=yuv420p/, 'flags=lanczos:out_color_matrix=bt709:out_range=tv,format=yuv420p') : x));
+  const out = a.includes('libx264') ? [...a.slice(0, -1), ...BT709, a[a.length - 1]] : a;
+  return execFileSync('ffmpeg', ['-v', 'error', '-y', ...out], {stdio: ['ignore', 'ignore', 'inherit']});
+};
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
 
 const idx = loadIndex();
@@ -39,7 +45,6 @@ for (const it of idx.items) {
 // demos
 const DEMOS = [
   ['logo-night-city', 'Logo film', 'One slow push-in: the letters stand on a dark mirror with their reflection kept dim, the mark turns above, and the night city stays far behind, out of focus. Eleven seconds, one file.', "Use connect-ai-three: our name 'CONNECT AI LAB' as gold 3D letters standing on a dark mirror floor, our mark above, a night city far behind and out of focus, the camera pushing in slowly. 11 seconds, plus a page I can drag.", 9.5],
-  ['on-my-video', '3D on my own video, behind me', 'Five cuts of real talking footage. A person matte, one picture per frame, puts every 3D object BEHIND the speaker: the name rises from behind his shoulders when he says it, a computer slides out from behind his head on "a good computer", a camera flies behind him on "I move the camera", three things drop on "gravity", and the studio building rises on "AI-native company". His pixels are never touched, and the check knows where his face and his mic arm are.', 'Use connect-ai-three on my talking video with the person matte: when I say "3D modeling" show our mark as a wireframe on my right and turn it into solid gold; when I say "a good computer" slide a computer out from behind my head. Nothing in front of my face or my mic.', 21.75],
   ['interactive-hero', 'Interactive hero', 'The scene at the top of this page: a small studio you can turn around. The camera leans to the pointer, things lift on hover and spin on click. This clip is that page, driven by a pointer script.', 'Use connect-ai-three: an interactive hero for my landing page. A small studio set on a desk: display, computer, microphone, a camera on a tripod, a softbox. Hover lifts, click spins, drag turns the scene.', 7.6],
   ['korean-title', '3D text, also in Korean', 'Six built-in typefaces for 3D letters (four sans weights, two serif). The sans faces also carry the Korean letters of a few brand lines, like this one: "AI education for everyone". Any other text in any script takes your own font file.', 'Use connect-ai-three: the words "모두를 위한 AI 교육" as ivory 3D letters arriving one by one, a small gold mark above, blue light behind.', 6.5],
   ['explainer-fly', 'Explainer fly-through', 'How this tool works, told by the tool: a microphone and what was said, a display with the one file, then a laptop and a clapperboard for the two outputs. One 3D space, and a camera that flies between the three.', 'Use connect-ai-three: explain my three steps as three stations in one space (a microphone with a glass card, a display, a laptop with a clapperboard), the camera flying from one to the next, then pulling back to show all of them.', 11.4],
@@ -50,7 +55,7 @@ for (const [id, title, about, prompt, posterAt] of DEMOS) {
   const out = path.join(DOCS, 'media', id + '.mp4'), poster = path.join(DOCS, 'media', id + '.jpg');
   if (!skip && src && fs.existsSync(src)) {
     // the talking cuts keep their sound (it plays muted until the visitor turns it on): the timing is to his words
-    ff(['-i', src, ...(id === 'on-my-video' ? ['-c:a', 'aac', '-b:a', '128k'] : ['-an']), '-vf', 'scale=1280:720:flags=lanczos,format=yuv420p', '-c:v', 'libx264', '-crf', '26', '-preset', 'slow', '-movflags', '+faststart', out]);
+    ff(['-i', src, '-an', '-vf', 'scale=1280:720:flags=lanczos,format=yuv420p', '-c:v', 'libx264', '-crf', '26', '-preset', 'slow', '-movflags', '+faststart', out]);
     ff(['-ss', String(posterAt ?? 5), '-i', src, '-frames:v', '1', '-vf', 'scale=1280:720:flags=lanczos', '-q:v', '4', poster]);
   }
   if (fs.existsSync(out)) demos.push({id, title, about, prompt});
@@ -62,7 +67,7 @@ const hasShort = fs.existsSync(path.join(DOCS, 'media', 'short.mp4'));
 const heroSrc = demosDir && path.join(demosDir, 'logo-night-city.mp4');
 if (!skip && heroSrc && fs.existsSync(heroSrc)) {
   const C = (k) => path.join(clipsDir, 'clips', k + '.mp4'), Dm = (k) => path.join(demosDir, k + '.mp4');
-  const cuts = [[heroSrc, 3.6, 5.6], [Dm('on-my-video'), 1.5, 2.6], [Dm('on-my-video'), 10.9, 2.2], [Dm('on-my-video'), 16.5, 2.4], [Dm('on-my-video'), 26.6, 2.2], [Dm('on-my-video'), 31.6, 2.6],
+  const cuts = [[heroSrc, 3.6, 5.6],
     [Dm('interactive-hero'), 6.0, 2.4], [Dm('explainer-fly'), 3.4, 2.2], [Dm('korean-title'), 1.4, 2.2],
     [C('object__building'), 1.2, 1.4], [C('camera__orbit'), 1.0, 1.3], [C('physics__dominoes'), 1.4, 1.6], [C('object__instances-wave'), 1.6, 1.2], [C('light__sweep'), 1.0, 1.3], [C('motion__path'), 1.2, 1.4],
     [C('object__gltf'), 1.6, 1.2], [C('post__halftone'), 1.6, 1.0], [C('camera__dolly-zoom'), 0.8, 1.8], [C('physics__letters-drop'), 1.6, 1.6], [C('object__sky'), 1.4, 1.3], [heroSrc, 9.0, 1.9]].filter((c) => fs.existsSync(c[0]));
@@ -76,7 +81,7 @@ if (!skip && heroSrc && fs.existsSync(heroSrc)) {
 }
 // live pages: the real web output, embedded
 for (const ex of ['interactive-hero', 'logo-night-city']) {
-  const spec = readJson(path.join(KIT, 'examples', ex, 'scene.json'));
+  const spec = readJson(path.join(KIT, 'examples', 'scene-json', ex, 'scene.json'));
   const tmp = fs.mkdtempSync(path.join(fs.realpathSync(process.env.TMPDIR || '/tmp'), 'c3-docs-'));
   const r = await buildWeb(tmp, {...spec, page: {credit: false, pageTitle: `${ex} · ${KIT_NAME}`}}, {});
   fs.copyFileSync(r.file, path.join(DOCS, 'live', ex + '.html'));
@@ -88,7 +93,7 @@ const N = items.length;
 const data = JSON.stringify({items: items.map(({spec, ...m}) => m), specs: Object.fromEntries(items.map((i) => [i.key, i.spec]))}).replace(/</g, '\\u003c');
 const sampleSpec = JSON.stringify({name: 'my-name', duration: 6, look: 'connect-night-city', camera: {position: [0, 1.5, 9], target: [0, 0.5, 0], fov: 30, motion: [{type: 'dolly', from: 1, to: 0.8, dur: 6}]}, objects: [{id: 'floor', type: 'floor', kind: 'mirror', dim: 0.84}, {id: 'name', type: 'wordmark', text: 'MY NAME', font: 'sans', split: true, position: [0, 0.22, 0], motion: [{type: 'stagger', at: 0.5, kind: 'rise'}]}, {id: 'camera', type: 'cinema-camera', tripod: true, position: [3, 0, -1]}], addPost: [{type: 'dof', aperture: 0.0003}], interact: ['parallax', 'orbit']}, null, 1).replace(/\n\s+(-?[\d.]+),?(?=\n)/g, (m) => ' ' + m.trim()).replace(/\[ /g, '[').replace(/\n\s*\]/g, ']');
 
-const demoCards = demos.map((d) => `    <div class="demo${d.id === 'on-my-video' || d.id === 'explainer-fly' ? ' wide' : ''}"><video data-src="media/${d.id}.mp4" poster="media/${d.id}.jpg" muted loop playsinline preload="none"${d.id === 'on-my-video' ? ' controls' : ''}></video><div class="txt"><h3>${esc(d.title)}</h3><p>${esc(d.about)}</p><p class="say">${esc(d.prompt)}</p><button class="btn" data-copy="${esc(d.prompt)}">Copy prompt</button>${d.id === 'logo-night-city' || d.id === 'interactive-hero' ? ` <a class="btn ghost" href="live/${d.id}.html" target="_blank" rel="noopener">Open live page</a>` : ''}</div></div>`);
+const demoCards = demos.map((d) => `    <div class="demo${d.id === 'explainer-fly' ? ' wide' : ''}"><video data-src="media/${d.id}.mp4" poster="media/${d.id}.jpg" muted loop playsinline preload="none"${d.id === 'on-my-video' ? ' controls' : ''}></video><div class="txt"><h3>${esc(d.title)}</h3><p>${esc(d.about)}</p><p class="say">${esc(d.prompt)}</p><button class="btn" data-copy="${esc(d.prompt)}">Copy prompt</button>${d.id === 'logo-night-city' || d.id === 'interactive-hero' ? ` <a class="btn ghost" href="live/${d.id}.html" target="_blank" rel="noopener">Open live page</a>` : ''}</div></div>`);
 if (hasShort) demoCards.splice(1, 0, `    <div class="demo tall"><video data-src="media/short.mp4" muted loop playsinline preload="none"></video><div class="txt"><h3>The same file, vertical</h3><p>Add <code>--short</code> and the scene also renders 9:16. Nothing is re-laid out by hand: the camera steps back until the picture designed for 16:9 fits the narrow frame, and the self-check tells you if something is still cut off.</p><p class="say">npx ${KIT_NAME} make my-scene --short --alpha</p><button class="btn" data-copy="npx ${KIT_NAME} make my-scene --short --alpha">Copy command</button></div></div>`);
 const demoHtml = demoCards.join('\n');
 
@@ -247,7 +252,7 @@ footer .l{display:flex;gap:22px;flex-wrap:wrap}
 </div>
 
 <section id="film">
-  <div class="sec-head"><div><div class="caps gold">Film</div><h2>Everything below, <em>in one minute.</em></h2></div><p>The logo film, 3D behind a speaker in real footage, the live scene above as a video, and pieces of the catalog. Every frame is a render of this tool.</p></div>
+  <div class="sec-head"><div><div class="caps gold">Film</div><h2>This is all <em>code.</em></h2></div><p>The 12 example pages in <code>examples/</code>, recorded live from a browser one after another: a miniature island, glass, neon, shaders, 260,000 particles, physics, a machine teardown, a scroll site, seven styles, a flight game, Gaussian splats and a VR roller coaster.</p></div>
   <div class="film"><video data-src="media/hero.mp4" poster="media/hero.jpg" muted loop playsinline preload="none"></video></div>
 </section>
 

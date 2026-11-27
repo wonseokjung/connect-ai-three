@@ -1,7 +1,7 @@
 {
   "name": "connect-ai-three",
-  "version": "0.4.0",
-  "description": "Say it, get a three.js scene. One scene spec (camera, lights, objects, motion, post) becomes an interactive web page AND a frame-locked video, also behind you in your own footage, with a self-check for blank frames, draw calls, texture sizes, mobile budgets and WebGL leaks. Open source by CONNECT AI LAB.",
+  "version": "0.5.0",
+  "description": "Say it, get it in three.js. 13 real three.js pages adapted from the official three.js examples and other MIT open source (miniature world, glass, neon, shaders, 260,000 GPU particles, physics, a machine teardown, a scroll site, seven render styles, a flight game, Gaussian splats, WebXR), plus one scene spec that becomes an interactive web page AND a frame-locked video with a self-check. Open source by CONNECT AI LAB.",
   "type": "module",
   "license": "MIT",
   "author": "CONNECT AI LAB",
@@ -30,7 +30,8 @@
     "react-dom": "19.1.0",
     "remotion": "4.0.529",
     "three": "0.170.0",
-    "three-mesh-bvh": "0.9.18"
+    "three-mesh-bvh": "0.9.18",
+    "three-latest": "npm:three@0.187.0"
   },
   "devDependencies": {
     "@types/react": "19.1.0",
@@ -43,9 +44,10 @@
     "src/",
     "catalog/",
     "examples/",
-    "!examples/*/preview.jpg",
-    "!examples/*/preview.mp4",
-    "!examples/*/assets/**",
+    "!examples/**/preview.jpg",
+    "!examples/**/preview.mp4",
+    "!examples/**/preview.webp",
+    "!examples/scene-json/*/assets/**",
     "assets/",
     "skill/",
     "licenses/",

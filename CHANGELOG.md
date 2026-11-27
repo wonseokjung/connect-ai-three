@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.5.0
+
+Real three.js. The kit now starts from real open source instead of only its own scene spec.
+
+- **13 example pages in `examples/`**, one per lesson section: miniature world, glass and soap film, neon text,
+  shader worlds, 260,000 GPU particles, physics, a V8 engine teardown, a scroll website, one scene in seven styles, a
+  flight game, Gaussian splats and a VR roller coaster, plus an opening page that plays them all. Each is adapted from
+  MIT code (the official three.js examples, elvarofficial/teardown, tsogjavklann/awwwards-3d, Spark) and uses only
+  CC0 models and textures. Every folder has its sources, its licence texts, a preview and the sentence that made it.
+- **`examples`** lists them; **`example <name>`** opens one in your browser; **`--copy <folder>`** writes your own copy
+  that loads three.js 0.187 from a pinned CDN, so it runs on any static host.
+- **The skill carries a three.js r186 reference** (CloudAI-X/threejs-skills, MIT) so agents write current three.js.
+- **Video colour fixed.** Videos were tagged yuvj420p / full range / BT.601, which plays with shifted colours in some
+  players and editors. Every video the kit makes is now yuv420p, limited range, BT.709, and so is every mp4 in the
+  repository (re-encoded, colours kept within one level). A test renders a known colour and reads it back.
+- The old scene.json examples moved to `examples/scene-json/`. The on-video example ships no footage.
+
 ## 0.4.0
 
 Colour. Every sentence gets its own world; the spec stays compatible.

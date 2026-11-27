@@ -1,5 +1,3 @@
-<p align="center"><img src="docs/brand/banner.jpg" width="100%" alt="AI 멘토 제이, CONNECT AI LAB 의 connect-ai-three"></p>
-
 <p align="center">
   <b>CONNECT AI LAB</b> · AI education for everyone · 모두를 위한 AI 교육<br>
   <a href="https://www.youtube.com/@CONNECT-AI-LAB">YouTube: CONNECT AI LAB</a> · <a href="https://www.aicitybuilders.com/vibecoding">강의: 비주얼 바이브코딩</a> · <a href="README.md">English</a>
@@ -7,41 +5,65 @@
 
 # connect-ai-three
 
-**AI 3D 웹 직원이에요. 보고 싶은 걸 한 문장으로 말하면, 끌어서 돌려 보는 3D 웹 페이지랑 같은 그림의 영상이 같이 나와요.**
+**AI 3D 웹 직원이에요. 한 문장으로 말하면 AI가 three.js로 만들어 줘요.**
 
-[![파스텔 갤러리의 흉상, 장난감 세상의 카메라, 노을 사막의 전시. 전부 scene.json 하나씩으로 만든 장면](docs/showcase/v04/hero.webp)](docs/showcase/v04/hero.mp4)
+아래는 전부 진짜 웹 페이지예요. 누르면 그 폴더랑 코드, 그걸 만든 문장이 나와요.
+
+<table>
+<tr><td colspan="3"><a href="examples/00-opening"><img src="examples/00-opening/preview.jpg" alt="열두 예제가 실시간으로 하나씩 지나가는 화면"></a><br><b>00</b> <a href="examples/00-opening">이게 다 코드예요</a>: 아래 예제 12개가 브라우저 탭 하나에서 실시간으로 하나씩 지나가요</td></tr>
+<tr><td width="33%" valign="top"><a href="examples/01-miniature-world"><img src="examples/01-miniature-world/preview.jpg" alt="미니어처 세상"></a><br><b>01</b> <a href="examples/01-miniature-world">미니어처 세상</a></td><td width="33%" valign="top"><a href="examples/02-glass-materials"><img src="examples/02-glass-materials/preview.jpg" alt="유리, 무지개, 비눗방울"></a><br><b>02</b> <a href="examples/02-glass-materials">유리, 무지개, 비눗방울</a></td><td width="33%" valign="top"><a href="examples/03-neon-text"><img src="examples/03-neon-text/preview.jpg" alt="빛나는 네온 글자와 후처리"></a><br><b>03</b> <a href="examples/03-neon-text">빛나는 네온 글자와 후처리</a></td></tr>
+<tr><td width="33%" valign="top"><a href="examples/04-shader-worlds"><img src="examples/04-shader-worlds/preview.jpg" alt="셰이더로 그린 세상: 은하, 바다, 행성, 불꽃"></a><br><b>04</b> <a href="examples/04-shader-worlds">셰이더로 그린 세상: 은하, 바다, 행성, 불꽃</a></td><td width="33%" valign="top"><a href="examples/05-particles"><img src="examples/05-particles/preview.jpg" alt="입자 26만 개"></a><br><b>05</b> <a href="examples/05-particles">입자 26만 개</a></td><td width="33%" valign="top"><a href="examples/06-physics"><img src="examples/06-physics/preview.jpg" alt="진짜 물리"></a><br><b>06</b> <a href="examples/06-physics">진짜 물리</a></td></tr>
+<tr><td width="33%" valign="top"><a href="examples/07-teardown"><img src="examples/07-teardown/preview.jpg" alt="기계 분해 시뮬레이터"></a><br><b>07</b> <a href="examples/07-teardown">기계 분해 시뮬레이터</a></td><td width="33%" valign="top"><a href="examples/08-scroll-site"><img src="examples/08-scroll-site/preview.jpg" alt="스크롤 웹사이트"></a><br><b>08</b> <a href="examples/08-scroll-site">스크롤 웹사이트</a></td><td width="33%" valign="top"><a href="examples/09-many-styles"><img src="examples/09-many-styles/preview.jpg" alt="한 장면, 스타일만 바꾸기"></a><br><b>09</b> <a href="examples/09-many-styles">한 장면, 스타일만 바꾸기</a></td></tr>
+<tr><td width="33%" valign="top"><a href="examples/10-flight-game"><img src="examples/10-flight-game/preview.jpg" alt="비행 게임"></a><br><b>10</b> <a href="examples/10-flight-game">비행 게임</a></td><td width="33%" valign="top"><a href="examples/11-gaussian-splat"><img src="examples/11-gaussian-splat/preview.jpg" alt="가우시안 스플랫"></a><br><b>11</b> <a href="examples/11-gaussian-splat">가우시안 스플랫</a></td><td width="33%" valign="top"><a href="examples/12-xr"><img src="examples/12-xr/preview.jpg" alt="XR 롤러코스터"></a><br><b>12</b> <a href="examples/12-xr">XR 롤러코스터</a></td></tr>
+</table>
 
 ```bash
-npx github:wonseokjung/connect-ai-three
+npx github:wonseokjung/connect-ai-three examples           # 목록
+npx github:wonseokjung/connect-ai-three example physics    # 하나 골라서 브라우저로 열기
+npx github:wonseokjung/connect-ai-three example physics --copy my-page   # 고쳐 쓸 복사본 만들기
 ```
 
-이 한 줄이면 데모 장면이 만들어지고 브라우저에서 열려요. 마우스로 끌어서 돌려 보세요. 에이전트(Claude Code, Codex, Antigravity, Cursor)에게 가르치려면 `npx github:wonseokjung/connect-ai-three install` 을 붙여 넣고 설치해 달라고 하세요. 그다음 새 채팅에서 이렇게 말하면 돼요. "connect-ai-three 로 우리 카페 로고 'MY SHOP' 을 3D 로, 끌어서 돌려 보는 웹 페이지랑 6초 영상."
+에이전트(Claude Code, Codex, Antigravity, Cursor)한테 가르치려면 `npx github:wonseokjung/connect-ai-three install`을 붙여 넣고 설치해 달라고 하세요. 그다음 새 채팅에서 아래 문장 중 하나를 말하면 돼요.
 
 [Node.js](https://nodejs.org) 18 이상이랑 GPU 있는 컴퓨터면 돼요. 유료 API 키는 필요 없어요.
 
-## 예제
+## 예제 13개
 
-그림 하나가 [examples/](examples) 의 폴더 하나예요. 안에 `scene.json`, 짧은 영상, 그걸 만든 문장이 있어요. 눌러 보세요.
+| | 예제 | AI한테 이렇게 말해요 |
+|---|---|---|
+| 00 | [`opening`](examples/00-opening) | 내 three.js 예제들을 하나씩 바로바로 바꿔 가며 실시간으로 보여 주는 오프닝 페이지 만들어 줘. 처음엔 크게 '이게 다 코드예요'라고 써 줘. |
+| 01 | [`miniature-world`](examples/01-miniature-world) | 작은 섬 위에 미니어처 마을을 만들어 줘. 풍차랑 물레방아는 돌아가고 구름은 흘러가고, 섬 전체가 천천히 돌게 해 줘. |
+| 02 | [`glass-materials`](examples/02-glass-materials) | 내 제품을 유리처럼 보여 줘. 빛이 무지개로 갈라지는 보석, 뒤가 휘어 보이는 유리구슬, 주변에 둥둥 떠다니는 비눗방울까지. 천천히 돌아가게. |
+| 03 | [`neon-text`](examples/03-neon-text) | 우리 가게 이름을 3D 네온 글자로 만들어 줘. 글자가 하나씩 켜지면서 빛나고, 젖은 바닥에 비치고, 뒤쪽 도시 불빛은 초점이 흐려지게 해 줘. |
+| 04 | [`shader-worlds`](examples/04-shader-worlds) | 소용돌이 은하, 거친 바다, 밤이 된 쪽에 도시 불빛이 켜지는 행성, 흔들리는 촛불을 셰이더로만 만들어 줘. 이미지 파일 없이, 네 칸으로 나눠서. |
+| 05 | [`particles`](examples/05-particles) | 입자 수십만 개가 보이지 않는 자석을 따라 소용돌이치게 만들어 줘. GPU로 계산하고, 빨라질수록 보라색에서 복숭아색으로 빛나게. 자석은 내가 끌어서 옮길 수 있게. |
+| 06 | [`physics`](examples/06-physics) | 내 로고 글자들이 위에서 떨어져서 바닥에 부딪혀 튕기게 해 줘. 그 위로 알록달록한 공이랑 블록 수백 개가 진짜 물리 법칙대로 쏟아지고, 더블클릭하면 다 튀어 오르게. |
+| 07 | [`teardown`](examples/07-teardown) | 분해해 볼 수 있는 V8 엔진 시뮬레이터 만들어 줘. 단면으로 잘라서 실린더 하나가 네 박자로 움직이는 걸 보여 주고, 속도랑 카메라도 바꿀 수 있게 해 줘. 가만히 두면 자동 투어가 돌아가게 해 줘. |
+| 08 | [`scroll-site`](examples/08-scroll-site) | 글 뒤에 3D 스피커가 떠 있는 제품 소개 페이지 만들어 줘. 스크롤하면 스피커가 돌면서 반대편으로 옮겨 가고, 앞면이 박자에 맞춰 빛나게 해 줘. |
+| 09 | [`many-styles`](examples/09-many-styles) | 춤추는 로봇을 일곱 가지 스타일로 보여 줘. 스튜디오, 툰, 스테인드글라스, 라이다 스캔, 픽셀 아트, 만화 망점, 홀로그램. 처음엔 화면을 비스듬하게 나눠서 나란히 보여 주고, 그다음엔 하나씩 버튼으로 고를 수 있게 해 줘. |
+| 10 | [`flight-game`](examples/10-flight-game) | 노을 지는 바다 위 링을 통과하는 비행 게임 만들어 줘. 링을 지나가면 점수가 오르고, 키를 안 누르면 자동 조종으로 날게 해 줘. |
+| 11 | [`gaussian-splat`](examples/11-gaussian-splat) | 내가 폰으로 찍은 3D 스캔을 웹에서 둘러보게 해 줘. 가우시안 스플랫으로 보여 주고, 처음엔 마법처럼 나타나게 해 줘. 내 파일을 끌어다 놓으면 바로 보여 주고. |
+| 12 | [`xr`](examples/12-xr) | 퀘스트에서 타 볼 수 있게 VR 롤러코스터로 만들어 줘. 노을 지는 공원에 나무랑 매점이 있고, 맨 앞 칸에 앉아서 타게 해 줘. |
 
-<table>
-<tr>
-<td width="33%" valign="top"><a href="examples/bust"><img src="examples/bust/preview.jpg" alt="Marble bust in a pastel gallery"></a><br><a href="examples/bust"><code>bust</code></a> 대리석 흉상, 파스텔 갤러리</td>
-<td width="33%" valign="top"><a href="examples/showroom"><img src="examples/showroom/preview.jpg" alt="Cine camera in a toy world"></a><br><a href="examples/showroom"><code>showroom</code></a> 장난감 세상의 필름 카메라</td>
-<td width="33%" valign="top"><a href="examples/flythrough"><img src="examples/flythrough/preview.jpg" alt="Three stops on a desert at sunset"></a><br><a href="examples/flythrough"><code>flythrough</code></a> 노을 사막의 세 자리</td>
-</tr>
-<tr>
-<td width="33%" valign="top"><a href="examples/toy-studio"><img src="examples/toy-studio/preview.jpg" alt="The demo, all built in code"></a><br><a href="examples/toy-studio"><code>toy-studio</code></a> 데모, 전부 코드로</td>
-<td width="33%" valign="top"><a href="examples/logo-night-city"><img src="examples/logo-night-city/preview.jpg" alt="Gold logo over a night city"></a><br><a href="examples/logo-night-city"><code>logo-night-city</code></a> 밤 도시 위 금색 로고</td>
-<td width="33%" valign="top"><a href="examples/interactive-hero"><img src="examples/interactive-hero/preview.jpg" alt="A web hero you can turn"></a><br><a href="examples/interactive-hero"><code>interactive-hero</code></a> 돌려 보는 웹 히어로</td>
-</tr>
-<tr>
-<td width="33%" valign="top"><a href="examples/explainer-fly"><img src="examples/explainer-fly/preview.jpg" alt="Explainer fly-through"></a><br><a href="examples/explainer-fly"><code>explainer-fly</code></a> 설명 장면 사이를 나는 카메라</td>
-<td width="33%" valign="top"><a href="examples/korean-title"><img src="examples/korean-title/preview.jpg" alt="3D text in Korean"></a><br><a href="examples/korean-title"><code>korean-title</code></a> 한글 3D 글자</td>
-<td width="33%" valign="top"><a href="examples/on-my-video"><img src="examples/on-my-video/preview.jpg" alt="3D beside me in my own video"></a><br><a href="examples/on-my-video"><code>on-my-video</code></a> 내 영상 위 3D</td>
-</tr>
-</table>
+다 오픈소스에서 시작했어요. mrdoob이랑 three.js 만든 사람들의 공식 예제, 그리고
+[teardown](https://github.com/elvarofficial/teardown), [awwwards-3d](https://github.com/tsogjavklann/awwwards-3d),
+[Spark](https://github.com/sparkjsdev/spark)예요. 전부 MIT고, 모델이랑 텍스처는 모두 CC0(Poly Haven, Kenney, KayKit,
+Quaternius, Khronos)예요. 폴더마다 출처가 적혀 있고, 전체 목록은 [NOTICE.md](NOTICE.md)에 있어요.
 
-## 0.4: 문장마다 다른 세상
+복사본은 버전이 고정된 CDN에서 three.js 0.187을 불러와서, 정적 호스팅이면 어디서나 돌아가요. 오프닝 페이지는
+다른 예제를 틀어 주는 거라 이 키트 안에서만 돌아가요. 04 셰이더랑 05 입자는 WebGPU(Chrome, Edge, Safari 26)를 써요. 12 XR은 메타
+퀘스트에서 VR로 열려요.
+
+에이전트가 설치하는 스킬에는 three.js r186 레퍼런스가 같이 들어 있어요
+([CloudAI-X/threejs-skills](https://github.com/CloudAI-X/threejs-skills), MIT). 그래서 옛날 방식 말고 최신 three.js
+(`HDRLoader`, `Timer`, WebGPU, TSL)로 코드를 짜 줘요.
+
+## 영상이 필요할 때: scene.json 하나로 웹 페이지와 영상
+
+페이지 말고 영상이 필요하면, 작은 `scene.json` 하나만 쓰면 돼요. 웹 페이지랑, 프레임 하나까지 같은 그림의 영상이
+같이 나오고, 넘기기 전에 스스로 검사해요. 이쪽의 예전 예제는 [examples/scene-json](examples/scene-json)에 있어요.
+
+### 문장마다 다른 세상
 
 예전엔 웬만한 문장은 다 검정에 금색이었어요. 이제는 문장을 읽고 거기 맞는 색이랑 분위기를 골라요. 카페면 파스텔, 장난감이면 쨍한 장난감 세상, 노을이면 사막 노을, 클럽이면 네온, 동화면 종이 공예. 아무 말 안 하면 단어로 하나를 골라서, 두 문장이 같은 방에 들어가는 일이 거의 없어요.
 
@@ -53,11 +75,11 @@ npx github:wonseokjung/connect-ai-three new "노을 지는 사막 위 'SUNSET'"
 npx github:wonseokjung/connect-ai-three make my-shop          # 검사, 웹 페이지, 영상, 스틸 시트, 보고서
 ```
 
-**[카탈로그 페이지 열기](docs/index.html)**: 맨 위에 직접 끌어 돌리는 살아 있는 장면, 136개 항목이 전부 살아 있는 클립으로, 완성 데모와 항목마다 복사해 쓰는 한 줄 지시문이 있습니다.
+**[카탈로그 페이지 열기](docs/index.html)**: 맨 위에 직접 끌어 돌리는 살아 있는 장면, 136개 항목이 전부 살아 있는 클립으로, 완성 데모와 항목마다 복사해 쓰는 한 줄 지시문이 있어요.
 
-**장면 규격 하나. 결과 둘. 스스로 검사.** 나(또는 코딩 에이전트)는 작은 `scene.json` 하나만 씁니다. 카메라, 조명, 물체, 움직임, 마무리. 도구가 이것을 브라우저에서 돌아가는 인터랙티브 웹 페이지와, 프레임 하나까지 같은 그림인 영상으로 만듭니다. 넘겨주기 전에 직접 검사합니다: 빈 화면, 화면 밖 물체, 가려진 얼굴, 드로콜, 텍스처 크기, 폰 화면, WebGL 누수.
+**장면 규격 하나. 결과 둘. 스스로 검사.** 나(또는 코딩 에이전트)는 작은 `scene.json` 하나만 써요. 카메라, 조명, 물체, 움직임, 마무리. 도구가 이걸 브라우저에서 돌아가는 인터랙티브 웹 페이지와, 프레임 하나까지 같은 그림인 영상으로 만들어요. 넘겨주기 전에 직접 검사해요: 빈 화면, 화면 밖 물체, 가려진 얼굴, 드로콜, 텍스처 크기, 폰 화면, WebGL 누수.
 
-3D 라이브러리를 하나 더 만든 것이 아닙니다. 종합격투기가 여러 무술의 좋은 기술을 한데 묶었듯, three.js 생태계(three 본체, `examples/jsm` 의 로더 · 도형 · 후처리, Rapier 물리, three-mesh-bvh, React Three Fiber, Remotion 렌더러)를 규격 하나 뒤에 놓았습니다. 그래서 무엇이든 한 줄입니다.
+3D 라이브러리를 하나 더 만든 게 아니에요. 종합격투기가 여러 무술의 좋은 기술을 한데 묶었듯, three.js 생태계(three 본체, `examples/jsm` 의 로더 · 도형 · 후처리, Rapier 물리, three-mesh-bvh, React Three Fiber, Remotion 렌더러)를 규격 하나 뒤에 놓았어요. 그래서 무엇이든 한 줄이에요.
 
 ```json
 {"id": "title", "type": "wordmark", "text": "MY NAME", "split": true, "motion": [{"type": "stagger", "at": 0.5}]}
@@ -66,22 +88,22 @@ npx github:wonseokjung/connect-ai-three make my-shop          # 검사, 웹 페�
 {"id": "word", "type": "text3d", "text": "DROP", "bodyEach": true}
 ```
 
-> **라이선스.** 이 키트는 MIT 입니다. 만들어지는 웹 페이지에는 MIT / Apache-2.0 코드만 들어갑니다(three.js, 물리를 쓰면 Rapier). 영상 쪽은 [Remotion](https://www.remotion.dev) 위에서 도는데 Remotion 은 MIT 가 아닙니다: 개인과 3명 이하 회사는 무료, 그보다 크면 회사 라이선스가 필요합니다([LICENSE.md](https://github.com/remotion-dev/remotion/blob/main/LICENSE.md)). 쓰인 부품은 전부 [NOTICE.md](NOTICE.md) 에 있습니다.
+> **라이선스.** 이 키트는 MIT 예요. 만들어지는 웹 페이지에는 MIT / Apache-2.0 코드만 들어가요(three.js, 물리를 쓰면 Rapier). 영상 쪽은 [Remotion](https://www.remotion.dev) 위에서 도는데 Remotion 은 MIT 가 아니에요: 개인과 3명 이하 회사는 무료, 그보다 크면 회사 라이선스가 필요해요([LICENSE.md](https://github.com/remotion-dev/remotion/blob/main/LICENSE.md)). 쓰인 부품은 전부 [NOTICE.md](NOTICE.md) 에 있어요.
 
-## 시작
+### 시작
 
 Node 18 이상. GPU 가 있는 macOS, Windows, Linux.
 
 ```bash
-npx github:wonseokjung/connect-ai-three            # 데모 장면을 만들어 브라우저에서 엽니다: 끌어서 둘러보세요
-npx github:wonseokjung/connect-ai-three install    # 코딩 에이전트(Claude Code, Codex, Cursor, Antigravity)에 규격과 카탈로그를 알려 줍니다
+npx github:wonseokjung/connect-ai-three            # 데모 장면을 만들어 브라우저에서 열어요: 끌어서 둘러보세요
+npx github:wonseokjung/connect-ai-three install    # 코딩 에이전트(Claude Code, Codex, Cursor, Antigravity)에 규격과 카탈로그를 알려 줘요
 ```
 
-그다음 에이전트에게 말로 부탁합니다.
+그다음 에이전트에게 말로 부탁해요.
 
 > connect-ai-three 로 만들어 줘: 우리 장난감 가게 이름 "TOY BOX" 를 3D 글자로, 쨍한 장난감 세상에. 끌어서 돌려 볼 수 있는 웹 히어로와 6초 영상 둘 다.
 
-에이전트가 없어도 말로 됩니다(한국어도 알아듣습니다).
+에이전트가 없어도 말로 돼요(한국어도 알아들어요).
 
 ```bash
 npx github:wonseokjung/connect-ai-three new "밤 도시 위에 금색 로고 'JANE DOE', 천천히 도는 카메라, 6초"
@@ -93,14 +115,14 @@ npx github:wonseokjung/connect-ai-three make jane-doe --short --alpha    # 세�
 
 | 파일 | 무엇 |
 |---|---|
-| `web/index.html` | 인터랙티브 페이지. 파일 하나라 더블클릭으로 열리고, 어디든 올리면 됩니다 |
+| `web/index.html` | 인터랙티브 페이지. 파일 하나라 더블클릭으로 열리고, 어디든 올리면 돼요 |
 | `video.mp4` | 같은 장면의 영상(H.264) |
-| `overlay.mov` | `--alpha`: 배경이 투명한 ProRes 4444. Premiere / CapCut / DaVinci 에 그대로 올립니다 |
-| `short_9x16.mp4` | `--short`: 세로 버전(그림이 다 들어오게 카메라가 물러납니다) |
+| `overlay.mov` | `--alpha`: 배경이 투명한 ProRes 4444. Premiere / CapCut / DaVinci 에 그대로 올려요 |
+| `short_9x16.mp4` | `--short`: 세로 버전(그림이 다 들어오게 카메라가 물러나요) |
 | `sheet.jpg` | 장면 전체에서 뽑은 스틸 8장 |
 | `report.md` | 검사 결과: 꼭 고칠 것, 볼 만한 것, 잰 숫자 |
 
-## 규격
+### 규격
 
 ```json
 {
@@ -119,11 +141,11 @@ npx github:wonseokjung/connect-ai-three make jane-doe --short --alpha    # 세�
 }
 ```
 
-`look` 한 단어가 배경 · 조명 · 반사 · 마무리를 정합니다. 모든 움직임은 시간(`at`, `dur`)만으로 정해집니다. 그래서 앞뒤로 돌려 보고, 반복하고, 프레임을 아무 순서로 렌더해도 같은 그림입니다.
+`look` 한 단어가 배경 · 조명 · 반사 · 마무리를 정해요. 모든 움직임은 시간(`at`, `dur`)만으로 정해져요. 그래서 앞뒤로 돌려 보고, 반복하고, 프레임을 아무 순서로 렌더해도 같은 그림이에요.
 
-알아 두면 좋은 작은 칸 둘: `"short": {...}` 에는 세로 9:16 버전(`--short`)에서만 달라질 것을 적습니다. `camera` 같은 맨 위 칸이나, 물체 하나하나(`"objects": {"tag": {"size": 0.12}}`). 그리고 물체에 `"reflect": false` 를 주면 거울 바닥에 비치지 않습니다.
+알아 두면 좋은 작은 칸 둘: `"short": {...}` 에는 세로 9:16 버전(`--short`)에서만 달라질 것을 적어요. `camera` 같은 맨 위 칸이나, 물체 하나하나(`"objects": {"tag": {"size": 0.12}}`). 그리고 물체에 `"reflect": false` 를 주면 거울 바닥에 비치지 않아요.
 
-## 카탈로그: 136개, 전부 실제로 도는 장면
+### 카탈로그: 136개, 전부 실제로 도는 장면
 
 ```bash
 npx github:wonseokjung/connect-ai-three catalog            # 목록
@@ -141,26 +163,26 @@ npx github:wonseokjung/connect-ai-three use dof my-scene   # 항목 하나에서
 | 후처리 (11) | 블룸, 피사계 심도, AO, 외곽선, 픽셀 아트, 망점, SMAA, 비네트, 그레인, 색수차, 그레이드 | three EffectComposer 패스, 우리 마무리 셰이더 |
 | 룩 (8) | connect-gold-night, connect-night-city, studio-black, midnight-glass, pale-studio, blueprint, daylight, on-video | 자체 |
 | 인터랙션 (6) | 끌어서 돌리기, 포인터 따라 기울기, 올리면 뜨기, 줌, 클릭, 스크롤 | 자체(무거운 모델은 three-mesh-bvh) |
-| 물리 (3) | 글자 떨어뜨리기, 도미노, 쌓기와 공 | Rapier. 미리 계산해 두어 돌려 보기 · 반복이 됩니다 |
+| 물리 (3) | 글자 떨어뜨리기, 도미노, 쌓기와 공 | Rapier. 미리 계산해 둬서 돌려 보기 · 반복이 돼요 |
 | 다른 길 (2) | React Three Fiber 어댑터, 내 영상 위 3D | @react-three/fiber, @remotion/three, Remotion |
 
-## 스스로 하는 검사
+### 스스로 하는 검사
 
-`make` 와 `check` 는 화면 없는 브라우저에서 장면을 실제로 만들어 잽니다. "FIX" 줄이 있으면 렌더를 멈추고, "look" 줄은 참고입니다.
+`make` 와 `check` 는 화면 없는 브라우저에서 장면을 실제로 만들어 재요. "FIX" 줄이 있으면 렌더를 멈추고, "look" 줄은 참고예요.
 
 | 보는 것 | 까닭 |
 |---|---|
-| 빈 화면 · 거의 검은 화면 | three.js 에서 가장 흔한 실패입니다: 카메라가 엉뚱한 곳을 보거나 조명이 없을 때 |
-| 한 번도 화면에 안 들어오는 물체, NaN 위치 | 좌표 오타. NaN 하나가 블룸을 타고 화면 전체를 검게 만듭니다 |
-| 얼굴 보호 상자(`keepOut`), `front` 표시 상자 | 내 영상 위에서는 어떤 것도 얼굴을 가리면 안 됩니다. 사람 매트가 있으면 3D 는 전부 내 뒤로 가고, 내 앞의 마이크 암은 앞에 남습니다 |
-| 같은 그림이 두 번 나오는가 | 2.0초의 프레임은 어떻게 왔든 같아야 합니다. 이게 웹과 영상을 일치시킵니다 |
-| WebGL 누수 | 장면을 여러 번 만들었다 지워 봅니다. 컨텍스트 · 도형 · 텍스처가 남으면 안 됩니다 |
-| 드로콜, 삼각형 수, 가장 큰 텍스처, 텍스처 메모리 | 폰에서는 4096px 이 안전한 한계입니다 |
+| 빈 화면 · 거의 검은 화면 | three.js 에서 가장 흔한 실패예요: 카메라가 엉뚱한 곳을 보거나 조명이 없을 때 |
+| 한 번도 화면에 안 들어오는 물체, NaN 위치 | 좌표 오타. NaN 하나가 블룸을 타고 화면 전체를 검게 만들어요 |
+| 얼굴 보호 상자(`keepOut`), `front` 표시 상자 | 내 영상 위에서는 어떤 것도 얼굴을 가리면 안 돼요. 사람 매트가 있으면 3D 는 전부 내 뒤로 가고, 내 앞의 마이크 암은 앞에 남아요 |
+| 같은 그림이 두 번 나오는가 | 2.0초의 프레임은 어떻게 왔든 같아야 해요. 이게 웹과 영상을 일치시켜요 |
+| WebGL 누수 | 장면을 여러 번 만들었다 지워 봐요. 컨텍스트 · 도형 · 텍스처가 남으면 안 돼요 |
+| 드로콜, 삼각형 수, 가장 큰 텍스처, 텍스처 메모리 | 폰에서는 4096px 이 안전한 한계예요 |
 | 프레임 시간(원래 크기, 폰 크기) | 이 컴퓨터에서 후처리까지 다 넣고 잰 값 |
 | 폰 화면(390 x 844) | 세로에서 잘리는 것이 있는지 |
 | 글자 높이(픽셀) | 폰에서 못 읽을 만큼 작은 라벨 |
 
-## 색: 장면마다 그 장면의 세상
+### 색: 장면마다 그 장면의 세상
 
 정해진 집 색은 없어요. 문장에 맞는 팔레트랑 분위기를 장면마다 따로 골라요. 파스텔 카페(복숭아에서 라일락으로 가는 하늘, 분홍 클레이 바닥, 민트랑 노랑 장난감), 쨍한 장난감 세상, 노을 사막, 네온 클럽, 종이 공예. 검정에 금색은 "고급", "골드" 라고 했을 때만 나와요. 대부분은 `pale-studio` 나 `daylight` 룩에 `background` 그라데이션이랑 색 있는 `floor` 하나면 돼요.
 
@@ -173,36 +195,36 @@ npx github:wonseokjung/connect-ai-three use dof my-scene   # 항목 하나에서
 
 색이 밝으면 하얀 부분이 날아가기 쉬워요. `grade` 의 `whites` 를 0.95 쯤 주면 하이라이트가 부드럽게 눌려요. 너무 번들거리거나 어두운 모델은 `gltf` 에 `"surface": {"roughness": 1, "brightness": 1.3}` 을 주면 파일을 안 고치고 잡혀요.
 
-## 3D 글자: 글꼴 6종, 그리고 내 글꼴 파일
+### 3D 글자: 글꼴 6종, 그리고 내 글꼴 파일
 
-`text3d`, `wordmark`, `building` 의 간판은 `"font"` 를 받습니다: `thin`, `light`, `sans`, `bold`(깔끔한 산세리프 네 굵기), `serif`, `serif-bold`(제목용 세리프). 필요한 글자만 남긴 작은 데이터라 하나에 수십 KB 이고, 웹 페이지에는 장면이 쓴 글꼴만 들어갑니다. 글자 사이 간격(커닝)도 적용됩니다.
+`text3d`, `wordmark`, `building` 의 간판은 `"font"` 를 받아요: `thin`, `light`, `sans`, `bold`(깔끔한 산세리프 네 굵기), `serif`, `serif-bold`(제목용 세리프). 필요한 글자만 남긴 작은 데이터라 하나에 수십 KB 이고, 웹 페이지에는 장면이 쓴 글꼴만 들어가요. 글자 사이 간격(커닝)도 적용돼요.
 
-납작한 글자(`label`, `card`, 페이지 제목)는 준비 없이 한글이 됩니다. 산세리프 글꼴에는 "모두를 위한 AI 교육" 같은 몇 줄의 한글 글자가 들어 있고, 그 밖의 한글 · 일본어 · 한자 등은 내 글꼴 파일을 하나 주면 똑같이 입체가 됩니다.
+납작한 글자(`label`, `card`, 페이지 제목)는 준비 없이 한글이 돼요. 산세리프 글꼴에는 "모두를 위한 AI 교육" 같은 몇 줄의 한글 글자가 들어 있고, 그 밖의 한글 · 일본어 · 한자 등은 내 글꼴 파일을 하나 주면 똑같이 입체가 돼요.
 
 ```json
 {"type": "text3d", "text": "안녕하세요, 반갑습니다", "fontFile": "assets/MyFont.otf", "material": "gold", "split": true}
 ```
 
-글꼴에 없는 글자가 있으면 검사가 알려 줍니다. `examples/korean-title` 을 보세요. 글꼴 데이터는 공개 글꼴에서 만든 것이고 SIL Open Font License 를 그대로 따릅니다([licenses/fonts-OFL.txt](licenses/fonts-OFL.txt)).
+글꼴에 없는 글자가 있으면 검사가 알려 줘요. `examples/scene-json/korean-title` 을 보세요. 글꼴 데이터는 공개 글꼴에서 만든 것이고 SIL Open Font License 를 그대로 따라요([licenses/fonts-OFL.txt](licenses/fonts-OFL.txt)).
 
-## 내 영상 위 3D
+### 내 영상 위 3D
 
-2강의 도구([connect-ai-video-motion](https://github.com/wonseokjung/connect-ai-video-motion))가 내 주변에 2D 그래픽을 올렸다면, 이 도구는 같은 영상에 3D 물체를 올립니다.
+2강의 도구([connect-ai-video-motion](https://github.com/wonseokjung/connect-ai-video-motion))가 내 주변에 2D 그래픽을 올렸다면, 이 도구는 같은 영상에 3D 물체를 올려요.
 
 ```bash
 npx github:wonseokjung/connect-ai-three on-video talk.mp4 --faces talk-video-motion/work/face.json --matte talk-video-motion/work/matte
 ```
 
-영상 위에 투명한 3D 층을 올릴 뿐, 내 픽셀은 건드리지 않습니다. `face.json` 과 `matte` 폴더는 connect-ai-video-motion 이 그 영상을 분석하며 만든 것입니다(매트는 프레임마다 한 장인 흑백 그림, 흰색이 사람. macOS 에서는 Apple Vision 이 만들어 내려받을 것이 없습니다).
+영상 위에 투명한 3D 층을 올릴 뿐, 내 픽셀은 건드리지 않아요. `face.json` 과 `matte` 폴더는 connect-ai-video-motion 이 그 영상을 분석하며 만든 거예요(매트는 프레임마다 한 장인 흑백 그림, 흰색이 사람. macOS 에서는 Apple Vision 이 만들어서 내려받을 게 없어요).
 
-- **매트가 있으면 모든 3D 가 내 뒤에 그려집니다.** 워드마크가 어깨 뒤에서 올라오고, 카메라가 머리 뒤로 날아가고, 어떤 것도 얼굴이나 손 앞에 올 수 없습니다. 매트 가장자리의 애매한 픽셀은 사람으로 치므로 언제나 원본 영상이 이깁니다.
-- **매트가 없으면** 3D 가 위에 올라가고 얼굴 상자가 지킵니다: `--faces` 나 `--face 0.33,0.13,0.25,0.48`. 물체가 상자에 걸치면 검사가 실패하고, 언제 얼마나 걸쳤는지 알려 줍니다.
-- 내 앞에 있지만 내가 아닌 것(마이크 암, 스탠드)은 매트에 없습니다. 그 자리를 `keepOut` 에 `{"x": 0, "y": 0.5, "w": 0.46, "h": 0.5, "front": true}` 로 적어 두면 검사가 3D 를 거기서 떼어 놓습니다.
-- `make --alpha` 는 사람 자리가 이미 비워진 3D 를 `overlay.mov` 로 씁니다. Premiere, CapCut, DaVinci 에서 영상 위에 그대로 올리면 됩니다.
+- **매트가 있으면 모든 3D 가 내 뒤에 그려져요.** 워드마크가 어깨 뒤에서 올라오고, 카메라가 머리 뒤로 날아가고, 어떤 것도 얼굴이나 손 앞에 올 수 없어요. 매트 가장자리의 애매한 픽셀은 사람으로 쳐서 언제나 원본 영상이 이겨요.
+- **매트가 없으면** 3D 가 위에 올라가고 얼굴 상자가 지켜요: `--faces` 나 `--face 0.33,0.13,0.25,0.48`. 물체가 상자에 걸치면 검사가 실패하고, 언제 얼마나 걸쳤는지 알려 줘요.
+- 내 앞에 있지만 내가 아닌 것(마이크 암, 스탠드)은 매트에 없어요. 그 자리를 `keepOut` 에 `{"x": 0, "y": 0.5, "w": 0.46, "h": 0.5, "front": true}` 로 적어 두면 검사가 3D 를 거기서 떼어 놓아요.
+- `make --alpha` 는 사람 자리가 이미 비워진 3D 를 `overlay.mov` 로 써요. Premiere, CapCut, DaVinci 에서 영상 위에 그대로 올리면 돼요.
 
-`examples/on-my-video` 에 완성된 다섯 컷이 있습니다(인사, "3D 모델링", "카메라를 막 움직이니까", "중력", "AI 네이티브 컴퍼니"). 전부 그 테이크에서 실제로 한 말에 맞춘 타이밍입니다.
+`examples/scene-json/on-my-video` 에 완성된 네 컷이 있어요("3D 모델링", "카메라를 막 움직이니까", "중력", "AI 네이티브 컴퍼니"). 전부 그 테이크에서 실제로 한 말에 맞춘 타이밍이에요. 영상 파일은 키트에 안 들어 있어요. 내 영상으로 돌려 보세요.
 
-## 이미 React Three Fiber 를 쓰고 있다면
+### 이미 React Three Fiber 를 쓰고 있다면
 
 ```tsx
 import {ConnectScene} from 'connect-ai-three/src/adapters/r3f';
@@ -212,13 +234,13 @@ import {ConnectScene} from 'connect-ai-three/src/adapters/r3f';
 </Canvas>
 ```
 
-## 아직 안 되는 것
+### 아직 안 되는 것
 
-가우시안 스플랫 · WebGPU / TSL 재질 · 소리 · 키프레임 편집기. 배경이 투명할 때는 피사계 심도와 블룸이 자동으로 빠집니다(투명도를 지키지 못해서). 프레임 시간은 검사를 돌린 컴퓨터에서 잰 값이라, 폰 숫자는 참고용입니다.
+scene.json 쪽에서는 가우시안 스플랫, WebGPU / TSL(예제에는 둘 다 있어요) · 소리 · 키프레임 편집기. 배경이 투명할 때는 피사계 심도와 블룸이 자동으로 빠져요(투명도를 지키지 못해서). 프레임 시간은 검사를 돌린 컴퓨터에서 잰 값이라, 폰 숫자는 참고용이에요.
 
 ## 만든 곳
 
-three.js 와 [NOTICE.md](NOTICE.md) 의 프로젝트들 위에 만들었습니다(버전 · 라이선스 포함). 에셋은 Poly Haven 의 CC0 HDRI 하나, NASA 공개 모델 하나, 그리고 예제 세 개에 쓴 Poly Haven 의 CC0 모델 다섯 개와 HDRI 세 개이고, 출처 표기가 필요한 에셋은 쓰지 않았습니다([licenses/assets.md](licenses/assets.md)). 카탈로그 페이지에서 사람이 나오는 클립은 만든 사람 본인의 영상입니다.
+three.js와 [NOTICE.md](NOTICE.md)에 적은 프로젝트들 위에 만들었어요(버전, 라이선스 포함). 예제는 three.js 공식 예제, elvarofficial/teardown, tsogjavklann/awwwards-3d, Spark(전부 MIT)에서 가져와 고쳤어요. 모델, 텍스처, HDRI는 전부 CC0이나 공개 저작물이고, 글꼴은 SIL Open Font License예요([licenses/assets.md](licenses/assets.md)). 출처 표기가 필요한 에셋은 안 썼어요.
 
 <!-- team:start -->
 ## CONNECT AI LAB의 AI 직원들

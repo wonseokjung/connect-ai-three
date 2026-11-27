@@ -13,6 +13,10 @@ import {judge, validate, LIMITS} from '../lib/check.mjs';
 import {scanCatalog, loadIndex} from '../lib/catalog.mjs';
 import {installSkill, removeSkill} from '../lib/install.mjs';
 import {assetRefs, materialize, isDraco, dracoDir} from '../lib/project.mjs';
+import {listExamples, exampleProblems, copyExample, resolveUrl, findExample} from '../lib/examples.mjs';
+import {spawnSync} from 'node:child_process';
+import zlib from 'node:zlib';
+import {createRequire} from 'node:module';
 
 const fast = process.argv.includes('--fast');
 let pass = 0, fail = 0;
@@ -194,15 +198,87 @@ test('catalog: every item validates, ids are unique, the index matches the files
   for (const o of N.objects) ok(used.has(o), `object type ${o} is never used in the catalog`);
 });
 test('examples: every example validates and finds its files', () => {
-  for (const d of fs.readdirSync(path.join(KIT, 'examples'))) {
-    const f = path.join(KIT, 'examples', d, 'scene.json');
+  for (const d of fs.readdirSync(path.join(KIT, 'examples', 'scene-json'))) {
+    const f = path.join(KIT, 'examples', 'scene-json', d, 'scene.json');
     if (!fs.existsSync(f)) continue;
     const spec = readJson(f);
     eq(V(spec).errors, [], d);
     // the model files stay in the repo, not in the npm package: check them where they are
-    if (fs.existsSync(path.join(KIT, 'examples', d, 'assets'))) for (const m of JSON.stringify(spec).matchAll(/"src":"(assets\/[^"]+)"/g)) ok(fs.existsSync(path.join(KIT, 'examples', d, m[1])), `${d}: ${m[1]} missing`);
+    if (fs.existsSync(path.join(KIT, 'examples', 'scene-json', d, 'assets'))) for (const m of JSON.stringify(spec).matchAll(/"src":"(assets\/[^"]+)"/g)) ok(fs.existsSync(path.join(KIT, 'examples', 'scene-json', d, m[1])), `${d}: ${m[1]} missing`);
   }
 });
+// --- the 13 example pages ---
+const inRepo = fs.existsSync(path.join(KIT, '.git'));
+test('examples: 13 pages, one per section 0 to 12, each well formed', () => {
+  const all = listExamples();
+  eq(all.map((e) => e.section), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 'sections');
+  for (const e of all) {
+    eq(exampleProblems(e), [], e.folder);
+    ok(e.sources.length > 0, `${e.folder}: no sources`);
+    const html = fs.readFileSync(path.join(e.dir, 'index.html'), 'utf8');
+    if (e.renderer !== 'html') ok(/"three": "\.\.\/_three\/build\/three\.(module|webgpu)\.js"/.test(html), `${e.folder}: import map does not use the kit's three`);
+    // previews stay in the repo (they are left out of the npm package)
+    if (inRepo) for (const f of ['preview.jpg', 'preview.mp4']) ok(fs.existsSync(path.join(e.dir, f)), `${e.folder}: no ${f}`);
+  }
+});
+test('examples: the server maps the import map and never leaves its roots', () => {
+  ok(resolveUrl('/examples/_three/build/three.module.js'), 'three');
+  ok(resolveUrl('/examples/_lib/rapier/dist/rapier.mjs'), 'rapier');
+  ok(resolveUrl('/examples/06-physics/'), 'a page');
+  for (const bad of ['/examples/../package.json', '/examples/%2e%2e/package.json', '/package.json', '/examples/_three/../../package.json']) eq(resolveUrl(bad), null, bad);
+});
+test('examples: a copy loads three.js from the pinned CDN and runs without the kit', () => {
+  const to = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'c3-copy-')), 'mine');
+  copyExample(findExample('physics'), to);
+  const html = fs.readFileSync(path.join(to, 'index.html'), 'utf8');
+  ok(html.includes('https://cdn.jsdelivr.net/npm/three@0.187.0/') && !html.includes('../_three/') && !html.includes('../_lib/'), 'import map rewritten');
+  ok(fs.existsSync(path.join(to, 'main.js')) && fs.existsSync(path.join(to, 'LICENSE-three.txt')) && !fs.existsSync(path.join(to, 'preview.mp4')), 'files copied, previews left out');
+  let threw = false;
+  try { copyExample(findExample('physics'), to); } catch { threw = true; }
+  ok(threw, 'never writes into a folder that is not empty');
+  fs.rmSync(path.dirname(to), {recursive: true, force: true});
+});
+// ffmpeg and ffprobe ship with Remotion's compositor, so the colour tests need nothing else installed
+const ff = (tool, args) => {
+  const dir = path.dirname(createRequire(import.meta.url).resolve(`@remotion/compositor-${process.platform}-${process.arch}/package.json`));
+  const env = {...process.env, DYLD_LIBRARY_PATH: dir, LD_LIBRARY_PATH: dir};
+  const r = spawnSync(path.join(dir, tool), args, {env, maxBuffer: 1 << 26});
+  if (r.status !== 0) throw new Error(`${tool} failed: ${String(r.stderr).slice(-400)}`);
+  return r.stdout;
+};
+const colourTags = (file) => {
+  const j = JSON.parse(ff('ffprobe', ['-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=pix_fmt,color_range,color_space,color_primaries,color_transfer', '-of', 'json', file]).toString());
+  return j.streams[0];
+};
+// what every video we ship must say about its colours: yuv420p, limited (tv) range, BT.709. A video tagged
+// yuvj420p / pc / bt470bg plays with washed-out or shifted colours in YouTube, Premiere and QuickTime.
+const BT709 = {pix_fmt: 'yuv420p', color_range: 'tv', color_space: 'bt709', color_transfer: 'bt709', color_primaries: 'bt709'};
+test('video: every mp4 in examples/ and docs/ is yuv420p, tv range, BT.709', () => {
+  const files = [];
+  const walk = (d) => fs.existsSync(d) && fs.readdirSync(d, {withFileTypes: true}).forEach((x) => (x.isDirectory() ? walk(path.join(d, x.name)) : x.name.endsWith('.mp4') && files.push(path.join(d, x.name))));
+  walk(path.join(KIT, 'examples'));
+  walk(path.join(KIT, 'docs'));
+  if (inRepo) ok(files.length > 100, `only ${files.length} videos found`);
+  for (const f of files) {
+    const t = colourTags(f);
+    eq({pix_fmt: t.pix_fmt, color_range: t.color_range, color_space: t.color_space, color_transfer: t.color_transfer, color_primaries: t.color_primaries}, BT709, path.relative(KIT, f));
+  }
+});
+// one frame of a video as RGB: a PNG with no row filters (so the pixels are just inflated bytes)
+const frameRgb = (file, at, vf) => {
+  const png = ff('ffmpeg', ['-v', 'error', '-ss', String(at), '-i', file, '-frames:v', '1', '-vf', `${vf},format=rgb24`, '-c:v', 'png', '-pred', 'none', '-f', 'image2pipe', '-']);
+  const w = png.readUInt32BE(16), h = png.readUInt32BE(20);
+  const idat = [];
+  for (let o = 8; o < png.length; ) {
+    const len = png.readUInt32BE(o), type = png.toString('latin1', o + 4, o + 8);
+    if (type === 'IDAT') idat.push(png.subarray(o + 8, o + 8 + len));
+    o += 12 + len;
+  }
+  const raw = zlib.inflateSync(Buffer.concat(idat));
+  const rgb = Buffer.alloc(w * h * 3);
+  for (let y = 0; y < h; y++) raw.copy(rgb, y * w * 3, y * (w * 3 + 1) + 1, (y + 1) * (w * 3 + 1));
+  return rgb;
+};
 // --- the judge, on made-up probe numbers (no browser) ---
 const box = (id, x, y, w, h, extra = {}) => ({id, type: 'gem', visible: true, nan: false, inView: true, rect: {x, y, w, h}, ...extra});
 const probeOf = (over = {}, sample = {}) => ({
@@ -396,6 +472,30 @@ test('browser: hover and click on a still object stay a pure function of time', 
     pointerScript: [{t: 0, x: 0, y: 0}, {t: 0.5, x: 0, y: 0, click: 'box'}, {t: 3, x: 0, y: 0}], objects: [{id: 'box', type: 'rounded-box', position: [0, 1, 0], rotation: [0, 30, 0]}]}, {samples: 6});
   ok(r.probe.determinism.every((d) => d.same), JSON.stringify(r.probe.determinism));
   ok(r.ok, JSON.stringify(r.errors));
+  fs.rmSync(dir, {recursive: true, force: true});
+}, {browser: true});
+
+test('browser: three example pages open headless, draw a real picture, and log no errors', async () => {
+  const {smokeExample} = await import('../lib/examples.mjs');
+  for (const name of ['physics', 'glass-materials', 'neon-text']) {
+    const r = await smokeExample(findExample(name), {seconds: 3});
+    const errors = r.errors.filter((x) => !/favicon/.test(x));
+    ok(r.ready, `${name}: never set window.EXAMPLE.ready`);
+    eq(errors, [], `${name}: errors`);
+    ok(r.kind === 'webgl' && r.distinct > 12 && r.calls > 3, `${name}: picture looks empty ${JSON.stringify(r)}`);
+  }
+}, {browser: true});
+test('video: a rendered mp4 is yuv420p, tv range, BT.709, and a known colour comes back', async () => {
+  const {renderVideo} = await import('../lib/render.mjs');
+  const dir = tmpProject();
+  const file = path.join(dir, 'out', 'c.mp4');
+  // a flat brand-gold background, nothing in front of the middle, no post effects and no tone mapping on it
+  await renderVideo(dir, {name: 'colour', duration: 1, size: {width: 320, height: 180}, background: {color: '#d6892a'}, post: [], objects: [{id: 'dot', type: 'sphere', position: [40, 40, -60], scale: 0.1}]}, file);
+  const t = colourTags(file);
+  eq({pix_fmt: t.pix_fmt, color_range: t.color_range, color_space: t.color_space, color_transfer: t.color_transfer, color_primaries: t.color_primaries}, BT709);
+  const px = frameRgb(file, 0.5, 'crop=8:8:156:86,scale=in_color_matrix=bt709:in_range=tv:out_range=pc:flags=accurate_rnd+full_chroma_int');
+  const avg = [0, 1, 2].map((c) => Math.round([...px].filter((_, i) => i % 3 === c).reduce((a, b) => a + b, 0) / (px.length / 3)));
+  ok(avg.every((v, i) => Math.abs(v - [0xd6, 0x89, 0x2a][i]) <= 10), `the middle decodes as rgb(${avg}) instead of rgb(214,137,42)`);
   fs.rmSync(dir, {recursive: true, force: true});
 }, {browser: true});
 

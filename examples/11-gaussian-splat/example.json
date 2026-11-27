@@ -1,0 +1,18 @@
+{
+  "name": "gaussian-splat",
+  "section": 11,
+  "title": "Gaussian splats",
+  "titleKo": "가우시안 스플랫",
+  "about": "A photoscanned statue shown the way phone and drone scans are shown on the web: as 540k soft coloured splats, with a sweeping reveal. Drop your own .spz, .ply or .splat capture to look around it.",
+  "aboutKo": "폰이나 드론으로 찍은 3D 스캔을 웹에 올리는 방식 그대로예요. 사진으로 스캔한 석상을 54만 개의 부드러운 점(스플랫)으로 보여 줘요. 처음에 스르륵 드러나는 효과가 있고, 내 스캔 파일(.spz, .ply, .splat)을 끌어다 놓으면 바로 둘러볼 수 있어요.",
+  "prompt": "Show a 3D scan as Gaussian splats on a web page with a magic reveal effect, let me orbit around it, and let me drop my own phone scan file to view it.",
+  "promptKo": "내가 폰으로 찍은 3D 스캔을 웹에서 둘러보게 해 줘. 가우시안 스플랫으로 보여 주고, 처음엔 마법처럼 나타나게 해 줘. 내 파일을 끌어다 놓으면 바로 보여 주고.",
+  "renderer": "webgl",
+  "sources": [
+    {"name": "Spark by World Labs (@sparkjsdev/spark 2.4.0)", "url": "https://github.com/sparkjsdev/spark", "license": "MIT", "what": "the splat renderer (lib/spark/spark.module.min.js), constructSplats from the procedural-splats example, the Magic reveal from the splat-reveal-effects example"},
+    {"name": "Poly Haven, Gothic Statue", "url": "https://polyhaven.com/a/gothic_statue", "license": "CC0-1.0", "what": "the photoscan the statue splats are sampled from (assets/gothic_statue.*, texture resized to 1k)"},
+    {"name": "Poly Haven, Mossy Rock", "url": "https://polyhaven.com/a/mossy_rock", "license": "CC0-1.0", "what": "ground colour (assets/mossy_rock_diff_512.jpg)"}
+  ],
+  "replaces": "Spark's own demo captures are not used here; the splats are made in the browser from a CC0 photoscan.",
+  "capture": {"wait": 12, "warm": 0, "clip": 10, "still": 7.5, "pre": "window.RESTART()"}
+}

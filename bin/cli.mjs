@@ -8,7 +8,7 @@ import {KIT, KIT_NAME, RUN_CMD, VERSION, projectPaths, readJson, writeJson} from
 import {banner} from '../lib/banner.mjs';
 
 const argv = process.argv.slice(2);
-const VALUE = ['dir', 'agent', 'at', 'out', 'scale', 'target', 'faces', 'face', 'matte', 'matte-fps', 'start', 'port', 'place', 'size', 'times'];
+const VALUE = ['copy', 'dir', 'agent', 'at', 'out', 'scale', 'target', 'faces', 'face', 'matte', 'matte-fps', 'start', 'port', 'place', 'size', 'times'];
 const flag = (n) => argv.includes('--' + n);
 const opt = (n, d = null) => {
   const i = argv.indexOf('--' + n);
@@ -28,6 +28,9 @@ const open = (f) => {
 const HELP = `${KIT_NAME} ${VERSION} · open source by CONNECT AI LAB
 Say it, get a three.js scene: one spec becomes an interactive web page and a frame-locked video.
 
+  ${RUN_CMD} examples              the 13 ready examples (miniature world, glass, neon, shaders, particles,
+                                         physics, machine teardown, scroll site, styles, flight game, splats, XR)
+  ${RUN_CMD} example <name>        open one in your browser   --copy <folder>: your own copy to edit
   ${RUN_CMD}                       make the demo scene and open it in your browser
   ${RUN_CMD} new "'MY SHOP' logo in a pastel cafe, slow orbit"
                                          draft scene.json from words (your AI agent writes better ones: see install)
@@ -124,11 +127,43 @@ async function main() {
   if (flag('help') || cmd === 'help') { log(banner()); return log(HELP); }
   if (flag('version')) return log(VERSION);
 
+  if (cmd === 'examples') {
+    const {listExamples, exampleProblems} = await import('../lib/examples.mjs');
+    const all = listExamples();
+    if (flag('json')) return log(JSON.stringify(all.map(({dir, ...e}) => e), null, 2));
+    log(`${KIT_NAME} examples: ${all.length}  (open one: ${RUN_CMD} example <name>)\n`);
+    let bad = 0;
+    for (const e of all) {
+      log(`  ${String(e.section).padStart(2, '0')}  ${e.name.padEnd(17)} ${e.title}\n      say: "${e.prompt}"`);
+      const p = flag('check') ? exampleProblems(e) : [];
+      for (const x of p) log(`      FIX ${x}`);
+      bad += p.length;
+    }
+    if (bad) process.exitCode = 1;
+    return;
+  }
+  if (cmd === 'example') {
+    const {findExample, listExamples, serveExamples, copyExample} = await import('../lib/examples.mjs');
+    const ex = findExample(pos[1] || '');
+    if (!ex) return log(`no example "${pos[1] || ''}". The list: ${RUN_CMD} examples\n  ${listExamples().map((e) => e.name).join(', ')}`), (process.exitCode = 1);
+    if (opt('copy')) {
+      if (ex.name === 'opening') return log('the opening plays the other examples, so it only runs inside the kit: open it without --copy'), (process.exitCode = 1);
+      const to = copyExample(ex, opt('copy'));
+      log(`${to}\n  your copy of "${ex.title}". three.js comes from a pinned CDN, so any static server works:\n  npx serve ${path.relative(process.cwd(), to) || '.'}   (or open it in VS Code Live Server)`);
+      return;
+    }
+    const s = await serveExamples(Number(opt('port', 4180)));
+    globalThis.__serving = true;
+    const url = `${s.url}/examples/${path.basename(ex.dir)}/`;
+    log(`${ex.title}  ${url}\n  say: "${ex.prompt}"\n  (ctrl-c to stop)`);
+    open(url);
+    return;
+  }
   if (cmd === 'demo') {
     const L = await loadAll();
     const dir = path.resolve(pos[1] || opt('dir') || `${KIT_NAME}-demo`);
     const P = projectPaths(dir);
-    if (!fs.existsSync(P.spec)) writeJson(P.spec, readJson(path.join(KIT, 'examples', 'toy-studio', 'scene.json')));
+    if (!fs.existsSync(P.spec)) writeJson(P.spec, readJson(path.join(KIT, 'examples', 'scene-json', 'toy-studio', 'scene.json')));
     const {spec} = L.loadSpec(dir);
     log(banner());
     log(`${KIT_NAME} ${VERSION} · open source by CONNECT AI LAB`);
@@ -312,7 +347,7 @@ async function main() {
 }
 main().then(() => {
   // the renderer keeps a browser alive: leave once the work is done (a --serve keeps running)
-  if (!flag('serve') && !(pos[0] === 'web' && globalThis.__serving)) setTimeout(() => process.exit(process.exitCode || 0), 50);
+  if (!flag('serve') && !globalThis.__serving) setTimeout(() => process.exit(process.exitCode || 0), 50);
 }).catch((e) => {
   console.error(`${KIT_NAME}: ${e && e.message ? e.message : e}`);
   if (process.env.DEBUG) console.error(e);
