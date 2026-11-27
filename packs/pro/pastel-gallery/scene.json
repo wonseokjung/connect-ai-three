@@ -191,7 +191,7 @@
    "type": "wordmark",
    "text": "CONNECT AI LAB",
    "font": "serif",
-   "size": 0.245,
+   "size": 0.19,
    "tracking": 0.1,
    "position": [
     0.95,
@@ -215,7 +215,7 @@
     "color": "#2D2A6E",
     "roughness": 0.5
    },
-   "subSize": 0.175,
+   "subSize": 0.14,
    "subTracking": 0.1,
    "subColor": "#2D2A6E",
    "subWeight": 500,

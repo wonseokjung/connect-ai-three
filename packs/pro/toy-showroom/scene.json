@@ -229,7 +229,7 @@
    "type": "wordmark",
    "text": "CONNECT AI LAB",
    "font": "bold",
-   "size": 0.24,
+   "size": 0.16,
    "tracking": 0.12,
    "position": [
     0,
@@ -258,7 +258,7 @@
    "id": "tagline",
    "type": "label",
    "text": "모두를 위한 AI 교육",
-   "size": 0.17,
+   "size": 0.12,
    "weight": 600,
    "tracking": 0.18,
    "color": "#FFFFFF",
