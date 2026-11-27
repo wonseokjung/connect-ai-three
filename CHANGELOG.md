@@ -15,6 +15,13 @@ Colour. Every sentence gets its own world; the spec stays compatible.
 - Every "next:" hint and the help now print the line that works without a published package:
   `npx github:wonseokjung/connect-ai-three ...`.
 - 3D titles from `new` shrink with long text, so a long name stays in frame.
+- Each mood brings its own props: a donut and a macaron for a cafe, a block and a cone for toys, paper cards and a
+  paper tree for a story, a low sun and dunes for a sunset, lit letters and rings of light for neon.
+- Fixed: `addLights` and `addPost` were applied twice when a spec was prepared twice (the page and the video both do
+  it), so a scene got a second depth of field, a second grade and doubled lights. One of the hero scenes went from 172
+  draw calls to 120.
+- `packs/pro/`: three finished cinematic scenes (pastel gallery, toy showroom, sunset flythrough), kept apart from
+  the package.
 
 ## 0.3.0
 

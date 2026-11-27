@@ -242,7 +242,7 @@ From a clone:
 ```bash
 git clone https://github.com/wonseokjung/connect-ai-three.git
 cd connect-ai-three && npm install
-npm test                 # 31 tests; --fast skips the ones that open the browser
+npm test                 # 33 tests; --fast skips the ones that open the browser
 node bin/cli.mjs demo
 ```
 
