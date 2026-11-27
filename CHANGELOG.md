@@ -13,6 +13,7 @@ Premium product and sculpture shots; the spec stays compatible.
 - `new` keeps gold letters gold when "black" describes the room ("gold title on a black stage").
 - `new` no longer adds a cinema camera when "camera" only means the camera move ("천천히 도는 카메라", "slow orbit
   camera"); "my camera", "tripod", "삼각대" still bring the prop.
+- `on-video --face` now also guards a folder that already has a scene.json (drafted with `new` or by an agent): before, the face box was only written into a fresh spec, so a title across the face could pass the check.
 - `wordmark` takes `subWeight`. `demo --no-open` (or `CI=1`) says "Open <path>" instead of "Opening it".
 - 136 catalog items (was 135): a contact-shadow example.
 

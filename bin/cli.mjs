@@ -238,6 +238,12 @@ async function main() {
         ],
       });
       log(`made ${P.spec} (edit the object, or ask your agent)`);
+    } else if (keepOut.length) {
+      // a folder drafted with "new" (or written by an agent) gets the face box too, so the check really guards the face
+      const s0 = readJson(P.spec);
+      s0.keepOut = [...keepOut, ...(s0.keepOut || []).filter((k) => k.front)];
+      writeJson(P.spec, s0);
+      log(`  face box added to ${path.basename(dir)}/scene.json: the check keeps the 3D off your face`);
     }
     // person matte: --matte <folder of m_000000.png ...> (connect-ai-video-motion writes one in work/matte). With it
     // every 3D object is drawn behind the person, so nothing can ever sit in front of a face or a hand.
