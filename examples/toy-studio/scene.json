@@ -1,0 +1,321 @@
+{
+ "name": "toy-studio",
+ "duration": 8,
+ "look": "pale-studio",
+ "tone": "neutral",
+ "background": {
+  "type": "gradient",
+  "top": "#2EC4F1",
+  "bottom": "#1B6FE0"
+ },
+ "fog": {
+  "color": "#2a8fe8",
+  "density": 0.04
+ },
+ "env": {
+  "type": "hdri",
+  "intensity": 0.8
+ },
+ "backdrop": [],
+ "lights": [
+  {
+   "type": "key",
+   "color": "#fff6e8",
+   "intensity": 2.6,
+   "position": [
+    -3,
+    5,
+    4
+   ]
+  },
+  {
+   "type": "fill",
+   "color": "#ffd6f0",
+   "intensity": 0.9,
+   "position": [
+    3.5,
+    2,
+    3
+   ]
+  },
+  {
+   "type": "rim",
+   "color": "#FFE066",
+   "intensity": 3,
+   "position": [
+    2.5,
+    3.5,
+    -3
+   ]
+  },
+  {
+   "type": "ambient",
+   "intensity": 0.3
+  }
+ ],
+ "camera": {
+  "position": [
+   0,
+   1.6,
+   6.4
+  ],
+  "target": [
+   0,
+   1.05,
+   0
+  ],
+  "fov": 32,
+  "motion": [
+   {
+    "type": "orbit",
+    "from": -18,
+    "to": 12,
+    "dur": 8
+   },
+   {
+    "type": "dolly",
+    "from": 1.08,
+    "to": 0.94,
+    "dur": 8
+   }
+  ]
+ },
+ "objects": [
+  {
+   "id": "floor",
+   "type": "floor",
+   "kind": "matte",
+   "material": {
+    "preset": "clay",
+    "color": "#FFD23F"
+   },
+   "size": 300
+  },
+  {
+   "id": "stage",
+   "type": "cylinder",
+   "radius": 1.0,
+   "height": 0.36,
+   "position": [
+    0,
+    0.18,
+    0
+   ],
+   "material": {
+    "preset": "plastic",
+    "color": "#FF5D8F",
+    "roughness": 0.35
+   }
+  },
+  {
+   "id": "stage-shadow",
+   "type": "contact",
+   "radius": 1.4,
+   "opacity": 0.3,
+   "color": "#5a2a10",
+   "position": [
+    0,
+    0.004,
+    0
+   ]
+  },
+  {
+   "id": "camera",
+   "type": "cinema-camera",
+   "position": [
+    0,
+    0.62,
+    0
+   ],
+   "rotation": [
+    0,
+    -30,
+    0
+   ],
+   "scale": 1.0,
+   "motion": [
+    {
+     "type": "turntable",
+     "speed": 10
+    }
+   ]
+  },
+  {
+   "id": "halo",
+   "type": "torus",
+   "radius": 0.95,
+   "tube": 0.035,
+   "position": [
+    0,
+    1.35,
+    -0.5
+   ],
+   "material": {
+    "preset": "plastic",
+    "color": "#7BF1A8",
+    "roughness": 0.3
+   },
+   "motion": [
+    {
+     "type": "float",
+     "amp": 0.04
+    }
+   ]
+  },
+  {
+   "id": "cube-a",
+   "type": "rounded-box",
+   "size": [
+    0.55,
+    0.55,
+    0.55
+   ],
+   "radius": 0.1,
+   "position": [
+    -2.2,
+    0.28,
+    -0.6
+   ],
+   "rotation": [
+    0,
+    20,
+    0
+   ],
+   "material": {
+    "preset": "plastic",
+    "color": "#00BBF9",
+    "roughness": 0.3
+   },
+   "motion": [
+    {
+     "type": "float",
+     "amp": 0.03
+    }
+   ]
+  },
+  {
+   "id": "cube-a-shadow",
+   "type": "contact",
+   "radius": 0.5,
+   "opacity": 0.3,
+   "color": "#5a2a10",
+   "position": [
+    -2.2,
+    0.004,
+    -0.6
+   ]
+  },
+  {
+   "id": "ball-a",
+   "type": "sphere",
+   "radius": 0.3,
+   "position": [
+    2.1,
+    0.3,
+    -0.2
+   ],
+   "material": {
+    "preset": "plastic",
+    "color": "#9B5DE5",
+    "roughness": 0.3
+   },
+   "motion": [
+    {
+     "type": "float",
+     "amp": 0.04,
+     "phase": 1
+    }
+   ]
+  },
+  {
+   "id": "ball-a-shadow",
+   "type": "contact",
+   "radius": 0.42,
+   "opacity": 0.3,
+   "color": "#5a2a10",
+   "position": [
+    2.1,
+    0.004,
+    -0.2
+   ]
+  },
+  {
+   "id": "ring-a",
+   "type": "torus",
+   "radius": 0.28,
+   "tube": 0.1,
+   "position": [
+    1.6,
+    0.1,
+    0.9
+   ],
+   "rotation": [
+    90,
+    0,
+    0
+   ],
+   "material": {
+    "preset": "plastic",
+    "color": "#F15BB5",
+    "roughness": 0.3
+   }
+  },
+  {
+   "id": "name",
+   "type": "wordmark",
+   "text": "CONNECT AI LAB",
+   "font": "bold",
+   "size": 0.2,
+   "tracking": 0.12,
+   "position": [
+    0,
+    2.55,
+    -0.6
+   ],
+   "material": {
+    "preset": "plastic",
+    "color": "#FFFFFF",
+    "roughness": 0.35
+   },
+   "split": true,
+   "motion": [
+    {
+     "type": "stagger",
+     "at": 0.6,
+     "each": 0.05,
+     "kind": "rise"
+    }
+   ],
+   "reflect": false
+  }
+ ],
+ "interact": [
+  "orbit",
+  "parallax",
+  "hover"
+ ],
+ "post": [
+  {
+   "type": "bloom",
+   "strength": 0.1,
+   "radius": 0.5,
+   "threshold": 0.97
+  },
+  {
+   "type": "vignette",
+   "amount": 0.1
+  },
+  {
+   "type": "grain",
+   "amount": 0.02
+  }
+ ],
+ "addPost": [
+  {
+   "type": "grade",
+   "contrast": 1.05,
+   "saturation": 1.12,
+   "whites": 0.95
+  }
+ ]
+}

@@ -1,12 +1,39 @@
+<p align="center"><img src="docs/brand/banner.jpg" width="100%" alt="AI Mentor Jay, connect-ai-three by CONNECT AI LAB"></p>
+
+<p align="center">
+  <b>CONNECT AI LAB</b> · AI education for everyone · 모두를 위한 AI 교육<br>
+  <a href="https://www.youtube.com/@CONNECT-AI-LAB">YouTube: CONNECT AI LAB</a> · <a href="https://www.aicitybuilders.com/vibecoding">Course: Visual Vibe Coding</a> · <a href="README.ko.md">한국어</a>
+</p>
+
 # connect-ai-three
 
-**Open source by CONNECT AI LAB · AI education for everyone.** A tool for one job: say what you want to see, get a three.js scene.
+**An AI 3D web developer. Say what you want to see in one sentence, and you get a 3D web page you can drag and a video of the same picture.**
+
+[![A bust in a pastel gallery, a camera in a toy world, a desert sunset show. Each one is one scene.json](docs/showcase/v04/hero.webp)](docs/showcase/v04/hero.mp4)
 
 ```bash
-npx connect-ai-three
+npx github:wonseokjung/connect-ai-three
 ```
 
-[![Gold 3D letters on a dark mirror in front of a night city, made from one scene.json](docs/media/hero.webp)](docs/index.html)
+That one line makes the demo scene and opens it in your browser. Drag it around. To teach your agent (Claude Code, Codex, Antigravity, Cursor), paste `npx github:wonseokjung/connect-ai-three install` into its chat and ask it to install it. Then open a new chat and say: "Use connect-ai-three: my cafe logo 'MY SHOP' in 3D, a web page I can drag and a 6 second video."
+
+You need [Node.js](https://nodejs.org) 18 or newer and a computer with a GPU. No paid API key.
+
+## 0.4: a different world for every sentence
+
+Before, most sentences came out black and gold. Now it reads the sentence and picks colours and a mood that fit. A cafe gets pastel, toys get a bright toy world, a sunset gets a desert at dusk, a club gets neon, a story gets paper craft. Say nothing about the room and it still picks one from your words, so two sentences rarely land in the same room.
+
+![Six results, one sentence each: pastel cafe, toy box, desert sunset, neon club, paper story, black and gold](docs/showcase/v04/moods.jpg)
+
+```bash
+npx github:wonseokjung/connect-ai-three new "'MY SHOP' logo in a pastel cafe, slow orbit"
+npx github:wonseokjung/connect-ai-three new "neon club sign 'NIGHT CLUB'"
+npx github:wonseokjung/connect-ai-three make my-shop          # self-check, web page, video, still sheet, report
+```
+
+It goes on your own video too. It never covers your face, and with a person matte the 3D passes behind you.
+
+[![A toy planet and HELLO 3D floating in the empty space beside me in my own footage](docs/showcase/v04/on-video.jpg)](docs/showcase/v04/on-video.mp4)
 
 **[Open the catalog page](docs/index.html)**: a live scene you can drag at the top, all 136 items as living clips, the demos, and a prompt to copy for each one.
 
@@ -40,20 +67,20 @@ It does not invent one more 3D library. Like mixed martial arts took the best mo
 Node 18 or newer. macOS, Windows or Linux with a GPU.
 
 ```bash
-npx connect-ai-three            # makes the demo scene and opens it in your browser: drag to look around
-npx connect-ai-three install    # teaches your coding agent (Claude Code, Codex, Cursor, Antigravity) the spec and the catalog
+npx github:wonseokjung/connect-ai-three            # makes the demo scene and opens it in your browser: drag to look around
+npx github:wonseokjung/connect-ai-three install    # teaches your coding agent (Claude Code, Codex, Cursor, Antigravity) the spec and the catalog
 ```
 
 Then just say it to your agent:
 
-> Use connect-ai-three: my name "JANE DOE" in gold 3D letters over a night city. I want a web hero I can drag and a 6 second video.
+> Use connect-ai-three: my toy shop name "TOY BOX" in 3D letters, in a bright toy world. I want a web hero I can drag and a 6 second video.
 
 No agent? Words still work:
 
 ```bash
-npx connect-ai-three new "gold logo 'JANE DOE' over a night city, slow orbit, 6s"
-npx connect-ai-three make jane-doe          # self-check, web page, video, still sheet, report
-npx connect-ai-three make jane-doe --short --alpha   # also a 9:16 version and a transparent overlay.mov
+npx github:wonseokjung/connect-ai-three new "gold logo 'JANE DOE' over a night city, slow orbit, 6s"
+npx github:wonseokjung/connect-ai-three make jane-doe          # self-check, web page, video, still sheet, report
+npx github:wonseokjung/connect-ai-three make jane-doe --short --alpha   # also a 9:16 version and a transparent overlay.mov
 ```
 
 What you get in `out/`:
@@ -93,9 +120,9 @@ Two small fields worth knowing: `"short": {...}` holds what should differ in the
 ## Catalog: 136 items, every one a scene that runs
 
 ```bash
-npx connect-ai-three catalog            # the list
-npx connect-ai-three catalog motion     # one group, with the sentence to say for each
-npx connect-ai-three use dof my-scene   # start from an item
+npx github:wonseokjung/connect-ai-three catalog            # the list
+npx github:wonseokjung/connect-ai-three catalog motion     # one group, with the sentence to say for each
+npx github:wonseokjung/connect-ai-three use dof my-scene   # start from an item
 ```
 
 | Group | Items | Stands on |
@@ -127,16 +154,18 @@ npx connect-ai-three use dof my-scene   # start from an item
 | Phone framing (390 x 844) | is anything cut off in portrait |
 | Text height in pixels | labels too small to read on a phone |
 
-## Colour: black and gold, plus two or three colours of your own
+## Colour: every scene gets its own world
 
-The eight looks set the room; the picture gets its colour from the things in it. Every catalog example stars a
-different object in a different scheme (gold, teal, deep blue, ivory, one red accent), so no two neighbours look
-alike. To change a scheme, change the pool of light behind the subject and one rim light:
+There is no house colour. Each scene gets a palette and a mood that fit what you said: a pastel cafe (peach to lilac sky, pink clay floor, mint and yellow toys), a bright toy world, a desert sunset, a neon club, paper craft. Black and gold comes only when you ask for luxury or gold. Most of these are a `pale-studio` or `daylight` look with a `background` gradient and a coloured `floor`:
 
 ```json
-"backdrop": [{"type": "backglow", "color": "#2F8F9D", "intensity": 0.2}],
-"lights": [{"type": "key", "intensity": 2.5, "position": [-3.2, 4.2, 4.5]}, {"type": "rim", "color": "#2F8F9D", "intensity": 8, "position": [3.6, 2.6, -4.2]}]
+"look": "pale-studio",
+"background": {"type": "gradient", "top": "#2EC4F1", "bottom": "#1B6FE0"},
+"objects": [{"id": "floor", "type": "floor", "kind": "matte", "material": {"preset": "clay", "color": "#FFD23F"}, "size": 300}],
+"addPost": [{"type": "grade", "whites": 0.95}]
 ```
+
+Bright colours blow out whites easily. `grade` with `whites` about 0.95 rolls the highlights off softly. A model that is too shiny or too dark takes `"surface": {"roughness": 1, "brightness": 1.3}` on its `gltf`, no file editing.
 
 ## 3D letters: six typefaces, and any font file
 
@@ -160,7 +189,7 @@ are derived from open fonts and stay under the SIL Open Font License ([licenses/
 Lesson 2's tool ([connect-ai-video-motion](https://github.com/wonseokjung/connect-ai-video-motion)) puts 2D graphics around you. This one adds a 3D object to the same video:
 
 ```bash
-npx connect-ai-three on-video talk.mp4 --faces talk-video-motion/work/face.json --matte talk-video-motion/work/matte
+npx github:wonseokjung/connect-ai-three on-video talk.mp4 --faces talk-video-motion/work/face.json --matte talk-video-motion/work/matte
 ```
 
 It makes a transparent 3D layer over your footage and never touches your pixels. `face.json` and the `matte` folder
@@ -190,13 +219,13 @@ import {ConnectScene} from 'connect-ai-three/src/adapters/r3f';
 </Canvas>
 ```
 
-The same component works inside Remotion's `<ThreeCanvas>` (`npx connect-ai-three video my-scene --r3f`).
+The same component works inside Remotion's `<ThreeCanvas>` (`npx github:wonseokjung/connect-ai-three video my-scene --r3f`).
 
 ## Commands
 
 | Command | What it does |
 |---|---|
-| `npx connect-ai-three` | demo scene, opened in the browser |
+| `npx github:wonseokjung/connect-ai-three` | demo scene, opened in the browser |
 | `new "<words>"` | first `scene.json` from words (English or Korean), no AI needed |
 | `make [folder]` | check, web page, video, sheet, report. `--short`, `--alpha`, `--force` |
 | `web [folder]` | only the page. `--serve` serves it on localhost, `--no-inline` keeps assets as files |
@@ -213,7 +242,7 @@ From a clone:
 ```bash
 git clone https://github.com/wonseokjung/connect-ai-three.git
 cd connect-ai-three && npm install
-npm test                 # 30 tests; --fast skips the ones that open the browser
+npm test                 # 31 tests; --fast skips the ones that open the browser
 node bin/cli.mjs demo
 ```
 
@@ -225,6 +254,32 @@ Gaussian splats · WebGPU / TSL materials · sound · a keyframe editor. Depth o
 
 Built on three.js and the projects listed in [NOTICE.md](NOTICE.md), each with version and licence. Assets: one CC0 HDRI from Poly Haven, one public-domain NASA model, and typeface data derived from two open fonts under the SIL Open Font License ([licenses/assets.md](licenses/assets.md)); no credit-required assets. The props are built in code. The clips on the catalog page that show a person are the author, on his own footage.
 
-More open-source tools and free lessons: [CONNECT AI LAB on YouTube](https://www.youtube.com/@CONNECT-AI-LAB) · [aicitybuilders.com](https://www.aicitybuilders.com)
+<!-- team:start -->
+## CONNECT AI LAB's AI employees
+
+I'm building AI employees one by one, in the open. Grab the one you need first.
+
+<table>
+<tr><td width="34%" valign="top"><b>AI business analyst</b><br><a href="https://github.com/wonseokjung/reversebusiness"><code>reversebusiness</code></a></td><td valign="top">Give it a website, and it breaks down how that business makes money.</td></tr>
+<tr><td width="34%" valign="top"><b>AI video editor</b><br><a href="https://github.com/wonseokjung/connect-ai-video-motion"><code>connect-ai-video-motion</code></a></td><td valign="top">Give it your video, and it puts motion graphics in the empty space around you.</td></tr>
+<tr><td width="34%" valign="top"><b>AI motion designer</b><br><a href="https://github.com/wonseokjung/connect-ai-motion"><code>connect-ai-motion</code></a></td><td valign="top">Give it a few lines of text, and it makes a motion graphics video. No footage needed.</td></tr>
+<tr><td width="34%" valign="top"><b>AI presentation designer</b><br><a href="https://github.com/wonseokjung/connect-ai-slides-web"><code>connect-ai-slides-web</code></a></td><td valign="top">Give it a few lines or an old PPT, and it makes a deck that moves and a PowerPoint file you can edit.</td></tr>
+<tr><td width="34%" valign="top"><b>AI 3D web developer</b> · <b>this one</b><br><a href="https://github.com/wonseokjung/connect-ai-three"><code>connect-ai-three</code></a></td><td valign="top">Give it one sentence, and it makes a 3D web page you can drag and a video of the same picture.</td></tr>
+<tr><td width="34%" valign="top"><b>AI marketing team</b><br><a href="https://github.com/wonseokjung/connect-ai-marketer"><code>connect-ai-marketer</code></a></td><td valign="top">Replies, social listening and uploads, 24/7 in your own browser.</td></tr>
+<tr><td width="34%" valign="top"><b>AI writer</b><br><a href="https://github.com/wonseokjung/connect-ai-writer"><code>connect-ai-writer</code></a></td><td valign="top">Give it one video, and it writes a post for every platform in your voice, with pictures.</td></tr>
+<tr><td width="34%" valign="top"><b>AI XR developer</b><br><a href="https://github.com/wonseokjung/connect-ai-xr"><code>connect-ai-xr</code></a></td><td valign="top">Give it one sentence, and it makes an XR app that opens on Meta Quest, computers and phones.</td></tr>
+</table>
+<!-- team:end -->
+
+---
+
+I teach how to build tools like this with your own AI agent in [Visual Vibe Coding](https://www.aicitybuilders.com/vibecoding).
+
+<table><tr>
+<td width="140" valign="top"><img src="docs/brand/jay.jpg" width="128" alt="AI Mentor Jay"></td>
+<td valign="top"><b>Made by AI Mentor Jay</b> · CONNECT AI LAB<br>
+I'll keep releasing AI employees as open source, one by one, and show how I build them on YouTube and in my course.<br>
+<a href="https://www.youtube.com/@CONNECT-AI-LAB">YouTube</a> · <a href="https://www.aicitybuilders.com/vibecoding">Visual Vibe Coding</a> · <a href="https://github.com/wonseokjung">More open source</a></td>
+</tr></table>
 
 MIT · CONNECT AI LAB

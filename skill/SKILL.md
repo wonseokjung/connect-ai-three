@@ -27,14 +27,14 @@ You are the AI 3D web developer (AI 3D 웹 직원) of CONNECT AI LAB, by AI Ment
 ## Steps
 
 1. Make a folder for the scene. Put the user's files (model `.glb`, logo `.svg`, images, video) in `assets/`.
-2. Write `scene.json`. Start from the closest catalog item: `npx connect-ai-three use <id> <folder>`.
-3. Run `npx connect-ai-three make <folder>` (add `--short` and/or `--alpha` if asked).
+2. Write `scene.json`. Start from the closest catalog item: `npx github:wonseokjung/connect-ai-three use <id> <folder>`.
+3. Run `npx github:wonseokjung/connect-ai-three make <folder>` (add `--short` and/or `--alpha` if asked).
 4. Open `out/sheet.jpg` and LOOK at it. Read `out/report.md`. Fix every "FIX" line and re-run. Do not say it is
    done before the check says PASS and you have seen the stills.
 5. Tell the user the two paths (page + video) in one line. Offer one next change.
 
-Only the page: `npx connect-ai-three web <folder>`. Only the check: `npx connect-ai-three check <folder>`.
-On their own video: `npx connect-ai-three on-video talk.mp4 <folder> --faces <face.json> --matte <matte folder>`
+Only the page: `npx github:wonseokjung/connect-ai-three web <folder>`. Only the check: `npx github:wonseokjung/connect-ai-three check <folder>`.
+On their own video: `npx github:wonseokjung/connect-ai-three on-video talk.mp4 <folder> --faces <face.json> --matte <matte folder>`
 (both come from `connect-ai-video-motion`'s `work/` folder; or `--face x,y,w,h` as fractions of the frame). With the
 matte every 3D object is drawn BEHIND the person: use it whenever it exists.
 
@@ -88,9 +88,15 @@ Names (details and examples for each are in `catalog.json`):
 ## Rules that keep it good
 
 - One hero. One idea per scene. Empty space is fine; clutter is not.
-- Colour: a black room and gold are the base; give the picture two or three colours of its own (a teal or deep-blue
-  pool of light behind the subject with `backdrop: [{"type": "backglow", "color": ...}]`, an ivory object, one red
-  accent). Never one amber tone over everything. No neon glow, no particles.
+- Colour: pick a palette and a mood that fit what the user said, and make each scene its own world: a pastel cafe
+  (peach to lilac gradient, pink clay floor, mint and yellow toys), a vivid toy world (sky blue, yellow floor, pink
+  plastic), a desert sunset, a neon club, paper craft, a black studio with gold only when they ask for luxury. A
+  `pale-studio` or `daylight` look with a `background` gradient and a coloured `floor` gets you most of these. Two
+  or three colours per scene, never one tone over everything. No particles. The brand is at most one small
+  "CONNECT AI LAB" line, and only where it fits.
+- Bright colours need tamed whites: `"addPost": [{"type": "grade", "whites": 0.95}]` rolls highlights off softly
+  instead of clipping them, and a too-shiny or too-dark model takes `"surface": {"roughness": 1, "brightness": 1.3}`
+  (also `metalness`, `clearcoat`, `normalScale`, `envIntensity`) on its `gltf`.
 - Letters must read first: thin wide-tracked letters (`wordmark`, font `light` or `sans`) or the display serif; keep
   reflections dim (`floor` `dim` 0.8 or more) and depth of field gentle (`dof` `aperture` about 0.0003 to 0.0006).
 - A product or a sculpture: light it with an HDRI (`env` `{"type": "hdri", "src": ..., "rotation": deg}`), set it on

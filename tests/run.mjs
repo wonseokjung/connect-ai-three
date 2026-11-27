@@ -8,7 +8,7 @@ import {names, normalizeSpec, validateSpec, specNeeds} from '../src/runtime/node
 import {cameraPose} from '../src/runtime/camera.js';
 import {applyMotions, captureBase} from '../src/runtime/motion.js';
 import {scriptedInput} from '../src/runtime/stage.js';
-import {draftSpec} from '../lib/draft.mjs';
+import {draftSpec, pickMood} from '../lib/draft.mjs';
 import {judge, validate, LIMITS} from '../lib/check.mjs';
 import {scanCatalog, loadIndex} from '../lib/catalog.mjs';
 import {installSkill, removeSkill} from '../lib/install.mjs';
@@ -129,6 +129,20 @@ test('draft: words become a spec that validates', () => {
     const {spec} = draftSpec(w);
     ok(t(spec), `draft "${w}": ${JSON.stringify(spec).slice(0, 300)}`);
     eq(V(spec).errors, [], `draft "${w}" validates`);
+  }
+});
+test('draft: the sentence picks the mood, different sentences get different rooms', () => {
+  eq(pickMood('our pastel cafe logo'), 'pastel');
+  eq(pickMood('장난감 가게 로고'), 'toy');
+  eq(pickMood('노을 지는 해변'), 'sunset');
+  eq(pickMood('neon club sign'), 'neon');
+  eq(pickMood('종이로 만든 동화'), 'paper');
+  eq(pickMood('premium gold watch'), 'luxury');
+  const seen = new Set(['MY SHOP', 'TOY BOX', 'HELLO', 'BREAD', 'JANE', 'SEOUL', 'NOVA', 'MAPLE'].map((t) => pickMood(`'${t}' logo, slow orbit`)));
+  ok(seen.size >= 3, `plain sentences should not all get one room: ${[...seen]}`);
+  for (const w of ["'MY SHOP' logo in a pastel cafe, slow orbit", '노을 지는 사막 위 "SUN"', 'neon club sign "NIGHT"', 'paper craft story "ONCE"', "'TOY BOX' for kids"]) {
+    const {spec} = draftSpec(w);
+    eq(V(spec).errors, [], `mood draft "${w}" validates`);
   }
 });
 test('catalog: every item validates, ids are unique, the index matches the files', () => {

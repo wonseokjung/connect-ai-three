@@ -10,9 +10,9 @@ import {REG, registerPost, NEEDS} from './registry.js';
 import {asDef} from './util.js';
 
 const FinishShader = {
-  uniforms: {tDiffuse: {value: null}, uVignette: {value: 0}, uGrain: {value: 0}, uChroma: {value: 0}, uSeed: {value: 0}, uContrast: {value: 1}, uSaturation: {value: 1}, uTint: {value: new THREE.Color('#ffffff')}, uTintAmount: {value: 0}, uLift: {value: 0}},
+  uniforms: {tDiffuse: {value: null}, uVignette: {value: 0}, uGrain: {value: 0}, uChroma: {value: 0}, uSeed: {value: 0}, uContrast: {value: 1}, uSaturation: {value: 1}, uTint: {value: new THREE.Color('#ffffff')}, uTintAmount: {value: 0}, uLift: {value: 0}, uWhites: {value: 1}},
   vertexShader: /* glsl */ `varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
-  fragmentShader: /* glsl */ `uniform sampler2D tDiffuse; uniform float uVignette; uniform float uGrain; uniform float uChroma; uniform float uSeed; uniform float uContrast; uniform float uSaturation; uniform vec3 uTint; uniform float uTintAmount; uniform float uLift; varying vec2 vUv;
+  fragmentShader: /* glsl */ `uniform sampler2D tDiffuse; uniform float uVignette; uniform float uGrain; uniform float uChroma; uniform float uSeed; uniform float uContrast; uniform float uSaturation; uniform vec3 uTint; uniform float uTintAmount; uniform float uLift; uniform float uWhites; varying vec2 vUv;
     float hash(vec2 p){ vec3 p3 = fract(vec3(p.xyx) * 0.1031); p3 += dot(p3, p3.yzx + 33.33); return fract((p3.x + p3.y) * p3.z); }
     void main(){ vec2 c = vUv - 0.5; float r2 = dot(c, c);
       vec4 base = texture2D(tDiffuse, vUv); vec3 col = base.rgb;
@@ -20,6 +20,7 @@ const FinishShader = {
       float l = dot(col, vec3(0.2126, 0.7152, 0.0722));
       col = mix(vec3(l), col, uSaturation); col = (col - 0.5) * uContrast + 0.5 + uLift;
       col = mix(col, col * uTint, uTintAmount);
+      if (uWhites < 1.0) { float k = uWhites - 0.18; vec3 o = max(col - k, 0.0); col = min(col, vec3(k)) + 0.18 * (1.0 - exp(-o / 0.18)); }
       col *= 1.0 - uVignette * smoothstep(0.12, 0.62, r2) ;
       float n = hash(gl_FragCoord.xy + uSeed * 17.31) - 0.5; col += n * uGrain * (0.6 + 0.4 * (1.0 - l));
       gl_FragColor = vec4(clamp(col, 0.0, 1.0), base.a); }`,
@@ -31,10 +32,11 @@ registerPost('bloom', {kind: 'pass', order: 30, alpha: false, source: 'three exa
 registerPost('vignette', {kind: 'finish', alpha: true, source: 'CONNECT AI LAB shader', about: 'darker corners', set: (d, u) => (u.uVignette.value = d.amount ?? 0.38)});
 registerPost('grain', {kind: 'finish', alpha: true, source: 'CONNECT AI LAB shader', about: 'light film grain, the same on every render', set: (d, u) => (u.uGrain.value = d.amount ?? 0.045)});
 registerPost('chroma', {kind: 'finish', alpha: true, source: 'CONNECT AI LAB shader', about: 'colour fringing toward the corners', set: (d, u) => (u.uChroma.value = d.amount ?? 1)});
-registerPost('grade', {kind: 'finish', alpha: true, source: 'CONNECT AI LAB shader', about: 'contrast, saturation, tint', set: (d, u) => {
+registerPost('grade', {kind: 'finish', alpha: true, source: 'CONNECT AI LAB shader', about: 'contrast, saturation, tint, a soft roll-off for the brightest whites (whites)', set: (d, u) => {
   u.uContrast.value = d.contrast ?? 1.06;
   u.uSaturation.value = d.saturation ?? 1;
   u.uLift.value = d.lift ?? 0;
+  u.uWhites.value = d.whites ?? 1;
   if (d.tint) {
     u.uTint.value.set(d.tint);
     u.uTintAmount.value = d.amount ?? 0.35;

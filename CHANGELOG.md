@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.4.0
+
+Colour. Every sentence gets its own world; the spec stays compatible.
+
+- **`new` picks a mood from your words.** A cafe gets a pastel room, kids and toys get a vivid toy world, a beach or
+  a desert gets a sunset, a club gets neon, a story gets paper craft, and luxury or gold gets the black studio with
+  gold. Say nothing about the room and it still picks one from the words, so two sentences rarely look the same.
+  The report says which: `look: pale-studio · mood: pastel`.
+- **The demo is new**: `toy-studio`, a cinema camera turning on a pink stage in a blue and yellow toy world.
+- **`grade` takes `whites`** (below 1, for example 0.95): highlights roll off softly instead of clipping to flat white.
+- **`gltf` takes `surface`**: `roughness`, `metalness`, `clearcoat`, `normalScale`, `envIntensity`, `brightness`, to
+  calm a shiny scan or lift a dark one without editing the file.
+- Every "next:" hint and the help now print the line that works without a published package:
+  `npx github:wonseokjung/connect-ai-three ...`.
+- 3D titles from `new` shrink with long text, so a long name stays in frame.
+
 ## 0.3.0
 
 Premium product and sculpture shots; the spec stays compatible.

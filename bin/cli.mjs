@@ -4,7 +4,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {spawn} from 'node:child_process';
-import {KIT, KIT_NAME, VERSION, projectPaths, readJson, writeJson} from '../lib/paths.mjs';
+import {KIT, KIT_NAME, RUN_CMD, VERSION, projectPaths, readJson, writeJson} from '../lib/paths.mjs';
 import {banner} from '../lib/banner.mjs';
 
 const argv = process.argv.slice(2);
@@ -28,21 +28,21 @@ const open = (f) => {
 const HELP = `${KIT_NAME} ${VERSION} · open source by CONNECT AI LAB
 Say it, get a three.js scene: one spec becomes an interactive web page and a frame-locked video.
 
-  npx ${KIT_NAME}                       make the demo scene and open it in your browser
-  npx ${KIT_NAME} new "gold logo 'MY NAME' over a night city, slow orbit"
+  ${RUN_CMD}                       make the demo scene and open it in your browser
+  ${RUN_CMD} new "'MY SHOP' logo in a pastel cafe, slow orbit"
                                          draft scene.json from words (your AI agent writes better ones: see install)
-  npx ${KIT_NAME} make [folder]         self-check, then web page + video + still sheet + report
-  npx ${KIT_NAME} web [folder]          out/web/index.html (one file, opens by double-click)
-  npx ${KIT_NAME} video [folder]        out/video.mp4   --alpha: out/overlay.mov (transparent)   --short: 9:16 too
-  npx ${KIT_NAME} check [folder]        blank frames, draw calls, textures, phone framing, WebGL leaks, same-picture-twice
-  npx ${KIT_NAME} sheet [folder]        out/sheet.jpg (stills across the scene)
-  npx ${KIT_NAME} on-video talk.mp4 [folder]
+  ${RUN_CMD} make [folder]         self-check, then web page + video + still sheet + report
+  ${RUN_CMD} web [folder]          out/web/index.html (one file, opens by double-click)
+  ${RUN_CMD} video [folder]        out/video.mp4   --alpha: out/overlay.mov (transparent)   --short: 9:16 too
+  ${RUN_CMD} check [folder]        blank frames, draw calls, textures, phone framing, WebGL leaks, same-picture-twice
+  ${RUN_CMD} sheet [folder]        out/sheet.jpg (stills across the scene)
+  ${RUN_CMD} on-video talk.mp4 [folder]
                                          3D object on top of your own video; --face x,y,w,h keeps your face clear;
                                          --matte <folder> draws the 3D BEHIND you (person matte, one picture per frame)
-  npx ${KIT_NAME} catalog [group]       every object, material, motion, camera move, light, pass, look
-  npx ${KIT_NAME} use <catalog-id> [folder]   start from a catalog example
-  npx ${KIT_NAME} install               add the skill to Claude Code / Codex / Cursor / Antigravity
-  npx ${KIT_NAME} doctor                is this machine ready?
+  ${RUN_CMD} catalog [group]       every object, material, motion, camera move, light, pass, look
+  ${RUN_CMD} use <catalog-id> [folder]   start from a catalog example
+  ${RUN_CMD} install               add the skill to Claude Code / Codex / Cursor / Antigravity
+  ${RUN_CMD} doctor                is this machine ready?
 
 A project is a folder with scene.json (+ assets/). Everything we make goes to out/.
 Docs and every example clip: https://github.com/wonseokjung/${KIT_NAME}`;
@@ -128,7 +128,7 @@ async function main() {
     const L = await loadAll();
     const dir = path.resolve(pos[1] || opt('dir') || `${KIT_NAME}-demo`);
     const P = projectPaths(dir);
-    if (!fs.existsSync(P.spec)) writeJson(P.spec, readJson(path.join(KIT, 'examples', 'logo-night-city', 'scene.json')));
+    if (!fs.existsSync(P.spec)) writeJson(P.spec, readJson(path.join(KIT, 'examples', 'toy-studio', 'scene.json')));
     const {spec} = L.loadSpec(dir);
     log(banner());
     log(`${KIT_NAME} ${VERSION} · open source by CONNECT AI LAB`);
@@ -137,13 +137,13 @@ async function main() {
     const w = await L.buildWeb(dir, spec, {log});
     log(`web page ready in ${secs(t)}. ${flag('no-open') || process.env.CI ? `Open ${path.relative(process.cwd(), w.file)}` : 'Opening it'}: drag to look around.`);
     open(w.file);
-    log(`\nnext:\n  npx ${KIT_NAME} make ${path.relative(process.cwd(), dir) || '.'}      (self-check + video + sheet)\n  npx ${KIT_NAME} install             (teach your AI agent the spec and the catalog)\n  edit scene.json, or tell your agent: "change the text to my name and make it a 9:16 short"`);
+    log(`\nnext:\n  ${RUN_CMD} make ${path.relative(process.cwd(), dir) || '.'}      (self-check + video + sheet)\n  ${RUN_CMD} install             (teach your AI agent the spec and the catalog)\n  edit scene.json, or tell your agent: "change the text to my name and make it a 9:16 short"`);
     return;
   }
   if (cmd === 'new') {
     const {draftSpec} = await import('../lib/draft.mjs');
     const words = pos.slice(1).join(' ');
-    if (!words) return log(`say what you want to see: ${KIT_NAME} new "gold logo 'MY NAME' over a night city"`);
+    if (!words) return log(`say what you want to see: ${RUN_CMD} new "'MY SHOP' logo in a pastel cafe, slow orbit"`);
     const {spec, notes} = draftSpec(words);
     const dir = path.resolve(opt('dir') || spec.name);
     const P = projectPaths(dir);
@@ -153,7 +153,7 @@ async function main() {
     } else writeJson(P.spec, spec);
     log(`${P.spec}`);
     for (const n of notes) log(`  ${n}`);
-    log(`next: npx ${KIT_NAME} make ${path.relative(process.cwd(), dir) || '.'}`);
+    log(`next: ${RUN_CMD} make ${path.relative(process.cwd(), dir) || '.'}`);
     return;
   }
   if (cmd === 'use') {
@@ -164,7 +164,7 @@ async function main() {
     const P = projectPaths(dir);
     if (fs.existsSync(P.spec) && !flag('force')) return log(`${P.spec} exists (add --force to replace it)`), (process.exitCode = 1);
     writeJson(P.spec, it.spec);
-    log(`${P.spec}  (${it.group}/${it.id}: ${it.about})\nnext: npx ${KIT_NAME} make ${path.relative(process.cwd(), dir) || '.'}`);
+    log(`${P.spec}  (${it.group}/${it.id}: ${it.about})\nnext: ${RUN_CMD} make ${path.relative(process.cwd(), dir) || '.'}`);
     return;
   }
   if (cmd === 'catalog') {
@@ -178,7 +178,7 @@ async function main() {
       log(`\n${g.title} (${g.count}): ${g.about}`);
       for (const it of idx.items.filter((i) => i.group === g.id)) log(`  ${it.id.padEnd(22)} ${it.about}${only ? `\n${''.padEnd(25)}say: "${it.prompt}"` : ''}`);
     }
-    log(`\nstart from one: npx ${KIT_NAME} use <id>`);
+    log(`\nstart from one: ${RUN_CMD} use <id>`);
     return;
   }
   if (cmd === 'install' || cmd === 'uninstall') {
@@ -206,7 +206,7 @@ async function main() {
   }
   if (cmd === 'on-video') {
     const video = pos[1];
-    if (!video || !fs.existsSync(video)) return log(`give a video file: ${KIT_NAME} on-video talk.mp4 [folder]`), (process.exitCode = 1);
+    if (!video || !fs.existsSync(video)) return log(`give a video file: ${RUN_CMD} on-video talk.mp4 [folder]`), (process.exitCode = 1);
     const src = path.resolve(video);
     const dir = path.resolve(pos[2] || opt('dir') || path.join(path.dirname(src), path.basename(src).replace(/\.[^.]+$/, '') + '-three'));
     const P = projectPaths(dir);

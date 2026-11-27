@@ -1,6 +1,6 @@
 {
   "name": "connect-ai-three",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Say it, get a three.js scene. One scene spec (camera, lights, objects, motion, post) becomes an interactive web page AND a frame-locked video, also behind you in your own footage, with a self-check for blank frames, draw calls, texture sizes, mobile budgets and WebGL leaks. Open source by CONNECT AI LAB.",
   "type": "module",
   "license": "MIT",

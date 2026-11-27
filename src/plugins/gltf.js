@@ -42,6 +42,17 @@ registerObject('gltf', async (d, ctx) => {
     if (override) m.material = override;
     const mats = Array.isArray(m.material) ? m.material : [m.material];
     for (const mat of mats) {
+      // "surface": tame a scanned material without replacing its textures, e.g. {"roughness": 0.5, "clearcoat": 0}
+      const sf = d.surface;
+      if (sf && !override) {
+        if (sf.roughness != null && 'roughness' in mat) mat.roughness = sf.roughness;
+        if (sf.metalness != null && 'metalness' in mat) mat.metalness = sf.metalness;
+        if (sf.clearcoat != null && 'clearcoat' in mat) mat.clearcoat = sf.clearcoat;
+        if (sf.normalScale != null && mat.normalScale) mat.normalScale.setScalar(sf.normalScale);
+        if (sf.envIntensity != null && 'envMapIntensity' in mat) mat.envMapIntensity = sf.envIntensity;
+        if (sf.brightness != null && mat.color) mat.color.multiplyScalar(sf.brightness);
+        mat.needsUpdate = true;
+      }
       mat.userData.baseOpacity = mat.opacity;
       for (const key of ['map', 'normalMap', 'roughnessMap', 'metalnessMap', 'emissiveMap', 'aoMap']) {
         const t = mat[key];
