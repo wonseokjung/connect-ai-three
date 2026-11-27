@@ -205,6 +205,18 @@ const probeOf = (over = {}, sample = {}) => ({
 });
 const J = (p, spec = good) => judge(normalizeSpec(spec), p);
 const has = (list, id) => list.some((e) => e.id === id);
+// packs/pro is optional (left out of the public repo): when it is there, every scene in it validates and finds its files
+test('packs: every pack scene validates and its assets are there', () => {
+  const root = path.join(KIT, 'packs');
+  if (!fs.existsSync(root)) return;
+  for (const pack of fs.readdirSync(root)) for (const d of fs.readdirSync(path.join(root, pack))) {
+    const f = path.join(root, pack, d, 'scene.json');
+    if (!fs.existsSync(f)) continue;
+    const spec = readJson(f);
+    eq(V(spec).errors, [], `${pack}/${d}`);
+    for (const m of JSON.stringify(spec).matchAll(/"src":"(assets\/[^"]+)"/g)) ok(fs.existsSync(path.join(root, pack, d, m[1])), `${pack}/${d}: ${m[1]} missing`);
+  }
+});
 test('check: a healthy scene passes', () => {
   const r = J(probeOf());
   ok(r.ok && !r.errors.length && !r.advice.length, JSON.stringify(r));
