@@ -5,6 +5,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {spawn} from 'node:child_process';
 import {KIT, KIT_NAME, VERSION, projectPaths, readJson, writeJson} from '../lib/paths.mjs';
+import {banner} from '../lib/banner.mjs';
 
 const argv = process.argv.slice(2);
 const VALUE = ['dir', 'agent', 'at', 'out', 'scale', 'target', 'faces', 'face', 'matte', 'matte-fps', 'start', 'port', 'place', 'size', 'times'];
@@ -120,7 +121,7 @@ async function cmdMake(dirArg) {
 
 async function main() {
   const cmd = pos[0] || 'demo';
-  if (flag('help') || cmd === 'help') return log(HELP);
+  if (flag('help') || cmd === 'help') { log(banner()); return log(HELP); }
   if (flag('version')) return log(VERSION);
 
   if (cmd === 'demo') {
@@ -129,6 +130,7 @@ async function main() {
     const P = projectPaths(dir);
     if (!fs.existsSync(P.spec)) writeJson(P.spec, readJson(path.join(KIT, 'examples', 'logo-night-city', 'scene.json')));
     const {spec} = L.loadSpec(dir);
+    log(banner());
     log(`${KIT_NAME} ${VERSION} · open source by CONNECT AI LAB`);
     log(`demo scene: ${P.spec}`);
     const t = Date.now();
@@ -184,6 +186,7 @@ async function main() {
     const o = {agent: opt('agent', 'all'), dir: opt('dir'), project: flag('project'), dryRun: flag('dry-run'), log};
     log(`${KIT_NAME} skill ${cmd}${o.dryRun ? ' (dry run)' : ''}`);
     if (cmd === 'install') {
+      log(banner());
       installSkill(o);
       log(`now tell your agent what you want to see, for example:\n  "Use ${KIT_NAME}: my name in gold 3D letters over a night city, as a web hero and a 6 s video."`);
     } else removeSkill(o);
