@@ -10,6 +10,7 @@ Premium product and sculpture shots; the spec stays compatible.
 - **`fade` with `until` / `back`**: fade in, then out again at `until`. Fades on one object multiply.
 - **Korean 3D letters from a sentence.** `new` turns a quoted Korean line into a 3D `wordmark` when the built-in
   faces carry all its letters (more brand and business words were added to them); any other Korean stays a flat label.
+- `new` keeps gold letters gold when "black" describes the room ("gold title on a black stage").
 - `new` no longer adds a cinema camera when "camera" only means the camera move ("천천히 도는 카메라", "slow orbit
   camera"); "my camera", "tripod", "삼각대" still bring the prop.
 - `wordmark` takes `subWeight`. `demo --no-open` (or `CI=1`) says "Open <path>" instead of "Opening it".

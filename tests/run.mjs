@@ -119,6 +119,8 @@ test('draft: words become a spec that validates', () => {
     ['밤 도시 위에 금색 글자 "커넥트"', (s) => s.objects.some((o) => o.type === 'wordmark' && o.text === '커넥트') && !s.objects.some((o) => o.type === 'text3d')],
     ['밤 도시 위에 금색 글자 "햇살김밥"', (s) => s.objects.some((o) => o.type === 'label' && o.text === '햇살김밥') && !s.objects.some((o) => o.type === 'text3d' || o.type === 'wordmark')],
     ['삼각대 위 시네마 카메라, 천천히 도는 카메라', (s) => s.objects.some((o) => o.type === 'cinema-camera')],
+    // "black" that describes the room does not take the gold away from the letters
+    ['gold title "HELLO" on a black stage, 4s', (s) => s.objects.some((o) => /text3d|wordmark/.test(o.type) && (o.material === 'gold' || o.material?.preset === 'gold'))],
     ['slow orbit around a gold logo "CONNECT AI LAB"', (s) => !s.objects.some((o) => o.type === 'cinema-camera')],
     ['bar chart 3 5 8 12 in a bright studio', (s) => s.look === 'pale-studio' && s.objects.some((o) => o.type === 'bars' && o.values.length === 4)],
     ['', (s) => s.objects.length >= 1],
