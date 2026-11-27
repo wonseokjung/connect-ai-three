@@ -6,7 +6,8 @@ Premium product and sculpture shots; the spec stays compatible.
 
 - **`contact`**: a soft dark pool under an object, so it sits on its pedestal or the floor instead of floating.
 - **Floor and wall without a seam.** `floor` mirror takes `dimFar` (with `fadeFrom` / `fadeTo`, metres) so the far
-  floor fades out; `backglow` takes `floorFade` (metres) so the wall glow stops above the floor line.
+  floor fades out; `backglow` takes `floorFade` (metres, default 3, 0 for the old look) so the wall glow stops above
+  the floor line. Drafts from `new` keep the mirror floor dimmer (`dim` 0.9) and frame a camera prop whole.
 - **`fade` with `until` / `back`**: fade in, then out again at `until`. Fades on one object multiply.
 - **Korean 3D letters from a sentence.** `new` turns a quoted Korean line into a 3D `wordmark` when the built-in
   faces carry all its letters (more brand and business words were added to them); any other Korean stays a flat label.

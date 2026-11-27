@@ -528,9 +528,9 @@ registerObject('city', (d, ctx) => {
 // --- back glow: a soft pool of light on the wall behind the subject (the night-set look) ---------------------
 registerObject('backglow', (d, ctx) => {
   const geo = new THREE.PlaneGeometry(1, 1);
-  // "floorFade" (metres): the glow fades out this far above the floor line, so the wall never meets the floor in a hard seam
+  // "floorFade" (metres, default 3, 0 = off): the glow fades out this far above the floor line, so the wall never meets the floor in a hard seam
   const bgH = d.height ?? 12, bgY = d.y ?? 2.2;
-  const floorV = (0 - (bgY - bgH / 2)) / bgH, fadeV = (d.floorFade ?? 0) / bgH;
+  const floorV = (0 - (bgY - bgH / 2)) / bgH, fadeV = (d.floorFade ?? 3) / bgH;
   ctx.disposables.push(geo);
   const mat = new THREE.ShaderMaterial({
     transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, fog: false,

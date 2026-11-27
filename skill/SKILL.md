@@ -95,7 +95,7 @@ Names (details and examples for each are in `catalog.json`):
   reflections dim (`floor` `dim` 0.8 or more) and depth of field gentle (`dof` `aperture` about 0.0003 to 0.0006).
 - A product or a sculpture: light it with an HDRI (`env` `{"type": "hdri", "src": ..., "rotation": deg}`), set it on
   a dark pedestal with a `contact` shadow under it, fade the far mirror floor (`floor` `dimFar`) and let the wall glow
-  stop above the floor (`backglow` `floorFade` 2 to 3) so wall and floor never meet in a hard line.
+  stop above the floor (`backglow` `floorFade`, 3 by default) so wall and floor never meet in a hard line.
 - Motion is slow and has weight: 4 to 8 seconds, ease in and out, never constant shaking.
 - Text in 3D stays short (a name, a title). Sentences go in the page (`page.title`, `page.sub`) or in labels.
 - Show the user's real things: their name, their logo file, their numbers, their model. Never invent numbers,
