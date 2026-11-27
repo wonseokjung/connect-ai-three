@@ -1,0 +1,355 @@
+{
+ "name": "bust",
+ "duration": 9,
+ "look": "pale-studio",
+ "background": {
+  "type": "gradient",
+  "top": "#FFB89A",
+  "bottom": "#B8A4F2"
+ },
+ "env": {
+  "type": "hdri",
+  "src": "assets/colorful.hdr",
+  "intensity": 0.5,
+  "rotation": 90
+ },
+ "lights": [
+  {
+   "type": "key",
+   "color": "#fffaf2",
+   "intensity": 2.8,
+   "position": [
+    -3.5,
+    5,
+    3.5
+   ]
+  },
+  {
+   "type": "fill",
+   "color": "#bcd7ff",
+   "intensity": 0.7,
+   "position": [
+    3.5,
+    2,
+    3
+   ]
+  },
+  {
+   "type": "rim",
+   "color": "#ff9fc0",
+   "intensity": 2.2,
+   "position": [
+    1.5,
+    3,
+    -3.5
+   ]
+  },
+  {
+   "type": "ambient",
+   "intensity": 0.25
+  }
+ ],
+ "camera": {
+  "position": [
+   -0.2,
+   2.45,
+   3.0
+  ],
+  "target": [
+   -1.35,
+   2.3,
+   0
+  ],
+  "fov": 30,
+  "motion": [
+   {
+    "type": "shots",
+    "list": [
+     {
+      "at": 0,
+      "dur": 2.6,
+      "position": [
+       -0.1,
+       2.45,
+       3.4
+      ],
+      "target": [
+       -1.35,
+       2.3,
+       0
+      ],
+      "ease": "out"
+     },
+     {
+      "at": 2.4,
+      "dur": 4.2,
+      "position": [
+       0.1,
+       1.95,
+       6.4
+      ],
+      "target": [
+       -0.05,
+       1.5,
+       0
+      ],
+      "arc": 0.25,
+      "ease": "inOut"
+     }
+    ]
+   },
+   {
+    "type": "orbit",
+    "from": -4,
+    "to": 6,
+    "dur": 9
+   }
+  ]
+ },
+ "objects": [
+  {
+   "id": "floor",
+   "type": "floor",
+   "kind": "matte",
+   "material": {
+    "preset": "clay",
+    "color": "#F2A7B8"
+   },
+   "size": 300
+  },
+  {
+   "id": "plinth",
+   "type": "cylinder",
+   "radius": 0.55,
+   "height": 0.7,
+   "position": [
+    -1.35,
+    0.35,
+    0
+   ],
+   "material": {
+    "preset": "clay",
+    "color": "#5CC8B0",
+    "roughness": 0.85
+   }
+  },
+  {
+   "id": "plinth-ring",
+   "type": "torus",
+   "radius": 0.56,
+   "tube": 0.012,
+   "position": [
+    -1.35,
+    0.7,
+    0
+   ],
+   "rotation": [
+    90,
+    0,
+    0
+   ],
+   "material": {
+    "preset": "clay",
+    "color": "#FFD166"
+   }
+  },
+  {
+   "id": "bust",
+   "type": "gltf",
+   "src": "assets/bust.glb",
+   "fit": 2.2,
+   "position": [
+    -1.35,
+    0.7,
+    0
+   ],
+   "rotation": [
+    0,
+    34,
+    0
+   ],
+   "motion": [
+    {
+     "type": "rotate",
+     "at": 0,
+     "dur": 9,
+     "by": [
+      0,
+      -22,
+      0
+     ]
+    }
+   ],
+   "surface": {
+    "roughness": 1,
+    "normalScale": 0.8,
+    "brightness": 1.45
+   }
+  },
+  {
+   "id": "title",
+   "type": "wordmark",
+   "text": "CONNECT AI LAB",
+   "font": "serif",
+   "size": 0.19,
+   "tracking": 0.1,
+   "position": [
+    0.95,
+    1.85,
+    -0.1
+   ],
+   "rule": false,
+   "sub": "AI 비즈니스를 배우는 가장 멋진 방법",
+   "split": true,
+   "motion": [
+    {
+     "type": "stagger",
+     "at": 3.6,
+     "each": 0.06,
+     "dur": 1.0,
+     "kind": "rise"
+    }
+   ],
+   "material": {
+    "preset": "plastic",
+    "color": "#2D2A6E",
+    "roughness": 0.5
+   },
+   "subSize": 0.14,
+   "subTracking": 0.1,
+   "subColor": "#2D2A6E",
+   "subWeight": 500,
+   "reflect": false
+  },
+  {
+   "id": "bust-contact",
+   "type": "contact",
+   "radius": 0.5,
+   "opacity": 0.35,
+   "position": [
+    -1.35,
+    0.704,
+    0
+   ],
+   "reflect": false,
+   "color": "#6b4f73"
+  },
+  {
+   "id": "stage-contact",
+   "type": "contact",
+   "radius": 0.95,
+   "opacity": 0.3,
+   "color": "#6b4f73",
+   "position": [
+    -1.35,
+    0.004,
+    0
+   ]
+  }
+ ],
+ "addPost": [
+  {
+   "type": "dof",
+   "aperture": 0.0004
+  },
+  {
+   "type": "grade",
+   "contrast": 1.06,
+   "saturation": 1.15,
+   "whites": 0.95
+  }
+ ],
+ "short": {
+  "camera": {
+   "position": [
+    -0.6,
+    2.35,
+    3.6
+   ],
+   "target": [
+    -1.35,
+    2.2,
+    0
+   ],
+   "fov": 30,
+   "motion": [
+    {
+     "type": "shots",
+     "list": [
+      {
+       "at": 0,
+       "dur": 2.6,
+       "position": [
+        -0.6,
+        2.35,
+        3.6
+       ],
+       "target": [
+        -1.35,
+        2.2,
+        0
+       ],
+       "ease": "out"
+      },
+      {
+       "at": 2.4,
+       "dur": 4.2,
+       "position": [
+        -1.2,
+        2.05,
+        6.2
+       ],
+       "target": [
+        -1.35,
+        2.0,
+        0
+       ],
+       "arc": 0.25,
+       "ease": "inOut"
+      }
+     ]
+    },
+    {
+     "type": "orbit",
+     "from": -4,
+     "to": 6,
+     "dur": 9
+    }
+   ]
+  },
+  "objects": {
+   "title": {
+    "position": [
+     -1.35,
+     3.55,
+     -0.1
+    ],
+    "size": 0.17,
+    "subSize": 0.15
+   }
+  }
+ },
+ "backdrop": [],
+ "exposure": 1.0,
+ "tone": "neutral",
+ "post": [
+  {
+   "type": "bloom",
+   "strength": 0.12,
+   "radius": 0.5,
+   "threshold": 0.96
+  },
+  {
+   "type": "vignette",
+   "amount": 0.12
+  },
+  {
+   "type": "grain",
+   "amount": 0.025
+  }
+ ],
+ "fog": {
+  "color": "#E9B8C8",
+  "density": 0.05
+ }
+}

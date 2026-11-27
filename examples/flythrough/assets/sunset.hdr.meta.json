@@ -1,0 +1,38 @@
+{
+ "id": "belfast_sunset_puresky",
+ "name": "Belfast Sunset (Pure Sky)",
+ "kind": "hdri",
+ "license": "CC0",
+ "author": "Greg Zaal, Dimitrios Savva, Jarod Guest",
+ "credit": "Belfast Sunset (Pure Sky) HDRI by Greg Zaal, Dimitrios Savva, Jarod Guest (Poly Haven, CC0)",
+ "url": "https://polyhaven.com/a/belfast_sunset_puresky",
+ "main": "belfast_sunset_puresky_4k.hdr",
+ "files": [
+  "belfast_sunset_puresky_4k.hdr",
+  "belfast_sunset_puresky_1k.hdr"
+ ],
+ "preview": "preview.png",
+ "desc": "Free 24K unclipped HDRI showing a low-contrast, partly cloudy sunset over calm water, with a warm golden horizon and soft violet-blue light.",
+ "tags": [
+  "pure skies",
+  "natural light",
+  "outdoor",
+  "nature",
+  "low contrast",
+  "partly cloudy",
+  "sunrise-sunset",
+  "skies",
+  "pure skies"
+ ],
+ "text": "HDRI environment light sky panorama natural light outdoor nature low contrast partly cloudy sunrise-sunset skies pure skies pure skies Pure Skies {\"time_of_day\": \"sunset\", \"weather\": \"partly_cloudy\", \"light_type\": \"natural\", \"contrast\": \"low\", \"environment\": \"outdoor\", \"sky_view\": \"open\"}",
+ "downloads": 413168,
+ "quality": 5,
+ "style": "realistic",
+ "formats": [
+  "hdr"
+ ],
+ "resolution": "4k+1k",
+ "evs": 12,
+ "schema": "lib3d-generic-1",
+ "collected": "2026-10-26"
+}

@@ -19,6 +19,28 @@ That one line makes the demo scene and opens it in your browser. Drag it around.
 
 You need [Node.js](https://nodejs.org) 18 or newer and a computer with a GPU. No paid API key.
 
+## Examples
+
+Every picture is one folder in [examples/](examples): the `scene.json`, a short clip and the sentence behind it. Click one.
+
+<table>
+<tr>
+<td width="33%" valign="top"><a href="examples/bust"><img src="examples/bust/preview.jpg" alt="Marble bust in a pastel gallery"></a><br><a href="examples/bust"><code>bust</code></a> Marble bust in a pastel gallery</td>
+<td width="33%" valign="top"><a href="examples/showroom"><img src="examples/showroom/preview.jpg" alt="Cine camera in a toy world"></a><br><a href="examples/showroom"><code>showroom</code></a> Cine camera in a toy world</td>
+<td width="33%" valign="top"><a href="examples/flythrough"><img src="examples/flythrough/preview.jpg" alt="Three stops on a desert at sunset"></a><br><a href="examples/flythrough"><code>flythrough</code></a> Three stops on a desert at sunset</td>
+</tr>
+<tr>
+<td width="33%" valign="top"><a href="examples/toy-studio"><img src="examples/toy-studio/preview.jpg" alt="The demo, all built in code"></a><br><a href="examples/toy-studio"><code>toy-studio</code></a> The demo, all built in code</td>
+<td width="33%" valign="top"><a href="examples/logo-night-city"><img src="examples/logo-night-city/preview.jpg" alt="Gold logo over a night city"></a><br><a href="examples/logo-night-city"><code>logo-night-city</code></a> Gold logo over a night city</td>
+<td width="33%" valign="top"><a href="examples/interactive-hero"><img src="examples/interactive-hero/preview.jpg" alt="A web hero you can turn"></a><br><a href="examples/interactive-hero"><code>interactive-hero</code></a> A web hero you can turn</td>
+</tr>
+<tr>
+<td width="33%" valign="top"><a href="examples/explainer-fly"><img src="examples/explainer-fly/preview.jpg" alt="Explainer fly-through"></a><br><a href="examples/explainer-fly"><code>explainer-fly</code></a> Explainer fly-through</td>
+<td width="33%" valign="top"><a href="examples/korean-title"><img src="examples/korean-title/preview.jpg" alt="3D text in Korean"></a><br><a href="examples/korean-title"><code>korean-title</code></a> 3D text in Korean</td>
+<td width="33%" valign="top"><a href="examples/on-my-video"><img src="examples/on-my-video/preview.jpg" alt="3D beside me in my own video"></a><br><a href="examples/on-my-video"><code>on-my-video</code></a> 3D beside me in my own video</td>
+</tr>
+</table>
+
 ## 0.4: a different world for every sentence
 
 Before, most sentences came out black and gold. Now it reads the sentence and picks colours and a mood that fit. A cafe gets pastel, toys get a bright toy world, a sunset gets a desert at dusk, a club gets neon, a story gets paper craft. Say nothing about the room and it still picks one from your words, so two sentences rarely land in the same room.
@@ -252,7 +274,7 @@ Gaussian splats · WebGPU / TSL materials · sound · a keyframe editor. Depth o
 
 ## Credits
 
-Built on three.js and the projects listed in [NOTICE.md](NOTICE.md), each with version and licence. Assets: one CC0 HDRI from Poly Haven, one public-domain NASA model, and typeface data derived from two open fonts under the SIL Open Font License ([licenses/assets.md](licenses/assets.md)); no credit-required assets. The props are built in code. The clips on the catalog page that show a person are the author, on his own footage.
+Built on three.js and the projects listed in [NOTICE.md](NOTICE.md), each with version and licence. Assets: one CC0 HDRI from Poly Haven, one public-domain NASA model, typeface data derived from two open fonts under the SIL Open Font License, and for three examples five CC0 models and three CC0 HDRIs from Poly Haven ([licenses/assets.md](licenses/assets.md)); no credit-required assets. The props are built in code. The clips on the catalog page that show a person are the author, on his own footage.
 
 <!-- team:start -->
 ## CONNECT AI LAB's AI employees

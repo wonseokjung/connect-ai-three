@@ -59,7 +59,8 @@ theatre-js/theatre, shader-effects-inc/shaders (all permissive; planned as later
 ## Assets
 
 See `licenses/assets.md`: one CC0 HDRI (Poly Haven), one NASA public-domain model, our own mark and sample frame,
-and six small typefaces under the SIL Open Font License.
+six small typefaces under the SIL Open Font License, and for the `bust`, `showroom` and `flythrough` examples five
+CC0 models and three CC0 HDRIs from Poly Haven.
 No credit-required (CC BY) asset is used.
 
 ## Remotion

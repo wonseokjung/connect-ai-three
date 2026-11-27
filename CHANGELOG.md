@@ -20,6 +20,9 @@ Colour. Every sentence gets its own world; the spec stays compatible.
 - Fixed: `addLights` and `addPost` were applied twice when a spec was prepared twice (the page and the video both do
   it), so a scene got a second depth of field, a second grade and doubled lights. One of the hero scenes went from 172
   draw calls to 120.
+- **Examples show their result.** Every folder in `examples/` has a `preview.jpg` and a 6 second `preview.mp4` made
+  with the kit, and a README with the sentence behind it. Three new ones with CC0 models and HDRIs from Poly Haven:
+  `bust`, `showroom`, `flythrough`. The README opens with a gallery of all nine.
 - `packs/pro/`: three finished cinematic scenes (pastel gallery, toy showroom, sunset flythrough), kept apart from
   the package.
 

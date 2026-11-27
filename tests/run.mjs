@@ -193,10 +193,14 @@ test('catalog: every item validates, ids are unique, the index matches the files
   });
   for (const o of N.objects) ok(used.has(o), `object type ${o} is never used in the catalog`);
 });
-test('examples: every example validates', () => {
+test('examples: every example validates and finds its files', () => {
   for (const d of fs.readdirSync(path.join(KIT, 'examples'))) {
     const f = path.join(KIT, 'examples', d, 'scene.json');
-    if (fs.existsSync(f)) eq(V(readJson(f)).errors, [], d);
+    if (!fs.existsSync(f)) continue;
+    const spec = readJson(f);
+    eq(V(spec).errors, [], d);
+    // the model files stay in the repo, not in the npm package: check them where they are
+    if (fs.existsSync(path.join(KIT, 'examples', d, 'assets'))) for (const m of JSON.stringify(spec).matchAll(/"src":"(assets\/[^"]+)"/g)) ok(fs.existsSync(path.join(KIT, 'examples', d, m[1])), `${d}: ${m[1]} missing`);
   }
 });
 // --- the judge, on made-up probe numbers (no browser) ---

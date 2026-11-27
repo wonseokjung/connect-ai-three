@@ -1,5 +1,13 @@
 # 3D on your own video, behind you
 
+[![The author talking at his desk, a gold mark with the words 3D MODELING floating in the empty space on his right](preview.jpg)](preview.mp4)
+
+Say it to your agent:
+
+> Use connect-ai-three on my talking video with the person matte: when I say "3D modeling" show our mark as a wireframe on my right and turn it into solid gold; when I say "a good computer" slide a computer out from behind my head. Nothing in front of my face or my mic.
+
+The preview is `scene.json` (cut 2) made with the kit on the author's own footage.
+
 Five finished cuts. Each one is timed to the words spoken in that take, and with a person matte every object is drawn
 behind the speaker.
 
@@ -13,11 +21,11 @@ behind the speaker.
 
 The kit does not ship anyone's footage. Run a cut on your own clip:
 
-    npx connect-ai-video-motion analyze my-talk.mp4          # lesson 2's tool: writes work/face.json and work/matte
-    npx connect-ai-three on-video my-talk.mp4 my-talk-three --faces my-talk-video-motion/work/face.json --matte my-talk-video-motion/work/matte
+    npx github:wonseokjung/connect-ai-video-motion analyze my-talk.mp4          # lesson 2's tool: writes work/face.json and work/matte
+    npx github:wonseokjung/connect-ai-three on-video my-talk.mp4 my-talk-three --faces my-talk-video-motion/work/face.json --matte my-talk-video-motion/work/matte
 
 Then copy a cut over `my-talk-three/scene.json`, move the objects to the empty parts of your own frame, set the times
-to your own words, and run `npx connect-ai-three make my-talk-three --alpha`.
+to your own words, and run `npx github:wonseokjung/connect-ai-three make my-talk-three --alpha`.
 
 - `keepOut` holds the face box and, marked `"front": true`, the mic arm: it is in front of the speaker but not part of
   the matte, so the check keeps 3D off it.

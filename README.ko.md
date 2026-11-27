@@ -19,6 +19,28 @@ npx github:wonseokjung/connect-ai-three
 
 [Node.js](https://nodejs.org) 18 이상이랑 GPU 있는 컴퓨터면 돼요. 유료 API 키는 필요 없어요.
 
+## 예제
+
+그림 하나가 [examples/](examples) 의 폴더 하나예요. 안에 `scene.json`, 짧은 영상, 그걸 만든 문장이 있어요. 눌러 보세요.
+
+<table>
+<tr>
+<td width="33%" valign="top"><a href="examples/bust"><img src="examples/bust/preview.jpg" alt="Marble bust in a pastel gallery"></a><br><a href="examples/bust"><code>bust</code></a> 대리석 흉상, 파스텔 갤러리</td>
+<td width="33%" valign="top"><a href="examples/showroom"><img src="examples/showroom/preview.jpg" alt="Cine camera in a toy world"></a><br><a href="examples/showroom"><code>showroom</code></a> 장난감 세상의 필름 카메라</td>
+<td width="33%" valign="top"><a href="examples/flythrough"><img src="examples/flythrough/preview.jpg" alt="Three stops on a desert at sunset"></a><br><a href="examples/flythrough"><code>flythrough</code></a> 노을 사막의 세 자리</td>
+</tr>
+<tr>
+<td width="33%" valign="top"><a href="examples/toy-studio"><img src="examples/toy-studio/preview.jpg" alt="The demo, all built in code"></a><br><a href="examples/toy-studio"><code>toy-studio</code></a> 데모, 전부 코드로</td>
+<td width="33%" valign="top"><a href="examples/logo-night-city"><img src="examples/logo-night-city/preview.jpg" alt="Gold logo over a night city"></a><br><a href="examples/logo-night-city"><code>logo-night-city</code></a> 밤 도시 위 금색 로고</td>
+<td width="33%" valign="top"><a href="examples/interactive-hero"><img src="examples/interactive-hero/preview.jpg" alt="A web hero you can turn"></a><br><a href="examples/interactive-hero"><code>interactive-hero</code></a> 돌려 보는 웹 히어로</td>
+</tr>
+<tr>
+<td width="33%" valign="top"><a href="examples/explainer-fly"><img src="examples/explainer-fly/preview.jpg" alt="Explainer fly-through"></a><br><a href="examples/explainer-fly"><code>explainer-fly</code></a> 설명 장면 사이를 나는 카메라</td>
+<td width="33%" valign="top"><a href="examples/korean-title"><img src="examples/korean-title/preview.jpg" alt="3D text in Korean"></a><br><a href="examples/korean-title"><code>korean-title</code></a> 한글 3D 글자</td>
+<td width="33%" valign="top"><a href="examples/on-my-video"><img src="examples/on-my-video/preview.jpg" alt="3D beside me in my own video"></a><br><a href="examples/on-my-video"><code>on-my-video</code></a> 내 영상 위 3D</td>
+</tr>
+</table>
+
 ## 0.4: 문장마다 다른 세상
 
 예전엔 웬만한 문장은 다 검정에 금색이었어요. 이제는 문장을 읽고 거기 맞는 색이랑 분위기를 골라요. 카페면 파스텔, 장난감이면 쨍한 장난감 세상, 노을이면 사막 노을, 클럽이면 네온, 동화면 종이 공예. 아무 말 안 하면 단어로 하나를 골라서, 두 문장이 같은 방에 들어가는 일이 거의 없어요.
@@ -200,7 +222,7 @@ import {ConnectScene} from 'connect-ai-three/src/adapters/r3f';
 
 ## 만든 곳
 
-three.js 와 [NOTICE.md](NOTICE.md) 의 프로젝트들 위에 만들었습니다(버전 · 라이선스 포함). 에셋은 Poly Haven 의 CC0 HDRI 하나와 NASA 공개 모델 하나뿐이고, 출처 표기가 필요한 에셋은 쓰지 않았습니다([licenses/assets.md](licenses/assets.md)). 카탈로그 페이지에서 사람이 나오는 클립은 만든 사람 본인의 영상입니다.
+three.js 와 [NOTICE.md](NOTICE.md) 의 프로젝트들 위에 만들었습니다(버전 · 라이선스 포함). 에셋은 Poly Haven 의 CC0 HDRI 하나, NASA 공개 모델 하나, 그리고 예제 세 개에 쓴 Poly Haven 의 CC0 모델 다섯 개와 HDRI 세 개이고, 출처 표기가 필요한 에셋은 쓰지 않았습니다([licenses/assets.md](licenses/assets.md)). 카탈로그 페이지에서 사람이 나오는 클립은 만든 사람 본인의 영상입니다.
 
 <!-- team:start -->
 ## CONNECT AI LAB의 AI 직원들
