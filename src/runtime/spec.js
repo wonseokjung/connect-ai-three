@@ -27,8 +27,10 @@ export function normalizeSpec(input) {
   s.env = s.env === undefined ? L.env : typeof s.env === 'string' ? {type: s.env} : s.env;
   s.lights = s.lights ?? L.lights;
   if (s.addLights) s.lights = [...s.lights, ...s.addLights];
+  delete s.addLights; // applied once: a spec normalized twice (page, then stage) must not get them again
   s.post = (s.post ?? L.post).map((x) => asDef(x));
   if (s.addPost) s.post = [...s.post, ...s.addPost.map((x) => asDef(x))];
+  delete s.addPost;
   s.tone = s.tone ?? L.tone;
   s.exposure = s.exposure ?? L.exposure;
   s.fog = s.fog === undefined ? L.fog || null : s.fog;

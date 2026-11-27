@@ -37,6 +37,12 @@ test('spec: the look fills what the spec leaves out', () => {
   eq(s.objects[0].motion, [{type: 'turntable'}], 'string motion becomes an object');
   ok(normalizeSpec({...good, post: []}).post.length === 0, 'an empty post list stays empty');
 });
+test('spec: normalizing twice adds addLights and addPost only once', () => {
+  const once = normalizeSpec({...good, addPost: [{type: 'dof'}], addLights: [{type: 'rim'}]});
+  const twice = normalizeSpec(once);
+  eq(twice.post.length, once.post.length);
+  eq(twice.lights.length, once.lights.length);
+});
 test('spec: a valid spec has no errors', () => eq(V(good).errors, []));
 test('spec: unknown names are errors with a suggestion', () => {
   const e = V({...good, look: 'gold-nite', post: ['blom'], objects: [{id: 'a', type: 'text-3d', material: 'golden', motion: ['turntabel']}], camera: {motion: ['orbitt']}}).errors.map((x) => x.msg).join('\n');
