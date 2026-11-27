@@ -47,6 +47,16 @@
   {
    "type": "ambient",
    "intensity": 0.3
+  },
+  {
+   "type": "point",
+   "color": "#FFD9E6",
+   "intensity": 6,
+   "position": [
+    0,
+    1.0,
+    2.4
+   ]
   }
  ],
  "backdrop": [],
