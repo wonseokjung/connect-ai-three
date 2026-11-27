@@ -1,0 +1,495 @@
+{
+ "name": "h2-showroom",
+ "duration": 9,
+ "look": "pale-studio",
+ "background": {
+  "type": "gradient",
+  "top": "#2EC4F1",
+  "bottom": "#1B6FE0"
+ },
+ "env": {
+  "type": "hdri",
+  "src": "assets/pink.hdr",
+  "intensity": 0.7,
+  "rotation": 0
+ },
+ "lights": [
+  {
+   "type": "key",
+   "color": "#fff6e8",
+   "intensity": 2.6,
+   "position": [
+    -3,
+    5,
+    4
+   ]
+  },
+  {
+   "type": "fill",
+   "color": "#ffd6f0",
+   "intensity": 0.9,
+   "position": [
+    3.5,
+    2,
+    3
+   ]
+  },
+  {
+   "type": "rim",
+   "color": "#FFE066",
+   "intensity": 3,
+   "position": [
+    2.5,
+    3.5,
+    -3
+   ]
+  },
+  {
+   "type": "ambient",
+   "intensity": 0.3
+  }
+ ],
+ "backdrop": [],
+ "camera": {
+  "position": [
+   0,
+   1.45,
+   6.4
+  ],
+  "target": [
+   0,
+   1.05,
+   0
+  ],
+  "fov": 28,
+  "motion": [
+   {
+    "type": "shots",
+    "list": [
+     {
+      "at": 0,
+      "dur": 0.01,
+      "position": [
+       1.85,
+       1.5,
+       3.5
+      ],
+      "target": [
+       0,
+       1.2,
+       0
+      ]
+     },
+     {
+      "at": 0.2,
+      "dur": 3.6,
+      "position": [
+       -1.95,
+       1.7,
+       3.7
+      ],
+      "target": [
+       0,
+       1.18,
+       0
+      ],
+      "ease": "inOut",
+      "arc": 0.15
+     },
+     {
+      "at": 3.9,
+      "dur": 3.8,
+      "position": [
+       0,
+       1.62,
+       5.3
+      ],
+      "target": [
+       0,
+       1.33,
+       0
+      ],
+      "ease": "inOut",
+      "arc": 0.3
+     }
+    ]
+   }
+  ]
+ },
+ "objects": [
+  {
+   "id": "floor",
+   "type": "floor",
+   "kind": "matte",
+   "material": {
+    "preset": "clay",
+    "color": "#FFD23F"
+   },
+   "size": 300
+  },
+  {
+   "id": "stage",
+   "type": "cylinder",
+   "radius": 1.05,
+   "height": 0.36,
+   "position": [
+    0,
+    0.18,
+    0
+   ],
+   "material": {
+    "preset": "plastic",
+    "color": "#FF5D8F",
+    "roughness": 0.35
+   }
+  },
+  {
+   "id": "stage-ring",
+   "type": "torus",
+   "radius": 1.06,
+   "tube": 0.018,
+   "position": [
+    0,
+    0.36,
+    0
+   ],
+   "rotation": [
+    90,
+    0,
+    0
+   ],
+   "material": {
+    "preset": "plastic",
+    "color": "#FFFFFF",
+    "roughness": 0.3
+   }
+  },
+  {
+   "id": "halo",
+   "type": "torus",
+   "radius": 0.86,
+   "tube": 0.03,
+   "position": [
+    0,
+    1.1,
+    -0.45
+   ],
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "material": {
+    "preset": "plastic",
+    "color": "#7BF1A8",
+    "roughness": 0.3
+   },
+   "motion": [
+    {
+     "type": "scale",
+     "from": 0.6,
+     "to": 1,
+     "at": 0.6,
+     "dur": 2.2
+    },
+    {
+     "type": "fade",
+     "at": 0.6,
+     "dur": 1.2
+    }
+   ]
+  },
+  {
+   "id": "product",
+   "type": "gltf",
+   "src": "assets/product.glb",
+   "fit": 1.6,
+   "position": [
+    0,
+    0.36,
+    0
+   ],
+   "rotation": [
+    0,
+    -60,
+    0
+   ],
+   "motion": [
+    {
+     "type": "turntable",
+     "speed": 9
+    }
+   ],
+   "surface": {
+    "brightness": 1.35
+   }
+  },
+  {
+   "id": "name",
+   "type": "wordmark",
+   "text": "CONNECT AI LAB",
+   "font": "bold",
+   "size": 0.24,
+   "tracking": 0.12,
+   "position": [
+    0,
+    2.42,
+    -0.6
+   ],
+   "material": {
+    "preset": "plastic",
+    "color": "#FFFFFF",
+    "roughness": 0.35
+   },
+   "rule": true,
+   "split": true,
+   "motion": [
+    {
+     "type": "stagger",
+     "at": 4.6,
+     "each": 0.05,
+     "dur": 0.9,
+     "kind": "rise"
+    }
+   ],
+   "reflect": false
+  },
+  {
+   "id": "tagline",
+   "type": "label",
+   "text": "모두를 위한 AI 교육",
+   "size": 0.17,
+   "weight": 600,
+   "tracking": 0.18,
+   "color": "#FFFFFF",
+   "position": [
+    0,
+    2.15,
+    -0.6
+   ],
+   "motion": [
+    {
+     "type": "fade",
+     "at": 5.6,
+     "dur": 1.0
+    }
+   ],
+   "reflect": false
+  },
+  {
+   "id": "product-contact",
+   "type": "contact",
+   "radius": 0.7,
+   "opacity": 0.35,
+   "position": [
+    0,
+    0.364,
+    0
+   ],
+   "reflect": false,
+   "softness": 0.75,
+   "color": "#5a2a10"
+  },
+  {
+   "id": "cube-a",
+   "type": "rounded-box",
+   "size": [
+    0.5,
+    0.5,
+    0.5
+   ],
+   "radius": 0.08,
+   "position": [
+    -2.1,
+    0.25,
+    -0.6
+   ],
+   "material": {
+    "preset": "plastic",
+    "color": "#7BF1A8",
+    "roughness": 0.3
+   },
+   "motion": [
+    {
+     "type": "float",
+     "amp": 0.03
+    }
+   ],
+   "rotation": [
+    0,
+    20,
+    0
+   ]
+  },
+  {
+   "id": "cube-a-c",
+   "type": "contact",
+   "radius": 0.4,
+   "opacity": 0.3,
+   "color": "#5a2a10",
+   "position": [
+    -2.1,
+    0.004,
+    -0.6
+   ]
+  },
+  {
+   "id": "cube-b",
+   "type": "rounded-box",
+   "size": [
+    0.36,
+    0.36,
+    0.36
+   ],
+   "radius": 0.07,
+   "position": [
+    -1.75,
+    0.18,
+    0.5
+   ],
+   "material": {
+    "preset": "plastic",
+    "color": "#9B5DE5",
+    "roughness": 0.3
+   },
+   "motion": [
+    {
+     "type": "float",
+     "amp": 0.03
+    }
+   ],
+   "rotation": [
+    0,
+    -15,
+    0
+   ]
+  },
+  {
+   "id": "cube-b-c",
+   "type": "contact",
+   "radius": 0.4,
+   "opacity": 0.3,
+   "color": "#5a2a10",
+   "position": [
+    -1.75,
+    0.004,
+    0.5
+   ]
+  },
+  {
+   "id": "ball-a",
+   "type": "sphere",
+   "radius": 0.28,
+   "position": [
+    2.0,
+    0.28,
+    -0.3
+   ],
+   "material": {
+    "preset": "plastic",
+    "color": "#00BBF9",
+    "roughness": 0.3
+   },
+   "motion": [
+    {
+     "type": "float",
+     "amp": 0.03
+    }
+   ]
+  },
+  {
+   "id": "ball-a-c",
+   "type": "contact",
+   "radius": 0.4,
+   "opacity": 0.3,
+   "color": "#5a2a10",
+   "position": [
+    2.0,
+    0.004,
+    -0.3
+   ]
+  },
+  {
+   "id": "ring-a",
+   "type": "torus",
+   "radius": 0.3,
+   "tube": 0.1,
+   "position": [
+    1.7,
+    0.1,
+    0.7
+   ],
+   "material": {
+    "preset": "plastic",
+    "color": "#F15BB5",
+    "roughness": 0.3
+   },
+   "motion": [
+    {
+     "type": "float",
+     "amp": 0.03
+    }
+   ],
+   "rotation": [
+    90,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "ring-a-c",
+   "type": "contact",
+   "radius": 0.4,
+   "opacity": 0.3,
+   "color": "#5a2a10",
+   "position": [
+    1.7,
+    0.004,
+    0.7
+   ]
+  }
+ ],
+ "addPost": [
+  {
+   "type": "dof",
+   "aperture": 0.0004
+  },
+  {
+   "type": "grade",
+   "contrast": 1.05,
+   "saturation": 1.12,
+   "whites": 0.95
+  }
+ ],
+ "tone": "neutral",
+ "fog": {
+  "color": "#2a8fe8",
+  "density": 0.04
+ },
+ "post": [
+  {
+   "type": "bloom",
+   "strength": 0.1,
+   "radius": 0.5,
+   "threshold": 0.97
+  },
+  {
+   "type": "vignette",
+   "amount": 0.1
+  },
+  {
+   "type": "grain",
+   "amount": 0.02
+  }
+ ],
+ "short": {
+  "objects": {
+   "name": {
+    "size": 0.15
+   },
+   "tagline": {
+    "size": 0.11
+   }
+  }
+ }
+}

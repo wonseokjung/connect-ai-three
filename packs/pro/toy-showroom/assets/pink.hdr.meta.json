@@ -1,0 +1,41 @@
+{
+ "id": "pink_sunrise",
+ "name": "Pink Sunrise",
+ "kind": "hdri",
+ "license": "CC0",
+ "author": "Greg Zaal, Rico Cilliers",
+ "credit": "Pink Sunrise HDRI by Greg Zaal, Rico Cilliers (Poly Haven, CC0)",
+ "url": "https://polyhaven.com/a/pink_sunrise",
+ "main": "pink_sunrise_4k.hdr",
+ "files": [
+  "pink_sunrise_4k.hdr",
+  "pink_sunrise_1k.hdr"
+ ],
+ "preview": "preview.png",
+ "desc": "Free 16K HDRI, unclipped. Soft pink sunrise over a coastal road, rocky hill and bushes; partly cloudy sky, medium-contrast light, subtle ocean reflections.",
+ "tags": [
+  "road",
+  "hill",
+  "bush",
+  "view",
+  "ocean",
+  "backplates",
+  "outdoor",
+  "nature",
+  "sunrise-sunset",
+  "partly cloudy",
+  "medium contrast",
+  "natural light"
+ ],
+ "text": "HDRI environment light sky panorama outdoor nature sunrise-sunset partly cloudy medium contrast natural light road hill bush view ocean backplates Coast & Water/Rocky Coast/Rocky Shorelines {\"time_of_day\": \"sunrise\", \"weather\": \"partly_cloudy\", \"light_type\": \"natural\", \"contrast\": \"medium\", \"backplates\": true, \"environment\": \"outdoor\", \"sky_view\": \"open\"}",
+ "downloads": 166175,
+ "quality": 5,
+ "style": "realistic",
+ "formats": [
+  "hdr"
+ ],
+ "resolution": "4k+1k",
+ "evs": 12,
+ "schema": "lib3d-generic-1",
+ "collected": "2026-10-26"
+}

@@ -1,0 +1,40 @@
+{
+ "id": "colorful_studio",
+ "name": "Colorful Studio",
+ "kind": "hdri",
+ "license": "CC0",
+ "author": "Sergej Majboroda",
+ "credit": "Colorful Studio HDRI by Sergej Majboroda (Poly Haven, CC0)",
+ "url": "https://polyhaven.com/a/colorful_studio",
+ "main": "colorful_studio_4k.hdr",
+ "files": [
+  "colorful_studio_4k.hdr",
+  "colorful_studio_1k.hdr"
+ ],
+ "preview": "preview.png",
+ "desc": "Free 16K unclipped HDRI of a colorful indoor studio: high contrast lounge lighting with warm bar glows, cool overhead spots and strong reflections.",
+ "tags": [
+  "couch",
+  "bar",
+  "bottle",
+  "incandescent",
+  "set",
+  "lounge",
+  "backplates",
+  "indoor",
+  "urban",
+  "high contrast",
+  "artificial light"
+ ],
+ "text": "HDRI environment light sky panorama indoor urban high contrast artificial light couch bar bottle incandescent set lounge backplates Studio/Photo Studios/Themed & Set-Dressed {\"light_type\": \"artificial\", \"contrast\": \"high\", \"backplates\": true, \"environment\": \"indoor\"}",
+ "downloads": 98721,
+ "quality": 5,
+ "style": "realistic",
+ "formats": [
+  "hdr"
+ ],
+ "resolution": "4k+1k",
+ "evs": 15,
+ "schema": "lib3d-generic-1",
+ "collected": "2026-10-26"
+}
