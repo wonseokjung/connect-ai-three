@@ -53,10 +53,6 @@ npx github:wonseokjung/connect-ai-three new "neon club sign 'NIGHT CLUB'"
 npx github:wonseokjung/connect-ai-three make my-shop          # self-check, web page, video, still sheet, report
 ```
 
-It goes on your own video too. It never covers your face, and with a person matte the 3D passes behind you.
-
-[![A toy planet and HELLO 3D floating in the empty space beside me in my own footage](docs/showcase/v04/on-video.jpg)](docs/showcase/v04/on-video.mp4)
-
 **[Open the catalog page](docs/index.html)**: a live scene you can drag at the top, all 136 items as living clips, the demos, and a prompt to copy for each one.
 
 **One scene spec. Two outputs. A self-check.** You (or your coding agent) write one small `scene.json`: camera, lights, objects, motion, finish. The tool turns it into an interactive web page that runs in any browser **and** a video that is the same picture, frame for frame. Before it hands anything over it checks its own work: blank frames, objects out of view, a covered face, draw calls, texture sizes, phone framing, WebGL leaks.

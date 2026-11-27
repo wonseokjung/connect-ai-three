@@ -53,10 +53,6 @@ npx github:wonseokjung/connect-ai-three new "노을 지는 사막 위 'SUNSET'"
 npx github:wonseokjung/connect-ai-three make my-shop          # 검사, 웹 페이지, 영상, 스틸 시트, 보고서
 ```
 
-내 영상 위에도 올라가요. 얼굴은 절대 안 가리고, 사람 매트를 주면 3D 가 내 뒤로 지나가요.
-
-[![내 촬영 영상 옆 빈자리에 떠 있는 장난감 행성과 HELLO 3D 글자](docs/showcase/v04/on-video.jpg)](docs/showcase/v04/on-video.mp4)
-
 **[카탈로그 페이지 열기](docs/index.html)**: 맨 위에 직접 끌어 돌리는 살아 있는 장면, 136개 항목이 전부 살아 있는 클립으로, 완성 데모와 항목마다 복사해 쓰는 한 줄 지시문이 있습니다.
 
 **장면 규격 하나. 결과 둘. 스스로 검사.** 나(또는 코딩 에이전트)는 작은 `scene.json` 하나만 씁니다. 카메라, 조명, 물체, 움직임, 마무리. 도구가 이것을 브라우저에서 돌아가는 인터랙티브 웹 페이지와, 프레임 하나까지 같은 그림인 영상으로 만듭니다. 넘겨주기 전에 직접 검사합니다: 빈 화면, 화면 밖 물체, 가려진 얼굴, 드로콜, 텍스처 크기, 폰 화면, WebGL 누수.
