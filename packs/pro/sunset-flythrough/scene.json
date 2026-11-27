@@ -186,6 +186,19 @@
    "size": 14
   },
   {
+   "id": "sea",
+   "type": "waves",
+   "size": 90,
+   "amp": 0.45,
+   "color": "#2E3F7A",
+   "color2": "#FFB37A",
+   "position": [
+    0,
+    -0.25,
+    -48
+   ]
+  },
+  {
    "id": "line",
    "type": "line",
    "points": [
