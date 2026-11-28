@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mechanical butterfly · connect-ai-three</title>
+<style>
+html, body { margin: 0; height: 100%; overflow: hidden; background: #040302; }
+canvas { display: block; }
+.vignette { position: fixed; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 48%, rgba(0, 0, 0, 0) 52%, rgba(0, 0, 0, .55) 100%); }
+.hint { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); font: 500 12px/1 system-ui, sans-serif; letter-spacing: .18em; color: rgba(236, 210, 160, .62); pointer-events: none; white-space: nowrap; }
+.mark { position: fixed; left: 16px; bottom: 14px; font: 600 11px/1 system-ui, sans-serif; letter-spacing: .2em; color: rgba(255, 255, 255, .78); text-shadow: 0 1px 3px rgba(0, 0, 0, .35); pointer-events: none; }
+@media (max-width: 600px) { .hint { bottom: 40px; } }
+</style>
+<script type="importmap">
+{ "imports": { "three": "../_three/build/three.module.js", "three/addons/": "../_three/examples/jsm/" } }
+</script>
+</head>
+<body>
+<div class="vignette"></div>
+<div class="hint ui">DRAG TO TURN · SCROLL TO COME CLOSER · CLICK TO WIND IT AGAIN</div>
+<div class="mark ui">CONNECT AI LAB</div>
+<script type="module" src="./main.js"></script>
+</body>
+</html>

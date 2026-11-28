@@ -1,0 +1,51 @@
+{
+  "name": "tower-defense",
+  "section": 17,
+  "title": "Tower defense with an AI commander",
+  "titleKo": "AI 사령관이 대신 싸우는 타워 디펜스",
+  "about": "A 3D isometric tower defense that plays itself: an AI commander builds and upgrades towers against waves of monsters across five lands, and your first click puts you in charge. Every model, texture and sound is made by code.",
+  "aboutKo": "혼자서 돌아가는 3D 타워 디펜스예요. AI 사령관이 다섯 지역을 돌며 몰려오는 몬스터에 맞서 탑을 짓고 올려요. 내가 한 번 클릭하면 그때부터 내가 지휘해요. 모델, 텍스처, 소리가 전부 코드로 만들어져요.",
+  "prompt": "Make a 3D tower defense game in the browser that an AI commander plays by itself from the moment the page opens, with towers, waves of monsters and a boss every fifth wave, and let me take over with one click.",
+  "promptKo": "페이지를 열자마자 AI 사령관이 혼자 플레이하는 3D 타워 디펜스 게임을 만들어 줘. 탑이랑 몰려오는 몬스터, 다섯 번째 판마다 보스가 나오고, 내가 클릭 한 번 하면 내가 지휘하게 해 줘.",
+  "renderer": "webgl",
+  "sources": [
+    {
+      "name": "Cinderwatch by kevintngo",
+      "url": "https://github.com/kevintngo/cinderwatch",
+      "license": "MIT",
+      "what": "the whole game: src/*.js joined into main.js and src/shell.html as index.html, licence text in LICENSE-cinderwatch.txt"
+    },
+    {
+      "name": "three.js",
+      "url": "https://threejs.org",
+      "license": "MIT",
+      "what": "loaded from the kit (0.187) through the import map instead of the vendored r170 copy"
+    }
+  ],
+  "replaces": "The repository's media/ folder (gameplay video and screenshots) is not copied.",
+  "capture": {
+    "wait": 8,
+    "clip": 6,
+    "still": 3
+  },
+  "community": {
+    "id": "D1",
+    "kind": "code",
+    "author": "kevintngo",
+    "repo": "https://github.com/kevintngo/cinderwatch",
+    "license": "MIT",
+    "viral": {
+      "url": "https://x.com/kevin_t_ngo/status/2125119969109418333",
+      "numbers": "X ♥2.4k (list value)",
+      "recorded": "2026-11-28"
+    }
+  },
+  "film": {
+    "seconds": 8,
+    "wait": 14,
+    "hide": [
+      "#hud",
+      "#load"
+    ]
+  }
+}

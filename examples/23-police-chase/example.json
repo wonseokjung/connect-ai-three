@@ -1,0 +1,71 @@
+{
+  "name": "police-chase",
+  "section": 23,
+  "title": "A police chase on a red clay road",
+  "titleKo": "붉은 흙길 경찰 추격 게임",
+  "about": "A driving game in the browser with zero asset files: a convertible on a red clay road through the hills, police cars that ram, box you in and brake-check, five wanted levels, damage that rips doors and the hood off, and sound made with Web Audio. Every texture, car, person and tree is built by code.",
+  "aboutKo": "에셋 파일이 하나도 없는 브라우저 운전 게임이에요. 언덕 사이 붉은 흙길을 오픈카로 달리고, 경찰차가 들이받고, 양옆을 막고, 앞에서 급정거해요. 수배 단계가 5개 있고, 부딪히면 문짝이랑 보닛이 떨어져 나가요. 소리는 Web Audio 로 만들고, 텍스처, 차, 사람, 나무는 전부 코드로 만들어요.",
+  "prompt": "Make a car chase game in the browser: I drive a convertible on a winding red clay road, police cars chase me and try to box me in, there are wanted stars, and the car gets damaged when I crash. No model files, everything made in code.",
+  "promptKo": "브라우저에서 하는 자동차 추격 게임 만들어 줘. 구불구불한 붉은 흙길을 오픈카로 달리고, 경찰차들이 쫓아와서 앞뒤로 막고, 수배 별이 올라가고, 부딪히면 차가 부서지게 해 줘. 모델 파일 없이 전부 코드로.",
+  "renderer": "webgl",
+  "sources": [
+    {
+      "name": "noclipepe: Red Clay Chase",
+      "url": "https://github.com/noclipepe/red-clay-chase",
+      "license": "MIT",
+      "what": "the whole game (js/, index.html): driving, police, damage, world, sound, menu"
+    },
+    {
+      "name": "three.js",
+      "url": "https://threejs.org",
+      "license": "MIT",
+      "what": "the kit's three.js r187 in place of the game's vendored r160 (boot.js gives the scripts a global THREE)"
+    }
+  ],
+  "replaces": "Left out: the vendored three.min.js (r160). The links back to the author's game site now point to the original repository.",
+  "capture": {
+    "wait": 5,
+    "clip": 6,
+    "still": 3,
+    "keys": [
+      "Enter"
+    ]
+  },
+  "community": {
+    "id": "D4",
+    "kind": "code",
+    "author": "noclipepe",
+    "repo": "https://github.com/noclipepe/red-clay-chase",
+    "license": "MIT",
+    "viral": {
+      "url": "https://x.com/noclipepe/status/2124805085393813586",
+      "numbers": "X ♥848 (목록 값)",
+      "recorded": "2026-11-28"
+    }
+  },
+  "film": {
+    "seconds": 8,
+    "wait": 2,
+    "startAt": 7,
+    "keys": [
+      "Enter"
+    ],
+    "hide": [
+      "#minimap",
+      "#speedo",
+      "#compass",
+      ".tc",
+      "#fps",
+      "#home",
+      "#hp",
+      "#stars",
+      "#goal",
+      "#bars",
+      "#dmg",
+      "#dmgL",
+      "#dmgR",
+      "#title"
+    ],
+    "still": 2
+  }
+}

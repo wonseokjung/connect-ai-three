@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A building that builds itself · connect-ai-three</title>
+<link rel="stylesheet" href="./style.css">
+<script type="importmap">
+{ "imports": { "three": "../_three/build/three.module.js", "three/addons/": "../_three/examples/jsm/" } }
+</script>
+</head>
+<body>
+<main class="poster">
+  <header>
+    <span class="wordmark"><i>A</i>ATELIER<em>ARCHITECTURE STUDIO</em></span>
+    <small>ANATOMY OF CONSTRUCTION · 3D</small>
+    <div class="header-actions"><button class="replay">Build again ↺</button></div>
+  </header>
+  <section class="scene">
+    <aside class="brief">
+      <p class="micro">THE ART OF ASSEMBLY<br>PROJECT 01 / BRICK AND TIMBER TOWER</p>
+      <h2>Built piece<br>by piece.</h2>
+      <p class="accent">See every stage before the first stone is laid.</p>
+      <blockquote>Stone footings, brick courses,<br>timber frame, layered eaves.</blockquote>
+      <div class="index"><b>01</b><i></i><span>a real 3D construction, not a video</span></div>
+    </aside>
+    <div class="tower-stage">
+      <div class="three-scene" aria-label="A 3D tower that builds itself. Drag to orbit, scroll to zoom."></div>
+      <div class="scene-loading">BUILDING</div>
+      <div class="stage-label"><i></i><b>Foundation stones</b><span>0%</span></div>
+      <div class="view-selector" role="group" aria-label="Views">
+        <button data-view="overview" aria-pressed="true">Overview</button>
+        <button data-view="roof" aria-pressed="false">Eaves close-up</button>
+        <button data-view="guardian" aria-pressed="false">Stone lion</button>
+      </div>
+      <div class="orbit-hint">drag to orbit · scroll to zoom</div>
+    </div>
+    <aside class="title-block">
+      <span class="symbols">ARCHITECTURE · THE SHAPE OF TIME</span>
+      <h1>Build<br>Grow</h1>
+      <p>BRICK · TIMBER · TIME</p>
+      <div class="original-mark"><b>CONNECT AI LAB</b></div>
+    </aside>
+  </section>
+  <footer>
+    <button class="play" aria-label="Play or pause">II</button>
+    <div class="timeline"><span></span><input aria-label="Construction progress" type="range" min="0" max="1000" value="0"></div>
+    <time>0.0 / 12.4 S</time>
+  </footer>
+</main>
+<script type="module" src="./main.js"></script>
+</body>
+</html>

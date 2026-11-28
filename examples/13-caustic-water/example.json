@@ -1,0 +1,59 @@
+{
+  "name": "caustic-water",
+  "section": 13,
+  "title": "Caustic water for a drink page",
+  "titleKo": "음료 페이지용 물빛 코스틱",
+  "about": "A glass tank of water on a tiled floor. Sunlight goes through the moving surface, bends and gathers into the bright net of lines you see on the bottom of a pool. A rubber duck bobs and makes a wake, a click makes a ripple, and a lamp lights it at night. One HTML file, no model or texture files, adapted from Scottie's CAUSTIC//LITE.",
+  "aboutKo": "타일 바닥 위 유리 수조예요. 햇빛이 움직이는 물결을 지나며 꺾이고 모여서, 수영장 바닥에서 보는 밝은 빛 그물을 그려요. 고무 오리가 떠다니며 물결을 만들고, 클릭하면 파문이 생기고, 밤에는 램프로 비춰요. 모델이나 텍스처 파일 없이 HTML 한 파일이에요. Scottie 의 CAUSTIC//LITE 를 옮겼어요.",
+  "prompt": "Make the hero of my sparkling water page: a glass tank of water where sunlight draws moving caustics on the floor, a rubber duck bobbing on the surface, ripples where I click, and my brand name on the right.",
+  "promptKo": "우리 탄산수 페이지 첫 화면을 만들어 줘. 유리 수조 속 물에 햇빛이 비쳐서 바닥에 물빛 무늬가 일렁이고, 고무 오리가 둥둥 떠 있고, 클릭하면 물결이 퍼지고, 오른쪽에 우리 브랜드 이름이 있게 해 줘.",
+  "renderer": "webgl",
+  "sources": [
+    {
+      "name": "CAUSTIC//LITE by Scottie (ScottieFox/caustic-volume)",
+      "url": "https://github.com/ScottieFox/caustic-volume",
+      "license": "MIT",
+      "what": "lite/index.html: the random sea, the GPU ripple simulation, the rubber duck, caustics, the CPU fallback and the panel, kept as written"
+    },
+    {
+      "name": "three.js (GPUComputationRenderer, OrbitControls)",
+      "url": "https://threejs.org",
+      "license": "MIT",
+      "what": "the renderer and addons, from the kit"
+    }
+  ],
+  "replaces": "Only the CDN import map changed (the kit serves three.js 0.187), plus a product line on the right. Nothing was taken out.",
+  "capture": {
+    "wait": 4,
+    "clip": 6,
+    "still": 3,
+    "click": [
+      0.5,
+      0.55
+    ]
+  },
+  "community": {
+    "id": "A1",
+    "kind": "code",
+    "author": "Scottie (ScottieFox)",
+    "repo": "https://github.com/ScottieFox/caustic-volume",
+    "license": "MIT",
+    "viral": {
+      "url": "https://x.com/ScottieFoxTTV/status/2103869371869212740",
+      "numbers": "X ♥5,189 · 52.2만 · RT537",
+      "recorded": "2026-11-28"
+    }
+  },
+  "film": {
+    "seconds": 8,
+    "wait": 4,
+    "camera": {
+      "type": "orbit",
+      "degrees": 40,
+      "dolly": 0.88
+    },
+    "hide": [
+      "#ui"
+    ]
+  }
+}

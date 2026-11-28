@@ -16,7 +16,7 @@ for (const e of all) {
 
 ${e.about}
 
-[preview.mp4](preview.mp4)
+[preview.mp4](preview.mp4)${e.film ? ' · [preview-9x16.mp4](preview-9x16.mp4)' : ''}
 
 ## Say this to your AI
 
@@ -32,6 +32,12 @@ ${e.aboutKo}
 
 \`\`\`bash
 ${RUN} example ${e.name}
+\`\`\`
+
+Make it a video (MP4 H.264, BT.709, frame-exact, 1920x1080; add \`--9x16\` for a vertical one, \`--4k\` for 3840x2160):
+
+\`\`\`bash
+${RUN} example ${e.name} --video ${e.name}.mp4
 \`\`\`
 
 Your own copy to change (three.js then comes from a pinned CDN, so any static server works):
@@ -54,8 +60,9 @@ const rows = [];
 for (let i = 0; i < all.length; i += 3) rows.push('<tr>' + all.slice(i, i + 3).map((e) => `<td width="33%" valign="top">${cell(e)}</td>`).join('') + '</tr>');
 fs.writeFileSync(path.join(EXAMPLES, 'README.md'), `# Examples
 
-${all.length} real three.js pages, one per lesson section. Each one started from MIT open source (the official three.js
-examples and other projects named in its folder) and uses only CC0 models and textures.
+${all.length} real three.js pages, one per lesson section, and each one films itself into a video. 00 to 12 started from the
+official three.js examples, 13 and up from community projects people made and shared on X, GitHub and Threads. Every one
+started from MIT, Apache-2.0 or CC0 code named in its folder, and ships only CC0 or the project's own licensed files.
 
 <table>
 ${rows.join('\n')}
@@ -67,7 +74,7 @@ ${all.map((e) => `| ${String(e.section).padStart(2, '0')} | [${e.name}](${e.fold
 
 \`\`\`bash
 ${RUN} examples          # the list
-${RUN} example physics   # open one
+${RUN} example physics   # open one\n${RUN} example caustic-water --video water.mp4 --9x16   # film one
 \`\`\`
 
 The old scene.json examples (one file of JSON per scene, made into video) are in [scene-json/](scene-json/).

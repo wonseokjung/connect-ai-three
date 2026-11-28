@@ -1,0 +1,44 @@
+# 14 Open ocean at golden hour
+
+![Open ocean at golden hour](preview.jpg)
+
+A real-time ocean in one HTML file: a wave spectrum turned into the sea surface on the GPU every frame, foam where waves break, a sky that lights the water, caustics on the seabed and a true underwater view when you dive. Fly with the mouse and W A S D. Adapted from Sacha's ABYSSAL, with a resort line on top.
+
+[preview.mp4](preview.mp4) · [preview-9x16.mp4](preview-9x16.mp4)
+
+## Say this to your AI
+
+> Make the first screen of my seaside resort site: an endless open ocean at golden hour with real waves and foam, the sun low over the water, my resort name on top, and let visitors fly over the sea and dive under it.
+
+## 한국어로는 이렇게 말해요
+
+> 우리 바닷가 리조트 사이트 첫 화면을 만들어 줘. 노을 지는 끝없는 바다에 진짜 같은 파도랑 거품이 있고, 해가 수평선에 낮게 걸려 있고, 위에 리조트 이름이 있고, 방문자가 바다 위를 날다가 물속으로 들어갈 수도 있게 해 줘.
+
+HTML 한 파일로 만든 실시간 바다예요. 파도 스펙트럼을 매 프레임 GPU 에서 바다 표면으로 바꾸고, 파도가 부서지는 곳에 거품이 생기고, 하늘빛이 물에 비치고, 바닥엔 물빛 무늬가 일렁이고, 물속으로 들어가면 진짜 수중 화면이 돼요. 마우스와 W A S D 로 날아다녀요. Sacha 의 ABYSSAL 을 옮기고 리조트 이름을 얹었어요.
+
+## Run it
+
+```bash
+npx github:wonseokjung/connect-ai-three example deep-ocean
+```
+
+Make it a video (MP4 H.264, BT.709, frame-exact, 1920x1080; add `--9x16` for a vertical one, `--4k` for 3840x2160):
+
+```bash
+npx github:wonseokjung/connect-ai-three example deep-ocean --video deep-ocean.mp4
+```
+
+Your own copy to change (three.js then comes from a pinned CDN, so any static server works):
+
+```bash
+npx github:wonseokjung/connect-ai-three example deep-ocean --copy my-deep-ocean
+```
+
+## Where it comes from
+
+- [ABYSSAL, spectral FFT ocean by Sacha (squall01337/abyssal-ocean)](https://github.com/squall01337/abyssal-ocean) (MIT): index.html: the JONSWAP spectrum, GPU FFT, foam, sky, island, buoys, underwater view, panel and presets, kept as written
+- [three.js](https://threejs.org) (MIT): the renderer, from the kit
+
+The CDN import map now points at the kit's three.js 0.187, the page starts on the Golden hour preset, and a resort line sits on top. Nothing was taken out.
+
+The full credits are in [NOTICE.md](../../NOTICE.md).

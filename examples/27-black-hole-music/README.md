@@ -1,0 +1,42 @@
+# 27 A black hole that plays its own track
+
+![A black hole that plays its own track](preview.jpg)
+
+A black hole with a glowing accretion disk, drawn by one shader that bends every light ray around it, so the far side of the disk arcs over the shadow and the stars smear into rings. The disk, the sparks and two jets pulse on a 128 BPM beat, and the disk flares on the drop. The track (kick, clap, hats, a wobble bass, an arpeggio and a riser) is made by Web Audio code when you press play. No texture, model or sound files.
+
+[preview.mp4](preview.mp4) · [preview-9x16.mp4](preview-9x16.mp4)
+
+## Say this to your AI
+
+> Make a 3D audio visualizer in one page: a black hole with a glowing accretion disk and gravitational lensing, stars around it, and particles that pulse to the beat of an EDM track called SINGULARITY. Make the music in code, start it with a play button, and let the disk flare when the drop hits.
+
+## 한국어로는 이렇게 말해요
+
+> 한 페이지짜리 3D 오디오 비주얼라이저 만들어 줘. 빛나는 강착원반과 중력 렌즈 효과가 있는 블랙홀, 주변의 별들, 그리고 SINGULARITY 라는 EDM 곡 박자에 맞춰 뛰는 입자들. 음악은 코드로 만들고 재생 버튼으로 시작하게 하고, 드롭이 터질 때 원반이 확 타오르게 해 줘.
+
+빛나는 강착원반을 두른 블랙홀이에요. 셰이더 하나가 빛줄기를 하나하나 블랙홀 쪽으로 휘게 그려서, 원반 뒤쪽이 그림자 위아래로 고리처럼 보이고 별빛도 둥글게 번져요. 원반이랑 불티, 위아래로 뻗는 제트가 128 BPM 박자에 맞춰 뛰고, 드롭에서 원반이 확 타올라요. 재생 버튼을 누르면 킥, 클랩, 하이햇, 워블 베이스, 아르페지오, 라이저로 된 곡을 Web Audio 코드가 직접 만들어요. 텍스처, 모델, 소리 파일은 하나도 없어요.
+
+## Run it
+
+```bash
+npx github:wonseokjung/connect-ai-three example black-hole-music
+```
+
+Make it a video (MP4 H.264, BT.709, frame-exact, 1920x1080; add `--9x16` for a vertical one, `--4k` for 3840x2160):
+
+```bash
+npx github:wonseokjung/connect-ai-three example black-hole-music --video black-hole-music.mp4
+```
+
+Your own copy to change (three.js then comes from a pinned CDN, so any static server works):
+
+```bash
+npx github:wonseokjung/connect-ai-three example black-hole-music --copy my-black-hole-music
+```
+
+## Where it comes from
+
+- [three.js](https://threejs.org) (MIT): WebGLRenderer, OrbitControls, EffectComposer and UnrealBloomPass, from the kit (0.187)
+- [chetaslua on X: shared prompt](https://x.com/chetaslua/status/2080534915494645997) (made for this kit): the idea and the prompt only; all code and music written for this kit
+
+The full credits are in [NOTICE.md](../../NOTICE.md).

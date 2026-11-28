@@ -1,0 +1,56 @@
+{
+  "name": "self-building",
+  "section": 24,
+  "title": "A building that builds itself",
+  "titleKo": "스스로 지어지는 건물",
+  "about": "An architecture page whose hero is a real 3D building going up: foundation stones, posts and beams, brick walls course by course, brackets, layered eaves and roof tiles, all on one timeline you can play, pause and scrub. Orbit it, or fly the camera to the eaves and the stone lions. Every material is procedural.",
+  "aboutKo": "건축 소개 페이지의 첫 화면에서 진짜 3D 건물이 올라가요. 주춧돌, 기둥과 보, 한 줄씩 쌓이는 벽돌, 공포, 겹처마, 기와까지 하나의 타임라인으로 재생하고 멈추고 앞뒤로 돌려 볼 수 있어요. 마우스로 돌려 보거나 처마랑 돌사자 쪽으로 카메라를 날릴 수 있고, 재질은 전부 코드로 만들어요.",
+  "prompt": "Make the opening of my architecture studio's page: a 3D building that assembles itself, foundations first, then walls brick by brick, then the roof, with a timeline I can scrub and buttons that fly the camera to the details.",
+  "promptKo": "우리 건축 사무소 홈페이지 첫 화면을 만들어 줘. 3D 건물이 기초부터 벽돌 한 줄씩, 마지막에 지붕까지 스스로 지어지고, 타임라인을 끌어서 앞뒤로 볼 수 있고, 버튼을 누르면 카메라가 디테일 쪽으로 날아가게 해 줘.",
+  "renderer": "webgl",
+  "sources": [
+    {
+      "name": "Hailey: threejs-architecture-effects (agent skill + starter)",
+      "url": "https://github.com/lhlGitHub/threejs-architecture-effects",
+      "license": "MIT",
+      "what": "the building, its procedural materials and the construction timeline (heritage/), the scene, lights and cameras (scene.js), the page layout and style (style.css)"
+    },
+    {
+      "name": "three.js (OrbitControls, RoomEnvironment, BufferGeometryUtils)",
+      "url": "https://threejs.org",
+      "license": "MIT",
+      "what": "the kit's three.js r187"
+    }
+  ],
+  "replaces": "The starter is a Vite + React + TypeScript app. Here it is plain JavaScript with an import map: the types are stripped, the React components became scene.js and main.js, and the labels are in English. The skill's preview video and images are not shipped.",
+  "capture": {
+    "wait": 3,
+    "clip": 8,
+    "still": 6
+  },
+  "community": {
+    "id": "E6",
+    "kind": "code",
+    "author": "Hailey (lhlGitHub)",
+    "repo": "https://github.com/lhlGitHub/threejs-architecture-effects",
+    "license": "MIT",
+    "viral": null
+  },
+  "film": {
+    "seconds": 10,
+    "wait": 3,
+    "camera": {
+      "type": "orbit",
+      "degrees": 36,
+      "dolly": 0.9
+    },
+    "hide": [
+      "footer",
+      ".view-selector",
+      ".orbit-hint",
+      ".header-actions",
+      ".scene-loading"
+    ],
+    "still": 9.5
+  }
+}

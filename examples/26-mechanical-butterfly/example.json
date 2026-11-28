@@ -1,0 +1,57 @@
+{
+  "name": "mechanical-butterfly",
+  "section": 26,
+  "title": "A mechanical butterfly that winds itself up",
+  "titleKo": "스스로 태엽을 감는 기계 나비",
+  "about": "A clockwork butterfly of gold and brass assembles itself out of the dark, lights its heart and eyes, and starts to fly. The gears really mesh, and a crank on its back drives two push rods into the wing levers, so every wing beat comes from the mechanism. Filigree wing frames with enamel panels, rivets, dust in the warm light. Every part is built in code, with no model, texture or sound file. Drag to turn it, scroll to come closer, click to wind it again.",
+  "aboutKo": "금과 황동으로 된 태엽 나비가 어둠 속에서 스스로 조립되고, 심장과 눈에 불이 들어오면서 날기 시작해요. 톱니바퀴가 진짜로 맞물려 돌고, 등에 있는 크랭크가 막대 두 개로 날개 레버를 밀어서 날갯짓이 전부 기계 장치에서 나와요. 금실 같은 날개 틀에 에나멜 유리판, 리벳, 따뜻한 빛 속 먼지까지 있어요. 모델 파일도 텍스처 파일도 소리 파일도 없이 전부 코드로 만들었어요. 끌어서 돌리고, 스크롤로 가까이 가고, 클릭하면 태엽을 다시 감아요.",
+  "prompt": "Make a beautiful mechanical butterfly for my watch brand film: gold gears and filigree wings with enamel panels, a clockwork heart, the parts assembling out of the dark, then the wings starting to beat as the camera circles close.",
+  "promptKo": "우리 시계 브랜드 영상으로 아름다운 기계 나비를 만들어 줘. 금빛 톱니와 섬세한 금속 날개 틀, 에나멜 판, 태엽 심장이 있고, 어둠 속에서 부품이 모여 조립된 다음 날개가 움직이기 시작하고, 카메라가 가까이서 천천히 돌게 해 줘.",
+  "renderer": "webgl",
+  "sources": [
+    {
+      "name": "three.js",
+      "url": "https://threejs.org",
+      "license": "MIT",
+      "what": "WebGLRenderer, OrbitControls, RoomEnvironment, BufferGeometryUtils, EffectComposer with UnrealBloomPass, from the kit (0.187)"
+    },
+    {
+      "name": "thtbee_ on X: shared prompt",
+      "url": "https://x.com/thtbee_/status/2101304547876700627",
+      "license": "own",
+      "what": "the idea and the prompt only; all code written for this kit"
+    }
+  ],
+  "community": {
+    "id": "P2",
+    "kind": "prompt",
+    "author": "thtbee_",
+    "post": "https://x.com/thtbee_/status/2101304547876700627",
+    "viral": {
+      "url": "https://x.com/thtbee_/status/2101304547876700627",
+      "numbers": "X ♥3,410 · 62.2만 · RT310",
+      "recorded": "2026-11-28"
+    }
+  },
+  "film": {
+    "seconds": 10,
+    "wait": 4,
+    "camera": {
+      "type": "orbit",
+      "degrees": 64,
+      "dolly": 0.94,
+      "rise": -0.25
+    },
+    "shortCamera": {
+      "type": "orbit",
+      "degrees": 56,
+      "dolly": 0.94,
+      "rise": -0.25
+    },
+    "hide": [
+      ".ui",
+      ".hint",
+      ".mark"
+    ]
+  }
+}

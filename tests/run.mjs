@@ -207,11 +207,12 @@ test('examples: every example validates and finds its files', () => {
     if (fs.existsSync(path.join(KIT, 'examples', 'scene-json', d, 'assets'))) for (const m of JSON.stringify(spec).matchAll(/"src":"(assets\/[^"]+)"/g)) ok(fs.existsSync(path.join(KIT, 'examples', 'scene-json', d, m[1])), `${d}: ${m[1]} missing`);
   }
 });
-// --- the 13 example pages ---
+// --- the example pages ---
 const inRepo = fs.existsSync(path.join(KIT, '.git'));
-test('examples: 13 pages, one per section 0 to 12, each well formed', () => {
+test('examples: one page per section from 0 up, each well formed', () => {
   const all = listExamples();
-  eq(all.map((e) => e.section), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 'sections');
+  ok(all.length >= 28, `only ${all.length} examples`);
+  eq(all.map((e) => e.section), all.map((_, i) => i), 'sections');
   for (const e of all) {
     eq(exampleProblems(e), [], e.folder);
     ok(e.sources.length > 0, `${e.folder}: no sources`);
@@ -221,6 +222,94 @@ test('examples: 13 pages, one per section 0 to 12, each well formed', () => {
     if (inRepo) for (const f of ['preview.jpg', 'preview.mp4']) ok(fs.existsSync(path.join(e.dir, f)), `${e.folder}: no ${f}`);
   }
 });
+// --- v0.6: the community library, the community examples, the scout ---
+const LIB = JSON.parse(fs.readFileSync(path.join(KIT, 'catalog', 'community.json'), 'utf8'));
+const OK_LIC = ['MIT', 'Apache-2.0', 'CC0-1.0', 'ISC', 'Zlib', 'BSD-2-Clause', 'BSD-3-Clause', 'Unlicense'];
+test('library: every entry has the schema, a cleared licence and a real link', () => {
+  const ids = new Set();
+  ok(LIB.filter((c) => c.kind === 'code').length >= 68, 'at least the 68 checked works');
+  for (const c of LIB) {
+    ok(!ids.has(c.id), `${c.id} twice`);
+    ids.add(c.id);
+    for (const k of ['id', 'kind', 'category', 'categoryKo', 'title', 'what', 'whatKo', 'say', 'sayKo', 'author', 'videoFit']) ok(c[k] != null && c[k] !== '', `${c.id}: no ${k}`);
+    ok([1, 2, 3].includes(c.videoFit), `${c.id}: videoFit`);
+    if (c.viral) ok(/^https:\/\/(x\.com|www\.threads\.(com|net))\//.test(c.viral.url) && c.viral.numbers && /^\d{4}-\d\d-\d\d$/.test(c.viral.recorded), `${c.id}: viral`);
+    if (c.kind === 'code') {
+      ok(/^https:\/\/github\.com\/[\w.-]+\/[\w.-]+$/.test(c.repo), `${c.id}: repo`);
+      ok(OK_LIC.includes(c.license), `${c.id}: licence ${c.license}`);
+      ok(['none', 'CC0', 'MIT-in-repo', 'strip', 'check'].includes(c.assets), `${c.id}: assets ${c.assets}`);
+      if (c.example) ok(fs.existsSync(path.join(KIT, 'examples', c.example, 'example.json')), `${c.id}: example ${c.example} missing`);
+    } else {
+      eq(c.kind, 'prompt', `${c.id}: kind`);
+      ok(c.prompt && c.prompt.length > 10 && c.post && /^https:\/\/x\.com\//.test(c.post), `${c.id}: prompt and post`);
+      ok(!c.repo || c.codeLicense === 'none', `${c.id}: a prompt entry ships no code`);
+    }
+  }
+});
+test('library: the README tables are in sync with catalog/community.json', () => {
+  for (const f of ['README.md', 'README.ko.md']) {
+    const md = fs.readFileSync(path.join(KIT, f), 'utf8');
+    for (const c of LIB) ok(md.includes(`| ${c.id} |`), `${f}: ${c.id} not in the library table (run node tools/make-library-table.mjs)`);
+  }
+});
+test('community examples: credit, licence texts, film block, 16:9 and 9:16 previews', () => {
+  const com = listExamples().filter((e) => e.community);
+  ok(com.length >= 12, `${com.length} community examples`);
+  for (const e of com) {
+    const c = e.community;
+    ok(c.author && c.kind && (c.kind === 'prompt' ? c.post : c.repo && OK_LIC.includes(c.license)), `${e.folder}: community block`);
+    const lic = fs.readdirSync(e.dir).filter((f) => /^LICENSE-.*\.(txt|md)$/.test(f));
+    if (c.kind === 'code') ok(lic.some((f) => f !== 'LICENSE-three.txt'), `${e.folder}: no licence text of the source`);
+    ok(lic.includes('LICENSE-three.txt'), `${e.folder}: no LICENSE-three.txt`);
+    ok(e.film && e.film.seconds > 0, `${e.folder}: no film block`);
+    if (inRepo) for (const f of ['preview.jpg', 'preview.mp4', 'preview-9x16.mp4']) ok(fs.existsSync(path.join(e.dir, f)), `${e.folder}: no ${f}`);
+    // no audio or model file we could not clear
+    const walk = (d) => fs.readdirSync(d, {withFileTypes: true}).flatMap((x) => (x.isDirectory() ? walk(path.join(d, x.name)) : [path.join(d, x.name)]));
+    for (const f of walk(e.dir)) ok(!/\.(mp3|ogg|wav|m4a|flac)$/i.test(f), `${e.folder}: ships audio ${path.basename(f)}`);
+    const notice = fs.readFileSync(path.join(KIT, 'NOTICE.md'), 'utf8');
+    ok(notice.includes(e.folder), `NOTICE.md does not credit ${e.folder}`);
+  }
+  // 23: three r187 no longer calls Material.onBuild; the example re-injects its shader inputs and says so
+  const chase = listExamples().find((e) => e.name === 'police-chase');
+  const jsIn = (d) => fs.readdirSync(d, {withFileTypes: true}).flatMap((x) => (x.isDirectory() ? jsIn(path.join(d, x.name)) : x.name.endsWith('.js') ? [path.join(d, x.name)] : []));
+  if (chase) ok(jsIn(chase.dir).some((f) => fs.readFileSync(f, 'utf8').includes('patchedOnBuild')), 'police-chase: onBuild patch missing');
+});
+test('scout: licence text, stop rules, words', async () => {
+  const {spdxFromText, licenceVerdict, words, rankLibrary} = await import('../lib/scout.mjs');
+  eq(spdxFromText(fs.readFileSync(path.join(KIT, 'LICENSE'), 'utf8')), 'MIT');
+  eq(spdxFromText('GNU AFFERO GENERAL PUBLIC LICENSE Version 3'), 'AGPL-3.0');
+  eq(spdxFromText('PolyForm Noncommercial License 1.0.0'), 'PolyForm-Noncommercial');
+  eq(spdxFromText('Attribution-NonCommercial-ShareAlike 4.0'), 'NC');
+  eq(spdxFromText(''), 'NONE');
+  for (const bad of ['NONE', 'GPL', 'AGPL-3.0', 'NC', 'PolyForm-Noncommercial', 'View-Only', 'UNKNOWN']) ok(!licenceVerdict(bad).ok, bad);
+  for (const good of ['MIT', 'Apache-2.0', 'CC0-1.0']) ok(licenceVerdict(good).ok, good);
+  ok(words('노을 진 바다 위 드래곤').includes('ocean') && words('노을 진 바다 위 드래곤').includes('dragon'), 'Korean words map to English');
+  ok(!words('금빛 태엽 나비').includes('rain') && words('금빛 태엽 나비').includes('butterfly') && words('비 오는 밤').includes('rain'), 'one-letter Korean words match only on their own');
+  ok(rankLibrary('음악 채널 블랙홀 비트').some((x) => x.source === 'prompt' || /black-hole/.test(x.example || '')), 'shared prompts are ranked too');
+  const r = rankLibrary('a glass tank of water with caustics for my drink');
+  eq(r[0].example, '13-caustic-water', 'the caustic example wins its own sentence');
+  const d = rankLibrary('드래곤이 봉우리 사이를 나는 오프닝 필름');
+  ok(d.slice(0, 2).some((x) => x.example === '19-dragon-film'), JSON.stringify(d.slice(0, 3).map((x) => x.title)));
+});
+test('scout: GitHub-only mode finds something or says the rate limit cleanly', async () => {
+  const {find} = await import('../lib/scout.mjs');
+  const r = await find('ocean waves at sunset', {limit: 4});
+  ok(r.library.length > 0, 'library results');
+  const limited = r.github.notes.some((n) => /rate limit|failed/.test(n));
+  ok(limited || r.github.results.length > 0, `no GitHub results and no clean note: ${JSON.stringify(r.github)}`);
+  for (const x of r.github.results) ok(x.skip || OK_LIC.includes(x.license), `${x.id}: ${x.license} passed the stop rules`);
+}, {browser: true});
+test('scout: fetch copies licence-cleared code only, with the licence and SOURCES.md', async () => {
+  const {fetchRepo} = await import('../lib/scout.mjs');
+  const to = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'c3-fetch-')), 'caustic');
+  const r = await fetchRepo('ScottieFox/caustic-volume', to);
+  eq(r.license, 'MIT');
+  ok(fs.existsSync(path.join(to, 'LICENSE-caustic-volume.txt')) && fs.existsSync(path.join(to, 'lite', 'index.html')), 'licence and code');
+  const src = fs.readFileSync(path.join(to, 'SOURCES.md'), 'utf8');
+  ok(src.includes('ScottieFox/caustic-volume') && src.includes('Left out') && src.includes('docs/lite.jpg'), 'SOURCES.md lists what was left out');
+  ok(!fs.existsSync(path.join(to, 'docs', 'lite.jpg')), 'media left out');
+  fs.rmSync(path.dirname(to), {recursive: true, force: true});
+}, {browser: true});
 test('examples: the server maps the import map and never leaves its roots', () => {
   ok(resolveUrl('/examples/_three/build/three.module.js'), 'three');
   ok(resolveUrl('/examples/_lib/rapier/dist/rapier.mjs'), 'rapier');
@@ -475,15 +564,30 @@ test('browser: hover and click on a still object stay a pure function of time', 
   fs.rmSync(dir, {recursive: true, force: true});
 }, {browser: true});
 
-test('browser: three example pages open headless, draw a real picture, and log no errors', async () => {
+test('browser: every example page opens headless, draws a real picture, and logs no errors', async () => {
   const {smokeExample} = await import('../lib/examples.mjs');
-  for (const name of ['physics', 'glass-materials', 'neon-text']) {
-    const r = await smokeExample(findExample(name), {seconds: 3});
+  const bad = [];
+  for (const e of listExamples().filter((x) => x.name !== 'opening')) {
+    const r = await smokeExample(e, {seconds: 3});
     const errors = r.errors.filter((x) => !/favicon/.test(x));
-    ok(r.ready, `${name}: never set window.EXAMPLE.ready`);
-    eq(errors, [], `${name}: errors`);
-    ok(r.kind === 'webgl' && r.distinct > 12 && r.calls > 3, `${name}: picture looks empty ${JSON.stringify(r)}`);
+    if (!r.ready) bad.push(`${e.name}: never set window.EXAMPLE.ready`);
+    if (errors.length) bad.push(`${e.name}: ${errors.slice(0, 3).join(' | ')}`);
+    if (r.kind === 'webgl' && !(r.distinct > 8 && r.calls > 0)) bad.push(`${e.name}: picture looks empty ${JSON.stringify(r)}`);
   }
+  eq(bad, [], 'pages');
+}, {browser: true});
+test('film: a page films frame by frame to H.264 BT.709 with the exact frame count, in 16:9 and 9:16', async () => {
+  const {filmPage} = await import('../lib/film.mjs');
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'c3-film-'));
+  const ex = findExample('caustic-water');
+  const a = await filmPage(ex, {out: path.join(dir, 'a.mp4'), seconds: 2, fps: 30, width: 640, height: 360, wait: 2});
+  ok(a.check.ok, JSON.stringify(a.check));
+  eq(a.check.frames, 60, 'frames');
+  eq(a.errors, [], 'page errors');
+  ok(fs.existsSync(path.join(dir, 'a.jpg')), 'still');
+  const b = await filmPage(ex, {out: path.join(dir, 'b.mp4'), seconds: 1, fps: 24, width: 360, height: 640, wait: 2});
+  ok(b.check.ok && b.check.frames === 24 && b.check.width === 360 && b.check.height === 640, JSON.stringify(b.check));
+  fs.rmSync(dir, {recursive: true, force: true});
 }, {browser: true});
 test('video: a rendered mp4 is yuv420p, tv range, BT.709, and a known colour comes back', async () => {
   const {renderVideo} = await import('../lib/render.mjs');

@@ -1,7 +1,7 @@
 {
   "name": "connect-ai-three",
-  "version": "0.5.0",
-  "description": "Say it, get it in three.js. 13 real three.js pages adapted from the official three.js examples and other MIT open source (miniature world, glass, neon, shaders, 260,000 GPU particles, physics, a machine teardown, a scroll site, seven render styles, a flight game, Gaussian splats, WebXR), plus one scene spec that becomes an interactive web page AND a frame-locked video with a self-check. Open source by CONNECT AI LAB.",
+  "version": "0.6.0",
+  "description": "The AI Web 3D Agent (AI Web 3D automation agent) of CONNECT AI LAB: one sentence becomes a finished three.js video, 16:9 and 9:16, frame-exact H.264 BT.709. It starts from the best base it can find: 28 working examples (13 from the official three.js examples, 12 viral community works from X with cleared licences, 3 written from prompts their authors shared), a library of 74 licence-checked community works plus 10 shared prompts, or a fresh find on GitHub, X or Threads (scout: find, fetch), and credits it. Plus one scene spec that becomes a web page and a video with a self-check. Open source by CONNECT AI LAB.",
   "type": "module",
   "license": "MIT",
   "author": "CONNECT AI LAB",
@@ -13,7 +13,8 @@
     "demo": "node bin/cli.mjs demo",
     "check": "node bin/cli.mjs check",
     "catalog": "node bin/cli.mjs catalog",
-    "typecheck": "tsc -p ."
+    "typecheck": "tsc -p .",
+    "find": "node bin/cli.mjs find"
   },
   "engines": {
     "node": ">=18"
@@ -47,6 +48,7 @@
     "!examples/**/preview.jpg",
     "!examples/**/preview.mp4",
     "!examples/**/preview.webp",
+    "!examples/**/preview-9x16.mp4",
     "!examples/scene-json/*/assets/**",
     "assets/",
     "skill/",
@@ -76,6 +78,11 @@
     "motion-graphics",
     "visual-vibe-coding",
     "claude-code",
-    "skill"
+    "skill",
+    "ai-agent",
+    "automation-agent",
+    "community",
+    "scout",
+    "video"
   ]
 }

@@ -8,7 +8,7 @@ import {KIT, KIT_NAME, RUN_CMD, VERSION, projectPaths, readJson, writeJson} from
 import {banner} from '../lib/banner.mjs';
 
 const argv = process.argv.slice(2);
-const VALUE = ['copy', 'dir', 'agent', 'at', 'out', 'scale', 'target', 'faces', 'face', 'matte', 'matte-fps', 'start', 'port', 'place', 'size', 'times'];
+const VALUE = ['seconds', 'video', 'fps', 'orbit', 'wait', 'limit', 'to', 'mode', 'copy', 'dir', 'agent', 'at', 'out', 'scale', 'target', 'faces', 'face', 'matte', 'matte-fps', 'start', 'port', 'place', 'size', 'times'];
 const flag = (n) => argv.includes('--' + n);
 const opt = (n, d = null) => {
   const i = argv.indexOf('--' + n);
@@ -25,12 +25,23 @@ const open = (f) => {
   } catch {}
 };
 
-const HELP = `${KIT_NAME} ${VERSION} · open source by CONNECT AI LAB
-Say it, get a three.js scene: one spec becomes an interactive web page and a frame-locked video.
+const HELP = `${KIT_NAME} ${VERSION} · the AI Web 3D Agent of CONNECT AI LAB (open source)
+Say it, get a three.js video: it finds the best base (our examples, the community library, GitHub, X), builds your
+version, films it frame by frame in 16:9 and 9:16, checks it and credits the authors.
 
-  ${RUN_CMD} examples              the 13 ready examples (miniature world, glass, neon, shaders, particles,
-                                         physics, machine teardown, scroll site, styles, flight game, splats, XR)
+  ${RUN_CMD} find "a dragon film over misty peaks"
+                                         rank our examples + 74 community works + shared prompts + fresh GitHub finds
+                                         (--offline: no GitHub; --json)
+  ${RUN_CMD} library [category]    the community library: viral link, repo, licence, assets
+  ${RUN_CMD} fetch owner/repo --to <folder>
+                                         copy only licence-cleared code, with the licence text and SOURCES.md
+  ${RUN_CMD} examples              the 25 ready examples (13 from three.js, 12 from the community)
   ${RUN_CMD} example <name>        open one in your browser   --copy <folder>: your own copy to edit
+  ${RUN_CMD} example <name> --video out.mp4 [--9x16] [--4k] [--seconds 8] [--orbit 30]
+                                         film it frame by frame: H.264 yuv420p BT.709, then the self-check
+  ${RUN_CMD} film <folder> [--9x16] [--4k] [--out f.mp4]
+                                         film any three.js folder (your copy, a fetched repo)
+  ${RUN_CMD} smoke [name ...]      open pages headless: errors, ready, a real picture
   ${RUN_CMD}                       make the demo scene and open it in your browser
   ${RUN_CMD} new "'MY SHOP' logo in a pastel cafe, slow orbit"
                                          draft scene.json from words (your AI agent writes better ones: see install)
@@ -49,6 +60,25 @@ Say it, get a three.js scene: one spec becomes an interactive web page and a fra
 
 A project is a folder with scene.json (+ assets/). Everything we make goes to out/.
 Docs and every example clip: https://github.com/wonseokjung/${KIT_NAME}`;
+
+// one sentence -> a page -> a video: frame-exact film of a three.js page, then the self-check
+async function filmCmd(target, out) {
+  const {filmPage} = await import('../lib/film.mjs');
+  const orbit = opt('orbit');
+  const camera = flag('no-camera') ? false : orbit ? {type: 'orbit', degrees: Number(orbit)} : undefined;
+  const t0 = Date.now();
+  log(`filming ${target.name || target.dir} ${flag('9x16') ? '9:16' : '16:9'}${flag('4k') ? ' 4K' : ''} ...`);
+  const r = await filmPage(target, {out, short: flag('9x16'), k4: flag('4k'), seconds: opt('seconds') ? Number(opt('seconds')) : undefined, fps: Number(opt('fps', 30)), wait: opt('wait') ? Number(opt('wait')) : undefined, camera,
+    onProgress: (i, n) => process.stdout.write(`\r  frame ${i}/${n}`)});
+  process.stdout.write('\r');
+  log(`${r.file}\n  ${r.frames} frames · ${r.seconds} s · ${r.width}x${r.height} · ${r.fps} fps · H.264 yuv420p BT.709  (${secs(t0)})`);
+  log(`  check: ${r.check.ok && !r.errors.length ? 'PASS' : 'FIX'}  frames ${r.check.frames}, black ${r.check.black}, frozen ${r.check.frozen}`);
+  for (const p of r.check.problems) log(`    FIX   ${p}`);
+  for (const e of r.errors.slice(0, 8)) log(`    FIX   page error: ${e}`);
+  log(`  still: ${r.file.replace(/\.mp4$/i, '')}.jpg  (look at it before you say it is done)`);
+  if (!r.check.ok || r.errors.length) process.exitCode = 1;
+  else open(r.file);
+}
 
 async function loadAll() {
   const [{loadSpec}, check, render, web] = await Promise.all([import('../lib/project.mjs'), import('../lib/check.mjs'), import('../lib/render.mjs'), import('../lib/web.mjs')]);
@@ -142,10 +172,62 @@ async function main() {
     if (bad) process.exitCode = 1;
     return;
   }
+  // the scout: rank our examples + the community library + fresh GitHub finds for one sentence
+  if (cmd === 'find') {
+    const {find, formatFind} = await import('../lib/scout.mjs');
+    const sentence = pos.slice(1).join(' ');
+    if (!sentence) return log(`say what you want: ${RUN_CMD} find "a dragon film over misty peaks"`), (process.exitCode = 1);
+    const r = await find(sentence, {offline: flag('offline'), limit: Number(opt('limit', 6))});
+    if (flag('json')) return log(JSON.stringify(r, null, 2));
+    log(formatFind(r));
+    return;
+  }
+  if (cmd === 'fetch') {
+    const {fetchRepo} = await import('../lib/scout.mjs');
+    if (!pos[1]) return log(`which repo? ${RUN_CMD} fetch owner/name --to <folder>`), (process.exitCode = 1);
+    try {
+      const r = await fetchRepo(pos[1], opt('to'), {withAssets: flag('with-assets')});
+      log(`${r.to}\n  ${r.repo} @ ${r.sha.slice(0, 7)} · ${r.license} · ${r.copied} files copied, ${r.left} left out (see SOURCES.md)\n  next: adapt it, then ${RUN_CMD} film ${path.relative(process.cwd(), r.to) || '.'}`);
+    } catch (e) {
+      log(`fetch stopped: ${e.message}`);
+      process.exitCode = 1;
+    }
+    return;
+  }
+  if (cmd === 'library') {
+    const {loadLibrary} = await import('../lib/scout.mjs');
+    const all = loadLibrary().filter((c) => !pos[1] || c.category === pos[1] || c.kind === pos[1]);
+    if (flag('json')) return log(JSON.stringify(all, null, 2));
+    let cat = '';
+    for (const c of all.sort((a, b) => a.kind.localeCompare(b.kind) || a.id.localeCompare(b.id, 'en', {numeric: true}))) {
+      const head = c.kind === 'prompt' ? 'prompt lane: no code shipped' : c.categoryTitle;
+      if (head !== cat) log(`\n${(cat = head)}`);
+      log(`  ${c.id.padEnd(4)} ${c.title.padEnd(34).slice(0, 34)} ${String(c.license || '').padEnd(11)} ${c.viral ? c.viral.numbers.padEnd(28).slice(0, 28) : ''.padEnd(28)} ${c.example ? 'example ' + c.example : c.repo || c.post || ''}`);
+    }
+    return;
+  }
+  // open pages headless and report errors, readiness and whether a real picture is drawn
+  if (cmd === 'smoke') {
+    const {findExample, listExamples, smokeExample} = await import('../lib/examples.mjs');
+    const list = pos.length > 1 ? pos.slice(1).map((n) => findExample(n)) : listExamples().filter((e) => e.name !== 'opening');
+    let bad = 0;
+    for (const e of list) {
+      if (!e) { log('  no such example'); bad++; continue; }
+      const r = await smokeExample(e, {seconds: Number(opt('seconds', 3))});
+      const errors = r.errors.filter((x) => !/favicon/.test(x));
+      const okPic = r.kind !== 'webgl' || (r.distinct > 8 && r.calls > 0);
+      const good = r.ready && !errors.length && okPic;
+      if (!good) bad++;
+      log(`  ${good ? 'ok  ' : 'FAIL'} ${e.folder.padEnd(24)} ready=${r.ready} ${r.kind || '-'} colours=${r.distinct} calls=${r.calls}${errors.length ? '\n       ' + errors.slice(0, 5).join('\n       ') : ''}`);
+    }
+    if (bad) process.exitCode = 1;
+    return;
+  }
   if (cmd === 'example') {
     const {findExample, listExamples, serveExamples, copyExample} = await import('../lib/examples.mjs');
     const ex = findExample(pos[1] || '');
     if (!ex) return log(`no example "${pos[1] || ''}". The list: ${RUN_CMD} examples\n  ${listExamples().map((e) => e.name).join(', ')}`), (process.exitCode = 1);
+    if (opt('video') || flag('video')) return filmCmd(ex, opt('video') || `${ex.name}${flag('9x16') ? '-9x16' : ''}.mp4`);
     if (opt('copy')) {
       if (ex.name === 'opening') return log('the opening plays the other examples, so it only runs inside the kit: open it without --copy'), (process.exitCode = 1);
       const to = copyExample(ex, opt('copy'));
@@ -158,6 +240,14 @@ async function main() {
     log(`${ex.title}  ${url}\n  say: "${ex.prompt}"\n  (ctrl-c to stop)`);
     open(url);
     return;
+  }
+  // film any three.js folder (your copy of an example, a scout result): the page is the stage, the video is the result
+  if (cmd === 'film') {
+    const dir = path.resolve(pos[1] || '.');
+    if (!fs.existsSync(path.join(dir, 'index.html'))) return log(`no index.html in ${dir}`), (process.exitCode = 1);
+    let film = {};
+    try { film = JSON.parse(fs.readFileSync(path.join(dir, 'example.json'), 'utf8')); } catch {}
+    return filmCmd({...film, dir, section: undefined}, opt('out') || path.join(dir, `film${flag('9x16') ? '-9x16' : ''}.mp4`));
   }
   if (cmd === 'demo') {
     const L = await loadAll();

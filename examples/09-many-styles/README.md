@@ -22,6 +22,12 @@ The same dancing robot on the same stage, drawn seven ways: studio, toon, staine
 npx github:wonseokjung/connect-ai-three example many-styles
 ```
 
+Make it a video (MP4 H.264, BT.709, frame-exact, 1920x1080; add `--9x16` for a vertical one, `--4k` for 3840x2160):
+
+```bash
+npx github:wonseokjung/connect-ai-three example many-styles --video many-styles.mp4
+```
+
 Your own copy to change (three.js then comes from a pinned CDN, so any static server works):
 
 ```bash

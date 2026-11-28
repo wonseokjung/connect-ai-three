@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Singularity · connect-ai-three</title>
+<style>
+:root { --ink: #f5ead8; --dim: rgba(245, 226, 196, .56); --gold: #e9a64a; --line: rgba(233, 166, 74, .28); }
+html, body { margin: 0; height: 100%; overflow: hidden; background: #000; color: var(--ink); font: 13px/1.4 -apple-system, "SF Pro Text", "Segoe UI", system-ui, sans-serif; }
+canvas { display: block; touch-action: none; }
+/* everything sits inside a 5% title-safe margin, in landscape and in portrait */
+.title { position: fixed; left: max(24px, 5vw); top: max(24px, 5vh); pointer-events: none; z-index: 5; }
+.title b { display: block; font: 400 clamp(26px, min(4.2vw, 5.2vh), 64px)/1 Georgia, "Times New Roman", serif; letter-spacing: .32em; text-shadow: 0 2px 30px rgba(0, 0, 0, .7); }
+.title i { display: block; margin-top: .9em; font: 500 clamp(10px, min(1vw, 1.25vh), 14px)/1.4 system-ui, sans-serif; font-style: normal; letter-spacing: .28em; text-transform: uppercase; color: var(--dim); }
+.title i em { font-style: normal; color: var(--gold); }
+.mark { position: fixed; right: max(24px, 5vw); bottom: max(22px, 5vh); font: 600 11px/1 system-ui, sans-serif; letter-spacing: .24em; color: rgba(255, 240, 220, .72); pointer-events: none; z-index: 5; }
+.hint { position: fixed; left: max(24px, 5vw); bottom: max(22px, 5vh); font: 500 11px/1 system-ui, sans-serif; letter-spacing: .18em; text-transform: uppercase; color: var(--dim); pointer-events: none; z-index: 5; }
+#play { position: fixed; left: 50%; bottom: max(22px, 5vh); transform: translateX(-50%); z-index: 6; display: flex; align-items: center; gap: 12px;
+  padding: 12px 22px 12px 14px; border-radius: 999px; border: 1px solid var(--line); background: rgba(20, 12, 4, .55); color: var(--ink); cursor: pointer;
+  font: 600 12px/1 system-ui, sans-serif; letter-spacing: .22em; text-transform: uppercase; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 0 40px rgba(233, 130, 40, .18); }
+#play:hover { background: rgba(60, 34, 8, .6); }
+#play .dot { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--gold); color: #1b0f02; font-size: 12px; letter-spacing: 0; }
+#play[aria-pressed=true] .dot::before { content: "II"; }
+#play[aria-pressed=false] .dot::before { content: "\25B6"; }
+@media (max-width: 640px) { .hint { display: none; } #play { bottom: max(64px, 9vh); } }
+/* filming (the kit sets window.__FILM__ before the page runs): no buttons or hints, the title and mark stay */
+body.film #play, body.film .hint { display: none !important; }
+</style>
+<script type="importmap">
+{ "imports": { "three": "../_three/build/three.module.js", "three/addons/": "../_three/examples/jsm/" } }
+</script>
+</head>
+<body>
+<div class="title"><b>SINGULARITY</b><i>a black hole that plays its own track · <em>128 BPM</em></i></div>
+<button id="play" type="button" aria-pressed="false" aria-label="Play the track"><span class="dot"></span><span class="label">Play the track</span></button>
+<div class="hint">drag to orbit · scroll to zoom</div>
+<div class="mark">CONNECT AI LAB</div>
+<script type="module" src="./main.js"></script>
+</body>
+</html>

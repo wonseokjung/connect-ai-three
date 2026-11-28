@@ -1,0 +1,82 @@
+{
+  "name": "hex-island",
+  "section": 18,
+  "title": "An island map that builds itself",
+  "titleKo": "스스로 지어지는 섬 지도",
+  "about": "Hexagon tiles drop in and lock together into an island with roads, rivers, villages, windmills and coast, solved by Wave Function Collapse. Click the cog on an empty plot and a new piece of island grows there; every load is a new island.",
+  "aboutKo": "육각 타일이 떨어지며 맞물려서 길, 강, 마을, 풍차, 해안이 있는 섬이 돼요. 파동 함수 붕괴(WFC)라는 방법으로 타일 자리를 풀어요. 빈 자리의 톱니를 누르면 거기에 새 섬 조각이 자라고, 열 때마다 다른 섬이 나와요.",
+  "prompt": "Make a little island map for our chain stores out of hexagon tiles that drop in and lock together by themselves, with roads, rivers, villages and windmills, and grow a new piece of island wherever I click.",
+  "promptKo": "우리 체인점들이 있는 작은 섬 지도를 육각 타일로 만들어 줘. 타일이 떨어지면서 저절로 맞물리고, 길이랑 강, 마을, 풍차가 있고, 내가 누르는 곳마다 새 섬 조각이 자라나게 해 줘.",
+  "renderer": "webgpu",
+  "sources": [
+    {
+      "name": "Hex Map WFC by Felix Turner",
+      "url": "https://github.com/felixturner/hex-map-wfc",
+      "license": "MIT",
+      "what": "the whole app in src/ (WFC solver, tiles, decorations, water, post effects), licence text in LICENSE-hex-map-wfc.txt"
+    },
+    {
+      "name": "KayKit Medieval Hexagon Pack (Kay Lousberg)",
+      "url": "https://kaylousberg.itch.io/kaykit-medieval-hexagon",
+      "license": "CC0-1.0",
+      "what": "the tiles in assets/models/hex-terrain.glb and their colour atlases assets/textures/*.png, as packed in the Hex Map WFC repository"
+    },
+    {
+      "name": "Poly Haven: Venice Sunset (Greg Zaal)",
+      "url": "https://polyhaven.com/a/venice_sunset",
+      "license": "CC0-1.0",
+      "what": "assets/hdr/venice_sunset_1k.hdr, the environment light"
+    },
+    {
+      "name": "tween, sound stub and drawn textures (this kit)",
+      "url": "https://github.com/wonseokjung/connect-ai-three",
+      "license": "own",
+      "what": "src/lib/tween.js in place of GSAP, a silent src/lib/Sounds.js in place of howler.js and its mp3 files, src/lib/proceduralTextures.js in place of caustic.jpg and cog.png"
+    },
+    {
+      "name": "three.js",
+      "url": "https://threejs.org",
+      "license": "MIT",
+      "what": "WebGPURenderer, TSL, GLTFLoader, HDRLoader, OrbitControls, CSS2DRenderer, lil-gui, from the kit (0.187)"
+    }
+  ],
+  "replaces": "Left out: GSAP and howler.js, the five sound files, caustic.jpg, cog.png, loader.gif, the summer and fall colour atlases, the WebGPU-only gate (WebGPURenderer falls back to WebGL 2) and the Google Fonts link.",
+  "capture": {
+    "wait": 9,
+    "clip": 6,
+    "still": 5
+  },
+  "community": {
+    "id": "D3",
+    "kind": "code",
+    "author": "felixturner",
+    "repo": "https://github.com/felixturner/hex-map-wfc",
+    "license": "MIT",
+    "viral": {
+      "url": "https://x.com/felixturner/status/2031010332391751908",
+      "numbers": "X ♥2,241 · 12.1만 · RT199",
+      "recorded": "2026-11-28"
+    }
+  },
+  "film": {
+    "seconds": 8,
+    "wait": 12,
+    "camera": {
+      "type": "orbit",
+      "degrees": 40,
+      "dolly": 0.82,
+      "target": [
+        0,
+        1,
+        0
+      ]
+    },
+    "hide": [
+      "#title-overlay",
+      "#ui-menu",
+      ".lil-gui",
+      "#loading",
+      ".mark"
+    ]
+  }
+}

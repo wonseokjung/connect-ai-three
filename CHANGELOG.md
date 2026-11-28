@@ -1,5 +1,48 @@
 # Changelog
 
+## 0.6.0
+
+The AI Web 3D Agent. connect-ai-three is now called the AI Web 3D Agent (AI Web 3D 에이전트), and every request ends
+in a video. It starts from the best work the community has made, not only from the official three.js examples.
+
+- **A community library**, `catalog/community.json`: 74 viral three.js works from X, Threads and public viral lists
+  (68 works in 9 categories + 6 agent skills), each with its viral post and numbers as recorded on 2026-11-28, the
+  repository, the licence read from the licence TEXT with `gh api` (not only the GitHub label: three of them say
+  NOASSERTION and are MIT), what its assets are, the sentence a user would say, and how good it looks as video.
+  `library` lists it; both READMEs carry the table (`node tools/make-library-table.mjs`).
+- **12 community examples** (`examples/13` to `24`), adapted under their own MIT or CC0 licence with the licence text
+  next to the code: caustic water (ScottieFox), a spectral ocean (squall01337), attractor particles (danlex), a talking
+  face of light (ptakaya, CC0), a tower defence an AI plays by itself (kevintngo), a hex island that builds itself
+  (felixturner, KayKit CC0), a 90 s dragon film with zero assets (0xCodez), a photoreal room at dawn from code
+  (Leonxlnx), the Kage landscape hero (MengTo's ThreeUI), a 3D cinema seat preview (Codrops), a red clay car chase
+  (noclipepe) and a self-assembling building (lhlGitHub). Left out and replaced: CC BY music and film (Room at Dawn,
+  Charge in the cinema), GSAP, howler and unverified sounds and textures, fonts without a licence, remote media.
+- **The prompt lane: 10 shared prompts** (`kind: "prompt"` in the library, P1 to P10), read read-only with Ego Lite
+  from the viral posts and the authors' replies: each quoted short with the post link, handle, date and numbers, no code
+  shipped. Three of them are built from scratch as our own examples (`examples/25` to `27`): a solar system (cb_doge),
+  a mechanical butterfly (thtbee_) and a black hole that pulses to code-made music (chetaslua), credited as "inspired
+  by". For the biggest closed works (Abeto Messenger, Hop.Earth, the anatomy app, Kage, Crimson Loong) no shared prompt
+  text was found, so they are not in the prompt list.
+- **Video first.** `example <name> --video out.mp4 [--9x16] [--4k] [--seconds N] [--orbit deg]` and `film <folder>`
+  film any three.js page frame by frame: the page's clock (`performance.now`, `Date.now`, `requestAnimationFrame`,
+  timers) is frozen after warm-up and stepped exactly 1/fps per frame, so nothing is dropped or doubled. Output is
+  H.264, yuv420p, limited range, BT.709 (also tagged in the stream), 1920x1080, 1080x1920 or 3840x2160, with an optional
+  camera path on the page's own camera and `window.__FILM__` for the page to hide its UI. The self-check counts
+  frames, reads the colour tags and size, and looks for black or frozen stretches and page errors.
+  Every community example ships a 16:9 and a 9:16 preview made this way (`tools/capture-example.mjs`).
+- **The scout.** `find "<sentence>"` ranks our examples, the library, shared prompts and fresh GitHub finds (GitHub-only
+  mode, no browser: the queries that worked, licence text checks, asset counts, stop rules for no licence, GPL / AGPL,
+  non-commercial, view-only and fan projects, a clean message at the search rate limit). `fetch <owner/repo>` copies only
+  licence-cleared code into a new folder with the licence text and `SOURCES.md`, and runs nothing from the repository.
+- **The skill** now works the same way on every prompt: rank (ours, library, fresh finds, shared prompts) → pick the
+  best base → build → camera → film 16:9 and 9:16 → self-check → show, with credit. Browser mode (ELDO first, Ego Lite
+  as fallback, its own task space, the user's own login, read only) and the prompt lane (write your own from a prompt
+  an author shared, credit as "inspired by") are in `SKILL.md`. The three.js r186 reference stays.
+- `smoke [name ...]` opens pages headless and reports errors; one headless Chrome at a time (a lock in the temp dir).
+- The test suite checks the library schema, the README tables, credits and licence texts, no shipped audio, both
+  previews, the scout's licence rules, GitHub-only mode, `fetch`, every example page in headless Chrome with zero
+  console errors, and a frame-exact film in 16:9 and 9:16.
+
 ## 0.5.0
 
 Real three.js. The kit now starts from real open source instead of only its own scene spec.
