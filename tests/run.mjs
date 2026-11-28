@@ -246,6 +246,17 @@ test('library: every entry has the schema, a cleared licence and a real link', (
     }
   }
 });
+test('public text: plain words for likes, no heart symbol, no "list value", no 직원 / employee', () => {
+  const files = ['README.md', 'README.ko.md', 'NOTICE.md', 'CHANGELOG.md', 'skill/SKILL.md', 'catalog/community.json', 'lib/banner.mjs', 'lib/brand.json', 'package.json',
+    ...listExamples().flatMap((e) => ['example.json', 'README.md'].map((f) => path.relative(KIT, path.join(e.dir, f))))];
+  for (const f of files) {
+    const t = fs.readFileSync(path.join(KIT, f), 'utf8');
+    ok(!/[\u2665\u2764]/.test(t), `${f}: heart symbol`);
+    ok(!/list value|목록 값/.test(t), `${f}: "list value"`);
+    ok(!/직원|employee/i.test(t), `${f}: 직원 / employee`);
+  }
+  for (const c of LIB) if (c.viral && c.viral.numbers !== 'not recorded') ok(/likes/.test(c.viral.numbers) && /좋아요/.test(c.viral.numbersKo), `${c.id}: numbers in words`);
+});
 test('library: the README tables are in sync with catalog/community.json', () => {
   for (const f of ['README.md', 'README.ko.md']) {
     const md = fs.readFileSync(path.join(KIT, f), 'utf8');

@@ -125,7 +125,7 @@ const holeMat = new THREE.ShaderMaterial({
       float beam = clamp(pow(g, 3.0), 0.15, 2.6);
       vec3 hot = vec3(1.0, 0.86, 0.6), warm = vec3(1.0, 0.42, 0.08), deep = vec3(0.55, 0.12, 0.02);
       vec3 col = mix(mix(deep, warm, smoothstep(0.0, 0.45, heat)), hot, smoothstep(0.45, 1.0, heat * (0.8 + 0.3 * g) + 0.35 * uFlare));
-      float I = (0.3 + 1.7 * heat) * beam * (1.0 + 0.3 * uKick + 0.7 * uFlare) * (1.0 - 0.5 * uSuck);
+      float I = (0.3 + 1.7 * heat) * beam * (1.0 + 0.3 * uKick + 0.35 * uFlare) * (1.0 - 0.5 * uSuck);
       return vec4(col * I * dens * edge * 0.85, clamp(dens * edge, 0.0, 1.0));
     }
 
@@ -195,7 +195,7 @@ const sparkMat = new THREE.ShaderMaterial({
         p = vec3(cos(a) * r, aData.z * (1.0 + 2.0 * uFlare), sin(a) * r);
         float heat = pow(3.0 / r, 1.1);
         vCol = mix(vec3(1.0, 0.36, 0.06), vec3(1.0, 0.85, 0.55), heat) * (0.55 + 0.9 * aData.w);
-        vA = (0.18 + 0.45 * uKick * heat + 0.6 * uFlare) * smoothstep(3.0, 4.2, r);
+        vA = (0.18 + 0.45 * uKick * heat + 0.3 * uFlare) * smoothstep(3.0, 4.2, r);
         size = (0.03 + 0.045 * aData.w) * (1.0 + 0.6 * uKick + 0.8 * uFlare);
       } else {
         float s = fract(aData.w * 7.31 + uT * (0.18 + 0.1 * aData.w));
@@ -203,15 +203,17 @@ const sparkMat = new THREE.ShaderMaterial({
         float w = 0.15 + s * 1.6;
         p = vec3(cos(a) * w, aData.z * (3.2 + s * 26.0), sin(a) * w); // the jets start above the shadow
         vCol = mix(vec3(1.0, 0.8, 0.5), vec3(1.0, 0.4, 0.1), s);
-        vA = (0.015 + 0.7 * uFlare) * (1.0 - s) * smoothstep(0.0, 0.08, s);
+        vA = (0.015 + 0.4 * uFlare) * (1.0 - s) * smoothstep(0.0, 0.08, s);
         size = 0.07 + 0.05 * aData.w;
       }
       // hide what is behind the black hole's shadow (about 2.6 horizon radii across, seen from the camera)
       vec3 d = p - cameraPosition; float L = length(d); vec3 n = d / L; float tc = -dot(cameraPosition, n);
       if (tc > 0.0 && tc < L) vA *= smoothstep(2.5, 3.1, length(cameraPosition + n * tc));
       vec4 mv = modelViewMatrix * vec4(p, 1.0);
+      // sparks that pass close to the camera fade out and never grow past ~3% of the frame (no big soft orbs in 9:16)
+      vA *= smoothstep(1.2, 5.0, -mv.z);
       gl_Position = projectionMatrix * mv;
-      gl_PointSize = max(1.0, size * uScale / -mv.z);
+      gl_PointSize = min(max(1.0, size * uScale / -mv.z), uScale * 0.03);
     }`,
   fragmentShader: /* glsl */`
     varying vec3 vCol; varying float vA;
@@ -347,7 +349,7 @@ function frame(now) {
   const m = musicTime(now), st = beatState(m);
   for (const u of [holeMat.uniforms, sparkMat.uniforms]) { u.uT.value = m; u.uKick.value = st.kick; u.uFlare.value = st.flare; u.uSuck.value = st.suck; }
   holeMat.uniforms.uWobble.value = st.wobble;
-  bloom.strength = 0.5 + 0.1 * st.kick + 0.2 * st.flare;
+  bloom.strength = 0.5 + 0.1 * st.kick + 0.08 * st.flare; // a modest flare: the shadow must stay readable at the drop
   controls.update();
   composer.render();
   // keep the frame rate: trade resolution when frames run long (never while filming)

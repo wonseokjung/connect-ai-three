@@ -17,13 +17,14 @@ const stars = (n) => '★'.repeat(n || 1);
 
 function tables(lang) {
   const ko = lang === 'ko';
+  const num = (v) => (ko ? v.numbersKo || v.numbers : v.numbers);
   const code = LIB.filter((c) => c.kind === 'code');
   const prompts = LIB.filter((c) => c.kind === 'prompt');
   const cats = [...new Map(code.map((c) => [c.category, ko ? c.categoryKo : c.categoryTitle])).entries()];
   const L = [];
   L.push(ko
-    ? `작품 ${code.length}개(코드) + 프롬프트 ${prompts.length}개. 라이선스는 GitHub 표시가 아니라 라이선스 본문을 읽어서 확인했어요(${code[0].verified}). 바이럴 숫자는 조사한 날 화면에 보인 값이고, (list value)는 공개 바이럴 목록에 적힌 값이에요. 영상 칸은 영상으로 찍었을 때 얼마나 좋은지 우리가 매긴 값이에요(★★★ 빛 · 움직임 · 카메라가 좋은 것, ★ 눌러 봐야 좋은 것).`
-    : `${code.length} works with code + ${prompts.length} prompts. Licences were read from the licence text, not the GitHub label (${code[0].verified}). Viral numbers are what the post showed on the day we looked; "(list value)" is the number written in a public viral list. The video column is our rating of how good it looks filmed (★★★ light, motion and camera; ★ good only to click).`);
+    ? `작품 ${code.length}개(코드) + 프롬프트 ${prompts.length}개. 라이선스는 GitHub 표시가 아니라 라이선스 본문을 읽어서 확인했어요(${code[0].verified}). 바이럴 숫자는 조사한 날(2026-11-28) 글이나 공개 바이럴 목록에서 확인한 값이에요. 영상 칸은 영상으로 찍었을 때 얼마나 좋은지 우리가 매긴 값이에요(★★★ 빛 · 움직임 · 카메라가 좋은 것, ★ 눌러 봐야 좋은 것).`
+    : `${code.length} works with code + ${prompts.length} prompts. Licences were read from the licence text, not the GitHub label (${code[0].verified}). Viral numbers are what the post, or a public viral list, showed on the day we looked (2026-11-28). The video column is our rating of how good it looks filmed (★★★ light, motion and camera; ★ good only to click).`);
   L.push('');
   L.push(ko ? '| 분야 | 개수 | 예제로 실은 것 |' : '| category | works | shipped as examples |');
   L.push('|---|---|---|');
@@ -40,7 +41,7 @@ function tables(lang) {
     L.push('|---|---|---|---|---|---|---|---|');
     for (const c of code.filter((x) => x.category === k)) {
       const name = c.example ? `**[${cell(c.title)}](examples/${c.example})**` : cell(c.title);
-      const viral = c.viral ? `[${cell(c.viral.numbers)}](${c.viral.url})` : '-';
+      const viral = c.viral ? `[${cell(num(c.viral))}](${c.viral.url})` : '-';
       L.push(`| ${c.id} | ${name} | ${cell(ko ? c.whatKo : c.what)} | ${cell(ko ? c.sayKo : c.say)} | ${viral} | [${c.repo.replace('https://github.com/', '')}](${c.repo}) · ${c.license} | ${ASSETS[lang][c.assets]} | ${stars(c.videoFit)} |`);
     }
     L.push('');
@@ -56,7 +57,7 @@ function tables(lang) {
     L.push('|---|---|---|---|---|---|---|');
     for (const c of prompts) {
       const name = c.example ? `**[${cell(c.title)}](examples/${c.example})**` : cell(c.title);
-      L.push(`| ${c.id} | ${name} | ${cell(ko ? c.whatKo : c.what)} | ${cell(c.prompt).slice(0, 160)}${c.prompt.length > 160 ? '…' : ''} | ${c.viral ? `[${cell(c.viral.numbers)}](${c.viral.url})` : `[post](${c.post})`} | ${cell(c.author)} | ${stars(c.videoFit)} |`);
+      L.push(`| ${c.id} | ${name} | ${cell(ko ? c.whatKo : c.what)} | ${cell(c.prompt).slice(0, 160)}${c.prompt.length > 160 ? '…' : ''} | ${c.viral ? `[${cell(num(c.viral))}](${c.viral.url})` : `[post](${c.post})`} | ${cell(c.author)} | ${stars(c.videoFit)} |`);
     }
     L.push('');
     L.push('</details>');
@@ -66,11 +67,12 @@ function tables(lang) {
 
 function communityExamples(lang) {
   const ko = lang === 'ko';
+  const num = (v) => (ko ? v.numbersKo || v.numbers : v.numbers);
   const all = listExamples().filter((e) => e.community);
   const nn = (e) => String(e.section).padStart(2, '0');
   const L = ['<table>'];
   for (let i = 0; i < all.length; i += 3) {
-    L.push('<tr>' + all.slice(i, i + 3).map((e) => `<td width="33%" valign="top"><a href="examples/${e.folder}"><img src="examples/${e.folder}/preview.jpg" alt="${ko ? e.titleKo : e.title}"></a><br><b>${nn(e)}</b> <a href="examples/${e.folder}">${ko ? e.titleKo : e.title}</a><br><sub>${e.community.kind === 'prompt' ? (ko ? '프롬프트에서 새로 만듦' : 'built from a shared prompt') + ' · ' : ''}${e.community.author}${e.community.viral ? ` · <a href="${e.community.viral.url}">${e.community.viral.numbers.replace(/ \(list value\)/, '')}</a>` : ''}</sub></td>`).join('') + '</tr>');
+    L.push('<tr>' + all.slice(i, i + 3).map((e) => `<td width="33%" valign="top"><a href="examples/${e.folder}"><img src="examples/${e.folder}/preview.jpg" alt="${ko ? e.titleKo : e.title}"></a><br><b>${nn(e)}</b> <a href="examples/${e.folder}">${ko ? e.titleKo : e.title}</a><br><sub>${e.community.kind === 'prompt' ? (ko ? '프롬프트에서 새로 만듦' : 'built from a shared prompt') + ' · ' : ''}${e.community.author}${e.community.viral ? ` · <a href="${e.community.viral.url}">${num(e.community.viral)}</a>` : ''}</sub></td>`).join('') + '</tr>');
   }
   L.push('</table>', '');
   L.push(ko ? '| | 예제 | 이렇게 말하면 이 영상이 나와요 | 원작 · 라이선스 |' : '| | example | say this, get this video | original · licence |');

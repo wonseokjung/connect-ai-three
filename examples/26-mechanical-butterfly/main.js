@@ -454,7 +454,8 @@ function fitCamera() {
   camera.fov = aspect < 1 ? 46 : 35;
   camera.updateProjectionMatrix();
   const tv = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)), th = tv * aspect;
-  const d = Math.max(1.95 / th, 1.56 / tv) * 1.2;
+  // filmed 16:9 sits further back, so a wing at the top of its beat stays inside the frame
+  const d = Math.max(1.95 / th, 1.56 / tv) * (FILM && aspect >= 1 ? 1.62 : 1.2);
   camera.position.copy(target).add(v(0.12, 1.5, -1).normalize().multiplyScalar(d));
   camera.lookAt(target);
 }

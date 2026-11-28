@@ -38,6 +38,9 @@ in a video. It starts from the best work the community has made, not only from t
   best base → build → camera → film 16:9 and 9:16 → self-check → show, with credit. Browser mode (ELDO first, Ego Lite
   as fallback, its own task space, the user's own login, read only) and the prompt lane (write your own from a prompt
   an author shared, credit as "inspired by") are in `SKILL.md`. The three.js r186 reference stays.
+- Every CONNECT AI LAB tool is now an "AI ... 에이전트" / "AI ... Agent" (agents, then teams, then an AI company): the team
+  table in both READMEs, `lib/banner.mjs` (`agentName`, `brand.json` key `agent`) and the chat banner and nameplate
+  images in `skill/assets/brand/` are renamed. Viral numbers are written in words ("6,555 likes", "좋아요 6,555").
 - `smoke [name ...]` opens pages headless and reports errors; one headless Chrome at a time (a lock in the temp dir).
 - The test suite checks the library schema, the README tables, credits and licence texts, no shipped audio, both
   previews, the scout's licence rules, GitHub-only mode, `fetch`, every example page in headless Chrome with zero
